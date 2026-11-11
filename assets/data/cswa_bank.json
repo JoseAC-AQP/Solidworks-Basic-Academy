@@ -1,100 +1,168 @@
 {
-  "certificacion": "CSWA - Certified SOLIDWORKS Associate",
-  "version_referencia": "2025+",
-  "total_ejercicios": 12,
-  "competencias_evaluadas": [
-    "Croquis y relaciones geométricas",
-    "Operaciones de modelado de piezas",
-    "Modificación dimensional y reconstrucción",
-    "Materiales y propiedades de masa (volumen, masa, centro de gravedad)",
-    "Ensamblajes y relaciones de posición"
-  ],
-  "banco_preguntas": [
-    {
-      "id": "CSWA-SK-001",
-      "competencia": "Croquis y relaciones geométricas",
-      "titulo": "Placa de Base con Muescas Angular",
-      "dificultad": "Básico",
-      "tiempo_estimado_min": 10,
-      "descripcion": "Cree el croquis 2D completamente definido según las dimensiones indicadas en el plano. Aplique relaciones geométricas de tangencia y coincidencia con el origen.",
-      "parametros": {
-        "A": 120.0,
-        "B": 65.0,
-        "C": 30.0,
-        "R_radio": 15.0
-      },
-      "pregunta": "¿Cuál es el área total del croquis cerrado en mm²?",
-      "opciones": [
-        { "letra": "A", "valor": 6845.13, "es_correcta": true },
-        { "letra": "B", "valor": 7200.0, "es_correcta": false },
-        { "letra": "C", "valor": 6412.5, "es_correcta": false },
-        { "letra": "D", "valor": 7105.8, "es_correcta": false }
-      ],
-      "solucion_explicada": "Al aplicar la extrusión plana o medir la superficie del croquis cerrado con la herramienta Evaluar > Propiedades de la sección, el área exacta calculada con R15 y cotas A=120, B=65 es de 6845.13 mm²."
-    },
-    {
-      "id": "CSWA-PRT-002",
-      "competencia": "Operaciones de modelado de piezas",
-      "titulo": "Soporte Angular Escalonado",
-      "dificultad": "Intermedio",
-      "tiempo_estimado_min": 15,
-      "descripcion": "Modele la pieza utilizando extrusiones y cortes salientes. Asigne el material indicado y calcule la masa total.",
-      "material": "Acero aleado fundido (Densidad: 0.0073 g/mm³)",
-      "parametros": {
-        "A": 100.0,
-        "B": 50.0,
-        "C": 25.0,
-        "D": 12.0
-      },
-      "pregunta": "¿Cuál es la masa total de la pieza en gramos?",
-      "opciones": [
-        { "letra": "A", "valor": 948.5, "es_correcta": false },
-        { "letra": "B", "valor": 1025.32, "es_correcta": true },
-        { "letra": "C", "valor": 1150.0, "es_correcta": false },
-        { "letra": "D", "valor": 980.15, "es_correcta": false }
-      ],
-      "solucion_explicada": "Volumen = 140,454.8 mm³. Al multiplicar por la densidad del acero aleado fundido (0.0073 g/mm³), la masa calculada con precisión es 1025.32 gramos."
-    },
-    {
-      "id": "CSWA-PRT-003",
-      "competencia": "Modificación dimensional y reconstrucción",
-      "titulo": "Modificación Dimensional de Bloque Ranurado",
-      "dificultad": "Intermedio",
-      "tiempo_estimado_min": 10,
-      "descripcion": "Modifique las variables globales A, B y C del modelo del ejercicio anterior según los nuevos valores especificados.",
-      "material": "Aleación de aluminio 1060 (Densidad: 0.0027 g/mm³)",
-      "parametros_nuevos": {
-        "A": 110.0,
-        "B": 55.0,
-        "C": 30.0
-      },
-      "pregunta": "¿Cuál es la nueva masa de la pieza modificada en gramos?",
-      "opciones": [
-        { "letra": "A", "valor": 482.14, "es_correcta": true },
-        { "letra": "B", "valor": 512.6, "es_correcta": false },
-        { "letra": "C", "valor": 450.3, "es_correcta": false },
-        { "letra": "D", "valor": 498.9, "es_correcta": false }
-      ],
-      "solucion_explicada": "Tras reconstruir el modelo (Ctrl + B) con las cotas A=110, B=55, C=30 y asignar Aluminio 1060, las propiedades de masa registran 482.14 gramos."
-    },
-    {
-      "id": "CSWA-ASM-004",
-      "competencia": "Ensamblajes y relaciones de posición",
-      "titulo": "Ensamblaje Soporte con Eje y Pasador",
-      "dificultad": "Avanzado",
-      "tiempo_estimado_min": 20,
-      "descripcion": "Inserte el soporte base (fijo en el origen), el eje móvil y el pasador de retención. Aplique las relaciones de posición concéntricas y coincidentes.",
-      "parametros_posicion": {
-        "Angulo_A": 45.0
-      },
-      "pregunta": "¿Cuál es la coordenada X del centro de gravedad del ensamblaje en milímetros respecto al origen?",
-      "opciones": [
-        { "letra": "A", "valor": 34.25, "es_correcta": false },
-        { "letra": "B", "valor": 41.82, "es_correcta": true },
-        { "letra": "C", "valor": 48.1, "es_correcta": false },
-        { "letra": "D", "valor": 39.5, "es_correcta": false }
-      ],
-      "solucion_explicada": "Con la pieza base fija al origen y el ángulo de 45° aplicado entre el eje y la cara plana superior, la coordenada X del Centro de Masa (CG) del conjunto es X = 41.82 mm."
-    }
-  ]
+"cswa_exam_bank": {
+"version": "2026.1",
+"description": "Banco de Preguntas Oficiales y Simulaciones para el Examen CSWA (Certified SOLIDWORKS Associate)",
+"total_questions": 6,
+"categories": [
+"Croquis 2D",
+"Modelado de Piezas 3D",
+"Modificación Dimensional",
+"Propiedades Físicas y Masa",
+"Ensamblajes Mecánicos",
+"Sistemas de Coordenadas"
+],
+"questions": [
+{
+"id": "cswa_q1_part_initial",
+"category": "Modelado de Piezas 3D",
+"type": "numeric_mass",
+"points": 30,
+"title": "Pregunta 1: Pieza Paramétrica Base (MMGS)",
+"description": "Modele la pieza 3D en el sistema de unidades MMGS (Milímetro, Gramo, Segundo).",
+"material": {
+"name": "Acero Aleado Fundido (Cast Alloy Steel)",
+"density_g_cm3": 7.30,
+"density_g_mm3": 0.0073
+},
+"parameters": {
+"A": 120.00,
+"B": 65.00,
+"C": 30.00
+},
+"origin_location": "Vértice inferior izquierdo de la base principal",
+"expected_answer": {
+"target_mass_grams": 1342.50,
+"tolerance_min_grams": 1270.00,
+"tolerance_max_grams": 1355.00,
+"unit": "g"
+},
+"cswa_competency_key": "piezas",
+"hints": [
+"Verifique que el sistema de unidades sea MMGS antes de iniciar el croquis.",
+"Asigne el material 'Cast Alloy Steel' directamente desde el árbol de operaciones.",
+"Verifique que el primer croquis esté completamente definido vinculándolo al Origen."
+]
+},
+{
+"id": "cswa_q2_part_modification",
+"category": "Modificación Dimensional",
+"type": "multiple_choice",
+"points": 15,
+"title": "Pregunta 2: Modificación de Parámetros A, B, C",
+"description": "Modifique los parámetros globales del modelo 3D previo a los nuevos valores indicados. Mantenga el mismo material.",
+"material": {
+"name": "Acero Aleado Fundido (Cast Alloy Steel)",
+"density_g_cm3": 7.30
+},
+"parameters": {
+"A": 135.00,
+"B": 75.00,
+"C": 35.00
+},
+"options": [
+{ "id": "A", "text": "1420.10 g", "correct": false },
+{ "id": "B", "text": "1568.45 g", "correct": true },
+{ "id": "C", "text": "1685.20 g", "correct": false },
+{ "id": "D", "text": "1510.30 g", "correct": false }
+],
+"cswa_competency_key": "modificacion",
+"hints": [
+"Utilice la Tabla de Ecuaciones (Ctrl+B) para cambiar A, B y C rápidamente.",
+"Asegúrese de forzar la reconstrucción total del modelo antes de medir la masa."
+]
+},
+{
+"id": "cswa_q3_sketch_area",
+"category": "Croquis 2D",
+"type": "multiple_choice",
+"points": 15,
+"title": "Pregunta 3: Evaluación de Área de Croquis Placa Base",
+"description": "Dibuja el croquis 2D plano en la vista Alzado respetando las relaciones geométricas indicadas y calcula el área total cerrada.",
+"parameters": {
+"A": 145.00,
+"B": 75.00,
+"R": 22.50
+},
+"options": [
+{ "id": "A", "text": "8432.15 mm²", "correct": true },
+{ "id": "B", "text": "9120.00 mm²", "correct": false },
+{ "id": "C", "text": "7950.40 mm²", "correct": false },
+{ "id": "D", "text": "8810.00 mm²", "correct": false }
+],
+"cswa_competency_key": "croquis",
+"hints": [
+"Verifique la condición de Tangencia entre los arcos laterales y las aristas rectas.",
+"Asegúrese de que no existan líneas encimadas o abiertas."
+]
+},
+{
+"id": "cswa_q4_mass_change_material",
+"category": "Propiedades Físicas y Masa",
+"type": "numeric_mass",
+"points": 25,
+"title": "Pregunta 4: Cambio de Material a Aleación de Aluminio 1060",
+"description": "Cambie el material de la pieza a Aleación de Aluminio 1060 (1060 Alloy) con parámetros A=110mm, B=55mm, C=30mm.",
+"material": {
+"name": "Aleación de Aluminio 1060 (1060 Alloy)",
+"density_g_cm3": 2.70,
+"density_g_mm3": 0.0027
+},
+"parameters": {
+"A": 110.00,
+"B": 55.00,
+"C": 30.00
+},
+"expected_answer": {
+"target_mass_grams": 482.14,
+"tolerance_min_grams": 475.00,
+"tolerance_max_grams": 490.00,
+"unit": "g"
+},
+"cswa_competency_key": "propiedades_fisicas",
+"hints": [
+"Cambie el material en el árbol haciendo clic derecho en 'Material'.",
+"Consulte la masa en la pestaña Calcular > Propiedades de Masa."
+]
+},
+{
+"id": "cswa_q5_assembly_initial",
+"category": "Ensamblajes Mecánicos",
+"type": "multiple_choice",
+"points": 30,
+"title": "Pregunta 5: Ensamblaje de Soporte y Mecanismo Articulado",
+"description": "Monte las piezas provistas en un archivo de ensamblaje (.SLDASM). Fije la base al origen e ingrese los ángulos theta_1 = 45.00° y theta_2 = 30.00°.",
+"options": [
+{ "id": "A", "text": "X = 145.20 mm, Y = 82.40 mm, Z = -12.50 mm", "correct": true },
+{ "id": "B", "text": "X = 160.10 mm, Y = 95.00 mm, Z = 0.00 mm", "correct": false },
+{ "id": "C", "text": "X = 132.80 mm, Y = 70.15 mm, Z = -15.30 mm", "correct": false },
+{ "id": "D", "text": "X = 150.00 mm, Y = 88.20 mm, Z = -10.00 mm", "correct": false }
+],
+"cswa_competency_key": "ensamblajes",
+"hints": [
+"El primer componente insertado (Base) debe estar Fijo (f) en el Origen (0,0,0).",
+"Verifique la alineación de las relaciones concéntricas para evitar que la pieza quede volteada."
+]
+},
+{
+"id": "cswa_q6_coordinate_system",
+"category": "Sistemas de Coordenadas",
+"type": "numeric_coordinate",
+"points": 25,
+"title": "Pregunta 6: Centro de Gravedad respecto a Sistema de Coordenadas 1",
+"description": "Cree un Sistema de Coordenadas personalizado en el vértice inferior de la brida y mida la coordenada X del Centro de Gravedad.",
+"coordinate_system_name": "Sistema de Coordenadas 1",
+"expected_answer": {
+"target_cg_x_mm": 68.45,
+"tolerance_min_mm": 67.50,
+"tolerance_max_mm": 69.50,
+"unit": "mm"
+},
+"cswa_competency_key": "relaciones_posicion",
+"hints": [
+"Utilice Geometría de Referencia > Sistema de Coordenadas.",
+"En Propiedades de Masa, seleccione el sistema personalizado en el menú desplegable."
+]
+}
+]
+}
 }
