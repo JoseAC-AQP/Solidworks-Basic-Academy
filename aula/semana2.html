@@ -1,1 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semana 2: Modelado Paramétrico y Operaciones Base | SOLIDWORKS ACADEMY</title>
+  
+  <!-- Hojas de Estilo Institucionales -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
 
+  <style>
+    .lesson-hero {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      color: var(--white);
+      padding: 2rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-md);
+    }
+
+    .lesson-meta-bar {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: var(--accent);
+      flex-wrap: wrap;
+    }
+
+    .step-box {
+      border-left: 4px solid var(--accent);
+      background: var(--bg-light);
+      padding: 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 1.25rem;
+    }
+
+    .step-number {
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.3rem;
+    }
+
+    .shortcut-tag {
+      background: #E2E8F0;
+      color: #334155;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-family: monospace;
+      font-weight: bold;
+      font-size: 0.85rem;
+      border: 1px solid #CBD5E1;
+    }
+
+    .cswa-tip-box {
+      background: #EFF6FF;
+      border: 1px solid #BFDBFE;
+      border-radius: 8px;
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+    }
+
+    .cswa-tip-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #1E40AF;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navegación Principal -->
+  <nav class="navbar">
+    <a href="../index.html" class="brand"><span>SOLIDWORKS</span> ACADEMY</a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Inicio</a></li>
+      <li><a href="../dashboard.html">Dashboard</a></li>
+      <li><a href="../aula/index.html" class="active">Aula Virtual</a></li>
+      <li><a href="../cswa/index.html">CSWA Center</a></li>
+      <li><a href="../proyecto.html">Proyecto Final</a></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+
+    <!-- Encabezado de la Lección -->
+    <header class="lesson-hero">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <span class="badge badge-info" style="margin-bottom: 0.5rem; display: inline-block;">Módulo 1: Introducción a SOLIDWORKS</span>
+          <h1 style="font-size: 2.2rem; color: var(--white); margin: 0.2rem 0;">Semana 2: Modelado Paramétrico y Operaciones Base</h1>
+          <p style="opacity: 0.9; font-size: 1rem; max-width: 700px; margin-top: 0.5rem;">
+            Aprende a estructurar modelos 3D sólidos mediante la lógica paramétrica, relacionando cotas, origen y gestor de diseño FeatureManager.
+          </p>
+        </div>
+        <div>
+          <button id="mark-completed-btn" class="btn" style="background: var(--success);" onclick="completeWeek2()">
+            ✓ Marcar Semana como Completada
+          </button>
+        </div>
+      </div>
+
+      <div class="lesson-meta-bar">
+        <span>⏱️ Duración: 3 Horas Académicas</span>
+        <span>🎯 Competencia CSWA: Gestión del árbol de operaciones y reconstrucción</span>
+        <span>📄 Tipo de Contenido: Teórico - Práctico</span>
+      </div>
+    </header>
+
+    <div class="grid-2" style="grid-template-columns: 2.5fr 1fr; gap: 1.5rem;">
+
+      <!-- Contenido Principal de la Lección -->
+      <div>
+
+        <!-- Bloque 1: Concepto de Modelado Paramétrico -->
+        <article class="card">
+          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">1. Principios del Modelado Paramétrico</h2>
+          <p style="line-height: 1.6; color: var(--text-dark); margin-bottom: 1rem;">
+            El modelado paramétrico implica que la geometría de una pieza 3D está impulsada por <strong>parámetros</strong> (dimensiones, restricciones geométricas y relaciones lógicas). Si cambias un parámetro, todo el modelo 3D y sus planos asociados se reconstruyen de forma automática manteniendo la intención del diseño.
+          </p>
+
+          <div class="cswa-tip-box">
+            <div class="cswa-tip-header">
+              <span>💡 Intención del Diseño (Design Intent)</span>
+            </div>
+            <p style="font-size: 0.9rem; color: #1E3A8A; margin: 0;">
+              En el examen CSWA, los problemas de modificación dimensional evalúan la flexibilidad de tu modelo. Si construyes tu pieza con una intención de diseño correcta (apoyada en el Origen y simetrías), modificar cotas $A$, $B$ y $C$ no romperá las operaciones siguientes.
+            </p>
+          </div>
+
+          <h3 style="font-size: 1.1rem; color: var(--primary); margin: 1.25rem 0 0.5rem 0;">Puntos Clave del Sistema Coordenado:</h3>
+          <ul style="margin-left: 1.25rem; font-size: 0.95rem; color: var(--text-dark); line-height: 1.6;">
+            <li><strong>El Origen $(0,0,0)$:</strong> Es el punto de anclaje de todos los bocetos. Todo modelo debe estar relacionado al Origen para evitar grados de libertad residuales.</li>
+            <li><strong>Planos Principales:</strong> Alzado (Front), Planta (Top) y Perfil/Vista Lateral (Right). Cada operación inicial parte de una línea de visión perpendicular a uno de estos planos.</li>
+          </ul>
+        </article>
+
+        <!-- Bloque 2: Gestor de Diseño y Reconstrucción -->
+        <article class="card">
+          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">2. Uso y Edición del Árbol de Operaciones (FeatureManager)</h2>
+          <p style="line-height: 1.6; color: var(--text-dark); margin-bottom: 1rem;">
+            El árbol de operaciones registra cronológicamente cada paso de modelado. Comprender este historial permite editar operaciones previas sin tener que volver a dibujar la pieza desde cero.
+          </p>
+
+          <div class="step-box">
+            <div class="step-number">Operación Paso 1</div>
+            <h4 style="margin: 0 0 0.3rem 0; color: var(--primary);">Edición de Croquis vs. Edición de Operación</h4>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">
+              Haz clic derecho sobre cualquier operación en el árbol para seleccionar <strong>Editar Croquis</strong> (modificar cotas 2D) o <strong>Editar Operación</strong> (modificar condiciones de extrusión o profundidad).
+            </p>
+          </div>
+
+          <div class="step-box">
+            <div class="step-number">Operación Paso 2</div>
+            <h4 style="margin: 0 0 0.3rem 0; color: var(--primary);">Forzar Reconstrucción Paramétrica</h4>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">
+              Utiliza el comando de reconstrucción inmediata presionando <span class="shortcut-tag">Ctrl + B</span> o haciendo clic en el icono del semáforo. Esto recalcula los volúmenes y actualiza las propiedades físicas.
+            </p>
+          </div>
+
+          <!-- Cad Viewport Interactivo -->
+          <div class="cad-viewport" style="margin-top: 1.5rem;">
+            <div style="text-align: center;">
+              <div style="font-size: 3rem; margin-bottom: 0.5rem;">📦📐</div>
+              <p style="font-size: 0.95rem; font-weight: 700; color: var(--white);">Práctica: Reconstrucción de Sólido Paramétrico</p>
+              <p style="font-size: 0.8rem; opacity: 0.8;">Atajo de Reconstrucción: Ctrl + B | Estado: Completamente Definido</p>
+            </div>
+            <div class="cad-viewport-controls">
+              <button type="button" class="cad-btn-icon" onclick="alert('Árbol de operaciones reconstruido exitosamente (Ctrl + B).')">🔄 Reconstruir</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Bloque 3: Ejercicio Práctico de la Semana -->
+        <article class="card">
+          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">3. Guía de Práctica Guiada: Bloque Escalonado Base</h2>
+          <p style="font-size: 0.95rem; color: var(--text-dark); margin-bottom: 1rem;">
+            Crea un nuevo documento de pieza (`.SLDPRT`), configura el sistema de unidades en <strong>MMGS</strong> y sigue estos pasos:
+          </p>
+
+          <ol style="margin-left: 1.25rem; font-size: 0.95rem; color: var(--text-dark); line-height: 1.7;">
+            <li>Abre un nuevo croquis en el plano <strong>Alzado</strong>.</li>
+            <li>Dibuja un contorno en L partiendo directamente desde el <strong>Origen</strong>.</li>
+            <li>Aplica cotas inteligentes: Base = $80\text{ mm}$, Altura total = $50\text{ mm}$, Espesor = $15\text{ mm}$.</li>
+            <li>Verifica que la barra de estado indique <strong>Completamente Definido (Fully Defined)</strong>.</li>
+            <li>Aplica la operación <strong>Extruir Saliente/Base</strong> con una profundidad de $40\text{ mm}$.</li>
+          </ol>
+        </article>
+
+      </div>
+
+      <!-- Barra Lateral: Progreso y Cuestionario de Validación -->
+      <aside>
+
+        <!-- Estado de la Lección -->
+        <div class="card">
+          <h3 class="card-title" style="font-size: 1.1rem; margin-bottom: 0.75rem;">📋 Resumen de la Lección</h3>
+          <ul style="list-style: none; font-size: 0.85rem; color: var(--text-muted);" class="space-y">
+            <li style="display: flex; align-items: center; gap: 0.5rem;">
+              <span>✅</span> Concepto de Intención de Diseño
+            </li>
+            <li style="display: flex; align-items: center; gap: 0.5rem;">
+              <span>✅</span> Anclaje al Origen $(0,0,0)$
+            </li>
+            <li style="display: flex; align-items: center; gap: 0.5rem;">
+              <span>✅</span> Reconstrucción con <span class="shortcut-tag">Ctrl+B</span>
+            </li>
+            <li style="display: flex; align-items: center; gap: 0.5rem;">
+              <span>✅</span> Edición del FeatureManager
+            </li>
+          </ul>
+        </div>
+
+        <!-- Cuestionario Rápido de Validación -->
+        <div class="card">
+          <h3 class="card-title" style="font-size: 1.1rem; margin-bottom: 0.75rem;">📝 Comprobación de Lectura</h3>
+          <form id="week2-quiz-form" onsubmit="evaluateWeek2Quiz(event)">
+            <p style="font-size: 0.85rem; font-weight: 600; color: var(--primary); margin-bottom: 0.5rem;">
+              1. ¿Qué combinación de teclas fuerza la reconstrucción completa del modelo?
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.85rem; margin-bottom: 1rem;">
+              <label><input type="radio" name="w2q1" value="A" required> Ctrl + Z</label>
+              <label><input type="radio" name="w2q1" value="B"> Ctrl + B</label>
+              <label><input type="radio" name="w2q1" value="C"> Ctrl + S</label>
+            </div>
+
+            <p style="font-size: 0.85rem; font-weight: 600; color: var(--primary); margin-bottom: 0.5rem;">
+              2. ¿Por qué es fundamental iniciar un croquis vinculado al Origen?
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.85rem; margin-bottom: 1.25rem;">
+              <label><input type="radio" name="w2q2" value="A" required> Elimina grados de libertad flotantes</label>
+              <label><input type="radio" name="w2q2" value="B"> Cambia el color del modelo 3D</label>
+              <label><input type="radio" name="w2q2" value="C"> Exporta automáticamente a STL</label>
+            </div>
+
+            <button type="submit" class="btn btn-outline" style="width: 100%; font-size: 0.85rem;">Validar Respuestas</button>
+          </form>
+        </div>
+
+        <!-- Navegación entre Semanas -->
+        <div class="card" style="text-align: center;">
+          <h4 style="font-size: 0.9rem; color: var(--primary); margin-bottom: 0.75rem;">Navegación Curricular</h4>
+          <div style="display: flex; justify-content: space-between; gap: 0.5rem;">
+            <a href="semana1.html" class="btn btn-outline" style="font-size: 0.8rem; flex: 1;">⬅️ Sem. 1</a>
+            <a href="index.html" class="btn btn-outline" style="font-size: 0.8rem; flex: 1;">Índice</a>
+            <a href="semana3.html" class="btn" style="font-size: 0.8rem; flex: 1;">Sem. 3 ➡️</a>
+          </div>
+        </div>
+
+      </aside>
+
+    </div>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 SOLIDWORKS ACADEMY - Formación por Competencias & Preparación CSWA</p>
+  </footer>
+
+  <!-- Scripts de la Aplicación -->
+  <script src="../assets/js/app.js"></script>
+  <script>
+    function completeWeek2() {
+      AppState.markWeekCompleted(2);
+      
+      const btn = document.getElementById('mark-completed-btn');
+      if (btn) {
+        btn.textContent = '✓ Semana 2 Completada';
+        btn.disabled = true;
+        btn.style.opacity = '0.8';
+      }
+      alert('🎉 ¡Semana 2 registrada como completada en tu expediente!');
+    }
+
+    function evaluateWeek2Quiz(e) {
+      e.preventDefault();
+      const form = document.getElementById('week2-quiz-form');
+      const formData = new FormData(form);
+
+      const q1 = formData.get('w2q1');
+      const q2 = formData.get('w2q2');
+
+      if (q1 === 'B' && q2 === 'A') {
+        alert('🎯 ¡Excelente! Has respondido correctamente ambas preguntas de comprobación.');
+        AppState.recordQuizResult('semana2_quiz', 100, { operaciones: 60, piezas: 55 });
+        completeWeek2();
+      } else {
+        alert('⚠️ Hay respuestas incorrectas. Revisa el contenido sobre el Origen y la Reconstrucción con Ctrl+B.');
+      }
+    }
+
+    // Verificar si ya fue completada al cargar
+    document.addEventListener('DOMContentLoaded', () => {
+      const progress = AppState.getUserProgress();
+      if (progress.completedWeeks && progress.completedWeeks.includes(2)) {
+        const btn = document.getElementById('mark-completed-btn');
+        if (btn) {
+          btn.textContent = '✓ Semana 2 Completada';
+          btn.disabled = true;
+          btn.style.opacity = '0.8';
+        }
+      }
+    });
+  </script>
+</body>
+</html>
+```
+
+### Summary of `aula/semana2.html`:
+- Provides structured educational content on parametric modeling principles, design intent, coordinate origins $(0,0,0)$, and FeatureManager operations.
+- Integrates interactive step-by-step guides, keyboard shortcuts (`Ctrl + B`), and a simulated CAD viewport.
+- Includes a reading check quiz and automatic progress tracking linked directly to `AppState` in `LocalStorage` (`app.js`).
