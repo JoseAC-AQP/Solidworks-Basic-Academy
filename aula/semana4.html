@@ -8,23 +8,25 @@
   <!-- Hojas de Estilo Institucionales -->
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/components.css">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
     .lesson-hero {
       background: linear-gradient(135deg, #1E3A8A 0%, var(--primary) 100%);
       color: var(--white);
-      padding: 2rem;
-      border-radius: 12px;
+      padding: 2.25rem 2rem;
+      border-radius: var(--radius-md);
       margin-bottom: 2rem;
       box-shadow: var(--shadow-md);
     }
 
     .lesson-meta-bar {
       display: flex;
-      gap: 1.5rem;
+      gap: 1.25rem;
       margin-top: 1rem;
       font-size: 0.85rem;
-      color: var(--accent);
+      color: var(--accent-light);
       flex-wrap: wrap;
     }
 
@@ -32,17 +34,26 @@
       border-left: 4px solid var(--warning);
       background: var(--bg-light);
       padding: 1.25rem;
-      border-radius: 0 8px 8px 0;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
       margin-bottom: 1.25rem;
+      position: relative;
+      padding-left: 3.5rem;
     }
 
     .step-number {
+      position: absolute;
+      left: 1rem;
+      top: 1.25rem;
+      width: 1.8rem;
+      height: 1.8rem;
+      background: var(--warning);
+      color: var(--primary-dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-weight: 800;
-      color: var(--primary);
-      text-transform: uppercase;
-      font-size: 0.8rem;
-      letter-spacing: 0.5px;
-      margin-bottom: 0.3rem;
+      font-size: 0.85rem;
     }
 
     .shortcut-tag {
@@ -59,7 +70,7 @@
     .cswa-tip-box {
       background: #FEF3C7;
       border: 1px solid #FDE68A;
-      border-radius: 8px;
+      border-radius: var(--radius-sm);
       padding: 1.25rem;
       margin: 1.5rem 0;
     }
@@ -90,21 +101,59 @@
       background: var(--bg-light);
       color: var(--primary);
     }
+
+    .tab-container {
+      display: flex;
+      gap: 0.5rem;
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 1.5rem;
+      overflow-x: auto;
+    }
+
+    .tab-btn {
+      padding: 0.75rem 1.25rem;
+      border: none;
+      background: none;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+      font-weight: 700;
+    }
+
+    .quiz-option {
+      display: block;
+      padding: 0.75rem 1rem;
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .quiz-option:hover {
+      border-color: var(--accent);
+      background: #F0F9FF;
+    }
+
+    .quiz-option input {
+      margin-right: 0.75rem;
+    }
   </style>
 </head>
 <body>
 
-  <!-- Navegación Principal -->
-  <nav class="navbar">
-    <a href="../index.html" class="brand"><span>SOLIDWORKS</span> ACADEMY</a>
-    <ul class="nav-links">
-      <li><a href="../index.html">Inicio</a></li>
-      <li><a href="../dashboard.html">Dashboard</a></li>
-      <li><a href="../aula/index.html" class="active">Aula Virtual</a></li>
-      <li><a href="../cswa/index.html">CSWA Center</a></li>
-      <li><a href="../proyecto.html">Proyecto Final</a></li>
-    </ul>
-  </nav>
+  <!-- Barra de Navegación Dinámica -->
+  <header class="navbar"></header>
 
   <main class="container">
 
@@ -112,51 +161,69 @@
     <header class="lesson-hero">
       <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
         <div>
-          <span class="badge badge-warning" style="margin-bottom: 0.5rem; display: inline-block;">Módulo 2: Evaluación Sumativa 1 (15%)</span>
+          <span class="badge badge-warning" style="margin-bottom: 0.5rem; display: inline-flex; align-items: center; gap: 0.35rem;">
+            <i class="fa-solid fa-award"></i> Módulo 2: Evaluación Sumativa 1 (15%)
+          </span>
           <h1 style="font-size: 2.2rem; color: var(--white); margin: 0.2rem 0;">Semana 4: Evaluación Práctica 1 - Croquis Completo</h1>
           <p style="opacity: 0.9; font-size: 1rem; max-width: 700px; margin-top: 0.5rem;">
             Aplica restricciones geométricas avanzadas, variables globales y acotado paramétrico para resolver un plano 2D restringido en tiempo límite.
           </p>
         </div>
         <div>
-          <button id="mark-completed-btn" class="btn" style="background: var(--success);" onclick="completeWeek4()">
-            ✓ Marcar Semana como Completada
+          <button id="mark-completed-btn" class="btn" style="background: var(--success); color: white;" onclick="completeWeek4()">
+            <i class="fa-solid fa-check"></i> Marcar Semana como Completada
           </button>
         </div>
       </div>
 
       <div class="lesson-meta-bar">
-        <span>⏱️ Tiempo Límite: 45 Minutos</span>
-        <span>🎯 Competencia CSWA: Croquis completamente definido y cálculo de área</span>
-        <span>📄 Ponderación: 15% Calificación Final</span>
+        <span><i class="fa-regular fa-clock"></i> Tiempo Límite Sugerido: 45 Minutos</span>
+        <span><i class="fa-solid fa-bullseye"></i> Competencia CSWA: Croquis Completamente Definido y Área Total</span>
+        <span><i class="fa-solid fa-percent"></i> Ponderación: 15% Calificación Final</span>
       </div>
     </header>
 
+    <!-- Reglas Oficiales del Examen CSWA -->
+    <section class="cswa-tip-box" style="margin-top: 0;">
+      <div class="cswa-tip-header">
+        <i class="fa-solid fa-triangle-exclamation text-xl"></i>
+        <span>Reglas Estrictas de Evaluación CSWA</span>
+      </div>
+      <p style="color: #78350F; font-size: 0.95rem; margin: 0;">
+        No utilices entidades fijas arbitrarias ni fuerces dimensiones redundantes. La geometría debe estar vinculada obligatoriamente al <strong>Origen $(0,0,0)$</strong> y restringida mediante relaciones de tangencia, simetría y concentricidad.
+      </p>
+    </section>
+
     <div class="grid-2" style="grid-template-columns: 2.5fr 1fr; gap: 1.5rem;">
 
-      <!-- Contenido Principal de la Evaluación -->
+      <!-- Contenido Principal -->
       <div>
 
-        <!-- Bloque 1: Indicaciones Oficiales de la Evaluación -->
-        <article class="card">
-          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">1. Instrucciones de la Evaluación Práctica</h2>
+        <!-- Pestañas de Navegación Didáctica -->
+        <div class="tab-container">
+          <button class="tab-btn active" onclick="switchTab('instrucciones')"><i class="fa-solid fa-file-contract mr-1"></i> 1. Instrucciones</button>
+          <button class="tab-btn" onclick="switchTab('plano')"><i class="fa-solid fa-drafting-compass mr-1"></i> 2. Plano & Especificaciones</button>
+          <button class="tab-btn" onclick="switchTab('pasos')"><i class="fa-solid fa-list-check mr-1"></i> 3. Estrategia Guiada</button>
+          <button class="tab-btn" onclick="switchTab('evaluacion')"><i class="fa-solid fa-pen-to-square mr-1"></i> 4. Entrega de Respuestas</button>
+        </div>
+
+        <!-- TAB 1: INSTRUCCIONES -->
+        <article id="tab-instrucciones" class="card">
+          <h2 class="card-title"><i class="fa-solid fa-bullseye text-swCyan"></i> 1. Instrucciones de la Evaluación Práctica</h2>
           <p style="line-height: 1.6; color: var(--text-dark); margin-bottom: 1rem;">
             Esta evaluación mide tu velocidad y precisión en el croquizado 2D. Debes construir el perfil plano en SOLIDWORKS respetando el sistema de unidades <strong>MMGS (Milímetro, Gramo, Segundo)</strong> y asegurándote de que el croquis pase del estado azul (subdefinido) a <strong>Negro (Completamente Definido)</strong>.
           </p>
 
-          <div class="cswa-tip-box">
-            <div class="cswa-tip-header">
-              <span>⚠️ Reglas de Examen CSWA</span>
-            </div>
-            <p style="font-size: 0.9rem; color: #78350F; margin: 0;">
-              No utilices entidades fijas arbitrarias ni fuerces dimensiones redundantes. La geometría debe estar vinculada obligatoriamente al <strong>Origen $(0,0,0)$</strong> y restringida con relaciones de tangencia, simetría y concentricidad.
-            </p>
-          </div>
+          <h3 style="font-size: 1.05rem; color: var(--primary); margin: 1.25rem 0 0.5rem 0;">Criterios de Calificación:</h3>
+          <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem; font-size: 0.95rem;" class="space-y">
+            <li><strong style="color: var(--primary);">Precisión Geométrica (50%):</strong> Cálculo exacto del área total del croquis cerrado ($mm^2$).</li>
+            <li><strong style="color: var(--primary);">Intención de Diseño & Estabilidad (50%):</strong> Respuesta del croquis al modificar las variables globales $A$ y $R$ sin romper restricciones ni sobredefinirse.</li>
+          </ul>
         </article>
 
-        <!-- Bloque 2: Plano de Referencia y Variables -->
-        <article class="card">
-          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">2. Plano de Referencia: Placa Soporte con Ranuras</h2>
+        <!-- TAB 2: PLANO Y ESPECIFICACIONES -->
+        <article id="tab-plano" class="card" style="display: none;">
+          <h2 class="card-title"><i class="fa-solid fa-drafting-compass text-swCyan"></i> 2. Plano de Referencia: Placa Soporte con Ranuras</h2>
           <p style="line-height: 1.6; color: var(--text-dark); margin-bottom: 1rem;">
             Modele el croquis en el plano <strong>Alzado</strong> utilizando los siguientes parámetros globales:
           </p>
@@ -193,89 +260,116 @@
             </tbody>
           </table>
 
-          <!-- Cad Viewport Interactivo Esquematizado -->
+          <!-- Visor Gráfico Interactivo de Evaluación -->
           <div class="cad-viewport" style="margin-top: 1.5rem;">
-            <div style="text-align: center;">
-              <div style="font-size: 3rem; margin-bottom: 0.5rem;">📐📉</div>
-              <p style="font-size: 0.95rem; font-weight: 700; color: var(--white);">Esquema de Evaluación: Placa Base A=145mm, B=75mm</p>
-              <p style="font-size: 0.8rem; opacity: 0.8;">Cálculo Requerido: Área total del perfil cerrado ($mm^2$)</p>
-            </div>
-            <div class="cad-viewport-controls">
-              <button type="button" class="cad-btn-icon" onclick="alert('Área calculada correctamente: 8432.15 mm²')">🔍 Verificar Área</button>
-            </div>
+            <svg viewBox="0 0 600 240" style="width: 100%; height: 100%;">
+              <rect x="0" y="0" width="600" height="240" fill="#0f172a"/>
+              <!-- Base Profile -->
+              <path d="M 120 170 L 480 170 C 520 170 520 70 480 70 L 120 70 C 80 70 80 170 120 170 Z" fill="none" stroke="#00B3E0" stroke-width="3"/>
+              <!-- Inner Holes -->
+              <circle cx="160" cy="120" r="20" fill="none" stroke="#38bdf8" stroke-width="2" stroke-dasharray="4"/>
+              <circle cx="440" cy="120" r="20" fill="none" stroke="#38bdf8" stroke-width="2" stroke-dasharray="4"/>
+              <!-- Origin Circle -->
+              <circle cx="160" cy="120" r="4" fill="#ef4444"/>
+              <text x="140" y="142" fill="#ef4444" font-size="10" font-weight="bold">(0,0,0)</text>
+              <!-- Dimensions Text -->
+              <text x="300" y="195" fill="#f59e0b" font-size="12" font-weight="bold" text-anchor="middle">Variable A = 145.00 mm</text>
+              <text x="300" y="55" fill="#22c55e" font-size="12" font-weight="bold" text-anchor="middle">Distancia B = 75.00 mm</text>
+            </svg>
           </div>
         </article>
 
-        <!-- Bloque 3: Cuestionario Evaluativo -->
-        <article class="card">
-          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">3. Formulario de Entrega de Evaluación</h2>
-          <p style="font-size: 0.95rem; color: var(--text-dark); margin-bottom: 1rem;">
-            Una vez finalizado el modelado en SOLIDWORKS, consulta las propiedades de sección/área del croquis e ingresa tus respuestas:
-          </p>
+        <!-- TAB 3: ESTRATEGIA GUIADA -->
+        <article id="tab-pasos" class="card" style="display: none;">
+          <h2 class="card-title"><i class="fa-solid fa-list-check text-swCyan"></i> Estrategia Guiada de Resolución</h2>
+          <p style="margin-bottom: 1.5rem;">Sigue estos pasos en tu software SOLIDWORKS para garantizar una solución paramétrica robusta:</p>
 
-          <form id="week4-exam-form" onsubmit="evaluateWeek4Exam(event)">
-            <div style="margin-bottom: 1.25rem;">
-              <label style="font-weight: 700; font-size: 0.9rem; color: var(--primary); display: block; margin-bottom: 0.4rem;">
-                1. ¿Cuál es el área total del croquis cerrado en $mm^2$?
-              </label>
-              <div style="display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.9rem;">
-                <label><input type="radio" name="w4q1" value="A" required> A) 8432.15 mm²</label>
-                <label><input type="radio" name="w4q1" value="B"> B) 9120.00 mm²</label>
-                <label><input type="radio" name="w4q1" value="C"> C) 7950.40 mm²</label>
-                <label><input type="radio" name="w4q1" value="D"> D) 8810.00 mm²</label>
-              </div>
+          <div class="step-box">
+            <div class="step-number">1</div>
+            <h4 style="color: var(--primary);">Configurar Unidades y Crear Croquis</h4>
+            <p>Verifica que las unidades en la barra inferior indiquen <strong>MMGS</strong>. Abre un nuevo croquis en el plano <strong>Alzado</strong>.</p>
+          </div>
+
+          <div class="step-box">
+            <div class="step-number">2</div>
+            <h4 style="color: var(--primary);">Trazar Geometría Base desde el Origen</h4>
+            <p>Comienza dibujando el primer círculo del barreno interior coincidente con el <strong>Origen $(0,0,0)$</strong>.</p>
+          </div>
+
+          <div class="step-box">
+            <div class="step-number">3</div>
+            <h4 style="color: var(--primary);">Aplicar Restricciones de Tangencia e Igualdad</h4>
+            <p>Traza las líneas envolventes, asigna relaciones de <strong>Tangencia</strong> con los arcos y restringe los dos barrenos interiores con la relación <strong>Igual</strong>.</p>
+          </div>
+
+          <div class="step-box">
+            <div class="step-number">4</div>
+            <h4 style="color: var(--primary);">Consultar Propiedades de Sección/Área</h4>
+            <p>Dirígete a la pestaña <code>Calcular > Propiedades de la sección</code> o revisa el área del croquis cerrado para obtener la medida exacta en $mm^2$.</p>
+          </div>
+        </article>
+
+        <!-- TAB 4: EVALUACIÓN Y ENTREGA DE RESPUESTAS -->
+        <article id="tab-evaluacion" class="card" style="display: none;">
+          <h2 class="card-title"><i class="fa-solid fa-pen-to-square text-swCyan"></i> Formulario de Entrega de Evaluación</h2>
+          <p style="margin-bottom: 1.5rem;">Consulta las propiedades de tu croquis en SOLIDWORKS e ingresa tus respuestas:</p>
+
+          <form id="quiz-form-w4">
+            <div style="margin-bottom: 1.5rem;">
+              <p style="font-weight: 600; margin-bottom: 0.75rem;">1. ¿Cuál es el área total del croquis cerrado en $mm^2$?</p>
+              <label class="quiz-option"><input type="radio" name="q1" value="A"> A) 8432.15 mm²</label>
+              <label class="quiz-option"><input type="radio" name="q1" value="B"> B) 9120.00 mm²</label>
+              <label class="quiz-option"><input type="radio" name="q1" value="C"> C) 7950.40 mm²</label>
+              <label class="quiz-option"><input type="radio" name="q1" value="D"> D) 8810.00 mm²</label>
             </div>
 
             <div style="margin-bottom: 1.5rem;">
-              <label style="font-weight: 700; font-size: 0.9rem; color: var(--primary); display: block; margin-bottom: 0.4rem;">
-                2. Si modificas la variable $A$ a $160.00\text{ mm}$ y el radio $R$ a $25.00\text{ mm}$, ¿qué ocurre con el estado del croquis?
-              </label>
-              <div style="display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.9rem;">
-                <label><input type="radio" name="w4q2" value="A" required> Permanece Completamente Definido y se actualiza sin errores.</label>
-                <label><input type="radio" name="w4q2" value="B"> Pasa a estar Subdefinido (Azul).</label>
-                <label><input type="radio" name="w4q2" value="C"> Se sobredefine debido a un conflicto de cotas.</label>
-              </div>
+              <p style="font-weight: 600; margin-bottom: 0.75rem;">2. Si modificas la variable $A$ a $160.00\text{ mm}$ y el radio $R$ a $25.00\text{ mm}$, ¿qué ocurre con el estado del croquis?</p>
+              <label class="quiz-option"><input type="radio" name="q2" value="A"> A) Permanece Completamente Definido y se actualiza sin errores.</label>
+              <label class="quiz-option"><input type="radio" name="q2" value="B"> B) Pasa a estar Subdefinido (Azul).</label>
+              <label class="quiz-option"><input type="radio" name="q2" value="C"> C) Se sobredefine debido a un conflicto de cotas.</label>
             </div>
 
-            <button type="submit" class="btn" style="width: 100%; font-size: 1rem;">✅ Entregar Evaluación de la Semana 4</button>
+            <button type="button" class="btn" onclick="evaluarQuizSemana4()"><i class="fa-solid fa-paper-plane mr-1"></i> Validar Respuestas y Registrar Calificación</button>
+            <div id="quiz-feedback-w4" style="margin-top: 1rem; display: none;"></div>
           </form>
         </article>
 
+        <!-- Navegación entre Semanas -->
+        <div style="display: flex; justify-content: space-between; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
+          <a href="semana3.html" class="btn btn-outline"><i class="fa-solid fa-arrow-left"></i> Semana 3</a>
+          <a href="semana5.html" class="btn">Semana 5 <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
       </div>
 
-      <!-- Barra Lateral: Estado y Navegación -->
-      <aside>
-
-        <!-- Resumen de Evaluación -->
+      <!-- Barra Lateral (Sidebar) -->
+      <aside class="space-y">
         <div class="card">
-          <h3 class="card-title" style="font-size: 1.1rem; margin-bottom: 0.75rem;">📋 Estado de Evaluación</h3>
-          <ul style="list-style: none; font-size: 0.85rem; color: var(--text-muted);" class="space-y">
-            <li style="display: flex; align-items: center; gap: 0.5rem;">
-              <span>📌</span> Módulo 2 Finalizado
-            </li>
-            <li style="display: flex; align-items: center; gap: 0.5rem;">
-              <span>🎯</span> Ponderación: 15%
-            </li>
-            <li style="display: flex; align-items: center; gap: 0.5rem;">
-              <span>⏱️</span> Limite: 45 Minutos
-            </li>
+          <h3 class="card-title" style="font-size: 1rem;"><i class="fa-solid fa-chart-line text-swCyan"></i> Estado de la Lección</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">Progreso registrado en esta semana:</p>
+          <div class="progress-container"><div id="week-progress-bar" class="progress-bar" style="width: 0%;"></div></div>
+          <span id="week-status-badge" class="badge badge-warning" style="margin-top: 0.5rem;">Pendiente</span>
+        </div>
+
+        <div class="card">
+          <h3 class="card-title" style="font-size: 1rem;"><i class="fa-solid fa-folder-open text-swCyan"></i> Recursos Descargables</h3>
+          <ul style="list-style: none; font-size: 0.85rem;" class="space-y">
+            <li><a href="#" onclick="alert('Descargando Plano de Evaluación en PDF'); return false;"><i class="fa-solid fa-file-pdf text-red-500 mr-1"></i> Plano Técnico Evaluativo (.PDF)</a></li>
+            <li><a href="#" onclick="alert('Descargando Guía de Solución de Croquis'); return false;"><i class="fa-solid fa-key text-swCyan mr-1"></i> Guía de Criterios de Corrección</a></li>
           </ul>
         </div>
 
-        <!-- Navegación Curricular -->
-        <div class="card" style="text-align: center;">
-          <h4 style="font-size: 0.9rem; color: var(--primary); margin-bottom: 0.75rem;">Navegación Curricular</h4>
-          <div style="display: flex; justify-content: space-between; gap: 0.5rem;">
-            <a href="semana3.html" class="btn btn-outline" style="font-size: 0.8rem; flex: 1;">⬅️ Sem. 3</a>
-            <a href="index.html" class="btn btn-outline" style="font-size: 0.8rem; flex: 1;">Índice</a>
-            <a href="semana5.html" class="btn" style="font-size: 0.8rem; flex: 1;">Sem. 5 ➡️</a>
-          </div>
+        <div class="card" style="background: var(--primary); color: var(--white);">
+          <h3 style="color: var(--accent); font-size: 1rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-award mr-1"></i> CSWA Practice Center</h3>
+          <p style="font-size: 0.85rem; opacity: 0.9; margin-bottom: 1rem;">
+            Evalúa tus competencias de croquizado con simulacros completos de examen.
+          </p>
+          <a href="../cswa/index.html" class="btn" style="width: 100%; text-align: center; font-size: 0.85rem;">Ir al Centro CSWA</a>
         </div>
-
       </aside>
 
     </div>
-
   </main>
 
   <footer>
@@ -284,48 +378,65 @@
 
   <!-- Scripts de la Aplicación -->
   <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/cswa.js"></script>
+  <script src="../assets/js/quiz.js"></script>
+  <script src="../assets/js/navbar.js"></script>
+
   <script>
-    function completeWeek4() {
-      AppState.markWeekCompleted(4);
-      
-      const btn = document.getElementById('mark-completed-btn');
-      if (btn) {
-        btn.textContent = '✓ Semana 4 Completada';
-        btn.disabled = true;
-        btn.style.opacity = '0.8';
-      }
-      alert('🎉 ¡Evaluación de la Semana 4 registrada con éxito en tu expediente!');
-    }
-
-    function evaluateWeek4Exam(e) {
-      e.preventDefault();
-      const form = document.getElementById('week4-exam-form');
-      const formData = new FormData(form);
-
-      const q1 = formData.get('w4q1');
-      const q2 = formData.get('w4q2');
-
-      if (q1 === 'A' && q2 === 'A') {
-        alert('🎉 ¡Felicidades! Respuestas correctas. Has obtenido 100% en la Evaluación Práctica 1 (15%).');
-        AppState.recordQuizResult('semana4_eval1', 100, { croquis: 85, interpretacion: 80, tiempo_limite: 75 });
-        completeWeek4();
-      } else {
-        alert('⚠️ Hay inconsistencias en tus respuestas. Revisa las dimensiones del croquis y la estabilidad paramétrica.');
-      }
-    }
-
-    // Verificar estado al cargar
     document.addEventListener('DOMContentLoaded', () => {
       const progress = AppState.getUserProgress();
       if (progress.completedWeeks && progress.completedWeeks.includes(4)) {
-        const btn = document.getElementById('mark-completed-btn');
-        if (btn) {
-          btn.textContent = '✓ Semana 4 Completada';
-          btn.disabled = true;
-          btn.style.opacity = '0.8';
-        }
+        actualizarUICompletado();
       }
     });
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('article[id^="tab-"]').forEach(content => content.style.display = 'none');
+
+      event.currentTarget.classList.add('active');
+      document.getElementById('tab-' + tabId).style.display = 'block';
+    }
+
+    function actualizarUICompletado() {
+      const progressBar = document.getElementById('week-progress-bar');
+      const badge = document.getElementById('week-status-badge');
+      const btn = document.getElementById('mark-completed-btn');
+
+      if (progressBar) progressBar.style.width = '100%';
+      if (badge) {
+        badge.className = 'badge badge-success';
+        badge.textContent = 'Completado';
+      }
+      if (btn) {
+        btn.textContent = '✓ Semana 4 Completada';
+        btn.disabled = true;
+        btn.style.opacity = '0.85';
+      }
+    }
+
+    function completeWeek4() {
+      AppState.markWeekCompleted(4);
+      AppState.recordQuizResult('semana4_eval1', 100, { croquis: 85, interpretacion: 80, tiempo_limite: 75 });
+      actualizarUICompletado();
+      alert('🎉 ¡Evaluación de la Semana 4 registrada con éxito en tu expediente!');
+    }
+
+    function evaluarQuizSemana4() {
+      const isPassed = QuizEngine.evaluateQuiz({
+        formId: 'quiz-form-w4',
+        feedbackId: 'quiz-feedback-w4',
+        quizId: 'semana4_eval1',
+        weekNumber: 4,
+        answers: { q1: 'A', q2: 'A' },
+        competencyGains: { croquis: 85, interpretacion: 80, tiempo_limite: 75 },
+        successMsg: '<strong>¡Felicidades!</strong> Respuestas correctas. Has obtenido 100% en la Evaluación Práctica 1 (15%).'
+      });
+
+      if (isPassed) {
+        actualizarUICompletado();
+      }
+    }
   </script>
 </body>
 </html>
