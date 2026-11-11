@@ -1,1 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semana 13: Interpretación de Problemas Tipo CSWA y Gestión de Tiempo | SOLIDWORKS ACADEMY</title>
+  
+  <!-- Hojas de Estilo Institucionales -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
 
+  <style>
+    .lesson-hero {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      color: var(--white);
+      padding: 2rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-md);
+    }
+
+    .lesson-meta-bar {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: var(--accent);
+      flex-wrap: wrap;
+    }
+
+    .step-box {
+      border-left: 4px solid var(--accent);
+      background: var(--bg-light);
+      padding: 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 1.25rem;
+    }
+
+    .step-number {
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.3rem;
+    }
+
+    .shortcut-tag {
+      background: #E2E8F0;
+      color: #334155;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-family: monospace;
+      font-weight: bold;
+      font-size: 0.85rem;
+      border: 1px solid #CBD5E1;
+    }
+
+    .cswa-tip-box {
+      background: #EFF6FF;
+      border: 1px solid #BFDBFE;
+      border-radius: 8px;
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+    }
+
+    .cswa-tip-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #1E40AF;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .param-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .param-table th, .param-table td {
+      border: 1px solid var(--border);
+      padding: 0.75rem;
+      text-align: left;
+    }
+
+    .param-table th {
+      background: var(--bg-light);
+      color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navegación Principal -->
+  <nav class="navbar">
+    <a href="../index.html" class="brand"><span>SOLIDWORKS</span> ACADEMY</a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Inicio</a></li>
+      <li><a href="../dashboard.html">Dashboard</a></li>
+      <li><a href="../aula/index.html" class="active">Aula Virtual</a></li>
+      <li><a href="../cswa/index.html">CSWA Center</a></li>
+      <li><a href="../proyecto.html">Proyecto Final</a></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+
+    <!-- Encabezado de la Lección -->
+    <header class="lesson-hero">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <span class="badge badge-info" style="margin-bottom: 0.5rem; display: inline-block;">Módulo 7: Preparación Intensiva CSWA</span>
+          <h1 style="font-size: 2.2rem; color: var(--white); margin: 0.2rem 0;">Semana 13: Interpretación de Problemas Tipo CSWA y Gestión de Tiempo</h1>
+          <p style="opacity: 0.9; font-size: 1rem; max-width: 700px; margin-top: 0.5rem;">
+            Estrategias ágiles de modelado, vinculación de ecuaciones globales ($A, B, C$) y distribución óptima de los 180 minutos del examen oficial.
+          </p>
+        </div>
+        <div>
+          <button id="mark-completed-btn" class="btn" style="background: var(--success);" onclick="completeWeek13()">
+            ✓ Marcar Semana como Completada
+          </button>
+        </div>
+      </div>
+
+      <div class="lesson-meta-bar">
+        <span>⏱️ Duración: 3 Horas Académicas</span>
+        <span>🎯 Competencia CSWA: Resolución bajo presión de tiempo y ecuaciones paramétricas</span>
+        <span>📄 Tipo de Contenido: Teórico - Práctico</span>
+      </div>
+    </header>
+
+    <div class="grid-2" style="grid-template-columns: 2.5fr 1fr; gap: 1.5rem;">
+
+      <!-- Contenido Principal de la Lección -->
+      <div>
+
+        <!-- Bloque 1: Estructura del Examen Oficial y Distribución de Tiempo -->
+        <article class="card">
+          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">1. Anatomía del Examen CSWA y Distribución de Tiempo</h2>
+          <p style="line-height: 1.6; color: var(--text-dark); margin-bottom: 1rem;">
+            El examen oficial de certificación CSWA (Certified SOLIDWORKS Associate) emitido por Dassault Systèmes consta de <strong>14 a 30 preguntas</strong> (dependiendo de la versión del cliente Tangix TesterPRO) con una puntuación máxima de <strong>240 puntos</strong>. Se requiere un mínimo de <strong>165 puntos (70%)</strong> para obtener el diploma oficial.
+          </p>
+
+          <table class="param-table">
+            <thead>
+              <tr>
+                <th>Categoría de Preguntas</th>
+                <th>Cantidad Aproximada</th>
+                <th>Tiempo Recomendado</th>
+                <th>Puntos Asignados</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Teoría General y Planos 2D</strong></td>
+                <td>5 - 8 Cuestionarios</td>
+                <td>15 Minutos totales</td>
+                <td>25 - 40 Puntos</td>
+              </tr>
+              <tr>
+                <td><strong>Pieza Inicial con Croquis Complejo</strong></td>
+                <td>1 Ejercicio (Ingreso manual)</td>
+                <td>35 Minutos</td>
+                <td>30 Puntos</td>
+              </tr>
+              <tr>
+                <td><strong>Modificación Dimensional de Pieza (Etapas B/C)</strong></td>
+                <td>2 - 3 Preguntas de opción múltiple</td>
+                <td>25 Minutos</td>
+                <td>30 - 45 Puntos</td>
+              </tr>
+              <tr>
+                <td><strong>Ensamblaje Mecánico Inicial</strong></td>
+                <td>1 Ejercicio de montaje</td>
+                <td>40 Minutos</td>
+                <td>30 Puntos</td>
+              </tr>
+              <tr>
+                <td><strong>Modificación de Posición en Ensamblaje</strong></td>
+                <td>2 Preguntas de opción múltiple</td>
+                <td>25 Minutos</td>
+                <td>30 Puntos</td>
+              </tr>
+              <tr>
+                <td><strong>Colchón de Revisión y Reconstrucción</strong></td>
+                <td>Comprobación de unidades y cotas</td>
+                <td>40 Minutos sobrantes</td>
+                <td>--</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="cswa-tip-box">
+            <div class="cswa-tip-header">
+              <span>💡 Regla del 80/20 en Selección del Plano de Inicio</span>
+            </div>
+            <p style="font-size: 0.9rem; color: #1E3A8A; margin: 0;">
+              El 80% de los fallos por falta de tiempo ocurren por elegir el plano equivocado para el primer croquis. Selecciona siempre la vista que muestre la <strong>silueta contorneada más compleja</strong> (usualmente la vista Frontal/Alzado), reduciendo la necesidad de múltiples extrusiones posteriores.
+            </p>
+          </div>
+        </article>
+
+        <!-- Bloque 2: Tablas de Ecuaciones y Variables Globales -->
+        <article class="card">
+          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">2. Automatización mediante Variables Globales (= "A", = "B", = "C")</h2>
+          <p style="line-height: 1.6; color: var(--text-dark); margin-bottom: 1rem;">
+            En el examen CSWA, una misma pieza base se reutiliza en 3 o 4 preguntas sucesivas cambiando únicamente las dimensiones fundamentales ($A, B, C$). Configurar una <strong>Tabla de Ecuaciones</strong> ahorra hasta 15 minutos en modificaciones dimensionales.
+          </p>
+
+          <h3 style="font-size: 1.1rem; color: var(--primary); margin: 1.25rem 0 0.5rem 0;">Pasos para Crear Variables Globales en SOLIDWORKS:</h3>
+          <ol style="margin-left: 1.25rem; font-size: 0.95rem; color: var(--text-dark); line-height: 1.7;">
+            <li>Dirígete al menú principal <code>Herramientas > Ecuaciones...</code> (o haz clic derecho en la carpeta <em>Ecuaciones</em> del árbol).</li>
+            <li>En la columna <strong>Nombre de la variable global</strong>, escribe <code>"A"</code> y asigna su valor numérico (ej. <code>120</code>). Repite para <code>"B"</code> y <code>"C"</code>.</li>
+            <li>Al colocar una cota inteligente en el croquis, escribe el signo igual <span class="shortcut-tag">=</span>, selecciona <em>Variables globales</em> y elige <code>"A"</code>.</li>
+          </ol>
+
+          <!-- CAD Viewport Esquemático -->
+          <div class="cad-viewport" style="margin-top: 1.5rem;">
+            <div style="text-align: center;">
+              <div style="font-size: 3rem; margin-bottom: 0.5rem;">📐⚡</div>
+              <p style="font-size: 0.95rem; font-weight: 700; color: var(--white);">Demostración: Cotas Vinculadas a Variables Globales = "A", = "B"</p>
+              <p style="font-size: 0.8rem; opacity: 0.8;">Modificación Instantánea: Cambio en Tabla de Ecuaciones > Reconstruir (Ctrl+B)</p>
+            </div>
+            <div class="cad-viewport-controls">
+              <button type="button" class="cad-btn-icon" onclick="alert('Variables Globales vinculadas: A=120mm, B=65mm, C=30mm')">🔗 Verificar Ecuaciones</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Bloque 3: Guía Práctica Paso a Paso -->
+        <article class="card">
+          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">3. Guía Práctica Paso a Paso: Flujo Rápido de Respuesta CSWA</h2>
+          <p style="font-size: 0.95rem; color: var(--text-dark); margin-bottom: 1rem;">
+            Sigue este flujo estandarizado al abordar una pregunta práctica de modelado tipo CSWA:
+          </p>
+
+          <div class="step-box">
+            <div class="step-number">Fase 1</div>
+            <h4 style="margin: 0 0 0.3rem 0; color: var(--primary);">Verificación del Sistema de Unidades y Material</h4>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">
+              Antes de dibujar una sola línea, ajusta la esquina inferior derecha a <strong>MMGS</strong> o <strong>IPS</strong> según requiera el enunciado. Asigna inmediatamente el material en el árbol (ej. <em>Acero al carbono 1020</em>).
+            </p>
+          </div>
+
+          <div class="step-box">
+            <div class="step-number">Fase 2</div>
+            <h4 style="margin: 0 0 0.3rem 0; color: var(--primary);">Definición del Origen (0,0,0) y Primer Croquis</h4>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">
+              Ubica la esquina o centro del croquis en el punto del Origen especificado en la ilustración de referencia. Asegúrate de que el croquis muestre el estado <strong>Completamente Definido</strong>.
+            </p>
+          </div>
+
+          <div class="step-box">
+            <div class="step-number">Fase 3</div>
+            <h4 style="margin: 0 0 0.3rem 0; color: var(--primary);">Extracción de Propiedades y Control Decimal</h4>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">
+              Consulta <code>Calcular > Propiedades de masa</code>. Si la pregunta requiere entrada manual, copia el valor redondeado a 2 decimales. Si es opción múltiple, verifica la opción dentro del margen de $\pm 0.5\%$.
+            </p>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Barra Lateral: Progreso y Cuestionario de Validación -->
+      <aside>
+
+        <!-- Resumen de la Lección -->
+        <div class="card">
+          <h3 class="card-title" style="font-size: 1.1rem; margin-bottom: 0.75rem;">📋 Resumen de la Lección</h3>
+          <ul style="list-style: none; font-size: 0.85rem; color: var(--text-muted);" class="space-y">
+            <li style="display: flex; align-items: center; gap: 0.5rem;">
+              <span>✅</span> Estructura del examen oficial CSWA
+            </li>
+            <li style="display: flex; align-items: center; gap: 0.5rem;">
+              <span>✅</span> Creación de Variables Globales (= "A")
+            </li>
+            <li style="display: flex; align-items: center; gap: 0.5rem;">
+              <span>✅</span> Gestión de tiempo (180 minutos)
+            </li>
+            <li style="display: flex; align-items: center; gap: 0.5rem;">
+              <span>✅</span> Tolerancia de respuesta decimal
+            </li>
+          </ul>
+        </div>
+
+        <!-- Cuestionario Rápido de Validación -->
+        <div class="card">
+          <h3 class="card-title" style="font-size: 1.1rem; margin-bottom: 0.75rem;">📝 Comprobación de Lectura</h3>
+          <form id="week13-quiz-form" onsubmit="evaluateWeek13Quiz(event)">
+            <p style="font-size: 0.85rem; font-weight: 600; color: var(--primary); margin-bottom: 0.5rem;">
+              1. ¿Qué carácter se debe ingresar en la casilla de Cota Inteligente para vincular una variable global previamente definida?
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.85rem; margin-bottom: 1rem;">
+              <label><input type="radio" name="w13q1" value="A" required> El signo de dólar ($)</label>
+              <label><input type="radio" name="w13q1" value="B"> El signo de igual (=)</label>
+              <label><input type="radio" name="w13q1" value="C"> El signo de porcentaje (%)</label>
+            </div>
+
+            <p style="font-size: 0.85rem; font-weight: 600; color: var(--primary); margin-bottom: 0.5rem;">
+              2. ¿Cuál es el puntaje mínimo requerido para aprobar el examen oficial CSWA de Dassault Systèmes?
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.85rem; margin-bottom: 1.25rem;">
+              <label><input type="radio" name="w13q2" value="A" required> 50% (120 Puntos)</label>
+              <label><input type="radio" name="w13q2" value="B"> 70% (165 Puntos de 240)</label>
+              <label><input type="radio" name="w13q2" value="C"> 90% (216 Puntos)</label>
+            </div>
+
+            <button type="submit" class="btn btn-outline" style="width: 100%; font-size: 0.85rem;">Validar Respuestas</button>
+          </form>
+        </div>
+
+        <!-- Navegación entre Semanas -->
+        <div class="card" style="text-align: center;">
+          <h4 style="font-size: 0.9rem; color: var(--primary); margin-bottom: 0.75rem;">Navegación Curricular</h4>
+          <div style="display: flex; justify-content: space-between; gap: 0.5rem;">
+            <a href="semana12.html" class="btn btn-outline" style="font-size: 0.8rem; flex: 1;">⬅️ Sem. 12</a>
+            <a href="index.html" class="btn btn-outline" style="font-size: 0.8rem; flex: 1;">Índice</a>
+            <a href="semana14.html" class="btn" style="font-size: 0.8rem; flex: 1;">Sem. 14 ➡️</a>
+          </div>
+        </div>
+
+      </aside>
+
+    </div>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 SOLIDWORKS ACADEMY - Formación por Competencias & Preparación CSWA</p>
+  </footer>
+
+  <!-- Scripts de la Aplicación -->
+  <script src="../assets/js/app.js"></script>
+  <script>
+    function completeWeek13() {
+      AppState.markWeekCompleted(13);
+      
+      const btn = document.getElementById('mark-completed-btn');
+      if (btn) {
+        btn.textContent = '✓ Semana 13 Completada';
+        btn.disabled = true;
+        btn.style.opacity = '0.8';
+      }
+      alert('🎉 ¡Semana 13 registrada como completada en tu expediente!');
+    }
+
+    function evaluateWeek13Quiz(e) {
+      e.preventDefault();
+      const form = document.getElementById('week13-quiz-form');
+      const formData = new FormData(form);
+
+      const q1 = formData.get('w13q1');
+      const q2 = formData.get('w13q2');
+
+      if (q1 === 'B' && q2 === 'B') {
+        alert('🎯 ¡Excelente! Has respondido correctamente ambas preguntas sobre la metodología del examen CSWA.');
+        AppState.recordQuizResult('semana13_quiz', 100, { tiempo_limite: 85, modificacion: 85 });
+        completeWeek13();
+      } else {
+        alert('⚠️ Hay respuestas incorrectas. Revisa cómo vincular variables con = y los requisitos mínimos de aprobación del examen.');
+      }
+    }
+
+    // Verificar si ya fue completada al cargar
+    document.addEventListener('DOMContentLoaded', () => {
+      const progress = AppState.getUserProgress();
+      if (progress.completedWeeks && progress.completedWeeks.includes(13)) {
+        const btn = document.getElementById('mark-completed-btn');
+        if (btn) {
+          btn.textContent = '✓ Semana 13 Completada';
+          btn.disabled = true;
+          btn.style.opacity = '0.8';
+        }
+      }
+    });
+  </script>
+</body>
+</html>
+```
+
+### Summary of `aula/semana13.html`:
+- Initiates **Module 7: Intensive CSWA Preparation**.
+- Details CSWA exam structure, time allocation strategies for the 180-minute test limit, global variable management (`="A"`, `="B"`, `="C"`), and fast sketching techniques.
+- Includes a reading check quiz and progress tracking integration with `AppState` in `LocalStorage` (`app.js`).
