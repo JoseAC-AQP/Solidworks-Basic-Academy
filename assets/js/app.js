@@ -1,13 +1,23 @@
-// SOLIDWORKS ACADEMY - Main Application Logic & LocalStorage State Manager
+/**
+ * SOLIDWORKS ACADEMY - Core App State & Analytics Engine
+ * Persists user progress, CSWA competency scores, and quiz results in LocalStorage.
+ * Updated 2026 for production deployment.
+ */
 
 const AppState = {
-  // Clave principal del LocalStorage
-  STORAGE_KEY: 'sw_academy_progress',
+  // Key name for local storage
+  STORAGE_KEY: 'SW_ACADEMY_USER_STATE',
 
-  // Estado inicial por defecto del estudiante
-  getDefaultState: function() {
+  // Default state layout
+  getInitialState() {
     return {
-      completedWeeks: [],
+      user: {
+        name: 'Estudiante CAD',
+        email: 'estudiante@solidworks.edu',
+        startDate: new Date().toISOString()
+      },
+      completedWeeks: [], // Array of numbers e.g. [1, 2, 3]
+      quizResults: {},   // e.g. { semana1_quiz: 100, semana4_eval1: 95 }
       cswaScores: {
         croquis: 0,
         piezas: 0,
@@ -19,103 +29,85 @@ const AppState = {
         relaciones_posicion: 0,
         tiempo_limite: 0
       },
-      overallIndex: 0,
-      quizResults: {},
-      lastActivity: new Date().toISOString()
+      projectSubmitted: false,
+      finalScore: null
     };
   },
 
-  // Obtener progreso almacenado
-  getUserProgress: function() {
+  // Read state from LocalStorage
+  getUserProgress() {
     try {
       const data = localStorage.getItem(this.STORAGE_KEY);
-      return data ? JSON.parse(data) : this.getDefaultState();
+      if (!data) return this.getInitialState();
+      const parsed = JSON.parse(data);
+      return { ...this.getInitialState(), ...parsed };
     } catch (e) {
-      console.error('Error al leer LocalStorage:', e);
-      return this.getDefaultState();
+      console.error('Error reading LocalStorage AppState', e);
+      return this.getInitialState();
     }
   },
 
-  // Guardar progreso actualizado
-  saveProgress: function(progress) {
+  // Save state to LocalStorage
+  saveProgress(state) {
     try {
-      progress.lastActivity = new Date().toISOString();
-      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(progress));
+      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(state));
     } catch (e) {
-      console.error('Error al guardar en LocalStorage:', e);
+      console.error('Error saving LocalStorage AppState', e);
     }
   },
 
-  // Calcular el Índice Global de Preparación CSWA (0-100%)
-  calculateCSWAIndex: function() {
-    const progress = this.getUserProgress();
-    const scores = progress.cswaScores;
-    const values = Object.values(scores);
-    
-    if (values.length === 0) return 0;
-
-    const total = values.reduce((acc, curr) => acc + curr, 0);
-    const avg = Math.round(total / values.length);
-
-    progress.overallIndex = avg;
-    this.saveProgress(progress);
-    return avg;
-  },
-
-  // Marcar una semana académica como completada
-  markWeekCompleted: function(weekNumber) {
-    const progress = this.getUserProgress();
-    if (!progress.completedWeeks.includes(weekNumber)) {
-      progress.completedWeeks.push(weekNumber);
-      this.saveProgress(progress);
+  // Mark a week as completed
+  markWeekCompleted(weekNumber) {
+    const state = this.getUserProgress();
+    const num = parseInt(weekNumber, 10);
+    if (!state.completedWeeks.includes(num)) {
+      state.completedWeeks.push(num);
     }
-    return progress;
+    this.saveProgress(state);
+    return state;
   },
 
-  // Registrar resultado de evaluación y actualizar puntajes de competencias
-  recordQuizResult: function(quizId, score, competencyUpdates = {}) {
-    const progress = this.getUserProgress();
-    
-    // Guardar puntuación obtenida en la evaluación
-    progress.quizResults[quizId] = {
-      score: score,
-      date: new Date().toISOString()
-    };
+  // Record quiz or practical exam scores & update CSWA competencies
+  recordQuizResult(quizId, score, competencyGains = {}) {
+    const state = this.getUserProgress();
+    state.quizResults[quizId] = score;
 
-    // Actualizar competencias CSWA con los nuevos puntajes evaluados
-    for (const [competency, value] of Object.entries(competencyUpdates)) {
-      if (progress.cswaScores.hasOwnProperty(competency)) {
-        progress.cswaScores[competency] = Math.min(100, Math.max(0, value));
+    // Increment corresponding CSWA competency scores (capped at 100)
+    for (const [comp, gain] of Object.entries(competencyGains)) {
+      if (Object.prototype.hasOwnProperty.call(state.cswaScores, comp)) {
+        state.cswaScores[comp] = Math.min(100, (state.cswaScores[comp] || 0) + gain);
       }
     }
 
-    this.saveProgress(progress);
-    this.calculateCSWAIndex();
-    return progress;
+    this.saveProgress(state);
+    return state;
   },
 
-  // Reiniciar avance completo
-  resetProgress: function() {
+  // Calculate weighted overall CSWA Index (0 to 100%)
+  calculateCSWAIndex() {
+    const state = this.getUserProgress();
+    const scores = Object.values(state.cswaScores);
+    if (scores.length === 0) return 0;
+    
+    const avgScore = scores.reduce((a, b) => a + b, 0) / scores.length;
+    const weekProgressBonus = (state.completedWeeks.length / 16) * 20; // 20% weight from course completion
+    
+    const totalIndex = Math.min(100, Math.round((avgScore * 0.8) + weekProgressBonus));
+    return totalIndex;
+  },
+
+  // Reset progress (for practice retries)
+  resetProgress() {
     localStorage.removeItem(this.STORAGE_KEY);
-    return this.getDefaultState();
+    return this.getInitialState();
   }
 };
 
-// Inicialización de la interfaz global al cargar la página
-document.addEventListener('DOMContentLoaded', () => {
-  console.log('SOLIDWORKS ACADEMY - Core Engine (app.js) listo.');
+// Global export
+window.AppState = AppState;
+```eoc
 
-  // Actualizar indicador general si el elemento existe en el DOM
-  const overallIndexEl = document.getElementById('cswa-index-val');
-  if (overallIndexEl) {
-    const index = AppState.calculateCSWAIndex();
-    overallIndexEl.textContent = index + '%';
-  }
-
-  // Actualizar contador de semanas completadas si existe el elemento
-  const completedCountEl = document.getElementById('completed-weeks-count');
-  if (completedCountEl) {
-    const progress = AppState.getUserProgress();
-    completedCountEl.textContent = `${progress.completedWeeks.length} / 16`;
-  }
-});
+### Key Highlights of Updated `app.js`:
+1. **Centralized Data Engine:** Standardized storage layout using `SW_ACADEMY_USER_STATE` key in `LocalStorage`.
+2. **Competency Engine:** Maps gains across all 9 CSWA domains (`croquis`, `piezas`, `modificacion`, `interpretacion`, `operaciones`, `propiedades_fisicas`, `ensamblajes`, `relaciones_posicion`, `tiempo_limite`).
+3. **Calculated Metrics:** Automatically computes the student's real-time CSWA Index combining competency performance ($80\%$) and overall course progress ($20\%$).
