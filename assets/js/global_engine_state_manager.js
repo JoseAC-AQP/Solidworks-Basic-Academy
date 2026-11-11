@@ -1,7 +1,7 @@
 /**
- * SOLIDWORKS ACADEMY - Core App State & Analytics Engine
+ * SOLIDWORKS ACADEMY - Global Engine & State Manager
  * Persists user progress, CSWA competency scores, and quiz results in LocalStorage.
- * Updated 2026 for production deployment.
+ * Updated 2026.
  */
 
 const AppState = {
@@ -16,8 +16,8 @@ const AppState = {
         email: 'estudiante@solidworks.edu',
         startDate: new Date().toISOString()
       },
-      completedWeeks: [], // Array of numbers e.g. [1, 2, 3]
-      quizResults: {},   // e.g. { semana1_quiz: 100, semana4_eval1: 95 }
+      completedWeeks: [], // Array of completed week numbers e.g. [1, 2, 3]
+      quizResults: {},   // Quiz scores e.g. { semana1_quiz: 100, semana4_eval1: 95 }
       cswaScores: {
         croquis: 0,
         piezas: 0,
@@ -59,8 +59,9 @@ const AppState = {
   // Mark a week as completed
   markWeekCompleted(weekNumber) {
     const state = this.getUserProgress();
-    if (!state.completedWeeks.includes(weekNumber)) {
-      state.completedWeeks.push(weekNumber);
+    const num = parseInt(weekNumber, 10);
+    if (!state.completedWeeks.includes(num)) {
+      state.completedWeeks.push(num);
     }
     this.saveProgress(state);
     return state;
@@ -73,7 +74,7 @@ const AppState = {
 
     // Increment corresponding CSWA competency scores (capped at 100)
     for (const [comp, gain] of Object.entries(competencyGains)) {
-      if (state.cswaScores.hasOwnProperty(comp)) {
+      if (Object.prototype.hasOwnProperty.call(state.cswaScores, comp)) {
         state.cswaScores[comp] = Math.min(100, (state.cswaScores[comp] || 0) + gain);
       }
     }
