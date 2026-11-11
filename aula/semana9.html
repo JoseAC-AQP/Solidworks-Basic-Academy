@@ -1,1 +1,363 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semana 9: Inserción de Componentes y Relaciones Estándar | SOLIDWORKS ACADEMY</title>
+  
+  <!-- Hojas de Estilo Institucionales -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
 
+  <style>
+    .lesson-hero {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      color: var(--white);
+      padding: 2rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-md);
+    }
+
+    .lesson-meta-bar {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: var(--accent);
+      flex-wrap: wrap;
+    }
+
+    .step-box {
+      border-left: 4px solid var(--accent);
+      background: var(--bg-light);
+      padding: 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 1.25rem;
+    }
+
+    .step-number {
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.3rem;
+    }
+
+    .shortcut-tag {
+      background: #E2E8F0;
+      color: #334155;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-family: monospace;
+      font-weight: bold;
+      font-size: 0.85rem;
+      border: 1px solid #CBD5E1;
+    }
+
+    .cswa-tip-box {
+      background: #EFF6FF;
+      border: 1px solid #BFDBFE;
+      border-radius: 8px;
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+    }
+
+    .cswa-tip-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #1E40AF;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .param-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .param-table th, .param-table td {
+      border: 1px solid var(--border);
+      padding: 0.75rem;
+      text-align: left;
+    }
+
+    .param-table th {
+      background: var(--bg-light);
+      color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navegación Principal -->
+  <nav class="navbar">
+    <a href="../index.html" class="brand"><span>SOLIDWORKS</span> ACADEMY</a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Inicio</a></li>
+      <li><a href="../dashboard.html">Dashboard</a></li>
+      <li><a href="../aula/index.html" class="active">Aula Virtual</a></li>
+      <li><a href="../cswa/index.html">CSWA Center</a></li>
+      <li><a href="../proyecto.html">Proyecto Final</a></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+
+    <!-- Encabezado de la Lección -->
+    <header class="lesson-hero">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <span class="badge badge-info" style="margin-bottom: 0.5rem; display: inline-block;">Módulo 5: Ensamblajes</span>
+          <h1 style="font-size: 2.2rem; color: var(--white); margin: 0.2rem 0;">Semana 9: Inserción de Componentes y Relaciones Estándar</h1>
+          <p style="opacity: 0.9; font-size: 1rem; max-width: 700px; margin-top: 0.5rem;">
+            Aprende a estructurar archivos de ensamblaje (.SLDASM), gestionar el componente fijo de origen y restringir grados de libertad con relaciones de posición estándar.
+          </p>
+        </div>
+        <div>
+          <button id="mark-completed-btn" class="btn" style="background: var(--success);" onclick="completeWeek9()">
+            ✓ Marcar Semana como Completada
+          </button>
+        </div>
+      </div>
+
+      <div class="lesson-meta-bar">
+        <span>⏱️ Duración: 3 Horas Académicas</span>
+        <span>🎯 Competencia CSWA: Ensamblajes y relaciones de posición estándar</span>
+        <span>📄 Tipo de Contenido: Teórico - Práctico</span>
+      </div>
+    </header>
+
+    <div class="grid-2" style="grid-template-columns: 2.5fr 1fr; gap: 1.5rem;">
+
+      <!-- Contenido Principal de la Lección -->
+      <div>
+
+        <!-- Bloque 1: Fundamentos de Ensamblajes en SOLIDWORKS -->
+        <article class="card">
+          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">1. Conceptos Fundamentales de Ensamblaje (.SLDASM)</h2>
+          <p style="line-height: 1.6; color: var(--text-dark); margin-bottom: 1rem;">
+            Un ensamblaje une piezas individuales (<code>.SLDPRT</code>) o subensamblajes dentro de un espacio virtual común 3D. El objetivo es simular el montaje mecánico real restringiendo los 6 grados de libertad de cada pieza (3 traslaciones y 3 rotaciones).
+          </p>
+
+          <div class="cswa-tip-box">
+            <div class="cswa-tip-header">
+              <span>💡 El Componente Fijo (f) y el Origen en el Examen CSWA</span>
+            </div>
+            <p style="font-size: 0.9rem; color: #1E3A8A; margin: 0;">
+              El primer componente insertado en un ensamblaje se fija automáticamente al origen con el símbolo <strong>(f)</strong>. En las preguntas de ensamblaje del examen CSWA, el primer componente <strong>DEBE</strong> hacer coincidir su origen con el origen del archivo de ensamblaje para garantizar que el Centro de Gravedad $(X, Y, Z)$ concuerde con el sistema de respuesta oficial.
+            </p>
+          </div>
+        </article>
+
+        <!-- Bloque 2: Relaciones de Posición Estándar -->
+        <article class="card">
+          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">2. Matriz de Relaciones de Posición Estándar (Standard Mates)</h2>
+          <p style="line-height: 1.6; color: var(--text-dark); margin-bottom: 1rem;">
+            Las relaciones de posición (Mates) vinculan geometrías de dos componentes distintos para eliminar grados de libertad.
+          </p>
+
+          <table class="param-table">
+            <thead>
+              <tr>
+                <th>Relación (Mate)</th>
+                <th>Entidades Seleccionadas</th>
+                <th>Efecto Mecánico</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Coincidente</strong></td>
+                <td>Caras planas, aristas o puntos</td>
+                <td>Elimina el desplazamiento normal a la cara. Coplanaridad de superficies.</td>
+              </tr>
+              <tr>
+                <td><strong>Concéntrica</strong></td>
+                <td>Caras cilíndricas, cónicas o aristas circulares</td>
+                <td>Alinea los ejes centrales de rotación de ambos componentes.</td>
+              </tr>
+              <tr>
+                <td><strong>Paralela / Perpendicular</strong></td>
+                <td>Caras planas o líneas constructivas</td>
+                <td>Forza un ángulo constante de $0^\circ$ o $90^\circ$ entre caras sin restringir distancia.</td>
+              </tr>
+              <tr>
+                <td><strong>Distancia / Ángulo</strong></td>
+                <td>Caras planas o aristas</td>
+                <td>Fija una separación milimétrica ($mm$) o una apertura angular ($^\circ$) específica.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- CAD Viewport Esquemático -->
+          <div class="cad-viewport" style="margin-top: 1.5rem;">
+            <div style="text-align: center;">
+              <div style="font-size: 3rem; margin-bottom: 0.5rem;">🔩🧩</div>
+              <p style="font-size: 0.95rem; font-weight: 700; color: var(--white);">Vista de Ensamblaje: Soporte Base y Pasador Articulado</p>
+              <p style="font-size: 0.8rem; opacity: 0.8;">Relaciones Aplicadas: Concéntrica (Eje) + Coincidente (Cara Frontal)</p>
+            </div>
+            <div class="cad-viewport-controls">
+              <button type="button" class="cad-btn-icon" onclick="alert('Relación Concéntrica y Coincidente verificadas: 0 Grados de Libertad Residuales.')">🔄 Verificar Mates</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Bloque 3: Paso a Paso Práctico -->
+        <article class="card">
+          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">3. Guía Práctica Paso a Paso: Ensamblaje de Soporte y Perno</h2>
+          <p style="font-size: 0.95rem; color: var(--text-dark); margin-bottom: 1rem;">
+            Sigue esta secuencia para crear tu primer ensamblaje paramétrico en SOLIDWORKS:
+          </p>
+
+          <div class="step-box">
+            <div class="step-number">Paso 1</div>
+            <h4 style="margin: 0 0 0.3rem 0; color: var(--primary);">Crear Archivo e Insertar Base Fija</h4>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">
+              Dirígete a <code>Archivo > Nuevo > Ensamblaje</code>. En el PropertyManager de inserción, selecciona el archivo <code>Base.SLDPRT</code> y haz clic directamente en el <strong>Check Verde (OK)</strong> sin hacer clic en el área de dibujo. Esto anclará el origen de la pieza al origen del ensamblaje (f).
+            </p>
+          </div>
+
+          <div class="step-box">
+            <div class="step-number">Paso 2</div>
+            <h4 style="margin: 0 0 0.3rem 0; color: var(--primary);">Insertar Componente Móvil (- (-) Componente)</h4>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">
+              Haz clic en <code>Insertar componentes</code> y posiciona el <code>Eje.SLDPRT</code> en el área de trabajo. Verás que antepone el símbolo <strong>(-)</strong> indicando que está flotando.
+            </p>
+          </div>
+
+          <div class="step-box">
+            <div class="step-number">Paso 3</div>
+            <h4 style="margin: 0 0 0.3rem 0; color: var(--primary);">Aplicación de Relaciones de Posición</h4>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">
+              Abre el comando <strong>Relación de Posición (Mate)</strong>. Selecciona la cara cilíndrica del eje y el barreno interno de la base (Relación <strong>Concéntrica</strong>). Luego selecciona la cara plana de la cabeza del eje y el plano frontal de la base (Relación <strong>Coincidente</strong>).
+            </p>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Barra Lateral: Progreso y Cuestionario de Validación -->
+      <aside>
+
+        <!-- Resumen de la Lección -->
+        <div class="card">
+          <h3 class="card-title" style="font-size: 1.1rem; margin-bottom: 0.75rem;">📋 Resumen de la Lección</h3>
+          <ul style="list-style: none; font-size: 0.85rem; color: var(--text-muted);" class="space-y">
+            <li style="display: flex; align-items: center; gap: 0.5rem;">
+              <span>✅</span> Estructura de Archivo `.SLDASM`
+            </li>
+            <li style="display: flex; align-items: center; gap: 0.5rem;">
+              <span>✅</span> Fijación de Componente Base `(f)`
+            </li>
+            <li style="display: flex; align-items: center; gap: 0.5rem;">
+              <span>✅</span> Relaciones Concéntrica y Coincidente
+            </li>
+            <li style="display: flex; align-items: center; gap: 0.5rem;">
+              <span>✅</span> Control de Grados de Libertad
+            </li>
+          </ul>
+        </div>
+
+        <!-- Cuestionario Rápido de Validación -->
+        <div class="card">
+          <h3 class="card-title" style="font-size: 1.1rem; margin-bottom: 0.75rem;">📝 Comprobación de Lectura</h3>
+          <form id="week9-quiz-form" onsubmit="evaluateWeek9Quiz(event)">
+            <p style="font-size: 0.85rem; font-weight: 600; color: var(--primary); margin-bottom: 0.5rem;">
+              1. ¿Qué indica el símbolo (f) junto al nombre del primer componente en el árbol de ensamblaje?
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.85rem; margin-bottom: 1rem;">
+              <label><input type="radio" name="w9q1" value="A" required> El componente está Flotante (Móvil)</label>
+              <label><input type="radio" name="w9q1" value="B"> El componente está Fijo en el espacio de trabajo</label>
+              <label><input type="radio" name="w9q1" value="C"> El componente tiene un error de reconstrucción</label>
+            </div>
+
+            <p style="font-size: 0.85rem; font-weight: 600; color: var(--primary); margin-bottom: 0.5rem;">
+              2. ¿Qué relación de posición debes aplicar para alinear los ejes centrales de dos cilindros?
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.85rem; margin-bottom: 1.25rem;">
+              <label><input type="radio" name="w9q2" value="A" required> Coincidente</label>
+              <label><input type="radio" name="w9q2" value="B"> Concéntrica</label>
+              <label><input type="radio" name="w9q2" value="C"> Paralela</label>
+            </div>
+
+            <button type="submit" class="btn btn-outline" style="width: 100%; font-size: 0.85rem;">Validar Respuestas</button>
+          </form>
+        </div>
+
+        <!-- Navegación entre Semanas -->
+        <div class="card" style="text-align: center;">
+          <h4 style="font-size: 0.9rem; color: var(--primary); margin-bottom: 0.75rem;">Navegación Curricular</h4>
+          <div style="display: flex; justify-content: space-between; gap: 0.5rem;">
+            <a href="semana8.html" class="btn btn-outline" style="font-size: 0.8rem; flex: 1;">⬅️ Sem. 8</a>
+            <a href="index.html" class="btn btn-outline" style="font-size: 0.8rem; flex: 1;">Índice</a>
+            <a href="semana10.html" class="btn" style="font-size: 0.8rem; flex: 1;">Sem. 10 ➡️</a>
+          </div>
+        </div>
+
+      </aside>
+
+    </div>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 SOLIDWORKS ACADEMY - Formación por Competencias & Preparación CSWA</p>
+  </footer>
+
+  <!-- Scripts de la Aplicación -->
+  <script src="../assets/js/app.js"></script>
+  <script>
+    function completeWeek9() {
+      AppState.markWeekCompleted(9);
+      
+      const btn = document.getElementById('mark-completed-btn');
+      if (btn) {
+        btn.textContent = '✓ Semana 9 Completada';
+        btn.disabled = true;
+        btn.style.opacity = '0.8';
+      }
+      alert('🎉 ¡Semana 9 registrada como completada en tu expediente!');
+    }
+
+    function evaluateWeek9Quiz(e) {
+      e.preventDefault();
+      const form = document.getElementById('week9-quiz-form');
+      const formData = new FormData(form);
+
+      const q1 = formData.get('w9q1');
+      const q2 = formData.get('w9q2');
+
+      if (q1 === 'B' && q2 === 'B') {
+        alert('🎯 ¡Excelente! Has respondido correctamente ambas preguntas sobre ensamblajes y relaciones de posición.');
+        AppState.recordQuizResult('semana9_quiz', 100, { ensamblajes: 75, relaciones_posicion: 70 });
+        completeWeek9();
+      } else {
+        alert('⚠️ Hay respuestas incorrectas. Revisa el significado del componente fijo (f) y las relaciones concéntricas.');
+      }
+    }
+
+    // Verificar si ya fue completada al cargar
+    document.addEventListener('DOMContentLoaded', () => {
+      const progress = AppState.getUserProgress();
+      if (progress.completedWeeks && progress.completedWeeks.includes(9)) {
+        const btn = document.getElementById('mark-completed-btn');
+        if (btn) {
+          btn.textContent = '✓ Semana 9 Completada';
+          btn.disabled = true;
+          btn.style.opacity = '0.8';
+        }
+      }
+    });
+  </script>
+</body>
+</html>
+```
+
+### Summary of `aula/semana9.html`:
+- Initiates **Módulo 5: Ensamblajes**, covering `.SLDASM` file structure, fixed base components `(f)`, origin alignment, and degree-of-freedom restriction.
+- Explains standard mates: **Coincident**, **Concentric**, **Parallel/Perpendicular**, and **Distance/Angle**.
+- Includes step-by-step assembly guides, simulated CAD viewport verification, and an interactive self-correcting validation quiz connected to `AppState` (`app.js`).
