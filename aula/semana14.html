@@ -1,1 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semana 14: Ejercicios Combinados de Ensamblaje y Modificación | SOLIDWORKS ACADEMY</title>
+  
+  <!-- Hojas de Estilo Institucionales -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
 
+  <style>
+    .lesson-hero {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      color: var(--white);
+      padding: 2rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-md);
+    }
+
+    .lesson-meta-bar {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: var(--accent);
+      flex-wrap: wrap;
+    }
+
+    .step-box {
+      border-left: 4px solid var(--accent);
+      background: var(--bg-light);
+      padding: 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 1.25rem;
+    }
+
+    .step-number {
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.3rem;
+    }
+
+    .shortcut-tag {
+      background: #E2E8F0;
+      color: #334155;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-family: monospace;
+      font-weight: bold;
+      font-size: 0.85rem;
+      border: 1px solid #CBD5E1;
+    }
+
+    .cswa-tip-box {
+      background: #EFF6FF;
+      border: 1px solid #BFDBFE;
+      border-radius: 8px;
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+    }
+
+    .cswa-tip-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #1E40AF;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .param-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .param-table th, .param-table td {
+      border: 1px solid var(--border);
+      padding: 0.75rem;
+      text-align: left;
+    }
+
+    .param-table th {
+      background: var(--bg-light);
+      color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navegación Principal -->
+  <nav class="navbar">
+    <a href="../index.html" class="brand"><span>SOLIDWORKS</span> ACADEMY</a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Inicio</a></li>
+      <li><a href="../dashboard.html">Dashboard</a></li>
+      <li><a href="../aula/index.html" class="active">Aula Virtual</a></li>
+      <li><a href="../cswa/index.html">CSWA Center</a></li>
+      <li><a href="../proyecto.html">Proyecto Final</a></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+
+    <!-- Encabezado de la Lección -->
+    <header class="lesson-hero">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <span class="badge badge-info" style="margin-bottom: 0.5rem; display: inline-block;">Módulo 7: Preparación Intensiva CSWA</span>
+          <h1 style="font-size: 2.2rem; color: var(--white); margin: 0.2rem 0;">Semana 14: Ejercicios Combinados de Ensamblaje y Modificación</h1>
+          <p style="opacity: 0.9; font-size: 1rem; max-width: 700px; margin-top: 0.5rem;">
+            Resolución de ensambles mecánicos multinivel, creación de Sistemas de Coordenadas personalizados y técnicas de diagnóstico rápido en fallos de relaciones de posición.
+          </p>
+        </div>
+        <div>
+          <button id="mark-completed-btn" class="btn" style="background: var(--success);" onclick="completeWeek14()">
+            ✓ Marcar Semana como Completada
+          </button>
+        </div>
+      </div>
+
+      <div class="lesson-meta-bar">
+        <span>⏱️ Duración: 3 Horas Académicas</span>
+        <span>🎯 Competencia CSWA: Ensamblajes articulados, sistemas de coordenadas y modificación rápida</span>
+        <span>📄 Tipo de Contenido: Teórico - Práctico</span>
+      </div>
+    </header>
+
+    <div class="grid-2" style="grid-template-columns: 2.5fr 1fr; gap: 1.5rem;">
+
+      <!-- Contenido Principal de la Lección -->
+      <div>
+
+        <!-- Bloque 1: Problemas Tipo Ensamblaje en CSWA -->
+        <article class="card">
+          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">1. Estructura de las Preguntas de Ensamblaje en el Examen CSWA</h2>
+          <p style="line-height: 1.6; color: var(--text-dark); margin-bottom: 1rem;">
+            En la sección de ensamblajes del examen CSWA (típicamente 30 puntos por ejercicio), se proveen archivos de piezas pre-modeladas (<code>.SLDPRT</code>). El candidato debe construir el ensamble (<code>.SLDASM</code>), aplicar relaciones de posición (Mates) precisas según los ángulos/distancias del gráfico y medir el <strong>Centro de Gravedad ($X, Y, Z$)</strong> del conjunto.
+          </p>
+
+          <table class="param-table">
+            <thead>
+              <tr>
+                <th>Fase del Ejercicio</th>
+                <th>Acción Requerida</th>
+                <th>Puntos Críticos de Error</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1. Inserción de la Base</strong></td>
+                <td>Coincidir el origen del componente base con el origen del ensamblaje (f).</td>
+                <td>Pieza flotante o fija fuera del Origen (0,0,0).</td>
+              </tr>
+              <tr>
+                <td><strong>2. Aplicación de Mates</strong></td>
+                <td>Concentricidad, Coincidencia y Ángulos fijos (ej. $X = 45^\circ$, $Y = 30^\circ$).</td>
+                <td>Alineación de mate invertida (Aligned vs. Anti-Aligned).</td>
+              </tr>
+              <tr>
+                <td><strong>3. Sistema de Coordenadas</strong></td>
+                <td>Crear un Sistema de Coordenadas (Coordinate System) en un vértice específico.</td>
+                <td>Medir el CG con respecto al Origen global en lugar del Sistema de Coordenadas indicado.</td>
+              </tr>
+              <tr>
+                <td><strong>4. Modificación de Ángulos</strong></td>
+                <td>Cambiar los valores angulares $\theta_1$ y $\theta_2$ para la siguiente pregunta.</td>
+                <td>Omitir la reconstrucción (<span class="shortcut-tag">Ctrl + B</span>) antes de leer la nueva masa o CG.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="cswa-tip-box">
+            <div class="cswa-tip-header">
+              <span>💡 Importancia del Sistema de Coordenadas Personalizado</span>
+            </div>
+            <p style="font-size: 0.9rem; color: #1E40AF; margin: 0;">
+              Muchas preguntas del CSWA no piden el Centro de Masa relativo al origen por defecto, sino respecto a un punto origen secundario (ej. <code>Sistema de Coordenadas 1</code> ubicado en una esquina o centro de pasador). Accede a <code>Geometría de referencia > Sistema de coordenadas</code> para definirlo antes de consultar las Propiedades de Masa.
+            </p>
+          </div>
+        </article>
+
+        <!-- Bloque 2: Solución de Errores Comunes de Relaciones (Mates) -->
+        <article class="card">
+          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">2. Diagnóstico y Corrección de Conflictos en Ensamblajes</h2>
+          <p style="line-height: 1.6; color: var(--text-dark); margin-bottom: 1rem;">
+            Un error habitual en el examen es sobredefinir las relaciones de posición o aplicar una alineación invertida que hace "volcar" mecánicamente la pieza.
+          </p>
+
+          <h3 style="font-size: 1.1rem; color: var(--primary); margin: 1.25rem 0 0.5rem 0;">Técnicas de Diagnóstico Rápido:</h3>
+          <ul style="margin-left: 1.25rem; font-size: 0.95rem; color: var(--text-dark); line-height: 1.7;">
+            <li><strong>Mate Controller / Invertir Alineación:</strong> Haz clic derecho en el Mate conflictivo en el árbol y selecciona <code>Invertir alineación de relaciones de posición</code>.</li>
+            <li><strong>Pieza Flotante sin Restringir:</strong> Si al arrastrar una pieza con el mouse esta gira libremente, falta una relación de paralelismo o una restricción angular.</li>
+            <li><strong>Error de Mate Sobredimensionado (Rojo/Amarillo):</strong> Elimina la última relación aplicada y utiliza <code>Mate Diagnostic</code> para identificar la cara sobredeterminada.</li>
+          </ul>
+
+          <!-- CAD Viewport Esquemático -->
+          <div class="cad-viewport" style="margin-top: 1.5rem;">
+            <div style="text-align: center;">
+              <div style="font-size: 3rem; margin-bottom: 0.5rem;">🧩⛓️</div>
+              <p style="font-size: 0.95rem; font-weight: 700; color: var(--white);">Mecanismo Articulado: Ángulos A=45°, B=30°</p>
+              <p style="font-size: 0.8rem; opacity: 0.8;">Sistema de Coordenadas: Ref_Coord_1 | CG Calculado: (X=145.20, Y=82.40, Z=-12.50)</p>
+            </div>
+            <div class="cad-viewport-controls">
+              <button type="button" class="cad-btn-icon" onclick="alert('Sistema de Coordenadas Ref_Coord_1 seleccionado. CG verificado.')">📍 Evaluar CG con Ref_Coord_1</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Bloque 3: Guía Práctica Paso a Paso -->
+        <article class="card">
+          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">3. Guía Práctica Paso a Paso: Ensamblaje Articulado de 3 Eslabones</h2>
+          <p style="font-size: 0.95rem; color: var(--text-dark); margin-bottom: 1rem;">
+            Ejecuta la siguiente secuencia de ensamble y medición en SOLIDWORKS:
+          </p>
+
+          <div class="step-box">
+            <div class="step-number">Paso 1</div>
+            <h4 style="margin: 0 0 0.3rem 0; color: var(--primary);">Inserción Fija del Soporte Base</h4>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">
+              Abre un nuevo ensamble (`.SLDASM`), inserta `Soporte_Base.SLDPRT` y presiona el check verde (OK) sin mover el cursor para fijar el origen coincidente.
+            </p>
+          </div>
+
+          <div class="step-box">
+            <div class="step-number">Paso 2</div>
+            <h4 style="margin: 0 0 0.3rem 0; color: var(--primary);">Montaje de Eslabones y Ángulos de Control</h4>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">
+              Inserta `Eslabón_1` y `Eslabón_2`. Aplica relaciones concéntricas en los pasadores. Agrega una relación de <strong>Ángulo Especificado</strong> de $45^\circ$ entre la cara plana de la base y el primer eslabón.
+            </p>
+          </div>
+
+          <div class="step-box">
+            <div class="step-number">Paso 3</div>
+            <h4 style="margin: 0 0 0.3rem 0; color: var(--primary);">Creación del Sistema de Coordenadas y Lectura</h4>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">
+              Selecciona el vértice inferior derecho de la base. Ve a <code>Geometría de referencia > Sistema de coordenadas</code>. En <code>Calcular > Propiedades de masa</code>, selecciona el nuevo sistema en la casilla desplegable y registra las coordenadas $(X, Y, Z)$.
+            </p>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Barra Lateral: Progreso y Cuestionario de Validación -->
+      <aside>
+
+        <!-- Resumen de la Lección -->
+        <div class="card">
+          <h3 class="card-title" style="font-size: 1.1rem; margin-bottom: 0.75rem;">📋 Resumen de la Lección</h3>
+          <ul style="list-style: none; font-size: 0.85rem; color: var(--text-muted);" class="space-y">
+            <li style="display: flex; align-items: center; gap: 0.5rem;">
+              <span>✅</span> Estructura de exámenes de ensamblaje CSWA
+            </li>
+            <li style="display: flex; align-items: center; gap: 0.5rem;">
+              <span>✅</span> Creación de Sistemas de Coordenadas
+            </li>
+            <li style="display: flex; align-items: center; gap: 0.5rem;">
+              <span>✅</span> Inversión de alineación de Mates
+            </li>
+            <li style="display: flex; align-items: center; gap: 0.5rem;">
+              <span>✅</span> Modificación rápida de ángulos cinemáticos
+            </li>
+          </ul>
+        </div>
+
+        <!-- Cuestionario Rápido de Validación -->
+        <div class="card">
+          <h3 class="card-title" style="font-size: 1.1rem; margin-bottom: 0.75rem;">📝 Comprobación de Lectura</h3>
+          <form id="week14-quiz-form" onsubmit="evaluateWeek14Quiz(event)">
+            <p style="font-size: 0.85rem; font-weight: 600; color: var(--primary); margin-bottom: 0.5rem;">
+              1. Si la pregunta del examen solicita medir el Centro de Gravedad desde el 'Sistema de Coordenadas A', ¿dónde debes seleccionar dicho sistema?
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.85rem; margin-bottom: 1rem;">
+              <label><input type="radio" name="w14q1" value="A" required> En el desplegable 'Reportar valores de masa relativos a' dentro de Propiedades de Masa</label>
+              <label><input type="radio" name="w14q1" value="B"> En el menú Configuración de Croquis 2D</label>
+              <label><input type="radio" name="w14q1" value="C"> En las propiedades del sistema operativo</label>
+            </div>
+
+            <p style="font-size: 0.85rem; font-weight: 600; color: var(--primary); margin-bottom: 0.5rem;">
+              2. ¿Qué ocurre si la alineación de una relación concéntrica queda invertida (Anti-Aligned en lugar de Aligned)?
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.85rem; margin-bottom: 1.25rem;">
+              <label><input type="radio" name="w14q2" value="A" required> El componente se orienta hacia el lado opuesto del eje, alterando las coordenadas del CG</label>
+              <label><input type="radio" name="w14q2" value="B"> La masa total disminuye a la mitad</label>
+              <label><input type="radio" name="w14q2" value="C"> El software elimina automáticamente el componente</label>
+            </div>
+
+            <button type="submit" class="btn btn-outline" style="width: 100%; font-size: 0.85rem;">Validar Respuestas</button>
+          </form>
+        </div>
+
+        <!-- Navegación entre Semanas -->
+        <div class="card" style="text-align: center;">
+          <h4 style="font-size: 0.9rem; color: var(--primary); margin-bottom: 0.75rem;">Navegación Curricular</h4>
+          <div style="display: flex; justify-content: space-between; gap: 0.5rem;">
+            <a href="semana13.html" class="btn btn-outline" style="font-size: 0.8rem; flex: 1;">⬅️ Sem. 13</a>
+            <a href="index.html" class="btn btn-outline" style="font-size: 0.8rem; flex: 1;">Índice</a>
+            <a href="semana15.html" class="btn" style="font-size: 0.8rem; flex: 1;">Sem. 15 ➡️</a>
+          </div>
+        </div>
+
+      </aside>
+
+    </div>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 SOLIDWORKS ACADEMY - Formación por Competencias & Preparación CSWA</p>
+  </footer>
+
+  <!-- Scripts de la Aplicación -->
+  <script src="../assets/js/app.js"></script>
+  <script>
+    function completeWeek14() {
+      AppState.markWeekCompleted(14);
+      
+      const btn = document.getElementById('mark-completed-btn');
+      if (btn) {
+        btn.textContent = '✓ Semana 14 Completada';
+        btn.disabled = true;
+        btn.style.opacity = '0.8';
+      }
+      alert('🎉 ¡Semana 14 registrada como completada en tu expediente!');
+    }
+
+    function evaluateWeek14Quiz(e) {
+      e.preventDefault();
+      const form = document.getElementById('week14-quiz-form');
+      const formData = new FormData(form);
+
+      const q1 = formData.get('w14q1');
+      const q2 = formData.get('w14q2');
+
+      if (q1 === 'A' && q2 === 'A') {
+        alert('🎯 ¡Excelente! Respuestas correctas. Dominas la configuración de ensambles y sistemas de coordenadas.');
+        AppState.recordQuizResult('semana14_quiz', 100, { ensamblajes: 90, relaciones_posicion: 90 });
+        completeWeek14();
+      } else {
+        alert('⚠️ Hay respuestas incorrectas. Revisa cómo seleccionar sistemas de coordenadas alternativos en Propiedades de Masa.');
+      }
+    }
+
+    // Verificar si ya fue completada al cargar
+    document.addEventListener('DOMContentLoaded', () => {
+      const progress = AppState.getUserProgress();
+      if (progress.completedWeeks && progress.completedWeeks.includes(14)) {
+        const btn = document.getElementById('mark-completed-btn');
+        if (btn) {
+          btn.textContent = '✓ Semana 14 Completada';
+          btn.disabled = true;
+          btn.style.opacity = '0.8';
+        }
+      }
+    });
+  </script>
+</body>
+</html>
+```
+
+### Summary of `aula/semana14.html`:
+- Covers **Module 7 (Intensive CSWA Preparation - Part 2)**.
+- Focuses on multi-component assemblies, custom Coordinate Systems (`Coordinate System 1`), mate alignment troubleshooting (Aligned vs. Anti-Aligned), and dynamic angle modifications.
+- Integrates step-by-step practical guides, a simulated CAD viewport, reading checks, and progress tracking with `AppState` in `LocalStorage` (`app.js`).
