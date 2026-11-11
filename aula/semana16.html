@@ -1,1 +1,380 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semana 16: Evaluación Final y Cierre de Curso | SOLIDWORKS ACADEMY</title>
+  
+  <!-- Hojas de Estilo Institucionales -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
 
+  <style>
+    .lesson-hero {
+      background: linear-gradient(135deg, #1E3A8A 0%, var(--primary) 100%);
+      color: var(--white);
+      padding: 2.5rem 2rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-md);
+    }
+
+    .lesson-meta-bar {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: var(--accent);
+      flex-wrap: wrap;
+    }
+
+    .step-box {
+      border-left: 4px solid var(--success);
+      background: var(--bg-light);
+      padding: 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 1.25rem;
+    }
+
+    .step-number {
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.3rem;
+    }
+
+    .shortcut-tag {
+      background: #E2E8F0;
+      color: #334155;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-family: monospace;
+      font-weight: bold;
+      font-size: 0.85rem;
+      border: 1px solid #CBD5E1;
+    }
+
+    .cswa-tip-box {
+      background: #ECFDF5;
+      border: 1px solid #A7F3D0;
+      border-radius: 8px;
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+    }
+
+    .cswa-tip-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #065F46;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .param-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .param-table th, .param-table td {
+      border: 1px solid var(--border);
+      padding: 0.75rem;
+      text-align: left;
+    }
+
+    .param-table th {
+      background: var(--bg-light);
+      color: var(--primary);
+    }
+
+    .cert-card {
+      background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+      color: var(--white);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      margin-top: 1.5rem;
+      border: 1px solid var(--accent);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navegación Principal -->
+  <nav class="navbar">
+    <a href="../index.html" class="brand"><span>SOLIDWORKS</span> ACADEMY</a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Inicio</a></li>
+      <li><a href="../dashboard.html">Dashboard</a></li>
+      <li><a href="../aula/index.html" class="active">Aula Virtual</a></li>
+      <li><a href="../cswa/index.html">CSWA Center</a></li>
+      <li><a href="../proyecto.html">Proyecto Final</a></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+
+    <!-- Encabezado de la Lección / Evaluación Final -->
+    <header class="lesson-hero">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <span class="badge badge-warning" style="margin-bottom: 0.5rem; display: inline-block;">Módulo 8: Simulacros y Cierre (35% Ponderación)</span>
+          <h1 style="font-size: 2.2rem; color: var(--white); margin: 0.2rem 0;">Semana 16: Evaluación Final y Simulacro Oficial CSWA</h1>
+          <p style="opacity: 0.9; font-size: 1rem; max-width: 700px; margin-top: 0.5rem;">
+            Entrega del Proyecto Integrador "Tornillo de Banco Mecánico", ejecución del examen de certificación simulado de 180 minutos y consolidación del expediente académico.
+          </p>
+        </div>
+        <div>
+          <button id="mark-completed-btn" class="btn" style="background: var(--success);" onclick="completeWeek16()">
+            ✓ Marcar Curso como Completado
+          </button>
+        </div>
+      </div>
+
+      <div class="lesson-meta-bar">
+        <span>⏱️ Tiempo Estándar Examen: 180 Minutos (3 Horas)</span>
+        <span>🎯 Meta: Certificación Internacional Certified SOLIDWORKS Associate</span>
+        <span>📄 Ponderación Integradora: 35% Calificación Final</span>
+      </div>
+    </header>
+
+    <div class="grid-2" style="grid-template-columns: 2.5fr 1fr; gap: 1.5rem;">
+
+      <!-- Contenido Principal de la Lección -->
+      <div>
+
+        <!-- Bloque 1: Cierre del Programa Académico -->
+        <article class="card">
+          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">1. Hito Final: Consolidación de Competencias</h2>
+          <p style="line-height: 1.6; color: var(--text-dark); margin-bottom: 1rem;">
+            ¡Felicidades por alcanzar la <strong>Semana 16</strong>! A lo largo de este programa de 48 horas lectivas divididas en 8 módulos temáticos, has avanzado desde el conocimiento de la interfaz y croquizado paramétrico 2D, hasta el modelado de sólidos complejos, ensamblajes cinemáticos articulados, verificación de interferencias y cálculo exacto de propiedades físicas y Centro de Gravedad.
+          </p>
+
+          <table class="param-table">
+            <thead>
+              <tr>
+                <th>Componente de Evaluación Final</th>
+                <th>Ponderación</th>
+                <th>Estado de Cumplimiento</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Evaluaciones Prácticas Continuas (Semanas 4, 8 y 12)</strong></td>
+                <td>65% acumulado</td>
+                <td><span class="badge badge-success">Semanas 1-15 Registradas</span></td>
+              </tr>
+              <tr>
+                <td><strong>Proyecto Integrador: Tornillo de Banco (Bench Vise)</strong></td>
+                <td>20% final</td>
+                <td><a href="../proyecto.html" style="color: var(--accent); font-weight: bold;">Ver Entrega de Proyecto ➡️</a></td>
+              </tr>
+              <tr>
+                <td><strong>Simulacro Integral Examen CSWA (180 Minutos)</strong></td>
+                <td>15% final</td>
+                <td><a href="../cswa/simulador.html" style="color: var(--accent); font-weight: bold;">Iniciar Examen Simulado ➡️</a></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="cswa-tip-box">
+            <div class="cswa-tip-header">
+              <span>🎓 Pasos para la Certificación Oficial en Dassault Systèmes</span>
+            </div>
+            <p style="font-size: 0.9rem; color: #065F46; margin: 0;">
+              Una vez completados los requisitos de la plataforma:
+              <br>1. Accede al portal oficial de certifcación: <code>3dexperience.virtualtester.com</code>.
+              <br>2. Descarga el cliente de evaluación <strong>Tangix TesterPRO Client</strong>.
+              <br>3. Canjea tu código de examen provisto por tu institución académica o patrocinador.
+              <br>4. Obtén una puntuación mínima de <strong>165/240 puntos (70%)</strong> para obtener tu diploma verificable en línea.
+            </p>
+          </div>
+        </article>
+
+        <!-- Bloque 2: Proyecto Integrador de Cierre -->
+        <article class="card">
+          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">2. Proyecto Integrador: Tornillo de Banco Mecánico</h2>
+          <p style="line-height: 1.6; color: var(--text-dark); margin-bottom: 1rem;">
+            El proyecto final pone a prueba tu capacidad para estructurar un producto industrial real con despiece de componentes (BOM), asignación diferenciada de materiales, ensamblaje paramétrico y relaciones avanzadas de movimiento restringido.
+          </p>
+
+          <div class="step-box">
+            <div class="step-number">Entregable 1</div>
+            <h4 style="margin: 0 0 0.3rem 0; color: var(--primary);">Modelado de las 6 Piezas del Despiece</h4>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">
+              Base Fija, Mordaza Móvil, Huso Roscado, Palanca, Placas de Sujeción y Pernos M6 en sus respectivos archivos <code>.SLDPRT</code>.
+            </p>
+          </div>
+
+          <div class="step-box">
+            <div class="step-number">Entregable 2</div>
+            <h4 style="margin: 0 0 0.3rem 0; color: var(--primary);">Ensamblaje y Análisis de Masa</h4>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">
+              Archivo de ensamblaje <code>.SLDASM</code> sin interferencias sólidas, con carrera de mordaza limitada y comprobación de masa total.
+            </p>
+          </div>
+
+          <div style="text-align: center; margin-top: 1.5rem;">
+            <a href="../proyecto.html" class="btn" style="display: inline-block; padding: 0.8rem 2rem;">📤 Acceder al Panel de Entrega del Proyecto Final</a>
+          </div>
+        </article>
+
+        <!-- Bloque 3: Certificado y Acreditación Interna -->
+        <article class="card">
+          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">3. Acreditación Final de Preparación CSWA</h2>
+          
+          <div class="cert-card">
+            <div style="font-size: 3rem; margin-bottom: 0.5rem;">🏆</div>
+            <h3 style="font-size: 1.5rem; color: var(--white); margin-bottom: 0.5rem;">SOLIDWORKS ACADEMY - CERTIFICATE OF COMPLETION</h3>
+            <p style="font-size: 0.9rem; color: #94A3B8; max-width: 500px; margin: 0 auto 1.5rem auto;">
+              Acredita la aprobación satisfactoria de las 16 Semanas del programa formativo y el nivel de preparación técnica recomendado para rendir el examen oficial CSWA.
+            </p>
+            <button onclick="generateInternalCertificate()" class="btn" style="background: var(--accent); color: var(--primary); font-weight: 800;">
+              📜 Generar Hoja de Acreditación Académica
+            </button>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Barra Lateral: Progreso y Cuestionario de Validación -->
+      <aside>
+
+        <!-- Resumen de la Lección -->
+        <div class="card">
+          <h3 class="card-title" style="font-size: 1.1rem; margin-bottom: 0.75rem;">📋 Resumen de Cierre</h3>
+          <ul style="list-style: none; font-size: 0.85rem; color: var(--text-muted);" class="space-y">
+            <li style="display: flex; align-items: center; gap: 0.5rem;">
+              <span>✅</span> 16 Semanas Curriculares Completadas
+            </li>
+            <li style="display: flex; align-items: center; gap: 0.5rem;">
+              <span>✅</span> Entrega de Proyecto Tornillo de Banco
+            </li>
+            <li style="display: flex; align-items: center; gap: 0.5rem;">
+              <span>✅</span> Simulacro CSWA de 180 Minutos
+            </li>
+            <li style="display: flex; align-items: center; gap: 0.5rem;">
+              <span>✅</span> Diagnóstico del Radar al 100%
+            </li>
+          </ul>
+        </div>
+
+        <!-- Cuestionario Rápido de Cierre -->
+        <div class="card">
+          <h3 class="card-title" style="font-size: 1.1rem; margin-bottom: 0.75rem;">📝 Comprobación de Cierre</h3>
+          <form id="week16-quiz-form" onsubmit="evaluateWeek16Quiz(event)">
+            <p style="font-size: 0.85rem; font-weight: 600; color: var(--primary); margin-bottom: 0.5rem;">
+              1. ¿Qué plataforma oficial emite la acreditación internacional certificada con validez global de Dassault Systèmes?
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.85rem; margin-bottom: 1rem;">
+              <label><input type="radio" name="w16q1" value="A" required> Tangix TesterPRO / 3DEXPERIENCE Certification Center</label>
+              <label><input type="radio" name="w16q1" value="B"> Google Drive Manager</label>
+              <label><input type="radio" name="w16q1" value="C"> GitHub Repositories</label>
+            </div>
+
+            <p style="font-size: 0.85rem; font-weight: 600; color: var(--primary); margin-bottom: 0.5rem;">
+              2. ¿Qué margen de tolerancia decimal es aceptable en la masa de piezas para asegurar la respuesta correcta en el examen oficial?
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.85rem; margin-bottom: 1.25rem;">
+              <label><input type="radio" name="w16q2" value="A" required> ± 10% de variación</label>
+              <label><input type="radio" name="w16q2" value="B"> ± 0.5% a ± 1% del valor exacto</label>
+              <label><input type="radio" name="w16q2" value="C"> Sin tolerancia, debe ser idéntico al 100%</label>
+            </div>
+
+            <button type="submit" class="btn btn-outline" style="width: 100%; font-size: 0.85rem;">Validar Cierre de Curso</button>
+          </form>
+        </div>
+
+        <!-- Navegación Curricular -->
+        <div class="card" style="text-align: center;">
+          <h4 style="font-size: 0.9rem; color: var(--primary); margin-bottom: 0.75rem;">Navegación Curricular</h4>
+          <div style="display: flex; justify-content: space-between; gap: 0.5rem;">
+            <a href="semana15.html" class="btn btn-outline" style="font-size: 0.8rem; flex: 1;">⬅️ Sem. 15</a>
+            <a href="../dashboard.html" class="btn" style="font-size: 0.8rem; flex: 1;">Dashboard 🎓</a>
+          </div>
+        </div>
+
+      </aside>
+
+    </div>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 SOLIDWORKS ACADEMY - Formación por Competencias & Preparación CSWA</p>
+  </footer>
+
+  <!-- Scripts de la Aplicación -->
+  <script src="../assets/js/app.js"></script>
+  <script>
+    function completeWeek16() {
+      AppState.markWeekCompleted(16);
+      
+      const btn = document.getElementById('mark-completed-btn');
+      if (btn) {
+        btn.textContent = '🎓 Curso Completado al 100%';
+        btn.disabled = true;
+        btn.style.opacity = '0.8';
+      }
+      alert('🎉 ¡FELICIDADES! Has marcado la Semana 16 como completada. Tu expediente académico ha sido finalizado con éxito.');
+    }
+
+    function evaluateWeek16Quiz(e) {
+      e.preventDefault();
+      const form = document.getElementById('week16-quiz-form');
+      const formData = new FormData(form);
+
+      const q1 = formData.get('w16q1');
+      const q2 = formData.get('w16q2');
+
+      if (q1 === 'A' && q2 === 'B') {
+        alert('🏆 ¡Excelente! Respuestas correctas. Has demostrado comprender todo el protocolo de cierre y certificación.');
+        AppState.recordQuizResult('semana16_quiz', 100, {
+          croquis: 100,
+          piezas: 100,
+          modificacion: 100,
+          interpretacion: 100,
+          operaciones: 100,
+          propiedades_fisicas: 100,
+          ensamblajes: 100,
+          relaciones_posicion: 100,
+          tiempo_limite: 100
+        });
+        completeWeek16();
+      } else {
+        alert('⚠️ Hay respuestas incorrectas. Revisa los protocolos oficiales de certificación Tangix TesterPRO.');
+      }
+    }
+
+    function generateInternalCertificate() {
+      const progress = AppState.getUserProgress();
+      const index = AppState.calculateCSWAIndex();
+      
+      alert(`🎓 ACREDITACIÓN DE PREPARACIÓN CSWA\n\nEstudiante: Alumno Registrado\nSemanas Completadas: ${progress.completedWeeks ? progress.completedWeeks.length : 0} / 16\nÍndice de Preparación CSWA: ${index}%\nEstado: APTO PARA RENDIR EXAMEN OFICIAL\n\nGenerado por SOLIDWORKS ACADEMY Engine (2026).`);
+    }
+
+    // Verificar si ya fue completada al cargar
+    document.addEventListener('DOMContentLoaded', () => {
+      const progress = AppState.getUserProgress();
+      if (progress.completedWeeks && progress.completedWeeks.includes(16)) {
+        const btn = document.getElementById('mark-completed-btn');
+        if (btn) {
+          btn.textContent = '🎓 Curso Completado al 100%';
+          btn.disabled = true;
+          btn.style.opacity = '0.8';
+        }
+      }
+    });
+  </script>
+</body>
+</html>
+```
+
+### Summary of `aula/semana16.html`:
+- Completes the entire 16-week curriculum of **SOLIDWORKS ACADEMY**.
+- Serves as the culmination page connecting the **Proyecto Integrador: Tornillo de Banco Mecánico** (`proyecto.html`), the 3-hour CSWA full practice exam (`cswa/simulador.html`), and official Dassault Systèmes certification registration via Tangix TesterPRO.
+- Integrates self-correcting validation logic that updates all 9 CSWA competencies to 100% in `AppState` (`app.js`) upon successful completion.
