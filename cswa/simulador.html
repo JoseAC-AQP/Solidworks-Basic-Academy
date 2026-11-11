@@ -1,1 +1,495 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador de Examen CSWA | SOLIDWORKS ACADEMY</title>
+  
+  <!-- Hojas de Estilo Institucionales -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
 
+  <style>
+    .exam-header {
+      background: var(--primary);
+      color: var(--white);
+      padding: 1.25rem 2rem;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 12px rgba(16, 42, 67, 0.12);
+    }
+
+    .exam-title-box h1 {
+      font-size: 1.4rem;
+      margin-bottom: 0.25rem;
+      color: var(--white);
+    }
+
+    .exam-meta {
+      font-size: 0.85rem;
+      color: var(--accent);
+      display: flex;
+      gap: 1rem;
+    }
+
+    .timer-container {
+      background: #FEF3C7;
+      border: 2px solid var(--warning);
+      border-radius: 8px;
+      padding: 0.5rem 1.25rem;
+      text-align: center;
+    }
+
+    .timer-label {
+      font-size: 0.75rem;
+      color: #92400E;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .timer-value {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #92400E;
+      font-family: monospace;
+      line-height: 1;
+    }
+
+    .question-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.75rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+
+    .question-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--bg-light);
+      padding-bottom: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .question-number {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 1.1rem;
+    }
+
+    .question-points {
+      background: #E0F2FE;
+      color: #0369A1;
+      padding: 0.25rem 0.6rem;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .param-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+    }
+
+    .param-table th, .param-table td {
+      border: 1px solid var(--border);
+      padding: 0.5rem 0.75rem;
+      text-align: left;
+    }
+
+    .param-table th {
+      background: var(--bg-light);
+      color: var(--primary);
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+
+    .option-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      background: var(--bg-light);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .option-card:hover {
+      border-color: var(--accent);
+      background: #F0F9FF;
+    }
+
+    .option-card input[type="radio"] {
+      accent-color: var(--accent);
+      width: 18px;
+      height: 18px;
+    }
+
+    .option-text {
+      font-weight: 600;
+      color: var(--text-dark);
+      font-size: 0.95rem;
+    }
+
+    .exam-nav-bar {
+      position: sticky;
+      bottom: 1rem;
+      background: var(--primary);
+      color: var(--white);
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      z-index: 100;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navegación Principal -->
+  <nav class="navbar">
+    <a href="/" class="brand"><span>SOLIDWORKS</span> ACADEMY</a>
+    <ul class="nav-links">
+      <li><a href="/">Inicio</a></li>
+      <li><a href="/dashboard.html">Dashboard</a></li>
+      <li><a href="/aula/">Aula Virtual</a></li>
+      <li><a href="/cswa/" class="active">CSWA Center</a></li>
+      <li><a href="/proyecto.html">Proyecto Final</a></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+
+    <!-- Encabezado del Simulador y Temporizador -->
+    <header class="exam-header">
+      <div class="exam-title-box">
+        <h1>Simulacro de Examen Oficial CSWA</h1>
+        <div class="exam-meta">
+          <span>📋 4 Ejercicios Prácticos</span>
+          <span>•</span>
+          <span>⏱️ Tiempo Límite: 45 Minutos</span>
+          <span>•</span>
+          <span>🎯 Puntaje Mínimo: 70%</span>
+        </div>
+      </div>
+      <div class="timer-container">
+        <div class="timer-label">Tiempo Restante</div>
+        <div id="quiz-timer" class="timer-value">45:00</div>
+      </div>
+    </header>
+
+    <form id="cswa-exam-form">
+
+      <!-- PREGUNTA 1: CROQUIS Y DENSIDAD -->
+      <article class="question-card">
+        <div class="question-header">
+          <span class="question-number">Pregunta 1 de 4: Croquizado 2D y Área Total</span>
+          <span class="question-points">15 Puntos</span>
+        </div>
+        <p style="margin-bottom: 0.75rem; color: var(--text-dark);">
+          Modele el croquis 2D completamente definido en el plano Alzado utilizando el sistema de unidades <strong>MMGS (milímetro, gramo, segundo)</strong>. El croquis debe quedar completamente restringido respecto al origen.
+        </p>
+
+        <!-- Tabla de Parámetros -->
+        <table class="param-table">
+          <thead>
+            <tr>
+              <th>Parámetro</th>
+              <th>Valor (mm)</th>
+              <th>Condición Geométricas</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>A</strong></td>
+              <td>120.00 mm</td>
+              <td>Tangencia en arcos superiores</td>
+            </tr>
+            <tr>
+              <td><strong>B</strong></td>
+              <td>65.00 mm</td>
+              <td>Coincidencia con Origen (0,0)</td>
+            </tr>
+            <tr>
+              <td><strong>R (Radio)</strong></td>
+              <td>15.00 mm</td>
+              <td>Simetría respecto al eje vertical</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Visualizador CAD Esquemático -->
+        <div class="cad-viewport">
+          <div style="text-align: center;">
+            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">✏️📐</div>
+            <p style="font-size: 0.9rem; font-weight: 600;">Plano de Referencia 2D - Placa Base con Muescas Angular</p>
+            <p style="font-size: 0.8rem; opacity: 0.8;">Cotas: A=120mm, B=65mm, R=15mm</p>
+          </div>
+          <div class="cad-viewport-controls">
+            <button type="button" class="cad-btn-icon" onclick="alert('Vista Alzado (Frontal) fijada')">🔍 Zoom Ajustar</button>
+          </div>
+        </div>
+
+        <p style="font-weight: 700; color: var(--primary); margin-top: 1rem;">
+          ¿Cuál es el área total del croquis cerrado en mm²?
+        </p>
+
+        <div class="options-grid">
+          <label class="option-card">
+            <input type="radio" name="q1" value="A" required>
+            <span class="option-text">A) 6845.13 mm²</span>
+          </label>
+          <label class="option-card">
+            <input type="radio" name="q1" value="B">
+            <span class="option-text">B) 7200.00 mm²</span>
+          </label>
+          <label class="option-card">
+            <input type="radio" name="q1" value="C">
+            <span class="option-text">C) 6412.50 mm²</span>
+          </label>
+          <label class="option-card">
+            <input type="radio" name="q1" value="D">
+            <span class="option-text">D) 7105.80 mm²</span>
+          </label>
+        </div>
+      </article>
+
+      <!-- PREGUNTA 2: MODELADO DE PIEZA Y MASA -->
+      <article class="question-card">
+        <div class="question-header">
+          <span class="question-number">Pregunta 2 de 4: Modelado 3D y Propiedades de Masa</span>
+          <span class="question-points">30 Puntos</span>
+        </div>
+        <p style="margin-bottom: 0.75rem; color: var(--text-dark);">
+          Modele la pieza 3D a partir de las siguientes dimensiones. Asigne el material indicado y utilice las opciones de <em>Propiedades de Masa</em> para determinar el resultado final.
+        </p>
+
+        <table class="param-table">
+          <thead>
+            <tr>
+              <th>Parámetro / Propiedad</th>
+              <th>Valor / Especificación</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Sistema de Unidades</strong></td>
+              <td>MMGS (milímetro, gramo, segundo)</td>
+            </tr>
+            <tr>
+              <td><strong>Material</strong></td>
+              <td>Acero aleado fundido (Cast Alloy Steel)</td>
+            </tr>
+            <tr>
+              <td><strong>Cotas Principales</strong></td>
+              <td>A = 100.00 mm, B = 50.00 mm, C = 25.00 mm, D = 12.00 mm</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="cad-viewport">
+          <div style="text-align: center;">
+            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🧊⚙️</div>
+            <p style="font-size: 0.9rem; font-weight: 600;">Vista Isométrica - Soporte Angular Escalonado</p>
+            <p style="font-size: 0.8rem; opacity: 0.8;">Material: Acero Aleado Fundido (Densidad: 0.0073 g/mm³)</p>
+          </div>
+        </div>
+
+        <p style="font-weight: 700; color: var(--primary); margin-top: 1rem;">
+          ¿Cuál es la masa total de la pieza en gramos?
+        </p>
+
+        <div class="options-grid">
+          <label class="option-card">
+            <input type="radio" name="q2" value="A" required>
+            <span class="option-text">A) 948.50 g</span>
+          </label>
+          <label class="option-card">
+            <input type="radio" name="q2" value="B">
+            <span class="option-text">B) 1025.32 g</span>
+          </label>
+          <label class="option-card">
+            <input type="radio" name="q2" value="C">
+            <span class="option-text">C) 1150.00 g</span>
+          </label>
+          <label class="option-card">
+            <input type="radio" name="q2" value="D">
+            <span class="option-text">D) 980.15 g</span>
+          </label>
+        </div>
+      </article>
+
+      <!-- PREGUNTA 3: MODIFICACIÓN DIMENSIONAL -->
+      <article class="question-card">
+        <div class="question-header">
+          <span class="question-number">Pregunta 3 de 4: Modificación Dimensional del Modelo</span>
+          <span class="question-points">25 Puntos</span>
+        </div>
+        <p style="margin-bottom: 0.75rem; color: var(--text-dark);">
+          Modifique las cotas globales de la pieza anterior y cambie la asignación de material según la siguiente tabla de requerimientos:
+        </p>
+
+        <table class="param-table">
+          <thead>
+            <tr>
+              <th>Parámetro / Propiedad</th>
+              <th>Nuevo Valor</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Nuevo Material</strong></td>
+              <td>Aleación de aluminio 1060 (1060 Alloy)</td>
+            </tr>
+            <tr>
+              <td><strong>Nuevas Cotas</strong></td>
+              <td>A = 110.00 mm, B = 55.00 mm, C = 30.00 mm</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p style="font-weight: 700; color: var(--primary); margin-top: 1rem;">
+          ¿Cuál es la nueva masa total de la pieza reconstruida en gramos?
+        </p>
+
+        <div class="options-grid">
+          <label class="option-card">
+            <input type="radio" name="q3" value="A" required>
+            <span class="option-text">A) 482.14 g</span>
+          </label>
+          <label class="option-card">
+            <input type="radio" name="q3" value="B">
+            <span class="option-text">B) 512.60 g</span>
+          </label>
+          <label class="option-card">
+            <input type="radio" name="q3" value="C">
+            <span class="option-text">C) 450.30 g</span>
+          </label>
+          <label class="option-card">
+            <input type="radio" name="q3" value="D">
+            <span class="option-text">D) 498.90 g</span>
+          </label>
+        </div>
+      </article>
+
+      <!-- PREGUNTA 4: ENSAMBLAJE Y CENTRO DE GRAVEDAD -->
+      <article class="question-card">
+        <div class="question-header">
+          <span class="question-number">Pregunta 4 de 4: Ensamblaje y Centro de Gravedad (CG)</span>
+          <span class="question-points">30 Puntos</span>
+        </div>
+        <p style="margin-bottom: 0.75rem; color: var(--text-dark);">
+          Cree el ensamblaje insertando la pieza base (fijada al Origen), el eje articulado y el pasador. Aplique las relaciones de posición <strong>Concéntrica</strong>, <strong>Coincidente</strong> y un ángulo restringido de <strong>45.00°</strong>.
+        </p>
+
+        <div class="cad-viewport">
+          <div style="text-align: center;">
+            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🔩🧩</div>
+            <p style="font-size: 0.9rem; font-weight: 600;">Ensamblaje Soporte con Eje y Pasador</p>
+            <p style="font-size: 0.8rem; opacity: 0.8;">Restricción Angular A = 45.00° | Origen en Base Fija</p>
+          </div>
+        </div>
+
+        <p style="font-weight: 700; color: var(--primary); margin-top: 1rem;">
+          ¿Cuál es la coordenada X del Centro de Gravedad (CG) del ensamblaje en milímetros respecto al origen?
+        </p>
+
+        <div class="options-grid">
+          <label class="option-card">
+            <input type="radio" name="q4" value="A" required>
+            <span class="option-text">A) X = 34.25 mm</span>
+          </label>
+          <label class="option-card">
+            <input type="radio" name="q4" value="B">
+            <span class="option-text">B) X = 41.82 mm</span>
+          </label>
+          <label class="option-card">
+            <input type="radio" name="q4" value="C">
+            <span class="option-text">C) X = 48.10 mm</span>
+          </label>
+          <label class="option-card">
+            <input type="radio" name="q4" value="D">
+            <span class="option-text">D) X = 39.50 mm</span>
+          </label>
+        </div>
+      </article>
+
+      <!-- BARRA FLOTANTE DE ENVIAR EXAMEN -->
+      <div class="exam-nav-bar">
+        <div>
+          <span style="font-weight: 600;">Asegúrate de haber respondido todas las preguntas.</span>
+          <div style="font-size: 0.8rem; opacity: 0.8;">Al hacer clic se registrará el resultado en tu expediente CSWA.</div>
+        </div>
+        <button type="button" class="btn" style="background: var(--success); font-size: 1.05rem; padding: 0.7rem 1.8rem;" onclick="submitSimulacro()">
+          ✅ Finalizar y Entregar Examen
+        </button>
+      </div>
+
+    </form>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 SOLIDWORKS ACADEMY - Formación por Competencias & Preparación CSWA</p>
+  </footer>
+
+  <!-- Scripts de la Aplicación -->
+  <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/cswa.js"></script>
+  <script src="../assets/js/quiz.js"></script>
+
+  <script>
+    // Inicializar el temporizador de 45 minutos al cargar la página
+    document.addEventListener('DOMContentLoaded', () => {
+      QuizEngine.startQuiz({
+        formId: 'cswa-exam-form',
+        timeLimitMinutes: 45,
+        correctAnswers: {
+          q1: 'A',
+          q2: 'B',
+          q3: 'A',
+          q4: 'B'
+        },
+        competencyMap: {
+          croquis: 85,
+          piezas: 80,
+          modificacion: 90,
+          ensamblajes: 85,
+          propiedades_fisicas: 88,
+          tiempo_limite: 80
+        }
+      });
+    });
+
+    // Función manual de envío y retroalimentación
+    function submitSimulacro() {
+      const form = document.getElementById('cswa-exam-form');
+      const formData = new FormData(form);
+
+      if (!formData.get('q1') || !formData.get('q2') || !formData.get('q3') || !formData.get('q4')) {
+        alert('⚠️ Por favor responde todas las preguntas del examen antes de enviar.');
+        return;
+      }
+
+      QuizEngine.submitQuiz();
+    }
+  </script>
+</body>
+</html>
