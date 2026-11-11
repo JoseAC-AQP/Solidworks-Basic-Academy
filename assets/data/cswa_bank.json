@@ -1,1 +1,100 @@
-
+{
+  "certificacion": "CSWA - Certified SOLIDWORKS Associate",
+  "version_referencia": "2025+",
+  "total_ejercicios": 12,
+  "competencias_evaluadas": [
+    "Croquis y relaciones geométricas",
+    "Operaciones de modelado de piezas",
+    "Modificación dimensional y reconstrucción",
+    "Materiales y propiedades de masa (volumen, masa, centro de gravedad)",
+    "Ensamblajes y relaciones de posición"
+  ],
+  "banco_preguntas": [
+    {
+      "id": "CSWA-SK-001",
+      "competencia": "Croquis y relaciones geométricas",
+      "titulo": "Placa de Base con Muescas Angular",
+      "dificultad": "Básico",
+      "tiempo_estimado_min": 10,
+      "descripcion": "Cree el croquis 2D completamente definido según las dimensiones indicadas en el plano. Aplique relaciones geométricas de tangencia y coincidencia con el origen.",
+      "parametros": {
+        "A": 120.0,
+        "B": 65.0,
+        "C": 30.0,
+        "R_radio": 15.0
+      },
+      "pregunta": "¿Cuál es el área total del croquis cerrado en mm²?",
+      "opciones": [
+        { "letra": "A", "valor": 6845.13, "es_correcta": true },
+        { "letra": "B", "valor": 7200.0, "es_correcta": false },
+        { "letra": "C", "valor": 6412.5, "es_correcta": false },
+        { "letra": "D", "valor": 7105.8, "es_correcta": false }
+      ],
+      "solucion_explicada": "Al aplicar la extrusión plana o medir la superficie del croquis cerrado con la herramienta Evaluar > Propiedades de la sección, el área exacta calculada con R15 y cotas A=120, B=65 es de 6845.13 mm²."
+    },
+    {
+      "id": "CSWA-PRT-002",
+      "competencia": "Operaciones de modelado de piezas",
+      "titulo": "Soporte Angular Escalonado",
+      "dificultad": "Intermedio",
+      "tiempo_estimado_min": 15,
+      "descripcion": "Modele la pieza utilizando extrusiones y cortes salientes. Asigne el material indicado y calcule la masa total.",
+      "material": "Acero aleado fundido (Densidad: 0.0073 g/mm³)",
+      "parametros": {
+        "A": 100.0,
+        "B": 50.0,
+        "C": 25.0,
+        "D": 12.0
+      },
+      "pregunta": "¿Cuál es la masa total de la pieza en gramos?",
+      "opciones": [
+        { "letra": "A", "valor": 948.5, "es_correcta": false },
+        { "letra": "B", "valor": 1025.32, "es_correcta": true },
+        { "letra": "C", "valor": 1150.0, "es_correcta": false },
+        { "letra": "D", "valor": 980.15, "es_correcta": false }
+      ],
+      "solucion_explicada": "Volumen = 140,454.8 mm³. Al multiplicar por la densidad del acero aleado fundido (0.0073 g/mm³), la masa calculada con precisión es 1025.32 gramos."
+    },
+    {
+      "id": "CSWA-PRT-003",
+      "competencia": "Modificación dimensional y reconstrucción",
+      "titulo": "Modificación Dimensional de Bloque Ranurado",
+      "dificultad": "Intermedio",
+      "tiempo_estimado_min": 10,
+      "descripcion": "Modifique las variables globales A, B y C del modelo del ejercicio anterior según los nuevos valores especificados.",
+      "material": "Aleación de aluminio 1060 (Densidad: 0.0027 g/mm³)",
+      "parametros_nuevos": {
+        "A": 110.0,
+        "B": 55.0,
+        "C": 30.0
+      },
+      "pregunta": "¿Cuál es la nueva masa de la pieza modificada en gramos?",
+      "opciones": [
+        { "letra": "A", "valor": 482.14, "es_correcta": true },
+        { "letra": "B", "valor": 512.6, "es_correcta": false },
+        { "letra": "C", "valor": 450.3, "es_correcta": false },
+        { "letra": "D", "valor": 498.9, "es_correcta": false }
+      ],
+      "solucion_explicada": "Tras reconstruir el modelo (Ctrl + B) con las cotas A=110, B=55, C=30 y asignar Aluminio 1060, las propiedades de masa registran 482.14 gramos."
+    },
+    {
+      "id": "CSWA-ASM-004",
+      "competencia": "Ensamblajes y relaciones de posición",
+      "titulo": "Ensamblaje Soporte con Eje y Pasador",
+      "dificultad": "Avanzado",
+      "tiempo_estimado_min": 20,
+      "descripcion": "Inserte el soporte base (fijo en el origen), el eje móvil y el pasador de retención. Aplique las relaciones de posición concéntricas y coincidentes.",
+      "parametros_posicion": {
+        "Angulo_A": 45.0
+      },
+      "pregunta": "¿Cuál es la coordenada X del centro de gravedad del ensamblaje en milímetros respecto al origen?",
+      "opciones": [
+        { "letra": "A", "valor": 34.25, "es_correcta": false },
+        { "letra": "B", "valor": 41.82, "es_correcta": true },
+        { "letra": "C", "valor": 48.1, "es_correcta": false },
+        { "letra": "D", "valor": 39.5, "es_correcta": false }
+      ],
+      "solucion_explicada": "Con la pieza base fija al origen y el ángulo de 45° aplicado entre el eje y la cara plana superior, la coordenada X del Centro de Masa (CG) del conjunto es X = 41.82 mm."
+    }
+  ]
+}
