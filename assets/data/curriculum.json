@@ -1,257 +1,215 @@
 {
-  "curso": "SOLIDWORKS PARA PRINCIPIANTES - PREPARACIÓN CSWA",
-  "nivel": "Básico",
-  "modalidad": "Virtual y autogestionada",
-  "duracion_semanas": 16,
-  "carga_academica": "3 horas académicas semanales (50 minutos c/u)",
-  "software_requerido": "SOLIDWORKS 2025 o versión compatible",
-  "certificacion_objetivo": "CSWA - Certified SOLIDWORKS Associate",
-  "modulos": [
-    {
-      "id_modulo": 1,
-      "nombre": "Introducción a SOLIDWORKS",
-      "semanas": [
-        {
-          "numero": 1,
-          "titulo": "Entorno de Trabajo e Interfaz",
-          "es_evaluacion": false,
-          "temas": [
-            "Interfaz de usuario y CommandManager",
-            "Gestores de diseño y árbol de operaciones",
-            "Planos de referencia (Planta, Alzado, Perfil)",
-            "Navegación 3D y manipulación de vistas",
-            "Tipos de archivos (SLDPRT, SLDASM, SLDDRW)",
-            "Configuración de unidades de medida (MMGS, IPS)"
-          ],
-          "competencia_cswa": "Reconocimiento del entorno y configuración de documentos"
-        },
-        {
-          "numero": 2,
-          "titulo": "Modelado Paramétrico y Operaciones Base",
-          "es_evaluacion": false,
-          "temas": [
-            "Principios del modelado paramétrico",
-            "Sistema de coordenadas y Origen",
-            "Uso y edición del Árbol de operaciones",
-            "Selección de elementos y reconstrucción de modelos (Ctrl+B)"
-          ],
-          "competencia_cswa": "Gestión del árbol de operaciones y reconstrucción"
-        }
-      ]
-    },
-    {
-      "id_modulo": 2,
-      "nombre": "Croquis y Restricciones Geométricas",
-      "semanas": [
-        {
-          "numero": 3,
-          "titulo": "Herramientas de Croquizado 2D",
-          "es_evaluacion": false,
-          "temas": [
-            "Creación de entidades: líneas, círculos, arcos y rectángulos",
-            "Construcción de polígonos",
-            "Aplicación de cotas inteligentes",
-            "Relaciones geométricas (Coincidente, Paralela, Perpendicular, Tangente)"
-          ],
-          "competencia_cswa": "Creación y acotado de croquis 2D"
-        },
-        {
-          "numero": 4,
-          "titulo": "Croquis Definidos y Evaluación Práctica 1",
-          "es_evaluacion": true,
-          "ponderacion_evaluacion": "15%",
-          "temas": [
-            "Estados del croquis: Subdefinido, Completamente definido y Sobredefinido",
-            "Edición y modificación de cotas",
-            "Evaluación Práctica 1 (Hito curricular)"
-          ],
-          "competencia_cswa": "Croquis completamente definidos y modificación dimensional"
-        }
-      ]
-    },
-    {
-      "id_modulo": 3,
-      "nombre": "Modelado de Sólidos",
-      "semanas": [
-        {
-          "numero": 5,
-          "titulo": "Operaciones Principales (Extrusión y Revolución)",
-          "es_evaluacion": false,
-          "temas": [
-            "Extrusión de saliente/base y extrusión de corte",
-            "Condiciones finales de extrusión (Hasta la superficie, Por todo, Hasta el siguiente)",
-            "Revolución de saliente/base y revolución de corte",
-            "Definición de ejes de revolución"
-          ],
-          "competencia_cswa": "Modelado tridimensional mediante sólidez y revolución"
-        },
-        {
-          "numero": 6,
-          "titulo": "Operaciones Complementarias y Patrones",
-          "es_evaluacion": false,
-          "temas": [
-            "Aplicación de Redondeos y Chaflanes",
-            "Operación de Vaciado y Nervios",
-            "Matrices lineales y circulares",
-            "Simetría de operaciones y sólidos",
-            "Edición de operaciones existentes"
-          ],
-          "competencia_cswa": "Aplicación de detalles geométricos y patrones de repetición"
-        }
-      ]
-    },
-    {
-      "id_modulo": 4,
-      "nombre": "Componentes Mecánicos e Interpretación",
-      "semanas": [
-        {
-          "numero": 7,
-          "titulo": "Modelado de Piezas Mecánicas Standard",
-          "es_evaluacion": false,
-          "temas": [
-            "Ejes escalonados y Bridas",
-            "Soportes y Poleas",
-            "Componentes con taladros y perforaciones",
-            "Estrategias de modelado paramétrico"
-          ],
-          "competencia_cswa": "Modelado de componentes mecánicos individuales"
-        },
-        {
-          "numero": 8,
-          "titulo": "Interpretación de Planos y Evaluación Práctica 2",
-          "es_evaluacion": true,
-          "ponderacion_evaluacion": "25%",
-          "temas": [
-            "Interpretación de planos técnicos 2D",
-            "Modificación de modelos existentes a partir de cambios en cotas",
-            "Verificación dimensional de piezas",
-            "Evaluación Práctica 2 (Hito curricular)"
-          ],
-          "competencia_cswa": "Interpretación de geometrías y modificación dimensional"
-        }
-      ]
-    },
-    {
-      "id_modulo": 5,
-      "nombre": "Ensamblajes Mecánicos",
-      "semanas": [
-        {
-          "numero": 9,
-          "titulo": "Creación e Inserción de Componentes",
-          "es_evaluacion": false,
-          "temas": [
-            "Creación de archivos de ensamblaje (.SLDASM)",
-            "Inserción y posicionamiento de componentes",
-            "Diferenciación entre componentes fijos y móviles",
-            "Relaciones de posición estándar: Coincidente, Concéntrica, Paralela, Perpendicular"
-          ],
-          "competencia_cswa": "Construcción de ensamblajes y relaciones estándar"
-        },
-        {
-          "numero": 10,
-          "titulo": "Relaciones Avanzadas e Interferencias",
-          "es_evaluacion": false,
-          "temas": [
-            "Relaciones de posición de Distancia y Ángulo",
-            "Relaciones avanzadas básicas",
-            "Detección de interferencias entre componentes",
-            "Modificación de ensamblajes y verificación de movimiento"
-          ],
-          "competencia_cswa": "Relaciones de posición avanzadas y verificación geométrica"
-        }
-      ]
-    },
-    {
-      "id_modulo": 6,
-      "nombre": "Propiedades Físicas y de Masa",
-      "semanas": [
-        {
-          "numero": 11,
-          "titulo": "Materiales, Densidades y Centro de Gravedad",
-          "es_evaluacion": false,
-          "temas": [
-            "Asignación de materiales y densidades",
-            "Cálculo de propiedades de masa (Masa y Volumen)",
-            "Uso del sistema de coordenadas y Centro de gravedad (CG)",
-            "Análisis del efecto de las modificaciones dimensionales en la masa"
-          ],
-          "competencia_cswa": "Cálculo de masa, volumen y centro de gravedad"
-        },
-        {
-          "numero": 12,
-          "titulo": "Propiedades en Ensamblajes y Evaluación Práctica 3",
-          "es_evaluacion": true,
-          "ponderacion_evaluacion": "25%",
-          "temas": [
-            "Propiedades físicas de ensamblajes complejos",
-            "Configuraciones de piezas y ensamblajes",
-            "Verificación de resultados dimensionales y físicos",
-            "Evaluación Práctica 3 (Hito curricular)"
-          ],
-          "competencia_cswa": "Verificación física y centro de masa en ensamblajes"
-        }
-      ]
-    },
-    {
-      "id_modulo": 7,
-      "nombre": "Preparación Intensiva CSWA",
-      "semanas": [
-        {
-          "numero": 13,
-          "titulo": "Estrategias y Exámenes Cronometrados",
-          "es_evaluacion": false,
-          "temas": [
-            "Interpretación rápida de problemas tipo CSWA",
-            "Análisis eficiente de planos técnicos",
-            "Identificación de secuencia óptima de operaciones",
-            "Resolución de ejercicios de modelado bajo límite de tiempo"
-          ],
-          "competencia_cswa": "Resolución de problemas con restricciones de tiempo"
-        },
-        {
-          "numero": 14,
-          "titulo": "Ejercicios Combinados y Diagnóstico",
-          "es_evaluacion": false,
-          "temas": [
-            "Ejercicios integrados de ensamblajes y relaciones de posición",
-            "Verificación rápida de propiedades físicas",
-            "Problemas combinados de modificación dimensional",
-            "Evaluación diagnóstica de preparación"
-          ],
-          "competencia_cswa": "Diagnóstico integral y resolución de ejercicios combinados"
-        }
-      ]
-    },
-    {
-      "id_modulo": 8,
-      "nombre": "Simulacros Integrales y Proyecto Final",
-      "semanas": [
-        {
-          "numero": 15,
-          "titulo": "Simulacros Integrales CSWA",
-          "es_evaluacion": false,
-          "temas": [
-            "Primer simulacro integral tipo CSWA",
-            "Análisis automático de resultados e identificación de debilidades",
-            "Sesión de reentrenamiento enfocado",
-            "Segundo simulacro integral tipo CSWA"
-          ],
-          "competencia_cswa": "Simulacros completos en entorno controlado"
-        },
-        {
-          "numero": 16,
-          "titulo": "Proyecto Tornillo de Banco y Evaluación Final",
-          "es_evaluacion": true,
-          "ponderacion_evaluacion": "35%",
-          "temas": [
-            "Presentación y entrega del Proyecto Integrador: Tornillo de Banco Mecánico",
-            "Evaluación curricular final",
-            "Retroalimentación general del curso",
-            "Elaboración del Plan personal de preparación para la certificación oficial"
-          ],
-          "competencia_cswa": "Dominio integral y proyecto mecánico de aplicación"
-        }
-      ]
-    }
-  ]
+"course": {
+"title": "SOLIDWORKS ACADEMY - Formación por Competencias y Preparación CSWA",
+"version": "2026.1",
+"total_weeks": 16,
+"total_modules": 8,
+"total_hours": 48,
+"target_certification": "Certified SOLIDWORKS Associate (CSWA)",
+"passing_grade_percentage": 70
+},
+"modules": [
+{
+"module_id": 1,
+"title": "Introducción a SOLIDWORKS y Entorno de Trabajo",
+"weeks": [1, 2],
+"cswa_competencies": ["Reconocer interfaz", "Sistemas de unidades MMGS/IPS", "Árbol de operaciones FeatureManager"],
+"description": "Familiarización con la interfaz gráfica, gestores de diseño, planos principales y lógica paramétrica básica."
+},
+{
+"module_id": 2,
+"title": "Croquis y Restricciones Geométricas 2D",
+"weeks": [3, 4],
+"cswa_competencies": ["Croquis completamente definido", "Relaciones geométricas explícitas", "Cotas inteligentes"],
+"description": "Dominio del dibujo vectorial 2D, acotación inteligente y aplicación de restricciones para evitar grados de libertad residuales."
+},
+{
+"module_id": 3,
+"title": "Modelado de Sólidos Fundamental",
+"weeks": [5, 6],
+"cswa_competencies": ["Extrusión saliente/corte", "Revolución de saliente/corte", "Redondeos y vaciados", "Matrices lineales/circulares"],
+"description": "Generación de volúmenes 3D principales, operaciones de adición/sustracción y repeticiones paramétricas."
+},
+{
+"module_id": 4,
+"title": "Componentes Mecánicos y Modificación Paramétrica",
+"weeks": [7, 8],
+"cswa_competencies": ["Modelado de piezas complejas", "Modificación dimensional con variables globales", "Chaveteros y bridas"],
+"description": "Diseño de elementos de transmisión (poleas, ejes, bridas) e interpretación de planos para modificaciones dimensionales."
+},
+{
+"module_id": 5,
+"title": "Ensamblajes y Relaciones de Posición",
+"weeks": [9, 10],
+"cswa_competencies": ["Ensambles (.SLDASM)", "Componente fijo de origen (f)", "Relaciones estándar y avanzadas", "Detección de interferencias"],
+"description": "Construcción de ensamblajes mecánicos multinivel, control de movilidad y diagnóstico de colisiones entre sólidos."
+},
+{
+"module_id": 6,
+"title": "Propiedades Físicas y Verificación de Modelos",
+"weeks": [11, 12],
+"cswa_competencies": ["Biblioteca de materiales", "Propiedades de masa (g)", "Centro de Gravedad (X,Y,Z)", "Sistemas de coordenadas"],
+"description": "Asignación de aleaciones normadas, cálculo de masa, volumen y medición de coordenadas inerciales."
+},
+{
+"module_id": 7,
+"title": "Preparación Intensiva CSWA",
+"weeks": [13, 14],
+"cswa_competencies": ["Estrategia de resolución rápida", "Ecuaciones globales (="A")", "Gestión de tiempo en 180 min"],
+"description": "Metodología avanzada para abordar problemas complejos de certificación en tiempo récord."
+},
+{
+"module_id": 8,
+"title": "Simulacros Oficiales y Cierre de Curso",
+"weeks": [15, 16],
+"cswa_competencies": ["Simulacro completo 180 min", "Auditoría de cuellos de botella", "Acreditación final CSWA"],
+"description": "Ejecución de simulacros finales cronometrados, entrega del Proyecto Integrador y emisión de certificados."
+}
+],
+"weeks": [
+{
+"week": 1,
+"module_id": 1,
+"title": "Entorno de Trabajo e Interfaz",
+"file_path": "aula/semana1.html",
+"topics": ["Archivos .SLDPRT, .SLDASM, .SLDDRW", "FeatureManager", "Planos Alzado/Planta/Vista Lateral", "Unidades MMGS vs IPS"],
+"evaluation_type": "Quiz Formativo",
+"cswa_weight": 5
+},
+{
+"week": 2,
+"module_id": 1,
+"title": "Modelado Paramétrico y Operaciones Base",
+"file_path": "aula/semana2.html",
+"topics": ["Intención del diseño", "Vinculación al Origen (0,0,0)", "Reconstrucción con Ctrl+B"],
+"evaluation_type": "Quiz Formativo",
+"cswa_weight": 5
+},
+{
+"week": 3,
+"module_id": 2,
+"title": "Herramientas de Croquizado y Relaciones Geométricas",
+"file_path": "aula/semana3.html",
+"topics": ["Entidades 2D", "Cotas inteligentes", "Relaciones de Tangencia, Concentricidad e Igualdad"],
+"evaluation_type": "Quiz Formativo",
+"cswa_weight": 10
+},
+{
+"week": 4,
+"module_id": 2,
+"title": "Evaluación Práctica 1 - Croquis Completo",
+"file_path": "aula/semana4.html",
+"topics": ["Evaluación sumativa de croquis 2D", "Cálculo de área total", "Estabilidad paramétrica"],
+"evaluation_type": "Evaluación Sumativa (15%)",
+"cswa_weight": 15
+},
+{
+"week": 5,
+"module_id": 3,
+"title": "Extrusión y Revolución de Saliente/Corte",
+"file_path": "aula/semana5.html",
+"topics": ["Extrude Boss/Cut", "Revolve Boss/Cut", "Condiciones finales: Blind, Through All, Mid Plane"],
+"evaluation_type": "Quiz Formativo",
+"cswa_weight": 10
+},
+{
+"week": 6,
+"module_id": 3,
+"title": "Redondeos, Chaflanes, Vaciados y Matrices",
+"file_path": "aula/semana6.html",
+"topics": ["Fillet & Chamfer", "Shell", "Linear & Circular Patterns", "Mirror 3D"],
+"evaluation_type": "Quiz Formativo",
+"cswa_weight": 10
+},
+{
+"week": 7,
+"module_id": 4,
+"title": "Bridas, Poleas y Ejes de Transmisión",
+"file_path": "aula/semana7.html",
+"topics": ["Modelado de transmisión", "Chaveteros DIN 6885 / ANSI B17.1", "Canales en V"],
+"evaluation_type": "Quiz Formativo",
+"cswa_weight": 10
+},
+{
+"week": 8,
+"module_id": 4,
+"title": "Evaluación Práctica 2 - Interpretación de Planos",
+"file_path": "aula/semana8.html",
+"topics": ["Interpretación de planos 2D", "Modificación A, B, C", "Cálculo de masa inicial"],
+"evaluation_type": "Evaluación Sumativa (25%)",
+"cswa_weight": 25
+},
+{
+"week": 9,
+"module_id": 5,
+"title": "Inserción de Componentes y Relaciones Estándar",
+"file_path": "aula/semana9.html",
+"topics": ["Archivos .SLDASM", "Componente fijo (f)", "Relaciones Coincidente y Concéntrica"],
+"evaluation_type": "Quiz Formativo",
+"cswa_weight": 10
+},
+{
+"week": 10,
+"module_id": 5,
+"title": "Relaciones Avanzadas y Detección de Interferencias",
+"file_path": "aula/semana10.html",
+"topics": ["Width Mate", "Limit Distance/Angle", "Interference Detection"],
+"evaluation_type": "Quiz Formativo",
+"cswa_weight": 10
+},
+{
+"week": 11,
+"module_id": 6,
+"title": "Asignación de Materiales y Propiedades de Masa",
+"file_path": "aula/semana11.html",
+"topics": ["Biblioteca de materiales", "Densidad g/cm3", "Medición de Masa y Centro de Gravedad"],
+"evaluation_type": "Quiz Formativo",
+"cswa_weight": 10
+},
+{
+"week": 12,
+"module_id": 6,
+"title": "Evaluación Práctica 3 - Propiedades Físicas",
+"file_path": "aula/semana12.html",
+"topics": ["Evaluación sumativa de masa y materiales", "Tolerancia decimal CSWA"],
+"evaluation_type": "Evaluación Sumativa (25%)",
+"cswa_weight": 25
+},
+{
+"week": 13,
+"module_id": 7,
+"title": "Estrategia CSWA y Gestión de Tiempo",
+"file_path": "aula/semana13.html",
+"topics": ["Variables globales (="A")", "Gestión de los 180 min", "Selección rápida de plano base"],
+"evaluation_type": "Quiz Formativo",
+"cswa_weight": 10
+},
+{
+"week": 14,
+"module_id": 7,
+"title": "Ensamblajes Combinados y Coordenadas",
+"file_path": "aula/semana14.html",
+"topics": ["Sistemas de Coordenadas personalizados", "Mates articulados", "Alineación Aligned/Anti-Aligned"],
+"evaluation_type": "Quiz Formativo",
+"cswa_weight": 10
+},
+{
+"week": 15,
+"module_id": 8,
+"title": "Simulacro Diagnóstico y Reentrenamiento",
+"file_path": "aula/semana15.html",
+"topics": ["Simulacro 90 min", "Auditoría de errores", "Uso de SketchXpert", "Reconstrucción Ctrl+Q"],
+"evaluation_type": "Simulacro Diagnóstico",
+"cswa_weight": 20
+},
+{
+"week": 16,
+"module_id": 8,
+"title": "Evaluación Final y Cierre de Curso",
+"file_path": "aula/semana16.html",
+"topics": ["Entrega de Proyecto Integrador", "Simulacro CSWA 180 min", "Certificado PDF jsPDF"],
+"evaluation_type": "Evaluación Final (35%)",
+"cswa_weight": 35
+}
+]
 }
