@@ -1,1 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semana 11: Asignación de Materiales y Propiedades de Masa | SOLIDWORKS ACADEMY</title>
+  
+  <!-- Hojas de Estilo Institucionales -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
 
+  <style>
+    .lesson-hero {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      color: var(--white);
+      padding: 2rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-md);
+    }
+
+    .lesson-meta-bar {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: var(--accent);
+      flex-wrap: wrap;
+    }
+
+    .step-box {
+      border-left: 4px solid var(--accent);
+      background: var(--bg-light);
+      padding: 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 1.25rem;
+    }
+
+    .step-number {
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.3rem;
+    }
+
+    .shortcut-tag {
+      background: #E2E8F0;
+      color: #334155;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-family: monospace;
+      font-weight: bold;
+      font-size: 0.85rem;
+      border: 1px solid #CBD5E1;
+    }
+
+    .cswa-tip-box {
+      background: #EFF6FF;
+      border: 1px solid #BFDBFE;
+      border-radius: 8px;
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+    }
+
+    .cswa-tip-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #1E40AF;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .param-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .param-table th, .param-table td {
+      border: 1px solid var(--border);
+      padding: 0.75rem;
+      text-align: left;
+    }
+
+    .param-table th {
+      background: var(--bg-light);
+      color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navegación Principal -->
+  <nav class="navbar">
+    <a href="../index.html" class="brand"><span>SOLIDWORKS</span> ACADEMY</a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Inicio</a></li>
+      <li><a href="../dashboard.html">Dashboard</a></li>
+      <li><a href="../aula/index.html" class="active">Aula Virtual</a></li>
+      <li><a href="../cswa/index.html">CSWA Center</a></li>
+      <li><a href="../proyecto.html">Proyecto Final</a></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+
+    <!-- Encabezado de la Lección -->
+    <header class="lesson-hero">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <span class="badge badge-info" style="margin-bottom: 0.5rem; display: inline-block;">Módulo 6: Propiedades Físicas</span>
+          <h1 style="font-size: 2.2rem; color: var(--white); margin: 0.2rem 0;">Semana 11: Asignación de Materiales y Propiedades de Masa</h1>
+          <p style="opacity: 0.9; font-size: 1rem; max-width: 700px; margin-top: 0.5rem;">
+            Aprende a aplicar materiales de la biblioteca de SOLIDWORKS, configurar densidad física y extraer la masa y coordenadas del Centro de Gravedad (CG).
+          </p>
+        </div>
+        <div>
+          <button id="mark-completed-btn" class="btn" style="background: var(--success);" onclick="completeWeek11()">
+            ✓ Marcar Semana como Completada
+          </button>
+        </div>
+      </div>
+
+      <div class="lesson-meta-bar">
+        <span>⏱️ Duración: 3 Horas Académicas</span>
+        <span>🎯 Competencia CSWA: Propiedades físicas, masa y Centro de Gravedad (CG)</span>
+        <span>📄 Tipo de Contenido: Teórico - Práctico</span>
+      </div>
+    </header>
+
+    <div class="grid-2" style="grid-template-columns: 2.5fr 1fr; gap: 1.5rem;">
+
+      <!-- Contenido Principal de la Lección -->
+      <div>
+
+        <!-- Bloque 1: Biblioteca de Materiales y Densidad -->
+        <article class="card">
+          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">1. Asignación de Materiales y Propiedades Mecánicas</h2>
+          <p style="line-height: 1.6; color: var(--text-dark); margin-bottom: 1rem;">
+            En SOLIDWORKS, la masa y las propiedades inerciales de un sólido dependen directamente del material asignado. La biblioteca integrada contiene aleaciones metálicas, plásticos y maderas con sus valores normalizados de <strong>densidad de masa</strong> ($\rho$), módulo de Elasticidad y límite elástico.
+          </p>
+
+          <table class="param-table">
+            <thead>
+              <tr>
+                <th>Material Común CSWA</th>
+                <th>Densidad Típica ($g/cm^3$)</th>
+                <th>Densidad en MMGS ($g/mm^3$)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Acero Aleado Fundido (Cast Alloy Steel)</strong></td>
+                <td>7.30 g/cm³</td>
+                <td>0.0073 g/mm³</td>
+              </tr>
+              <tr>
+                <td><strong>Acero al Carbono 1020 (AISI 1020 Steel)</strong></td>
+                <td>7.87 g/cm³</td>
+                <td>0.00787 g/mm³</td>
+              </tr>
+              <tr>
+                <td><strong>Aleación de Aluminio 1060 (1060 Alloy)</strong></td>
+                <td>2.70 g/cm³</td>
+                <td>0.0027 g/mm³</td>
+              </tr>
+              <tr>
+                <td><strong>Latón (Brass)</strong></td>
+                <td>8.50 g/cm³</td>
+                <td>0.0085 g/mm³</td>
+              </tr>
+              <tr>
+                <td><strong>Plástico ABS (ABS Plastic)</strong></td>
+                <td>1.02 g/cm³</td>
+                <td>0.00102 g/mm³</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="cswa-tip-box">
+            <div class="cswa-tip-header">
+              <span>💡 Regla de Oro en el Examen CSWA</span>
+            </div>
+            <p style="font-size: 0.9rem; color: #1E3A8A; margin: 0;">
+              Si el material asignado no coincide exactamente con el especificado en el enunciado (ej. confundir <em>Acero Aleado Fundido</em> con <em>Acero al Carbono 1020</em>), el resultado numérico de la masa será erróneo aunque la geometría 3D sea perfecta.
+            </p>
+          </div>
+        </article>
+
+        <!-- Bloque 2: Herramienta Propiedades de Masa y Sistema de Coordenadas -->
+        <article class="card">
+          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">2. Consulta de Propiedades de Masa y Sistemas de Coordenadas</h2>
+          <p style="line-height: 1.6; color: var(--text-dark); margin-bottom: 1rem;">
+            La herramienta <strong>Propiedades de Masa (Mass Properties)</strong> calcula instantáneamente el volumen, superficie, masa total y las coordenadas cuadráticas $(X, Y, Z)$ del <strong>Centro de Gravedad (CG)</strong>.
+          </p>
+
+          <h3 style="font-size: 1.1rem; color: var(--primary); margin: 1.25rem 0 0.5rem 0;">Pasos para obtener las propiedades:</h3>
+          <ol style="margin-left: 1.25rem; font-size: 0.95rem; color: var(--text-dark); line-height: 1.7;">
+            <li>Dirígete a la pestaña <strong>Calcular > Propiedades de Masa</strong>.</li>
+            <li>En la ventana emergente, verifica que el sistema de unidades esté configurado en <strong>MMGS</strong>.</li>
+            <li>Revisa las coordenadas $(X, Y, Z)$ del Centro de Masa respecto al Origen predeterminado o un Sistema de Coordenadas personalizado.</li>
+          </ol>
+
+          <!-- CAD Viewport Esquemático -->
+          <div class="cad-viewport" style="margin-top: 1.5rem;">
+            <div style="text-align: center;">
+              <div style="font-size: 3rem; margin-bottom: 0.5rem;">⚖️📍</div>
+              <p style="font-size: 0.95rem; font-weight: 700; color: var(--white);">Cálculo de Masa: Sólido con Material Acero 1020</p>
+              <p style="font-size: 0.8rem; opacity: 0.8;">Masa: 1342.50 g | CG: X = 45.20 mm, Y = 12.80 mm, Z = 0.00 mm</p>
+            </div>
+            <div class="cad-viewport-controls">
+              <button type="button" class="cad-btn-icon" onclick="alert('Propiedades de masa consultadas: Masa = 1342.50g')">📊 Evaluar Masa</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Bloque 3: Guía Práctica Paso a Paso -->
+        <article class="card">
+          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">3. Guía Práctica Paso a Paso: Asignación de Material y Medición de Masa</h2>
+          <p style="font-size: 0.95rem; color: var(--text-dark); margin-bottom: 1rem;">
+            Sigue estos pasos en SOLIDWORKS para asignar material y consultar propiedades de masa:
+          </p>
+
+          <div class="step-box">
+            <div class="step-number">Paso 1</div>
+            <h4 style="margin: 0 0 0.3rem 0; color: var(--primary);">Acceder a la Biblioteca de Materiales</h4>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">
+              En el árbol de diseño FeatureManager, haz clic derecho sobre la entrada <strong>Material &lt;Sin especificar&gt;</strong> y selecciona <strong>Editar Material</strong>.
+            </p>
+          </div>
+
+          <div class="step-box">
+            <div class="step-number">Paso 2</div>
+            <h4 style="margin: 0 0 0.3rem 0; color: var(--primary);">Seleccionar y Aplicar Aleación de Aluminio 1060</h4>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">
+              Navega en la carpeta <code>Aleaciones de Aluminio > Aleación 1060</code>. Revisa su densidad ($2.70\text{ g/cm}^3$) y haz clic en <strong>Aplicar</strong> y luego en <strong>Cerrar</strong>.
+            </p>
+          </div>
+
+          <div class="step-box">
+            <div class="step-number">Paso 3</div>
+            <h4 style="margin: 0 0 0.3rem 0; color: var(--primary);">Consultar Propiedades en Pestaña Calcular</h4>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">
+              Abre <code>Calcular > Propiedades de masa</code>. Anota la masa total y las coordenadas del Centro de Gravedad $(X, Y, Z)$ obtenidas.
+            </p>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Barra Lateral: Progreso y Cuestionario de Validación -->
+      <aside>
+
+        <!-- Resumen de la Lección -->
+        <div class="card">
+          <h3 class="card-title" style="font-size: 1.1rem; margin-bottom: 0.75rem;">📋 Resumen de la Lección</h3>
+          <ul style="list-style: none; font-size: 0.85rem; color: var(--text-muted);" class="space-y">
+            <li style="display: flex; align-items: center; gap: 0.5rem;">
+              <span>✅</span> Asignación de Materiales en el Árbol
+            </li>
+            <li style="display: flex; align-items: center; gap: 0.5rem;">
+              <span>✅</span> Densidad de Masa ($\rho$)
+            </li>
+            <li style="display: flex; align-items: center; gap: 0.5rem;">
+              <span>✅</span> Herramienta Propiedades de Masa
+            </li>
+            <li style="display: flex; align-items: center; gap: 0.5rem;">
+              <span>✅</span> Coordenadas del Centro de Gravedad (CG)
+            </li>
+          </ul>
+        </div>
+
+        <!-- Cuestionario Rápido de Validación -->
+        <div class="card">
+          <h3 class="card-title" style="font-size: 1.1rem; margin-bottom: 0.75rem;">📝 Comprobación de Lectura</h3>
+          <form id="week11-quiz-form" onsubmit="evaluateWeek11Quiz(event)">
+            <p style="font-size: 0.85rem; font-weight: 600; color: var(--primary); margin-bottom: 0.5rem;">
+              1. ¿En qué pestaña del CommandManager se encuentra el comando 'Propiedades de Masa'?
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.85rem; margin-bottom: 1rem;">
+              <label><input type="radio" name="w11q1" value="A" required> En la pestaña Croquis</label>
+              <label><input type="radio" name="w11q1" value="B"> En la pestaña Calcular</label>
+              <label><input type="radio" name="w11q1" value="C"> En la pestaña Operaciones</label>
+            </div>
+
+            <p style="font-size: 0.85rem; font-weight: 600; color: var(--primary); margin-bottom: 0.5rem;">
+              2. Si una pieza 3D no tiene material asignado, ¿qué valor de densidad utilizará SOLIDWORKS por defecto para estimar la masa?
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.85rem; margin-bottom: 1.25rem;">
+              <label><input type="radio" name="w11q1_2" value="A" required> Densidad cero o valor genérico (1.00 g/cm³)</label>
+              <label><input type="radio" name="w11q1_2" value="B"> Densidad del acero inoxidable (8.00 g/cm³)</label>
+              <label><input type="radio" name="w11q1_2" value="C"> La herramienta no funciona hasta asignar un material</label>
+            </div>
+
+            <button type="submit" class="btn btn-outline" style="width: 100%; font-size: 0.85rem;">Validar Respuestas</button>
+          </form>
+        </div>
+
+        <!-- Navegación entre Semanas -->
+        <div class="card" style="text-align: center;">
+          <h4 style="font-size: 0.9rem; color: var(--primary); margin-bottom: 0.75rem;">Navegación Curricular</h4>
+          <div style="display: flex; justify-content: space-between; gap: 0.5rem;">
+            <a href="semana10.html" class="btn btn-outline" style="font-size: 0.8rem; flex: 1;">⬅️ Sem. 10</a>
+            <a href="index.html" class="btn btn-outline" style="font-size: 0.8rem; flex: 1;">Índice</a>
+            <a href="semana12.html" class="btn" style="font-size: 0.8rem; flex: 1;">Sem. 12 ➡️</a>
+          </div>
+        </div>
+
+      </aside>
+
+    </div>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 SOLIDWORKS ACADEMY - Formación por Competencias & Preparación CSWA</p>
+  </footer>
+
+  <!-- Scripts de la Aplicación -->
+  <script src="../assets/js/app.js"></script>
+  <script>
+    function completeWeek11() {
+      AppState.markWeekCompleted(11);
+      
+      const btn = document.getElementById('mark-completed-btn');
+      if (btn) {
+        btn.textContent = '✓ Semana 11 Completada';
+        btn.disabled = true;
+        btn.style.opacity = '0.8';
+      }
+      alert('🎉 ¡Semana 11 registrada como completada en tu expediente!');
+    }
+
+    function evaluateWeek11Quiz(e) {
+      e.preventDefault();
+      const form = document.getElementById('week11-quiz-form');
+      const formData = new FormData(form);
+
+      const q1 = formData.get('w11q1');
+      const q2 = formData.get('w11q1_2');
+
+      if (q1 === 'B' && q2 === 'A') {
+        alert('🎯 ¡Excelente! Has respondido correctamente ambas preguntas sobre asignación de materiales y propiedades de masa.');
+        AppState.recordQuizResult('semana11_quiz', 100, { propiedades_fisicas: 90, piezas: 85 });
+        completeWeek11();
+      } else {
+        alert('⚠️ Hay respuestas incorrectas. Revisa la ubicación de la pestaña Calcular y el comportamiento de la densidad por defecto.');
+      }
+    }
+
+    // Verificar si ya fue completada al cargar
+    document.addEventListener('DOMContentLoaded', () => {
+      const progress = AppState.getUserProgress();
+      if (progress.completedWeeks && progress.completedWeeks.includes(11)) {
+        const btn = document.getElementById('mark-completed-btn');
+        if (btn) {
+          btn.textContent = '✓ Semana 11 Completada';
+          btn.disabled = true;
+          btn.style.opacity = '0.8';
+        }
+      }
+    });
+  </script>
+</body>
+</html>
+```
+
+### Resumen de `aula/semana11.html`:
+- Cubre el **Módulo 6: Propiedades Físicas (Parte 1)**, enfocándose en la selección de materiales normados de la biblioteca de SOLIDWORKS (Cast Alloy Steel, AISI 1020, 1060 Alloy, Brass, ABS).
+- Enseña la consulta de propiedades de masa ($g$, $mm^3$) y la medición de coordenadas del Centro de Gravedad $(X, Y, Z)$ respecto al Origen.
+- Incluye guías paso a paso, visualizador CAD simulado y un cuestionario formativo autocorregible vinculado con `AppState` (`app.js`).
