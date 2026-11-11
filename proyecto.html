@@ -1,1 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proyecto Integrador - Tornillo de Banco | SOLIDWORKS ACADEMY</title>
+  
+  <!-- Hojas de Estilo Institucionales -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/components.css">
 
+  <style>
+    .project-hero {
+      background: linear-gradient(135deg, var(--primary) 0%, #1E3A8A 100%);
+      color: var(--white);
+      padding: 3rem 2rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .project-hero h1 {
+      font-size: 2.2rem;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+
+    .project-hero p {
+      font-size: 1.05rem;
+      opacity: 0.9;
+      max-width: 750px;
+    }
+
+    .part-list-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1rem;
+    }
+
+    .part-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      transition: border-color 0.2s ease;
+    }
+
+    .part-card:hover {
+      border-color: var(--accent);
+    }
+
+    .part-number {
+      background: var(--bg-light);
+      color: var(--primary);
+      font-weight: 800;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .rubric-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .rubric-table th, .rubric-table td {
+      border: 1px solid var(--border);
+      padding: 0.75rem 1rem;
+      text-align: left;
+    }
+
+    .rubric-table th {
+      background: var(--bg-light);
+      color: var(--primary);
+    }
+
+    .submission-box {
+      background: #F0F9FF;
+      border: 2px dashed var(--accent);
+      border-radius: 10px;
+      padding: 2rem;
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navegación Principal -->
+  <nav class="navbar">
+    <a href="index.html" class="brand"><span>SOLIDWORKS</span> ACADEMY</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="aula/index.html">Aula Virtual</a></li>
+      <li><a href="cswa/index.html">CSWA Center</a></li>
+      <li><a href="proyecto.html" class="active">Proyecto Final</a></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+
+    <!-- Encabezado del Proyecto -->
+    <header class="project-hero">
+      <div>
+        <div style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); font-weight: 700; margin-bottom: 0.4rem;">
+          Semana 16 • Evaluación Final de Grado (35%)
+        </div>
+        <h1>Proyecto Integrador: Tornillo de Banco Mecánico</h1>
+        <p>
+          Desarrolla el modelado 3D, asignación de materiales, ensamblaje paramétrico y verificación de interferencias de un <strong>Tornillo de Banco Mecánico (Mechanical Vise)</strong> completo.
+        </p>
+      </div>
+      <div>
+        <span class="badge badge-warning" style="font-size: 1rem; padding: 0.5rem 1rem;">Ponderación: 35%</span>
+      </div>
+    </header>
+
+    <!-- Layout de 2 Columnas -->
+    <div class="grid-2">
+
+      <!-- Columna Izquierda: Especificaciones Técnicas y Despiece -->
+      <div>
+        
+        <!-- Descripción y Objetivos -->
+        <div class="card">
+          <h3 class="card-title" style="margin-bottom: 0.75rem;">📋 Objetivos del Proyecto Integrador</h3>
+          <p style="font-size: 0.95rem; color: var(--text-dark); line-height: 1.6; margin-bottom: 1rem;">
+            El objetivo central de este proyecto es integrar todas las competencias desarrolladas a lo largo de las 16 semanas del programa: desde el croquizado restringido y modelado de piezas complejas hasta el ensamblaje funcional con relaciones avanzadas y cálculo de centro de masa.
+          </p>
+          <div style="display: flex; gap: 1.5rem; font-size: 0.85rem; color: var(--text-muted);">
+            <span>⏱️ <strong>Tiempo estimado:</strong> 6 a 8 horas</span>
+            <span>📦 <strong>Componentes totales:</strong> 6 piezas</span>
+            <span>🎯 <strong>Software:</strong> SOLIDWORKS 2025+</span>
+          </div>
+        </div>
+
+        <!-- Visualizador CAD del Ensamblaje Integrador -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">🧩 Vista 3D del Ensamblaje Mecánico</h3>
+            <span class="badge badge-info">Filtro de Selección Activo</span>
+          </div>
+
+          <div class="cad-viewport" style="height: 280px;">
+            <div style="text-align: center;">
+              <div style="font-size: 3.5rem; margin-bottom: 0.5rem;">⚙️🔩🔧</div>
+              <p style="font-size: 1.05rem; font-weight: 700; color: var(--white);">Tornillo de Banco Mecánico (Mechanical Vise)</p>
+              <p style="font-size: 0.85rem; opacity: 0.8;">Ensamblaje Completo con Movimiento Restringido de Mordaza</p>
+            </div>
+            <div class="cad-viewport-controls">
+              <button type="button" class="cad-btn-icon" onclick="alert('Modo Explosionado Activado')">💥 Vista Explosionada</button>
+              <button type="button" class="cad-btn-icon" onclick="alert('Detección de Interferencias: 0 Interferencias encontradas.')">🔍 Verificar Interferencias</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lista de Piezas a Modelar (BOM) -->
+        <div class="card">
+          <h3 class="card-title">📦 Listado de Piezas del Ensamblaje (BOM)</h3>
+          <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">
+            Cada componente debe ser modelado de forma independiente en su propio archivo <code>.SLDPRT</code> asignando el material exacto especificado.
+          </p>
+
+          <div class="part-list-grid">
+            <div class="part-card">
+              <div class="part-number">1</div>
+              <div>
+                <strong style="color: var(--primary);">Base Fija de Guía</strong>
+                <div style="font-size: 0.8rem; color: var(--text-muted);">Material: Hierro Fundido Gris</div>
+                <div style="font-size: 0.75rem; color: var(--accent); font-weight: 600;">Archivo: Base_Fija.SLDPRT</div>
+              </div>
+            </div>
+
+            <div class="part-card">
+              <div class="part-number">2</div>
+              <div>
+                <strong style="color: var(--primary);">Mordaza Móvil</strong>
+                <div style="font-size: 0.8rem; color: var(--text-muted);">Material: Hierro Fundido Gris</div>
+                <div style="font-size: 0.75rem; color: var(--accent); font-weight: 600;">Archivo: Mordaza_Movil.SLDPRT</div>
+              </div>
+            </div>
+
+            <div class="part-card">
+              <div class="part-number">3</div>
+              <div>
+                <strong style="color: var(--primary);">Huso Roscado de Avance</strong>
+                <div style="font-size: 0.8rem; color: var(--text-muted);">Material: Acero al Carbono 1045</div>
+                <div style="font-size: 0.75rem; color: var(--accent); font-weight: 600;">Archivo: Huso_Roscado.SLDPRT</div>
+              </div>
+            </div>
+
+            <div class="part-card">
+              <div class="part-number">4</div>
+              <div>
+                <strong style="color: var(--primary);">Palanca de Manivela</strong>
+                <div style="font-size: 0.8rem; color: var(--text-muted);">Material: Acero Inoxidable 304</div>
+                <div style="font-size: 0.75rem; color: var(--accent); font-weight: 600;">Archivo: Palanca.SLDPRT</div>
+              </div>
+            </div>
+
+            <div class="part-card">
+              <div class="part-number">5</div>
+              <div>
+                <strong style="color: var(--primary);">Placas de Sujeción (x2)</strong>
+                <div style="font-size: 0.8rem; color: var(--text-muted);">Material: Acero Herramienta de Alta Dureza</div>
+                <div style="font-size: 0.75rem; color: var(--accent); font-weight: 600;">Archivo: Placa_Mordaza.SLDPRT</div>
+              </div>
+            </div>
+
+            <div class="part-card">
+              <div class="part-number">6</div>
+              <div>
+                <strong style="color: var(--primary);">Tornillos de Retención M6 (x4)</strong>
+                <div style="font-size: 0.8rem; color: var(--text-muted);">Material: Componente Standard Toolbox / ISO</div>
+                <div style="font-size: 0.75rem; color: var(--accent); font-weight: 600;">Archivo: Tornillo_M6.SLDPRT</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Columna Derecha: Rúbrica de Evaluación y Formulario de Entrega -->
+      <aside>
+
+        <!-- Rúbrica de Evaluación -->
+        <div class="card">
+          <h3 class="card-title">📊 Rúbrica Institucional de Evaluación</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+            Tu entregable será evaluado considerando los siguientes 4 criterios técnicos:
+          </p>
+
+          <table class="rubric-table">
+            <thead>
+              <tr>
+                <th>Criterio Evaluado</th>
+                <th>Ponderación</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Modelado Paramétrico y Cotas</strong><br><span style="font-size: 0.8rem; color: var(--text-muted);">Croquis completamente definidos sin errores de reconstrucción.</span></td>
+                <td><strong style="color: var(--primary);">30%</strong></td>
+              </tr>
+              <tr>
+                <td><strong>Asignación de Materiales y Masa</strong><br><span style="font-size: 0.8rem; color: var(--text-muted);">Densidades correctas y precisión del Centro de Gravedad.</span></td>
+                <td><strong style="color: var(--primary);">25%</strong></td>
+              </tr>
+              <tr>
+                <td><strong>Relaciones de Posición en Ensamblaje</strong><br><span style="font-size: 0.8rem; color: var(--text-muted);">Movimiento libre de mordaza sin interferencias mecánicas.</span></td>
+                <td><strong style="color: var(--primary);">30%</strong></td>
+              </tr>
+              <tr>
+                <td><strong>Organización de Archivos y Vista Explosionada</strong><br><span style="font-size: 0.8rem; color: var(--text-muted);">Nombres estandarizados y configuración de despiece.</span></td>
+                <td><strong style="color: var(--primary);">15%</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Formulario Simulador de Entrega -->
+        <div class="card">
+          <h3 class="card-title">📤 Entrega del Proyecto Integrador</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+            Registra los resultados finales obtenidos en SOLIDWORKS al medir las <em>Propiedades de Masa</em> de tu ensamblaje finalizado.
+          </p>
+
+          <form id="project-submission-form" onsubmit="handleProjectSubmit(event)">
+            <div style="margin-bottom: 1rem;">
+              <label style="font-weight: 600; font-size: 0.85rem; display: block; margin-bottom: 0.3rem;">Masa Total del Ensamblaje (Gramos):</label>
+              <input type="number" step="0.01" class="form-input" placeholder="Ej: 4250.75" required style="width: 100%; padding: 0.6rem; border: 1px solid var(--border); border-radius: 6px;">
+            </div>
+
+            <div style="margin-bottom: 1rem;">
+              <label style="font-weight: 600; font-size: 0.85rem; display: block; margin-bottom: 0.3rem;">Coordenada X del Centro de Gravedad (mm):</label>
+              <input type="number" step="0.01" class="form-input" placeholder="Ej: 112.45" required style="width: 100%; padding: 0.6rem; border: 1px solid var(--border); border-radius: 6px;">
+            </div>
+
+            <div style="margin-bottom: 1.25rem;">
+              <label style="font-weight: 600; font-size: 0.85rem; display: block; margin-bottom: 0.3rem;">Enlace del Repositorio / Archivos (.ZIP):</label>
+              <input type="url" class="form-input" placeholder="https://github.com/usuario/mi-proyecto-sw" required style="width: 100%; padding: 0.6rem; border: 1px solid var(--border); border-radius: 6px;">
+            </div>
+
+            <button type="submit" class="btn" style="width: 100%; text-align: center;">✅ Registrar Entrega del Proyecto</button>
+          </form>
+
+          <div id="project-feedback" style="margin-top: 1rem; display: none;">
+            <div class="alert-box alert-success">
+              <div>
+                <strong>¡Proyecto Entregado!</strong>
+                <p style="font-size: 0.85rem; margin-top: 0.2rem;">Tus datos de propiedades de masa han sido validados exitosamente en tu progreso general.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </aside>
+
+    </div>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 SOLIDWORKS ACADEMY - Formación por Competencias & Preparación CSWA</p>
+  </footer>
+
+  <!-- Scripts de la Aplicación -->
+  <script src="assets/js/app.js"></script>
+  <script>
+    function handleProjectSubmit(e) {
+      e.preventDefault();
+      
+      // Registrar Semana 16 como completada en AppState
+      AppState.markWeekCompleted(16);
+      
+      // Actualizar competencias integradoras
+      const updates = {
+        croquis: 100,
+        piezas: 95,
+        modificacion: 95,
+        interpretacion: 100,
+        operaciones: 95,
+        propiedades_fisicas: 95,
+        ensamblajes: 100,
+        relaciones_posicion: 95
+      };
+
+      AppState.recordQuizResult('proyecto_final_vise', 98, updates);
+
+      document.getElementById('project-feedback').style.display = 'block';
+      alert('🎉 ¡Felicidades! Has completado la entrega del Proyecto Integrador. Tu expediente y Dashboard han sido actualizados con tu ponderación académica.');
+    }
+  </script>
+</body>
+</html>
