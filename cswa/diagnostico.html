@@ -1,1 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diagnóstico por Competencias - CSWA | SOLIDWORKS ACADEMY</title>
 
+  <!-- Hojas de Estilo Institucionales -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+
+  <style>
+    .diag-header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      color: var(--white);
+      padding: 2.5rem 2rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 15px rgba(16, 42, 67, 0.15);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .diag-score-box {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      padding: 1.25rem 2rem;
+      text-align: center;
+      min-width: 200px;
+    }
+
+    .diag-score-num {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .competency-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .cswa-disclaimer-box {
+      background: #FFFBEB;
+      border-left: 4px solid var(--warning);
+      border-radius: 0 8px 8px 0;
+      padding: 1.25rem;
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #78350F;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navegación Principal -->
+  <nav class="navbar">
+    <a href="/" class="brand"><span>SOLIDWORKS</span> ACADEMY</a>
+    <ul class="nav-links">
+      <li><a href="/">Inicio</a></li>
+      <li><a href="/dashboard.html">Dashboard</a></li>
+      <li><a href="/aula/">Aula Virtual</a></li>
+      <li><a href="/cswa/" class="active">CSWA Center</a></li>
+      <li><a href="/proyecto.html">Proyecto Final</a></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+
+    <!-- Encabezado del Diagnóstico -->
+    <header class="diag-header">
+      <div>
+        <div style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent);">
+          CSWA Practice Center • Motor de Diagnóstico
+        </div>
+        <h1 style="font-size: 2.2rem; margin: 0.4rem 0;">Diagnóstico por Competencias</h1>
+        <p style="font-size: 1.05rem; opacity: 0.9;">
+          Análisis automático de fortalezas, áreas de oportunidad y plan personalizado de preparación.
+        </p>
+      </div>
+
+      <div class="diag-score-box">
+        <div style="font-size: 0.85rem; opacity: 0.85; text-transform: uppercase;">Índice General CSWA</div>
+        <div id="cswa-index-val" class="diag-score-num">0%</div>
+        <div style="margin-top: 0.4rem;">
+          <span id="cswa-level-badge" class="badge badge-warning">En Evaluación</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Grid Principal (Diagnóstico + Plan Personalizado) -->
+    <div class="grid-2">
+
+      <!-- Columna Izquierda: Evaluación de las 9 Competencias CSWA -->
+      <div>
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">📊 Estado de Dominio por Competencia</h3>
+            <button class="btn btn-outline" style="font-size: 0.8rem; padding: 0.3rem 0.7rem;" onclick="location.reload()">🔄 Actualizar</button>
+          </div>
+          <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+            Puntuación calculada automáticamente sobre la base de cuestionarios, evaluaciones prácticas y ejercicios cronometrados realizados (Escala: 0 a 100 puntos).
+          </p>
+
+          <!-- Contenedor dinámico de barras de competencia (Renderizado por cswa.js) -->
+          <div id="competencies-list">
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Cargando competencias...</p>
+          </div>
+        </div>
+
+        <!-- Leyenda y Niveles de Preparación Internos -->
+        <div class="card">
+          <h4 style="color: var(--primary); font-size: 1rem; margin-bottom: 0.75rem;">Escala Interna de Evaluación Pedagógica:</h4>
+          <ul style="list-style: none; font-size: 0.85rem; color: var(--text-dark);">
+            <li style="margin-bottom: 0.4rem;"><span class="badge badge-danger">0 - 49%</span> <strong>Nivel Inicial:</strong> Requiere reforzar conceptos teóricos y herramientas básicas.</li>
+            <li style="margin-bottom: 0.4rem;"><span class="badge badge-warning">50 - 69%</span> <strong>En Desarrollo:</strong> Dominio parcial. Requiere mayor práctica guiada.</li>
+            <li style="margin-bottom: 0.4rem;"><span class="badge badge-info">70 - 84%</span> <strong>Competente:</strong> Buen desempeño. Requiere consolidar velocidad y precisión.</li>
+            <li style="margin-bottom: 0.4rem;"><span class="badge badge-success">85 - 94%</span> <strong>Preparación Avanzada:</strong> Nivel adecuado para abordar ejercicios complejos.</li>
+            <li style="margin-bottom: 0.4rem;"><span class="badge badge-success">95 - 100%</span> <strong>Dominio Demostrado:</strong> Nivel sobresaliente en las evaluaciones del curso.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Columna Derecha: Plan de Estudio Personalizado & Acciones -->
+      <aside>
+        
+        <!-- Plan de Refuerzo Personalizado Automático -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title" style="font-size: 1.1rem;">🎯 Plan de Refuerzo Personalizado</h3>
+          </div>
+          
+          <!-- Se llena dinámicamente según debilidades detectadas por cswa.js -->
+          <div id="cswa-study-plan">
+            <p style="font-size: 0.9rem; color: var(--text-muted);">Generando recomendaciones personalizadas...</p>
+          </div>
+        </div>
+
+        <!-- Acciones Directas de Entrenamiento -->
+        <div class="card" style="background: var(--white); border-top: 4px solid var(--accent);">
+          <h4 style="color: var(--primary); margin-bottom: 0.5rem;">⚡ Acciones Rápidas</h4>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+            Ponte a prueba para actualizar tus indicadores de competencia.
+          </p>
+          <a href="/cswa/" class="btn" style="width: 100%; text-align: center; margin-bottom: 0.5rem;">⏱️ Ir a Simuladores Cronometrados</a>
+          <a href="/aula/" class="btn btn-outline" style="width: 100%; text-align: center;">📚 Repasar Lecciones del Aula</a>
+        </div>
+
+      </aside>
+    </div>
+
+    <!-- Aclaración Institucional sobre la Certificación Oficial -->
+    <div class="cswa-disclaimer-box">
+      <strong>⚠️ Nota Aclaratoria Oficial:</strong> El <em>Índice de Preparación CSWA</em> y los puntajes presentados en este panel son estimaciones pedagógicas internas desarrolladas por SOLIDWORKS ACADEMY para guiar tu aprendizaje. Alcanzar una preparación avanzada en la plataforma no constituye la entrega de la certificación oficial. La certificación <strong>Certified SOLIDWORKS Associate (CSWA)</strong> solo se obtiene al rendir y aprobar el examen oficial en la plataforma oficial de Dassault Systèmes (SOLIDWORKS Virtual Tester).
+    </div>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 SOLIDWORKS ACADEMY - Formación por Competencias & Preparación para la Certificación CSWA</p>
+  </footer>
+
+  <!-- Scripts de la Aplicación -->
+  <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/cswa.js"></script>
+</body>
+</html>
