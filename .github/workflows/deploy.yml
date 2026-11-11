@@ -1,39 +1,43 @@
 name: Deploy SOLIDWORKS Academy to GitHub Pages
 
 on:
-  push:
-    branches: ["main"]
-  workflow_dispatch:
+push:
+branches:
+- main
+- master
+workflow_dispatch:
 
-# Permisos necesarios para publicar en GitHub Pages
+Permisos requeridos para publicar en GitHub Pages
+
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+contents: read
+pages: write
+id-token: write
 
-# Permite solo un despliegue concurrente a la vez
+Prevenir ejecuciones concurrentes para evitar condiciones de carrera
+
 concurrency:
-  group: "pages"
-  cancel-in-progress: false
+group: 'pages'
+cancel-in-progress: true
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout del código fuente
-        uses: actions/checkout@v4
+deploy:
+environment:
+name: github-pages
+url: ${{ steps.deployment.outputs.page_url }}
+runs-on: ubuntu-latest
+steps:
+- name: Checkout Código Fuente
+uses: actions/checkout@v4
 
-      - name: Configurar GitHub Pages
-        uses: actions/configure-pages@v5
+  - name: Configurar GitHub Pages
+    uses: actions/configure-pages@v4
 
-      - name: Cargar artefactos para el despliegue
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: '.' # Despliega la raíz del repositorio (index.html, assets/, aula/, cswa/, etc.)
+  - name: Cargar Artefactos de la Aplicación Web
+    uses: actions/upload-pages-artifact@v3
+    with:
+      path: '.'
 
-      - name: Publicar en GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+  - name: Desplegar en GitHub Pages
+    id: deployment
+    uses: actions/deploy-pages@v4
