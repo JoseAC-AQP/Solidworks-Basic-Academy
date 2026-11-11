@@ -8,23 +8,25 @@
   <!-- Hojas de Estilo Institucionales -->
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/components.css">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
     .lesson-hero {
       background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
       color: var(--white);
-      padding: 2rem;
-      border-radius: 12px;
+      padding: 2.25rem 2rem;
+      border-radius: var(--radius-md);
       margin-bottom: 2rem;
       box-shadow: var(--shadow-md);
     }
 
     .lesson-meta-bar {
       display: flex;
-      gap: 1.5rem;
+      gap: 1.25rem;
       margin-top: 1rem;
       font-size: 0.85rem;
-      color: var(--accent);
+      color: var(--accent-light);
       flex-wrap: wrap;
     }
 
@@ -32,17 +34,26 @@
       border-left: 4px solid var(--accent);
       background: var(--bg-light);
       padding: 1.25rem;
-      border-radius: 0 8px 8px 0;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
       margin-bottom: 1.25rem;
+      position: relative;
+      padding-left: 3.5rem;
     }
 
     .step-number {
+      position: absolute;
+      left: 1rem;
+      top: 1.25rem;
+      width: 1.8rem;
+      height: 1.8rem;
+      background: var(--accent);
+      color: var(--primary-dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-weight: 800;
-      color: var(--primary);
-      text-transform: uppercase;
-      font-size: 0.8rem;
-      letter-spacing: 0.5px;
-      margin-bottom: 0.3rem;
+      font-size: 0.85rem;
     }
 
     .shortcut-tag {
@@ -59,7 +70,7 @@
     .cswa-tip-box {
       background: #EFF6FF;
       border: 1px solid #BFDBFE;
-      border-radius: 8px;
+      border-radius: var(--radius-sm);
       padding: 1.25rem;
       margin: 1.5rem 0;
     }
@@ -71,6 +82,33 @@
       color: #1E40AF;
       font-weight: 700;
       margin-bottom: 0.5rem;
+    }
+
+    .tab-container {
+      display: flex;
+      gap: 0.5rem;
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 1.5rem;
+      overflow-x: auto;
+    }
+
+    .tab-btn {
+      padding: 0.75rem 1.25rem;
+      border: none;
+      background: none;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+      font-weight: 700;
     }
 
     .param-table {
@@ -90,21 +128,32 @@
       background: var(--bg-light);
       color: var(--primary);
     }
+
+    .quiz-option {
+      display: block;
+      padding: 0.75rem 1rem;
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .quiz-option:hover {
+      border-color: var(--accent);
+      background: #F0F9FF;
+    }
+
+    .quiz-option input {
+      margin-right: 0.75rem;
+    }
   </style>
 </head>
 <body>
 
-  <!-- Navegación Principal -->
-  <nav class="navbar">
-    <a href="../index.html" class="brand"><span>SOLIDWORKS</span> ACADEMY</a>
-    <ul class="nav-links">
-      <li><a href="../index.html">Inicio</a></li>
-      <li><a href="../dashboard.html">Dashboard</a></li>
-      <li><a href="../aula/index.html" class="active">Aula Virtual</a></li>
-      <li><a href="../cswa/index.html">CSWA Center</a></li>
-      <li><a href="../proyecto.html">Proyecto Final</a></li>
-    </ul>
-  </nav>
+  <!-- Barra de Navegación Dinámica -->
+  <header class="navbar"></header>
 
   <main class="container">
 
@@ -112,197 +161,216 @@
     <header class="lesson-hero">
       <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
         <div>
-          <span class="badge badge-info" style="margin-bottom: 0.5rem; display: inline-block;">Módulo 3: Modelado de Sólidos</span>
+          <span class="badge badge-info" style="margin-bottom: 0.5rem; display: inline-flex; align-items: center; gap: 0.35rem;">
+            <i class="fa-solid fa-layer-group"></i> Módulo 3: Modelado de Sólidos Fundamental
+          </span>
           <h1 style="font-size: 2.2rem; color: var(--white); margin: 0.2rem 0;">Semana 6: Redondeos, Chaflanes, Vaciados y Matrices</h1>
           <p style="opacity: 0.9; font-size: 1rem; max-width: 700px; margin-top: 0.5rem;">
-            Aprende a aplicar operaciones de acabado tridimensional y patrones de repetición paramétricos (Lineales y Circulares) para optimizar el árbol de diseño.
+            Aplica operaciones de acabado tridimensional y patrones de repetición paramétricos (Lineales, Circulares y Simetrías 3D) para optimizar el árbol de operaciones FeatureManager.
           </p>
         </div>
         <div>
-          <button id="mark-completed-btn" class="btn" style="background: var(--success);" onclick="completeWeek6()">
-            ✓ Marcar Semana como Completada
+          <button id="mark-completed-btn" class="btn" style="background: var(--success); color: white;" onclick="completeWeek6()">
+            <i class="fa-solid fa-check"></i> Marcar Semana como Completada
           </button>
         </div>
       </div>
 
       <div class="lesson-meta-bar">
-        <span>⏱️ Duración: 3 Horas Académicas</span>
-        <span>🎯 Competencia CSWA: Operaciones avanzadas de sólidos y repeticiones</span>
-        <span>📄 Tipo de Contenido: Teórico - Práctico</span>
+        <span><i class="fa-regular fa-clock"></i> Carga Horaria: 3 hrs lectivas</span>
+        <span><i class="fa-solid fa-award"></i> Competencia CSWA: Operaciones Avanzadas de Sólidos y Repeticiones</span>
+        <span><i class="fa-solid fa-cubes"></i> Versión SW: 2021+</span>
       </div>
     </header>
 
+    <!-- Tip Oficial CSWA -->
+    <section class="cswa-tip-box" style="margin-top: 0;">
+      <div class="cswa-tip-header">
+        <i class="fa-solid fa-lightbulb text-xl"></i>
+        <span>Orden de Operaciones y Redondeos en la Certificación CSWA</span>
+      </div>
+      <p style="color: #1E3A8A; font-size: 0.95rem; margin: 0;">
+        <strong>Estrategia Clave de Examen:</strong> Aplica redondeos y chaflanes <em>después</em> de extruir y recortar la geometría principal. Agregar redondeos en el croquis 2D base dificulta la acotación de centros y genera errores de tangencia cuando varían las ecuaciones globales $A, B, C$.
+      </p>
+    </section>
+
     <div class="grid-2" style="grid-template-columns: 2.5fr 1fr; gap: 1.5rem;">
 
-      <!-- Contenido Principal de la Lección -->
+      <!-- Contenido Principal -->
       <div>
 
-        <!-- Bloque 1: Operaciones de Acabado (Fillet, Chamfer & Shell) -->
-        <article class="card">
-          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">1. Operaciones de Acabado y Modificación Volumétrica</h2>
-          <p style="line-height: 1.6; color: var(--text-dark); margin-bottom: 1rem;">
-            Las operaciones de acabado modifican aristas y caras directamente en el modelo 3D sin necesidad de volver a ingresar al croquis base:
+        <!-- Pestañas de Navegación Didáctica -->
+        <div class="tab-container">
+          <button class="tab-btn active" onclick="switchTab('fundamento')"><i class="fa-solid fa-book-open mr-1"></i> 1. Fundamento</button>
+          <button class="tab-btn" onclick="switchTab('matrices')"><i class="fa-solid fa-clone mr-1"></i> 2. Matrices & Simetrías</button>
+          <button class="tab-btn" onclick="switchTab('procedimiento')"><i class="fa-solid fa-list-check mr-1"></i> 3. Procedimiento</button>
+          <button class="tab-btn" onclick="switchTab('evaluacion')"><i class="fa-solid fa-pen-to-square mr-1"></i> 4. Evaluación</button>
+        </div>
+
+        <!-- TAB 1: FUNDAMENTO CONCEPTUAL -->
+        <article id="tab-fundamento" class="card">
+          <h2 class="card-title"><i class="fa-solid fa-bullseye text-swCyan"></i> 1. Resultado de Aprendizaje</h2>
+          <p>
+            Al finalizar esta sesión, serás capaz de <strong>aplicar operaciones 3D de acabado mecánico</strong> (Redondeos, Chaflanes y Vaciados) y multiplicar entidades paramétricas con <strong>Matrices Lineales, Circulares y Simetrías</strong> sin duplicar bocetos 2D.
           </p>
 
-          <ul style="margin-left: 1.25rem; font-size: 0.95rem; color: var(--text-dark); line-height: 1.7; margin-bottom: 1rem;">
-            <li><strong>Redondeo (Fillet):</strong> Suaviza aristas vivas aplicando un radio constante o variable. En piezas fundidas o inyectadas, reduce concentradores de esfuerzo.</li>
-            <li><strong>Chaflán (Chamfer):</strong> Crea un bisel inclinado definido por distancia/ángulo (ej. $2\text{ mm} \times 45^\circ$) o por dos distancias independientes.</li>
-            <li><strong>Vaciado (Shell):</strong> Remueve material interior dejando un espesor de pared constante en el cuerpo. Permite seleccionar caras abiertas.</li>
+          <h2 class="card-title" style="margin-top: 1.5rem;"><i class="fa-solid fa-gears text-swCyan"></i> 2. Operaciones de Acabado Volumétrico</h2>
+          <p style="line-height: 1.6;">
+            Las operaciones de modificación de aristas actúan sobre el sólido 3D sin alterar las cotas base del croquis:
+          </p>
+
+          <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem; font-size: 0.95rem;" class="space-y">
+            <li><strong style="color: var(--primary);">Redondeo (Fillet):</strong> Suaviza aristas vivas aplicando un radio constante o variable ($R$). Reduce concentradores de esfuerzo mecánico.</li>
+            <li><strong style="color: var(--primary);">Chaflán (Chamfer):</strong> Bisel inclinado definido por distancia/ángulo (ej. $2\text{ mm} \times 45^\circ$) para facilitar el ensamble de ejes y pasadores.</li>
+            <li><strong style="color: var(--primary);">Vaciado (Shell):</strong> Remueve material interno dejando un espesor de pared uniforme $t$ en todo el cuerpo sólido.</li>
           </ul>
 
-          <div class="cswa-tip-box">
-            <div class="cswa-tip-header">
-              <span>💡 Orden de Operaciones en el Árbol CSWA</span>
-            </div>
-            <p style="font-size: 0.9rem; color: #1E3A8A; margin: 0;">
-              <strong>Estrategia clave:</strong> Aplica los redondeos y chaflanes <em>después</em> de extruir y recortar la geometría principal. Si agregas redondeos en el croquis 2D inicial, dificultarás la acotación y podrías generar errores de tangencia.
-            </p>
+          <!-- Visor Gráfico Interactivo / Esquema 3D -->
+          <div class="cad-viewport">
+            <svg viewBox="0 0 600 240" style="width: 100%; height: 100%;">
+              <rect x="0" y="0" width="600" height="240" fill="#0f172a"/>
+              <!-- Base Block -->
+              <path d="M 180 180 L 380 180 L 440 130 L 240 130 Z" fill="#00B3E0" opacity="0.7"/>
+              <path d="M 180 180 L 180 90 Q 180 70 200 70 L 380 70 L 380 180 Z" fill="#0090B3" opacity="0.85"/>
+              <path d="M 380 180 L 380 70 L 440 30 L 440 130 Z" fill="#00738F" opacity="0.9"/>
+              <!-- Fillet Highlight -->
+              <path d="M 180 90 Q 180 70 200 70" fill="none" stroke="#38bdf8" stroke-width="4"/>
+              <text x="140" y="75" fill="#38bdf8" font-size="11" font-weight="bold">Radio R20</text>
+              <!-- Circular Pattern Preview -->
+              <circle cx="310" cy="115" r="8" fill="#ef4444"/>
+              <circle cx="340" cy="115" r="8" fill="#22c55e"/>
+              <circle cx="310" cy="140" r="8" fill="#22c55e"/>
+              <circle cx="340" cy="140" r="8" fill="#22c55e"/>
+              <text x="310" y="40" fill="#22c55e" font-size="12" font-weight="bold" text-anchor="middle">PATRÓN DE REPETICIÓN Y REDONDEO 3D</text>
+            </svg>
           </div>
         </article>
 
-        <!-- Bloque 2: Matrices Lineales y Circulares -->
-        <article class="card">
-          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">2. Patrones de Repetición Paramétricos (Linear & Circular Patterns)</h2>
-          <p style="line-height: 1.6; color: var(--text-dark); margin-bottom: 1rem;">
-            Las matrices permiten duplicar operaciones, caras o cuerpos completos a lo largo de ejes, aristas o trayectorias circulares.
+        <!-- TAB 2: MATRICES Y SIMETRÍAS -->
+        <article id="tab-matrices" class="card" style="display: none;">
+          <h2 class="card-title"><i class="fa-solid fa-clone text-swCyan"></i> Patrones de Repetición Paramétricos</h2>
+          <p style="margin-bottom: 1rem;">
+            Duplica operaciones de corte, extrucciones o cuerpos completos mediante relaciones direccionales:
           </p>
 
           <table class="param-table">
             <thead>
               <tr>
                 <th>Tipo de Matriz</th>
-                <th>Requisitos de Entrada</th>
-                <th>Parámetros Principales</th>
+                <th>Entradas de Referencia</th>
+                <th>Parámetros Clave</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td><strong>Matriz Lineal (Linear Pattern)</strong></td>
-                <td>Una o dos aristas/ejes direccionales + Operación objetivo</td>
-                <td>Distancia de separación ($mm$) + Número de instancias ($N$).</td>
+                <td>1 o 2 Aristas/Ejes rectilíneos</td>
+                <td>Distancia de separación ($mm$) + N° de instancias ($N$).</td>
               </tr>
               <tr>
                 <td><strong>Matriz Circular (Circular Pattern)</strong></td>
-                <td>Un eje temporal, cara cilíndrica o cota de centro + Operación objetivo</td>
-                <td>Ángulo total (ej. $360^\circ$), Separación igual + Número de instancias ($N$).</td>
+                <td>Eje temporal, cara cilíndrica o cota</td>
+                <td>Ángulo total (ej. $360^\circ$) + Separación igual ($N$).</td>
               </tr>
               <tr>
                 <td><strong>Simetría 3D (Mirror)</strong></td>
-                <td>Un plano o cara plana de referencia + Operaciones a reflejar</td>
-                <td>Genera una copia especular exacta al otro lado del plano.</td>
+                <td>Plano de referencia o cara plana</td>
+                <td>Copia especular de la operación o cuerpo.</td>
               </tr>
             </tbody>
           </table>
+        </article>
 
-          <!-- CAD Viewport Esquemático -->
-          <div class="cad-viewport" style="margin-top: 1.5rem;">
-            <div style="text-align: center;">
-              <div style="font-size: 3rem; margin-bottom: 0.5rem;">⚙️🌀</div>
-              <p style="font-size: 0.95rem; font-weight: 700; color: var(--white);">Vista 3D: Matriz Circular de Barrenos Pasantes ($N=6$, $360^\circ$)</p>
-              <p style="font-size: 0.8rem; opacity: 0.8;">Operación Base: Corte Extruido | Referencia: Eje Cilíndrico Central</p>
-            </div>
-            <div class="cad-viewport-controls">
-              <button type="button" class="cad-btn-icon" onclick="alert('Matriz verificada: 6 instancias distribuidas equitativamente a 360°')">🔄 Verificar Instancias</button>
-            </div>
+        <!-- TAB 3: PROCEDIMIENTO PASO A PASO -->
+        <article id="tab-procedimiento" class="card" style="display: none;">
+          <h2 class="card-title"><i class="fa-solid fa-list-check text-swCyan"></i> Procedimiento Guiado Paso a Paso</h2>
+          <p style="margin-bottom: 1.5rem;">Sigue estos pasos en SOLIDWORKS para construir una carcasa vaciada con matriz circular:</p>
+
+          <div class="step-box">
+            <div class="step-number">1</div>
+            <h4 style="color: var(--primary);">Generar el Cilindro Base y Vaciado</h4>
+            <p>Extruye un cilindro de $\emptyset 120\text{ mm} \times 80\text{ mm}$. Selecciona la herramienta <strong>Vaciado (Shell)</strong>, asigna un espesor de $3\text{ mm}$ y elimina la cara superior.</p>
+          </div>
+
+          <div class="step-box">
+            <div class="step-number">2</div>
+            <h4 style="color: var(--primary);">Crear Barreno Guía de Brida</h4>
+            <p>Abre un croquis en el labio superior, dibuja un círculo de $\emptyset 8\text{ mm}$ posicionado a $50\text{ mm}$ del centro y ejecuta <strong>Corte Extruido > Por Todo</strong>.</p>
+          </div>
+
+          <div class="step-box">
+            <div class="step-number">3</div>
+            <h4 style="color: var(--primary);">Aplicar Matriz Circular</h4>
+            <p>Selecciona <strong>Matriz Circular</strong>. Como eje de referencia elige la cara cilíndrica externa. Define $N=8$ instancias a $360^\circ$ con separación igual.</p>
+          </div>
+
+          <div class="step-box">
+            <div class="step-number">4</div>
+            <h4 style="color: var(--primary);">Aplicar Redondeos Finales</h4>
+            <p>Aplica un <strong>Redondeo (Fillet)</strong> de $R2\text{ mm}$ en las aristas exteriores superiores para finalizar la pieza.</p>
           </div>
         </article>
 
-        <!-- Bloque 3: Paso a Paso Práctico -->
-        <article class="card">
-          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">3. Guía Práctica Paso a Paso: Carcasa del Motor con Vaciado</h2>
-          <p style="font-size: 0.95rem; color: var(--text-dark); margin-bottom: 1rem;">
-            Aplica las siguientes operaciones en SOLIDWORKS para construir una pieza vaciada con matriz circular:
-          </p>
+        <!-- TAB 4: EVALUACIÓN Y CUESTIONARIO -->
+        <article id="tab-evaluacion" class="card" style="display: none;">
+          <h2 class="card-title"><i class="fa-solid fa-pen-to-square text-swCyan"></i> Cuestionario de Comprobación - Semana 6</h2>
+          <p style="margin-bottom: 1.5rem;">Responde a las siguientes preguntas para validar tu aprendizaje sobre operaciones avanzadas:</p>
 
-          <div class="step-box">
-            <div class="step-number">Paso 1</div>
-            <h4 style="margin: 0 0 0.3rem 0; color: var(--primary);">Sólido Principal y Vaciado</h4>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">
-              Extruye un cilindro base de $\emptyset 120\text{ mm} \times 80\text{ mm}$. Selecciona la herramienta <strong>Vaciado (Shell)</strong>, asigna un espesor de $3\text{ mm}$ y elimina la cara superior.
-            </p>
-          </div>
+          <form id="quiz-form-w6">
+            <div style="margin-bottom: 1.5rem;">
+              <p style="font-weight: 600; margin-bottom: 0.75rem;">1. ¿En qué etapa del modelado es preferible agregar los redondeos de arista en piezas mecánicas complejas?</p>
+              <label class="quiz-option"><input type="radio" name="q1" value="A"> A) Al inicio, dentro del croquis 2D base</label>
+              <label class="quiz-option"><input type="radio" name="q1" value="B"> B) Al final, como operaciones 3D independientes en el árbol FeatureManager</label>
+              <label class="quiz-option"><input type="radio" name="q1" value="C"> C) Únicamente al exportar en formato IGES/STEP</label>
+            </div>
 
-          <div class="step-box">
-            <div class="step-number">Paso 2</div>
-            <h4 style="margin: 0 0 0.3rem 0; color: var(--primary);">Barreno Guía de Brida</h4>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">
-              Abre un croquis en el labio superior de la brida. Dibuja un círculo de $\emptyset 8\text{ mm}$ a $50\text{ mm}$ del origen y aplica <strong>Corte Extruido > Por Todo</strong>.
-            </p>
-          </div>
+            <div style="margin-bottom: 1.5rem;">
+              <p style="font-weight: 600; margin-bottom: 0.75rem;">2. ¿Qué ventaja ofrece utilizar una Matriz Circular en lugar de dibujar 8 círculos individuales en el croquis?</p>
+              <label class="quiz-option"><input type="radio" name="q2" value="A"> A) Permite modificar la cantidad de instancias paramétricamente en segundos</label>
+              <label class="quiz-option"><input type="radio" name="q2" value="B"> B) Cambia el material de la pieza a aluminio automáticamente</label>
+              <label class="quiz-option"><input type="radio" name="q2" value="C"> C) Elimina el punto de Origen de la pieza</label>
+            </div>
 
-          <div class="step-box">
-            <div class="step-number">Paso 3</div>
-            <h4 style="margin: 0 0 0.3rem 0; color: var(--primary);">Matriz Circular y Redondeos</h4>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">
-              Selecciona <strong>Matriz Circular</strong>. Como eje de referencia usa la cara exterior cilíndrica. Define $N=8$ instancias a $360^\circ$. Finalmente, aplica un <strong>Redondeo</strong> de $R2\text{ mm}$ en las aristas exteriores.
-            </p>
-          </div>
+            <button type="button" class="btn" onclick="evaluarQuizSemana6()"><i class="fa-solid fa-check"></i> Validar Respuestas y Guardar Avance</button>
+            <div id="quiz-feedback-w6" style="margin-top: 1rem; display: none;"></div>
+          </form>
         </article>
+
+        <!-- Navegación entre Semanas -->
+        <div style="display: flex; justify-content: space-between; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
+          <a href="semana5.html" class="btn btn-outline"><i class="fa-solid fa-arrow-left"></i> Semana 5</a>
+          <a href="semana7.html" class="btn">Semana 7 <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
 
       </div>
 
-      <!-- Barra Lateral: Progreso y Cuestionario de Validación -->
-      <aside>
-
-        <!-- Resumen de la Lección -->
+      <!-- Barra Lateral (Sidebar) -->
+      <aside class="space-y">
         <div class="card">
-          <h3 class="card-title" style="font-size: 1.1rem; margin-bottom: 0.75rem;">📋 Resumen de la Lección</h3>
-          <ul style="list-style: none; font-size: 0.85rem; color: var(--text-muted);" class="space-y">
-            <li style="display: flex; align-items: center; gap: 0.5rem;">
-              <span>✅</span> Redondeo (Fillet) y Chaflán (Chamfer)
-            </li>
-            <li style="display: flex; align-items: center; gap: 0.5rem;">
-              <span>✅</span> Vaciado de paredes uniformes (Shell)
-            </li>
-            <li style="display: flex; align-items: center; gap: 0.5rem;">
-              <span>✅</span> Matrices Lineales y Circulares
-            </li>
-            <li style="display: flex; align-items: center; gap: 0.5rem;">
-              <span>✅</span> Operaciones de Simetría 3D (Mirror)
-            </li>
+          <h3 class="card-title" style="font-size: 1rem;"><i class="fa-solid fa-chart-line text-swCyan"></i> Estado de la Lección</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">Progreso registrado en esta semana:</p>
+          <div class="progress-container"><div id="week-progress-bar" class="progress-bar" style="width: 0%;"></div></div>
+          <span id="week-status-badge" class="badge badge-warning" style="margin-top: 0.5rem;">Pendiente</span>
+        </div>
+
+        <div class="card">
+          <h3 class="card-title" style="font-size: 1rem;"><i class="fa-solid fa-folder-open text-swCyan"></i> Recursos Descargables</h3>
+          <ul style="list-style: none; font-size: 0.85rem;" class="space-y">
+            <li><a href="#" onclick="alert('Descargando Guía PDF de Operaciones de Acabado'); return false;"><i class="fa-solid fa-file-pdf text-red-500 mr-1"></i> Guía PDF Operaciones 3D</a></li>
+            <li><a href="#" onclick="alert('Descargando Carcasa Vaciada SLDPRT'); return false;"><i class="fa-solid fa-cube text-swCyan mr-1"></i> Pieza Carcasa (.SLDPRT)</a></li>
           </ul>
         </div>
 
-        <!-- Cuestionario Rápido de Validación -->
-        <div class="card">
-          <h3 class="card-title" style="font-size: 1.1rem; margin-bottom: 0.75rem;">📝 Comprobación de Lectura</h3>
-          <form id="week6-quiz-form" onsubmit="evaluateWeek6Quiz(event)">
-            <p style="font-size: 0.85rem; font-weight: 600; color: var(--primary); margin-bottom: 0.5rem;">
-              1. ¿En qué momento del modelado es preferible agregar los redondeos de arista en piezas complejas?
-            </p>
-            <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.85rem; margin-bottom: 1rem;">
-              <label><input type="radio" name="w6q1" value="A" required> Al inicio, dentro del croquis 2D base</label>
-              <label><input type="radio" name="w6q1" value="B"> Al final, como operaciones 3D independientes en el árbol</label>
-              <label><input type="radio" name="w6q1" value="C"> Únicamente después de guardar en formato STEP</label>
-            </div>
-
-            <p style="font-size: 0.85rem; font-weight: 600; color: var(--primary); margin-bottom: 0.5rem;">
-              2. ¿Qué ventaja ofrece utilizar una Matriz Circular en lugar de dibujar manualmente 8 barrenos en el croquis?
-            </p>
-            <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.85rem; margin-bottom: 1.25rem;">
-              <label><input type="radio" name="w6q2" value="A" required> Permite modificar el número de barrenos paramétricamente en segundos</label>
-              <label><input type="radio" name="w6q2" value="B"> Reduce automáticamente la densidad del material</label>
-              <label><input type="radio" name="w6q2" value="C"> Elimina la necesidad de definir el Origen</label>
-            </div>
-
-            <button type="submit" class="btn btn-outline" style="width: 100%; font-size: 0.85rem;">Validar Respuestas</button>
-          </form>
+        <div class="card" style="background: var(--primary); color: var(--white);">
+          <h3 style="color: var(--accent); font-size: 1rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-award mr-1"></i> CSWA Practice Center</h3>
+          <p style="font-size: 0.85rem; opacity: 0.9; margin-bottom: 1rem;">
+            Evalúa tu velocidad en matrices y operaciones de acabado.
+          </p>
+          <a href="../cswa/index.html" class="btn" style="width: 100%; text-align: center; font-size: 0.85rem;">Ir al Centro CSWA</a>
         </div>
-
-        <!-- Navegación entre Semanas -->
-        <div class="card" style="text-align: center;">
-          <h4 style="font-size: 0.9rem; color: var(--primary); margin-bottom: 0.75rem;">Navegación Curricular</h4>
-          <div style="display: flex; justify-content: space-between; gap: 0.5rem;">
-            <a href="semana5.html" class="btn btn-outline" style="font-size: 0.8rem; flex: 1;">⬅️ Sem. 5</a>
-            <a href="index.html" class="btn btn-outline" style="font-size: 0.8rem; flex: 1;">Índice</a>
-            <a href="semana7.html" class="btn" style="font-size: 0.8rem; flex: 1;">Sem. 7 ➡️</a>
-          </div>
-        </div>
-
       </aside>
 
     </div>
-
   </main>
 
   <footer>
@@ -311,48 +379,65 @@
 
   <!-- Scripts de la Aplicación -->
   <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/cswa.js"></script>
+  <script src="../assets/js/quiz.js"></script>
+  <script src="../assets/js/navbar.js"></script>
+
   <script>
-    function completeWeek6() {
-      AppState.markWeekCompleted(6);
-      
-      const btn = document.getElementById('mark-completed-btn');
-      if (btn) {
-        btn.textContent = '✓ Semana 6 Completada';
-        btn.disabled = true;
-        btn.style.opacity = '0.8';
-      }
-      alert('🎉 ¡Semana 6 registrada como completada en tu expediente!');
-    }
-
-    function evaluateWeek6Quiz(e) {
-      e.preventDefault();
-      const form = document.getElementById('week6-quiz-form');
-      const formData = new FormData(form);
-
-      const q1 = formData.get('w6q1');
-      const q2 = formData.get('w6q2');
-
-      if (q1 === 'B' && q2 === 'A') {
-        alert('🎯 ¡Excelente! Has respondido correctamente ambas preguntas sobre operaciones de acabado y matrices.');
-        AppState.recordQuizResult('semana6_quiz', 100, { operaciones: 85, piezas: 75 });
-        completeWeek6();
-      } else {
-        alert('⚠️ Hay respuestas incorrectas. Revisa la secuencia de operaciones en el árbol y las ventajas paramétricas de las matrices.');
-      }
-    }
-
-    // Verificar si ya fue completada al cargar
     document.addEventListener('DOMContentLoaded', () => {
       const progress = AppState.getUserProgress();
       if (progress.completedWeeks && progress.completedWeeks.includes(6)) {
-        const btn = document.getElementById('mark-completed-btn');
-        if (btn) {
-          btn.textContent = '✓ Semana 6 Completada';
-          btn.disabled = true;
-          btn.style.opacity = '0.8';
-        }
+        actualizarUICompletado();
       }
     });
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('article[id^="tab-"]').forEach(content => content.style.display = 'none');
+
+      event.currentTarget.classList.add('active');
+      document.getElementById('tab-' + tabId).style.display = 'block';
+    }
+
+    function actualizarUICompletado() {
+      const progressBar = document.getElementById('week-progress-bar');
+      const badge = document.getElementById('week-status-badge');
+      const btn = document.getElementById('mark-completed-btn');
+
+      if (progressBar) progressBar.style.width = '100%';
+      if (badge) {
+        badge.className = 'badge badge-success';
+        badge.textContent = 'Completado';
+      }
+      if (btn) {
+        btn.textContent = '✓ Semana 6 Completada';
+        btn.disabled = true;
+        btn.style.opacity = '0.85';
+      }
+    }
+
+    function completeWeek6() {
+      AppState.markWeekCompleted(6);
+      AppState.recordQuizResult('semana6_quiz', 100, { operaciones: 85, piezas: 75 });
+      actualizarUICompletado();
+      alert('🎉 ¡Semana 6 marcada como completada en tu expediente!');
+    }
+
+    function evaluarQuizSemana6() {
+      const isPassed = QuizEngine.evaluateQuiz({
+        formId: 'quiz-form-w6',
+        feedbackId: 'quiz-feedback-w6',
+        quizId: 'semana6_quiz',
+        weekNumber: 6,
+        answers: { q1: 'B', q2: 'A' },
+        competencyGains: { operaciones: 85, piezas: 75 },
+        successMsg: '<strong>¡Excelente!</strong> Respuestas correctas. Los redondeos se agregan al final como operaciones 3D (B) y las matrices permiten modificaciones paramétricas (A).'
+      });
+
+      if (isPassed) {
+        actualizarUICompletado();
+      }
+    }
   </script>
 </body>
 </html>
