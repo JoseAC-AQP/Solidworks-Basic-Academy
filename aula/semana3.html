@@ -8,23 +8,25 @@
   <!-- Hojas de Estilo Institucionales -->
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/components.css">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
     .lesson-hero {
       background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
       color: var(--white);
-      padding: 2rem;
-      border-radius: 12px;
+      padding: 2.25rem 2rem;
+      border-radius: var(--radius-md);
       margin-bottom: 2rem;
       box-shadow: var(--shadow-md);
     }
 
     .lesson-meta-bar {
       display: flex;
-      gap: 1.5rem;
+      gap: 1.25rem;
       margin-top: 1rem;
       font-size: 0.85rem;
-      color: var(--accent);
+      color: var(--accent-light);
       flex-wrap: wrap;
     }
 
@@ -32,17 +34,26 @@
       border-left: 4px solid var(--accent);
       background: var(--bg-light);
       padding: 1.25rem;
-      border-radius: 0 8px 8px 0;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
       margin-bottom: 1.25rem;
+      position: relative;
+      padding-left: 3.5rem;
     }
 
     .step-number {
+      position: absolute;
+      left: 1rem;
+      top: 1.25rem;
+      width: 1.8rem;
+      height: 1.8rem;
+      background: var(--accent);
+      color: var(--primary-dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-weight: 800;
-      color: var(--primary);
-      text-transform: uppercase;
-      font-size: 0.8rem;
-      letter-spacing: 0.5px;
-      margin-bottom: 0.3rem;
+      font-size: 0.85rem;
     }
 
     .shortcut-tag {
@@ -59,7 +70,7 @@
     .cswa-tip-box {
       background: #EFF6FF;
       border: 1px solid #BFDBFE;
-      border-radius: 8px;
+      border-radius: var(--radius-sm);
       padding: 1.25rem;
       margin: 1.5rem 0;
     }
@@ -71,6 +82,33 @@
       color: #1E40AF;
       font-weight: 700;
       margin-bottom: 0.5rem;
+    }
+
+    .tab-container {
+      display: flex;
+      gap: 0.5rem;
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 1.5rem;
+      overflow-x: auto;
+    }
+
+    .tab-btn {
+      padding: 0.75rem 1.25rem;
+      border: none;
+      background: none;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+      font-weight: 700;
     }
 
     .relation-table {
@@ -90,21 +128,32 @@
       background: var(--bg-light);
       color: var(--primary);
     }
+
+    .quiz-option {
+      display: block;
+      padding: 0.75rem 1rem;
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .quiz-option:hover {
+      border-color: var(--accent);
+      background: #F0F9FF;
+    }
+
+    .quiz-option input {
+      margin-right: 0.75rem;
+    }
   </style>
 </head>
 <body>
 
-  <!-- Navegación Principal -->
-  <nav class="navbar">
-    <a href="../index.html" class="brand"><span>SOLIDWORKS</span> ACADEMY</a>
-    <ul class="nav-links">
-      <li><a href="../index.html">Inicio</a></li>
-      <li><a href="../dashboard.html">Dashboard</a></li>
-      <li><a href="../aula/index.html" class="active">Aula Virtual</a></li>
-      <li><a href="../cswa/index.html">CSWA Center</a></li>
-      <li><a href="../proyecto.html">Proyecto Final</a></li>
-    </ul>
-  </nav>
+  <!-- Barra de Navegación Dinámica -->
+  <header class="navbar"></header>
 
   <main class="container">
 
@@ -112,63 +161,73 @@
     <header class="lesson-hero">
       <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
         <div>
-          <span class="badge badge-info" style="margin-bottom: 0.5rem; display: inline-block;">Módulo 2: Croquis y Restricciones Geométricas</span>
+          <span class="badge badge-info" style="margin-bottom: 0.5rem; display: inline-flex; align-items: center; gap: 0.35rem;">
+            <i class="fa-solid fa-layer-group"></i> Módulo 2: Croquis y Restricciones Geométricas
+          </span>
           <h1 style="font-size: 2.2rem; color: var(--white); margin: 0.2rem 0;">Semana 3: Herramientas de Croquizado 2D y Relaciones Geométricas</h1>
           <p style="opacity: 0.9; font-size: 1rem; max-width: 700px; margin-top: 0.5rem;">
-            Aprende a dominar las entidades bidimensionales, la aplicación de cotas inteligentes y el uso explícito de relaciones geométricas.
+            Entidades bidimensionales, cotas inteligentes, relaciones geométricas explícitas y estrategias para croquis completamente definidos.
           </p>
         </div>
         <div>
-          <button id="mark-completed-btn" class="btn" style="background: var(--success);" onclick="completeWeek3()">
-            ✓ Marcar Semana como Completada
+          <button id="mark-completed-btn" class="btn" style="background: var(--success); color: white;" onclick="completeWeek3()">
+            <i class="fa-solid fa-check"></i> Marcar Semana como Completada
           </button>
         </div>
       </div>
 
       <div class="lesson-meta-bar">
-        <span>⏱️ Duración: 3 Horas Académicas</span>
-        <span>🎯 Competencia CSWA: Croquis y relaciones geométricas</span>
-        <span>📄 Tipo de Contenido: Teórico - Práctico</span>
+        <span><i class="fa-regular fa-clock"></i> Carga Horaria: 3 hrs lectivas</span>
+        <span><i class="fa-solid fa-award"></i> Competencia CSWA: Restricciones y Croquis 2D</span>
+        <span><i class="fa-solid fa-cubes"></i> Versión SW: 2021+</span>
       </div>
     </header>
 
+    <!-- Tip Oficial CSWA -->
+    <section class="cswa-tip-box" style="margin-top: 0;">
+      <div class="cswa-tip-header">
+        <i class="fa-solid fa-lightbulb text-xl"></i>
+        <span>Restricciones de Croquis en la Certificación CSWA</span>
+      </div>
+      <p style="color: #1E3A8A; font-size: 0.95rem; margin: 0;">
+        En el examen CSWA, nunca debes sobredimensionar ni colocar cotas redundantes. La clave de la rapidez consiste en combinar cotas inteligentes mínimas con relaciones geométricas automáticas y manuales (como coincidencia, tangencia e igualdad).
+      </p>
+    </section>
+
     <div class="grid-2" style="grid-template-columns: 2.5fr 1fr; gap: 1.5rem;">
 
-      <!-- Contenido Principal de la Lección -->
+      <!-- Contenido Principal -->
       <div>
 
-        <!-- Bloque 1: Entidades 2D y Cotas Inteligentes -->
-        <article class="card">
-          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">1. Entidades de Croquizado 2D y Cotas Inteligentes</h2>
-          <p style="line-height: 1.6; color: var(--text-dark); margin-bottom: 1rem;">
-            Las entidades de croquis son los elementos vectoriales básicos (líneas, círculos, arcos, rectángulos y polígonos) que componen cualquier contorno 2D. Para controlar la geometría de estas entidades se utiliza la herramienta <strong>Cota Inteligente (Smart Dimension)</strong>.
+        <!-- Pestañas de Navegación Didáctica -->
+        <div class="tab-container">
+          <button class="tab-btn active" onclick="switchTab('fundamento')"><i class="fa-solid fa-book-open mr-1"></i> 1. Fundamento</button>
+          <button class="tab-btn" onclick="switchTab('procedimiento')"><i class="fa-solid fa-list-check mr-1"></i> 2. Procedimiento</button>
+          <button class="tab-btn" onclick="switchTab('practica')"><i class="fa-solid fa-dumbbell mr-1"></i> 3. Práctica & Reto</button>
+          <button class="tab-btn" onclick="switchTab('evaluacion')"><i class="fa-solid fa-pen-to-square mr-1"></i> 4. Evaluación</button>
+        </div>
+
+        <!-- TAB 1: FUNDAMENTO CONCEPTUAL -->
+        <article id="tab-fundamento" class="card">
+          <h2 class="card-title"><i class="fa-solid fa-bullseye text-swCyan"></i> 1. Resultado de Aprendizaje</h2>
+          <p>
+            Al finalizar esta sesión, serás capaz de <strong>crear y restringir geometrías bidimensionales complejas</strong> en SOLIDWORKS, utilizando cotas inteligentes y asignando relaciones geométricas de tangencia, concentricidad e igualdad mediante la selección múltiple con la tecla <span class="shortcut-tag">Ctrl</span>.
           </p>
 
-          <div class="cswa-tip-box">
-            <div class="cswa-tip-header">
-              <span>💡 Requisito para Examen CSWA</span>
-            </div>
-            <p style="font-size: 0.9rem; color: #1E3A8A; margin: 0;">
-              En el examen CSWA, nunca debes colocar cotas redundantes o sobredefinir el croquis. Utiliza cotas inteligentes solo donde sea necesario y complementa la geometría mediante relaciones geométricas automáticas y manuales.
-            </p>
-          </div>
+          <h2 class="card-title" style="margin-top: 1.5rem;"><i class="fa-solid fa-vector-square text-swCyan"></i> 2. Entidades 2D y Cotas Inteligentes</h2>
+          <p>
+            Las entidades de croquis (líneas, círculos, arcos, rectángulos y ranuras) son los bloques vectoriales base del diseño CAD. Para controlar su tamaño y posición relativa se utiliza la herramienta <strong>Cota Inteligente (Smart Dimension)</strong>.
+          </p>
 
-          <h3 style="font-size: 1.1rem; color: var(--primary); margin: 1.25rem 0 0.5rem 0;">Atajos Rápidos de Croquizado:</h3>
-          <ul style="margin-left: 1.25rem; font-size: 0.95rem; color: var(--text-dark); line-height: 1.6;">
-            <li><span class="shortcut-tag">S</span> Abre la rueda o menú rápido de herramientas contextuales de croquis.</li>
+          <h3 style="font-size: 1.05rem; color: var(--primary); margin: 1.25rem 0 0.5rem 0;">Atajos Rápidos de Croquizado:</h3>
+          <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem; font-size: 0.95rem;" class="space-y">
+            <li><span class="shortcut-tag">S</span> Abre el menú contextual rápido de herramientas de croquis.</li>
             <li><span class="shortcut-tag">L</span> Activa la herramienta Línea.</li>
             <li><span class="shortcut-tag">C</span> Activa la herramienta Círculo.</li>
-            <li><span class="shortcut-tag">D</span> Coloca el cursor directamente en Cota Inteligente.</li>
+            <li><span class="shortcut-tag">D</span> Activa inmediatamente Cota Inteligente.</li>
           </ul>
-        </article>
 
-        <!-- Bloque 2: Tabla de Relaciones Geométricas Explicitas -->
-        <article class="card">
-          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">2. Matriz de Relaciones Geométricas Fundamentales</h2>
-          <p style="line-height: 1.6; color: var(--text-dark); margin-bottom: 1rem;">
-            Las relaciones geométricas definen el comportamiento posicional relativo entre dos o más entidades sin necesidad de ingresar un número de dimensión.
-          </p>
-
+          <h2 class="card-title" style="margin-top: 1.5rem;"><i class="fa-solid fa-diagram-next text-swCyan"></i> 3. Matriz de Relaciones Geométricas Fundamentales</h2>
           <table class="relation-table">
             <thead>
               <tr>
@@ -181,145 +240,156 @@
               <tr>
                 <td><strong>Coincidente</strong></td>
                 <td>Punto + Línea / Punto + Origen</td>
-                <td>Restringe el punto para que permanezca sobre la línea o en el Origen $(0,0)$.</td>
+                <td>Restringe el punto para que permanezca sobre la entidad o el Origen $(0,0)$.</td>
               </tr>
               <tr>
                 <td><strong>Horizontal / Vertical</strong></td>
-                <td>Una o varias líneas / Puntos</td>
-                <td>Alinea la línea o la trayectoria entre puntos según los ejes del plano.</td>
+                <td>Líneas / Par de Puntos</td>
+                <td>Alinea entidades según los ejes principales del plano.</td>
               </tr>
               <tr>
                 <td><strong>Tangente</strong></td>
                 <td>Arco/Círculo + Línea/Arco</td>
-                <td>Garantiza una transición suave sin cambios bruscos de curvatura.</td>
+                <td>Garantiza una transición suave sin saltos de curvatura.</td>
               </tr>
               <tr>
                 <td><strong>Concéntrica</strong></td>
                 <td>Dos o más Arcos/Círculos</td>
-                <td>Obliga a que compartan exactamente el mismo centro geométrico.</td>
+                <td>Obliga a compartir exactamente el mismo punto central.</td>
               </tr>
               <tr>
                 <td><strong>Igual</strong></td>
-                <td>Líneas / Círculos</td>
-                <td>Iguala la longitud de líneas o el radio/diámetro entre círculos.</td>
+                <td>Dos o más Líneas / Círculos</td>
+                <td>Iguala la longitud de líneas o el diámetro entre círculos.</td>
               </tr>
               <tr>
                 <td><strong>Colineal</strong></td>
                 <td>Dos o más Líneas</td>
-                <td>Hace que ambas líneas compartan la misma recta infinita subyacente.</td>
+                <td>Alinea múltiples segmentos sobre una misma recta subyacente.</td>
               </tr>
             </tbody>
           </table>
 
-          <!-- Cad Viewport Interactivo -->
           <div class="cad-viewport" style="margin-top: 1.5rem;">
-            <div style="text-align: center;">
-              <div style="font-size: 3rem; margin-bottom: 0.5rem;">✏️🎯</div>
-              <p style="font-size: 0.95rem; font-weight: 700; color: var(--white);">Demostración: Tangencia y Coincidencia</p>
-              <p style="font-size: 0.8rem; opacity: 0.8;">Selección Múltiple: Mantener presionada la tecla Ctrl</p>
-            </div>
-            <div class="cad-viewport-controls">
-              <button type="button" class="cad-btn-icon" onclick="alert('Relación Tangente y Concéntrica aplicada correctamente.')">⚡ Aplicar Tangencia</button>
-            </div>
+            <svg viewBox="0 0 600 240" style="width: 100%; height: 100%;">
+              <rect x="0" y="0" width="600" height="240" fill="#0f172a"/>
+              <!-- Arc 1 -->
+              <path d="M 180 160 A 40 40 0 0 1 180 80" fill="none" stroke="#00B3E0" stroke-width="3"/>
+              <!-- Tangent Line -->
+              <line x1="180" y1="80" x2="380" y2="80" stroke="#00B3E0" stroke-width="3"/>
+              <!-- Arc 2 -->
+              <path d="M 380 80 A 40 40 0 0 1 380 160" fill="none" stroke="#00B3E0" stroke-width="3"/>
+              <!-- Concentric Circles -->
+              <circle cx="180" cy="120" r="18" fill="none" stroke="#38bdf8" stroke-width="2" stroke-dasharray="4"/>
+              <circle cx="380" cy="120" r="18" fill="none" stroke="#38bdf8" stroke-width="2" stroke-dasharray="4"/>
+              <!-- Origin Circle -->
+              <circle cx="180" cy="120" r="4" fill="#ef4444"/>
+              <text x="160" y="142" fill="#ef4444" font-size="10" font-weight="bold">(0,0,0)</text>
+              <text x="300" y="50" fill="#22c55e" font-size="12" font-weight="bold" text-anchor="middle">RELACIÓN DE TANGENCIA Y CONCENTRICIDAD</text>
+            </svg>
           </div>
         </article>
 
-        <!-- Bloque 3: Paso a Paso Práctico -->
-        <article class="card">
-          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">3. Guía Práctica Paso a Paso: Placa de Base Ranurada</h2>
-          <p style="font-size: 0.95rem; color: var(--text-dark); margin-bottom: 1rem;">
-            Abre SOLIDWORKS y ejecuta la siguiente secuencia para construir un croquis paramétrico:
-          </p>
+        <!-- TAB 2: PROCEDIMIENTO PASO A PASO -->
+        <article id="tab-procedimiento" class="card" style="display: none;">
+          <h2 class="card-title"><i class="fa-solid fa-list-check text-swCyan"></i> Procedimiento Guiado Paso a Paso</h2>
+          <p style="margin-bottom: 1.5rem;">Ejecuta las siguientes acciones en tu software SOLIDWORKS:</p>
 
           <div class="step-box">
-            <div class="step-number">Paso 1</div>
-            <h4 style="margin: 0 0 0.3rem 0; color: var(--primary);">Creación del Perfil Exterior</h4>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">
-              Inicia un croquis en el plano <strong>Alzado</strong>. Dibuja un rectángulo central con el origen en el punto medio o traza un contorno continuo usando líneas y un arco tangente.
-            </p>
+            <div class="step-number">1</div>
+            <h4 style="color: var(--primary);">Dibujar el Perfil Inicial</h4>
+            <p>Abre un croquis en el plano <strong>Alzado</strong>. Dibuja un rectángulo central o traza un contorno continuo de líneas y arcos tangentes.</p>
           </div>
 
           <div class="step-box">
-            <div class="step-number">Paso 2</div>
-            <h4 style="margin: 0 0 0.3rem 0; color: var(--primary);">Aplicación de Relaciones Múltiples con Ctrl</h4>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">
-              Selecciona dos arcos laterales manteniendo presionada la tecla <span class="shortcut-tag">Ctrl</span> y asigna la relación <strong>Igual</strong>. Luego haz coincidir el centro del arco con el Origen.
-            </p>
+            <div class="step-number">2</div>
+            <h4 style="color: var(--primary);">Aplicar Relaciones con Selección Múltiple</h4>
+            <p>Selecciona los dos arcos laterales manteniendo presionada la tecla <span class="shortcut-tag">Ctrl</span>. En el PropertyManager, haz clic en la relación <strong>Igual</strong>.</p>
           </div>
 
           <div class="step-box">
-            <div class="step-number">Paso 3</div>
-            <h4 style="margin: 0 0 0.3rem 0; color: var(--primary);">Acotado Inteligente</h4>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">
-              Acota la distancia entre centros a $100\text{ mm}$ y el radio exterior a $R20\text{ mm}$. Confirma que las líneas cambien de color azul a <strong>Negro</strong>.
-            </p>
+            <div class="step-number">3</div>
+            <h4 style="color: var(--primary);">Acotar y Verificar Estado Completamente Definido</h4>
+            <p>Presiona <span class="shortcut-tag">D</span> y asigna la distancia entre centros ($100\text{ mm}$) y el radio ($R20\text{ mm}$). Verifica que todas las líneas pasen de azul a <strong>Negro</strong>.</p>
           </div>
         </article>
+
+        <!-- TAB 3: PRÁCTICA & RETO -->
+        <article id="tab-practica" class="card" style="display: none;">
+          <h2 class="card-title"><i class="fa-solid fa-dumbbell text-swCyan"></i> Ejercicio Guiado & Reto Tipo CSWA</h2>
+          <p style="margin-bottom: 1rem;">Completa el siguiente ejercicio práctico en SOLIDWORKS:</p>
+
+          <div style="background: var(--bg-light); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 1.25rem;">
+            <h4 style="color: var(--primary);"><i class="fa-solid fa-flag-checkered text-swCyan"></i> Reto: Placa de Base Ranurada (15 Minutos)</h4>
+            <ol style="margin-left: 1.2rem; margin-top: 0.5rem; font-size: 0.95rem; line-height: 1.7;">
+              <li>Crea un croquis en plano Alzado con unidades <strong>MMGS</strong>.</li>
+              <li>Dibuja dos círculos de $\emptyset 20\text{ mm}$ distanciados a $100\text{ mm}$ en horizontal.</li>
+              <li>Une ambos círculos con líneas tangentes y recorta los segmentos interiores.</li>
+              <li>Confirma que el croquis esté en estado <strong>Completamente Definido</strong>.</li>
+            </ol>
+          </div>
+        </article>
+
+        <!-- TAB 4: EVALUACIÓN Y CUESTIONARIO -->
+        <article id="tab-evaluacion" class="card" style="display: none;">
+          <h2 class="card-title"><i class="fa-solid fa-pen-to-square text-swCyan"></i> Cuestionario de Comprobación - Semana 3</h2>
+          <p style="margin-bottom: 1.5rem;">Responde a las siguientes preguntas formativas para validar tu aprendizaje:</p>
+
+          <form id="quiz-form-w3">
+            <div style="margin-bottom: 1.5rem;">
+              <p style="font-weight: 600; margin-bottom: 0.75rem;">1. ¿Qué tecla debes mantener presionada para seleccionar múltiples entidades y aplicarles una relación geométrica?</p>
+              <label class="quiz-option"><input type="radio" name="q1" value="A"> A) Alt</label>
+              <label class="quiz-option"><input type="radio" name="q1" value="B"> B) Ctrl</label>
+              <label class="quiz-option"><input type="radio" name="q1" value="C"> C) Shift</label>
+            </div>
+
+            <div style="margin-bottom: 1.5rem;">
+              <p style="font-weight: 600; margin-bottom: 0.75rem;">2. ¿Qué relación de posición garantiza que dos arcos o círculos compartan exactamente el mismo punto central?</p>
+              <label class="quiz-option"><input type="radio" name="q2" value="A"> A) Concéntrica</label>
+              <label class="quiz-option"><input type="radio" name="q2" value="B"> B) Tangente</label>
+              <label class="quiz-option"><input type="radio" name="q2" value="C"> C) Colineal</label>
+            </div>
+
+            <button type="button" class="btn" onclick="evaluarQuizSemana3()"><i class="fa-solid fa-check"></i> Validar Respuestas y Guardar Avance</button>
+            <div id="quiz-feedback-w3" style="margin-top: 1rem; display: none;"></div>
+          </form>
+        </article>
+
+        <!-- Navegación entre Semanas -->
+        <div style="display: flex; justify-content: space-between; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
+          <a href="semana2.html" class="btn btn-outline"><i class="fa-solid fa-arrow-left"></i> Semana 2</a>
+          <a href="semana4.html" class="btn">Semana 4 <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
 
       </div>
 
-      <!-- Barra Lateral: Progreso y Cuestionario de Validación -->
-      <aside>
-
-        <!-- Estado de la Lección -->
+      <!-- Barra Lateral (Sidebar) -->
+      <aside class="space-y">
         <div class="card">
-          <h3 class="card-title" style="font-size: 1.1rem; margin-bottom: 0.75rem;">📋 Resumen de la Lección</h3>
-          <ul style="list-style: none; font-size: 0.85rem; color: var(--text-muted);" class="space-y">
-            <li style="display: flex; align-items: center; gap: 0.5rem;">
-              <span>✅</span> Entidades de Croquis 2D
-            </li>
-            <li style="display: flex; align-items: center; gap: 0.5rem;">
-              <span>✅</span> Uso de Cotas Inteligentes
-            </li>
-            <li style="display: flex; align-items: center; gap: 0.5rem;">
-              <span>✅</span> Relaciones de Tangencia e Igualdad
-            </li>
-            <li style="display: flex; align-items: center; gap: 0.5rem;">
-              <span>✅</span> Selección múltiple con <span class="shortcut-tag">Ctrl</span>
-            </li>
+          <h3 class="card-title" style="font-size: 1rem;"><i class="fa-solid fa-chart-line text-swCyan"></i> Estado de la Lección</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">Progreso registrado en esta semana:</p>
+          <div class="progress-container"><div id="week-progress-bar" class="progress-bar" style="width: 0%;"></div></div>
+          <span id="week-status-badge" class="badge badge-warning" style="margin-top: 0.5rem;">Pendiente</span>
+        </div>
+
+        <div class="card">
+          <h3 class="card-title" style="font-size: 1rem;"><i class="fa-solid fa-folder-open text-swCyan"></i> Recursos Descargables</h3>
+          <ul style="list-style: none; font-size: 0.85rem;" class="space-y">
+            <li><a href="#" onclick="alert('Descargando Guía PDF de Relaciones Geométricas'); return false;"><i class="fa-solid fa-file-pdf text-red-500 mr-1"></i> Guía Relaciones Geométricas</a></li>
+            <li><a href="#" onclick="alert('Descargando Plano de Práctica 2D'); return false;"><i class="fa-solid fa-drafting-compass text-swCyan mr-1"></i> Plano Placa Base (.PDF)</a></li>
           </ul>
         </div>
 
-        <!-- Cuestionario Rápido de Validación -->
-        <div class="card">
-          <h3 class="card-title" style="font-size: 1.1rem; margin-bottom: 0.75rem;">📝 Comprobación de Lectura</h3>
-          <form id="week3-quiz-form" onsubmit="evaluateWeek3Quiz(event)">
-            <p style="font-size: 0.85rem; font-weight: 600; color: var(--primary); margin-bottom: 0.5rem;">
-              1. ¿Qué tecla se debe mantener presionada para seleccionar múltiples entidades y aplicar una relación geométrica?
-            </p>
-            <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.85rem; margin-bottom: 1rem;">
-              <label><input type="radio" name="w3q1" value="A" required> Alt</label>
-              <label><input type="radio" name="w3q1" value="B"> Ctrl</label>
-              <label><input type="radio" name="w3q1" value="C"> Shift</label>
-            </div>
-
-            <p style="font-size: 0.85rem; font-weight: 600; color: var(--primary); margin-bottom: 0.5rem;">
-              2. ¿Qué relación garantiza que dos círculos compartan exactamente el mismo punto central?
-            </p>
-            <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.85rem; margin-bottom: 1.25rem;">
-              <label><input type="radio" name="w3q2" value="A" required> Concéntrica</label>
-              <label><input type="radio" name="w3q2" value="B"> Tangente</label>
-              <label><input type="radio" name="w3q2" value="C"> Colineal</label>
-            </div>
-
-            <button type="submit" class="btn btn-outline" style="width: 100%; font-size: 0.85rem;">Validar Respuestas</button>
-          </form>
+        <div class="card" style="background: var(--primary); color: var(--white);">
+          <h3 style="color: var(--accent); font-size: 1rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-award mr-1"></i> CSWA Practice Center</h3>
+          <p style="font-size: 0.85rem; opacity: 0.9; margin-bottom: 1rem;">
+            Evalúa tu velocidad de croquizado con preguntas tipo certificación.
+          </p>
+          <a href="../cswa/index.html" class="btn" style="width: 100%; text-align: center; font-size: 0.85rem;">Ir al Centro CSWA</a>
         </div>
-
-        <!-- Navegación entre Semanas -->
-        <div class="card" style="text-align: center;">
-          <h4 style="font-size: 0.9rem; color: var(--primary); margin-bottom: 0.75rem;">Navegación Curricular</h4>
-          <div style="display: flex; justify-content: space-between; gap: 0.5rem;">
-            <a href="semana2.html" class="btn btn-outline" style="font-size: 0.8rem; flex: 1;">⬅️ Sem. 2</a>
-            <a href="index.html" class="btn btn-outline" style="font-size: 0.8rem; flex: 1;">Índice</a>
-            <a href="semana4.html" class="btn" style="font-size: 0.8rem; flex: 1;">Sem. 4 ➡️</a>
-          </div>
-        </div>
-
       </aside>
 
     </div>
-
   </main>
 
   <footer>
@@ -328,54 +398,65 @@
 
   <!-- Scripts de la Aplicación -->
   <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/cswa.js"></script>
+  <script src="../assets/js/quiz.js"></script>
+  <script src="../assets/js/navbar.js"></script>
+
   <script>
-    function completeWeek3() {
-      AppState.markWeekCompleted(3);
-      
-      const btn = document.getElementById('mark-completed-btn');
-      if (btn) {
-        btn.textContent = '✓ Semana 3 Completada';
-        btn.disabled = true;
-        btn.style.opacity = '0.8';
-      }
-      alert('🎉 ¡Semana 3 registrada como completada en tu expediente!');
-    }
-
-    function evaluateWeek3Quiz(e) {
-      e.preventDefault();
-      const form = document.getElementById('week3-quiz-form');
-      const formData = new FormData(form);
-
-      const q1 = formData.get('w3q1');
-      const q2 = formData.get('w3q2');
-
-      if (q1 === 'B' && q2 === 'A') {
-        alert('🎯 ¡Excelente! Respuestas correctas. Has demostrado dominio sobre relaciones geométricas.');
-        AppState.recordQuizResult('semana3_quiz', 100, { croquis: 75, piezas: 65 });
-        completeWeek3();
-      } else {
-        alert('⚠️ Hay respuestas incorrectas. Revisa la selección múltiple con Ctrl y el concepto de concentricidad.');
-      }
-    }
-
-    // Verificar si ya fue completada al cargar
     document.addEventListener('DOMContentLoaded', () => {
       const progress = AppState.getUserProgress();
       if (progress.completedWeeks && progress.completedWeeks.includes(3)) {
-        const btn = document.getElementById('mark-completed-btn');
-        if (btn) {
-          btn.textContent = '✓ Semana 3 Completada';
-          btn.disabled = true;
-          btn.style.opacity = '0.8';
-        }
+        actualizarUICompletado();
       }
     });
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('article[id^="tab-"]').forEach(content => content.style.display = 'none');
+
+      event.currentTarget.classList.add('active');
+      document.getElementById('tab-' + tabId).style.display = 'block';
+    }
+
+    function actualizarUICompletado() {
+      const progressBar = document.getElementById('week-progress-bar');
+      const badge = document.getElementById('week-status-badge');
+      const btn = document.getElementById('mark-completed-btn');
+
+      if (progressBar) progressBar.style.width = '100%';
+      if (badge) {
+        badge.className = 'badge badge-success';
+        badge.textContent = 'Completado';
+      }
+      if (btn) {
+        btn.textContent = '✓ Semana 3 Completada';
+        btn.disabled = true;
+        btn.style.opacity = '0.85';
+      }
+    }
+
+    function completeWeek3() {
+      AppState.markWeekCompleted(3);
+      AppState.recordQuizResult('semana3_quiz', 100, { croquis: 75, piezas: 65 });
+      actualizarUICompletado();
+      alert('🎉 ¡Semana 3 marcada como completada en tu expediente!');
+    }
+
+    function evaluarQuizSemana3() {
+      const isPassed = QuizEngine.evaluateQuiz({
+        formId: 'quiz-form-w3',
+        feedbackId: 'quiz-feedback-w3',
+        quizId: 'semana3_quiz',
+        weekNumber: 3,
+        answers: { q1: 'B', q2: 'A' },
+        competencyGains: { croquis: 75, piezas: 65 },
+        successMsg: '<strong>¡Excelente!</strong> Respuestas correctas. La tecla para selección múltiple es Ctrl (B) y compartir centro es la relación Concéntrica (A).'
+      });
+
+      if (isPassed) {
+        actualizarUICompletado();
+      }
+    }
   </script>
 </body>
 </html>
-```
-
-### Summary of `aula/semana3.html`:
-- Covers 2D sketching tools, smart dimensions, keyboard shortcuts (`S`, `L`, `C`, `D`), and explicit geometric relations (Concentric, Tangent, Equal, Collinear, Coincident).
-- Includes a reference matrix of geometric relations and step-by-step practical guidance for fully defined 2D sketches.
-- Integrates self-correcting quiz logic linked to `AppState` in `LocalStorage` (`app.js`).
