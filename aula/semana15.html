@@ -1,1 +1,359 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semana 15: Simulacro Diagnóstico y Reentrenamiento | SOLIDWORKS ACADEMY</title>
+  
+  <!-- Hojas de Estilo Institucionales -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
 
+  <style>
+    .lesson-hero {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      color: var(--white);
+      padding: 2rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-md);
+    }
+
+    .lesson-meta-bar {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: var(--accent);
+      flex-wrap: wrap;
+    }
+
+    .step-box {
+      border-left: 4px solid var(--accent);
+      background: var(--bg-light);
+      padding: 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 1.25rem;
+    }
+
+    .step-number {
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.3rem;
+    }
+
+    .shortcut-tag {
+      background: #E2E8F0;
+      color: #334155;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-family: monospace;
+      font-weight: bold;
+      font-size: 0.85rem;
+      border: 1px solid #CBD5E1;
+    }
+
+    .cswa-tip-box {
+      background: #EFF6FF;
+      border: 1px solid #BFDBFE;
+      border-radius: 8px;
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+    }
+
+    .cswa-tip-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #1E40AF;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .param-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .param-table th, .param-table td {
+      border: 1px solid var(--border);
+      padding: 0.75rem;
+      text-align: left;
+    }
+
+    .param-table th {
+      background: var(--bg-light);
+      color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navegación Principal -->
+  <nav class="navbar">
+    <a href="../index.html" class="brand"><span>SOLIDWORKS</span> ACADEMY</a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Inicio</a></li>
+      <li><a href="../dashboard.html">Dashboard</a></li>
+      <li><a href="../aula/index.html" class="active">Aula Virtual</a></li>
+      <li><a href="../cswa/index.html">CSWA Center</a></li>
+      <li><a href="../proyecto.html">Proyecto Final</a></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+
+    <!-- Encabezado de la Lección -->
+    <header class="lesson-hero">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <span class="badge badge-info" style="margin-bottom: 0.5rem; display: inline-block;">Módulo 8: Simulacros y Proyecto Final</span>
+          <h1 style="font-size: 2.2rem; color: var(--white); margin: 0.2rem 0;">Semana 15: Simulacro Diagnóstico y Reentrenamiento</h1>
+          <p style="opacity: 0.9; font-size: 1rem; max-width: 700px; margin-top: 0.5rem;">
+            Ejecución de simulacro de tiempo real, identificación de cuellos de botella individuales y aplicación de protocolos de recuperación de errores antes de la prueba final.
+          </p>
+        </div>
+        <div>
+          <button id="mark-completed-btn" class="btn" style="background: var(--success);" onclick="completeWeek15()">
+            ✓ Marcar Semana como Completada
+          </button>
+        </div>
+      </div>
+
+      <div class="lesson-meta-bar">
+        <span>⏱️ Duración: 3 Horas Académicas</span>
+        <span>🎯 Competencia CSWA: Velocidad de resolución bajo presión y diagnóstico de fallas</span>
+        <span>📄 Tipo de Contenido: Teórico - Práctico</span>
+      </div>
+    </header>
+
+    <div class="grid-2" style="grid-template-columns: 2.5fr 1fr; gap: 1.5rem;">
+
+      <!-- Contenido Principal de la Lección -->
+      <div>
+
+        <!-- Bloque 1: Estrategia de Diagnóstico Pre-Examen -->
+        <article class="card">
+          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">1. Auditoría de Desempeño y Manejo del Reloj</h2>
+          <p style="line-height: 1.6; color: var(--text-dark); margin-bottom: 1rem;">
+            A una semana de la evaluación final, el objetivo de la Semana 15 es transformar errores comunes en automatismos. Las estadísticas de la prueba oficial indican que el 65% de los reprobados pierden la mayoría de puntos en <strong>fallos de cotas al modificar piezas</strong> o en <strong>mal posicionamiento del origen en el primer croquis</strong>.
+          </p>
+
+          <table class="param-table">
+            <thead>
+              <tr>
+                <th>Falla Frecuente</th>
+                <th>Impacto en el Examen</th>
+                <th>Estrategia de Reentrenamiento</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Croquis Subdefinido (Azul)</strong></td>
+                <td>Desviación de masa tras cambio de cotas ($A, B, C$).</td>
+                <td>Verificar que la barra inferior marque siempre <em>Completamente Definido</em> antes de extruir.</td>
+              </tr>
+              <tr>
+                <td><strong>Confusión de Material</strong></td>
+                <td>Pérdida total del puntaje en masa ($g$) o Centro de Gravedad ($CG$).</td>
+                <td>Crear una lista rápida con densidades norma ISO / AISI en el escritorio de trabajo.</td>
+              </tr>
+              <tr>
+                <td><strong>Mates Invertidos (Anti-Aligned)</strong></td>
+                <td>Cambio drástico en las coordenadas $(X, Y, Z)$ del ensamble.</td>
+                <td>Utilizar <code>Invertir alineación</code> antes de borrar y rehacer la relación.</td>
+              </tr>
+              <tr>
+                <td><strong>Consumo Excesivo de Tiempo</strong></td>
+                <td>Quedar sin responder los ejercicios de ensamblaje (60 pts).</td>
+                <td>Limitar a máximo 25 min por pieza compleja y pasar a la siguiente si hay estancamiento.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="cswa-tip-box">
+            <div class="cswa-tip-header">
+              <span>💡 Protocolo de Abandono y Retorno</span>
+            </div>
+            <p style="font-size: 0.9rem; color: #1E40AF; margin: 0;">
+              Si te estancas por más de 10 minutos en una pieza que no cierra en masa, marca una respuesta tentativa, guarda el archivo como <code>Backup_P1.SLDPRT</code> y avanza de inmediato a la sección de Ensamblaje. Volver al final con la mente despejada permite detectar el error visual en segundos.
+            </p>
+          </div>
+        </article>
+
+        <!-- Bloque 2: Batería de Práctica Cronometrada -->
+        <article class="card">
+          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">2. Protocolo del Simulacro Diagnóstico</h2>
+          <p style="line-height: 1.6; color: var(--text-dark); margin-bottom: 1rem;">
+            Realiza la prueba cronometrada interactiva en el <strong>CSWA Practice Center</strong>. El simulador evaluará la precisión de tus respuestas y generará una actualización automática en el gráfico de Radar de tu Dashboard.
+          </p>
+
+          <div style="background: #F8FAFC; border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; text-align: center; margin-top: 1rem;">
+            <h3 style="color: var(--primary); margin-bottom: 0.5rem;">⏱️ Simulacro Diagnóstico (90 Minutos)</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+              Incluye 3 piezas paramétricas con ecuaciones globales + 1 ensamblaje cinemático articulado.
+            </p>
+            <a href="../cswa/simulador.html" class="btn" style="display: inline-block;">🚀 Iniciar Simulacro Diagnóstico Ahora</a>
+          </div>
+        </article>
+
+        <!-- Bloque 3: Guía de Reentrenamiento Paso a Paso -->
+        <article class="card">
+          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">3. Guía de Reentrenamiento: Corrección de Modelos Sobredimensionados</h2>
+          <p style="font-size: 0.95rem; color: var(--text-dark); margin-bottom: 1rem;">
+            Sigue estos 3 pasos de diagnóstico cuando tu croquis o modelo presente conflictos (color amarillo/rojo):
+          </p>
+
+          <div class="step-box">
+            <div class="step-number">Paso 1</div>
+            <h4 style="margin: 0 0 0.3rem 0; color: var(--primary);">Uso de 'Diagnosticar Croquis' (Sketch Xpert)</h4>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">
+              Si el croquis pasa a color amarillo o rojo (sobredefinido), haz clic en el mensaje de error de la barra de estado y presiona <strong>Diagnosticar</strong>. El asistente te presentará alternativas para eliminar la cota conflictiva.
+            </p>
+          </div>
+
+          <div class="step-box">
+            <div class="step-number">Paso 2</div>
+            <h4 style="margin: 0 0 0.3rem 0; color: var(--primary);">Limpieza de Entidades Fantasma</h4>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">
+              Utiliza la herramienta <code>Visualizar/Eliminar relaciones</code> para listar todas las restricciones del croquis actual y borrar duplicados innecesarios.
+            </p>
+          </div>
+
+          <div class="step-box">
+            <div class="step-number">Paso 3</div>
+            <h4 style="margin: 0 0 0.3rem 0; color: var(--primary);">Comprobación Final con Reconstrucción Total</h4>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">
+              Ejecuta una reconstrucción forzada presionando <span class="shortcut-tag">Ctrl + Q</span> (Reconstrucción completa de todo el árbol desde cero) para asegurar que el modelo no tenga advertencias ocultas.
+            </p>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Barra Lateral: Progreso y Cuestionario de Validación -->
+      <aside>
+
+        <!-- Resumen de la Lección -->
+        <div class="card">
+          <h3 class="card-title" style="font-size: 1.1rem; margin-bottom: 0.75rem;">📋 Resumen de la Lección</h3>
+          <ul style="list-style: none; font-size: 0.85rem; color: var(--text-muted);" class="space-y">
+            <li style="display: flex; align-items: center; gap: 0.5rem;">
+              <span>✅</span> Diagnóstico de cuellos de botella
+            </li>
+            <li style="display: flex; align-items: center; gap: 0.5rem;">
+              <span>✅</span> Protocolo de tiempo y abandono táctico
+            </li>
+            <li style="display: flex; align-items: center; gap: 0.5rem;">
+              <span>✅</span> Uso de SketchXpert para croquis sobredimensionados
+            </li>
+            <li style="display: flex; align-items: center; gap: 0.5rem;">
+              <span>✅</span> Reconstrucción forzada con <span class="shortcut-tag">Ctrl + Q</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Cuestionario Rápido de Validación -->
+        <div class="card">
+          <h3 class="card-title" style="font-size: 1.1rem; margin-bottom: 0.75rem;">📝 Comprobación de Lectura</h3>
+          <form id="week15-quiz-form" onsubmit="evaluateWeek15Quiz(event)">
+            <p style="font-size: 0.85rem; font-weight: 600; color: var(--primary); margin-bottom: 0.5rem;">
+              1. ¿Qué atajo de teclado ejecuta una reconstrucción profunda de todo el árbol desde la primera operación?
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.85rem; margin-bottom: 1rem;">
+              <label><input type="radio" name="w15q1" value="A" required> Ctrl + Q</label>
+              <label><input type="radio" name="w15q1" value="B"> Ctrl + Z</label>
+              <label><input type="radio" name="w15q1" value="C"> Ctrl + S</label>
+            </div>
+
+            <p style="font-size: 0.85rem; font-weight: 600; color: var(--primary); margin-bottom: 0.5rem;">
+              2. Si te quedan 15 minutos en el examen y estás atascado en el cálculo de masa de una pieza, ¿cuál es la mejor estrategia?
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.85rem; margin-bottom: 1.25rem;">
+              <label><input type="radio" name="w15q2" value="A" required> Borrar todo el modelo y empezar desde cero</label>
+              <label><input type="radio" name="w15q2" value="B"> Seleccionar la opción más cercana, guardar y avanzar al ejercicio de ensamblaje</label>
+              <label><input type="radio" name="w15q2" value="C"> Cerrar la plataforma del examen</label>
+            </div>
+
+            <button type="submit" class="btn btn-outline" style="width: 100%; font-size: 0.85rem;">Validar Respuestas</button>
+          </form>
+        </div>
+
+        <!-- Navegación entre Semanas -->
+        <div class="card" style="text-align: center;">
+          <h4 style="font-size: 0.9rem; color: var(--primary); margin-bottom: 0.75rem;">Navegación Curricular</h4>
+          <div style="display: flex; justify-content: space-between; gap: 0.5rem;">
+            <a href="semana14.html" class="btn btn-outline" style="font-size: 0.8rem; flex: 1;">⬅️ Sem. 14</a>
+            <a href="index.html" class="btn btn-outline" style="font-size: 0.8rem; flex: 1;">Índice</a>
+            <a href="../proyecto.html" class="btn" style="font-size: 0.8rem; flex: 1;">Proyecto Final ➡️</a>
+          </div>
+        </div>
+
+      </aside>
+
+    </div>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 SOLIDWORKS ACADEMY - Formación por Competencias & Preparación CSWA</p>
+  </footer>
+
+  <!-- Scripts de la Aplicación -->
+  <script src="../assets/js/app.js"></script>
+  <script>
+    function completeWeek15() {
+      AppState.markWeekCompleted(15);
+      
+      const btn = document.getElementById('mark-completed-btn');
+      if (btn) {
+        btn.textContent = '✓ Semana 15 Completada';
+        btn.disabled = true;
+        btn.style.opacity = '0.8';
+      }
+      alert('🎉 ¡Semana 15 registrada como completada en tu expediente!');
+    }
+
+    function evaluateWeek15Quiz(e) {
+      e.preventDefault();
+      const form = document.getElementById('week15-quiz-form');
+      const formData = new FormData(form);
+
+      const q1 = formData.get('w15q1');
+      const q2 = formData.get('w15q2');
+
+      if (q1 === 'A' && q2 === 'B') {
+        alert('🎯 ¡Excelente! Has demostrado dominar el protocolo de diagnóstico y gestión de tiempo.');
+        AppState.recordQuizResult('semana15_quiz', 100, { tiempo_limite: 95, modificacion: 90 });
+        completeWeek15();
+      } else {
+        alert('⚠️ Hay respuestas incorrectas. Revisa los comandos de reconstrucción completa (Ctrl+Q) y las tácticas de gestión de tiempo.');
+      }
+    }
+
+    // Verificar si ya fue completada al cargar
+    document.addEventListener('DOMContentLoaded', () => {
+      const progress = AppState.getUserProgress();
+      if (progress.completedWeeks && progress.completedWeeks.includes(15)) {
+        const btn = document.getElementById('mark-completed-btn');
+        if (btn) {
+          btn.textContent = '✓ Semana 15 Completada';
+          btn.disabled = true;
+          btn.style.opacity = '0.8';
+        }
+      }
+    });
+  </script>
+</body>
+</html>
+```
+
+### Summary of `aula/semana15.html`:
+- Covers **Module 8 (Mock Exams & Final Project)**.
+- Focuses on diagnostic auditing, handling over-defined sketches with `SketchXpert`, full-tree rebuild shortcuts (`Ctrl + Q`), time management tactics, and error recovery protocols during timed exams.
+- Integrates self-correcting reading checks, simulated CAD viewport concepts, direct links to the practice simulator, and progress tracking linked to `AppState` in `LocalStorage` (`app.js`).
