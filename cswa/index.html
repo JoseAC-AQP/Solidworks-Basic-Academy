@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CSWA Practice Center | SOLIDWORKS ACADEMY</title>
-
-  <!-- Hojas de Estilo Institucionales -->
+  <title>CSWA Center | SOLIDWORKS ACADEMY</title>
+  
+  <!-- Hojas de estilo institucionales -->
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/components.css">
 
@@ -13,211 +13,230 @@
     .cswa-hero {
       background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
       color: var(--white);
-      padding: 3rem 2rem;
+      padding: 2.5rem 2rem;
       border-radius: 12px;
       margin-bottom: 2rem;
-      box-shadow: 0 4px 15px rgba(16, 42, 67, 0.15);
-      text-align: center;
+      box-shadow: var(--shadow-md);
     }
 
-    .cswa-hero-title {
-      font-size: 2.3rem;
-      color: var(--white);
-      margin-bottom: 0.75rem;
-    }
-
-    .cswa-hero-title span {
-      color: var(--accent);
-    }
-
-    .cswa-stats-bar {
-      display: flex;
-      justify-content: center;
-      gap: 2.5rem;
-      margin-top: 2rem;
-      flex-wrap: wrap;
-    }
-
-    .stat-item {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(6px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      padding: 1rem 1.5rem;
-      border-radius: 8px;
-      min-width: 160px;
-    }
-
-    .stat-val {
-      font-size: 2rem;
-      font-weight: 800;
-      color: var(--accent);
-      line-height: 1;
-    }
-
-    .stat-lbl {
-      font-size: 0.85rem;
-      opacity: 0.9;
-      margin-top: 0.3rem;
-    }
-
-    .mode-card {
+    .cswa-grid-card {
       background: var(--white);
       border: 1px solid var(--border);
       border-radius: 10px;
-      padding: 1.75rem;
+      padding: 1.5rem;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
 
-    .mode-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(16, 42, 67, 0.1);
+    .cswa-grid-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
       border-color: var(--accent);
     }
 
-    .mode-icon {
-      width: 50px;
-      height: 50px;
-      background: rgba(0, 179, 224, 0.1);
-      color: var(--accent);
-      border-radius: 8px;
+    .competency-item {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px dashed var(--border);
+      font-size: 0.9rem;
     }
 
-    .official-info-card {
-      background: #F8FAFC;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1.5rem;
-      margin-top: 2rem;
+    .competency-item:last-child {
+      border-bottom: none;
     }
   </style>
 </head>
 <body>
 
-  <!-- Navegación Principal -->
+  <!-- Barra de Navegación Principal (Rutas Relativas) -->
   <nav class="navbar">
-    <a href="/" class="brand"><span>SOLIDWORKS</span> ACADEMY</a>
+    <a href="../index.html" class="brand"><span>SOLIDWORKS</span> ACADEMY</a>
     <ul class="nav-links">
-      <li><a href="/">Inicio</a></li>
-      <li><a href="/dashboard.html">Dashboard</a></li>
-      <li><a href="/aula/">Aula Virtual</a></li>
-      <li><a href="/cswa/" class="active">CSWA Center</a></li>
-      <li><a href="/proyecto.html">Proyecto Final</a></li>
+      <li><a href="../index.html">Inicio</a></li>
+      <li><a href="../dashboard.html">Dashboard</a></li>
+      <li><a href="../aula/index.html">Aula Virtual</a></li>
+      <li><a href="../cswa/index.html" class="active">CSWA Center</a></li>
+      <li><a href="../proyecto.html">Proyecto Final</a></li>
     </ul>
   </nav>
 
   <main class="container">
 
-    <!-- Hero Header CSWA -->
+    <!-- Hero Header -->
     <header class="cswa-hero">
-      <div style="font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.9; margin-bottom: 0.5rem;">
-        Centro de Entrenamiento & Diagnóstico
-      </div>
-      <h1 class="cswa-hero-title">CSWA <span>PRACTICE CENTER</span></h1>
-      <p style="font-size: 1.1rem; opacity: 0.9; max-width: 780px; margin: 0 auto;">
-        Plataforma interactiva para la preparación intensiva del examen Certified SOLIDWORKS Associate. Diagnostica tu nivel, resuelve simulacros cronometrados y refuerza competencias específicas.
-      </p>
-
-      <div class="cswa-stats-bar">
-        <div class="stat-item">
-          <div id="cswa-index-val" class="stat-val">0%</div>
-          <div class="stat-lbl">Índice de Preparación</div>
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
+        <div>
+          <span class="badge badge-info" style="margin-bottom: 0.5rem; display: inline-block;">Certificación Internacional Official</span>
+          <h1 style="font-size: 2.3rem; margin: 0.2rem 0; color: var(--white);">Centro de Entrenamiento y Preparación CSWA</h1>
+          <p style="opacity: 0.9; font-size: 1rem; max-width: 680px; margin-top: 0.5rem;">
+            Plataforma especializada para evaluar tus habilidades de modelado 3D, ensamblajes y propiedades mecánicas bajo las especificaciones oficiales de Dassault Systèmes.
+          </p>
         </div>
-        <div class="stat-item">
-          <div class="stat-val">9</div>
-          <div class="stat-lbl">Competencias Evaluadas</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-val">12</div>
-          <div class="stat-lbl">Ejercicios Prácticos</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-val">3h</div>
-          <div class="stat-lbl">Duración Examen Oficial</div>
+        
+        <div style="background: rgba(255,255,255,0.12); padding: 1.25rem 1.75rem; border-radius: 12px; text-align: center; backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,0.2);">
+          <div style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent);">Índice Global CSWA</div>
+          <div id="cswa-index-display" style="font-size: 2.8rem; font-weight: 800; margin: 0.2rem 0; color: var(--white);">0%</div>
+          <span id="cswa-status-tag" class="badge badge-warning">Calculando...</span>
         </div>
       </div>
     </header>
 
-    <!-- Opciones Principales del Centro CSWA -->
-    <section class="grid-3">
-
-      <!-- Opción 1: Diagnóstico -->
-      <div class="mode-card">
+    <!-- Módulos Principales de Acción -->
+    <section class="grid-2" style="grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+      
+      <!-- Tarjeta 1: Diagnóstico de Competencias -->
+      <div class="cswa-grid-card">
         <div>
-          <div class="mode-icon">📊</div>
-          <h3 style="color: var(--primary); font-size: 1.25rem; margin-bottom: 0.5rem;">Diagnóstico por Competencias</h3>
-          <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.25rem;">
-            Visualiza tu nivel actual en las 9 competencias oficiales del CSWA, identifica debilidades y genera un plan de estudio personalizado.
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+            <div style="font-size: 2rem; background: #E0F2FE; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 10px; color: #0284C7;">📊</div>
+            <div>
+              <h2 style="font-size: 1.25rem; color: var(--primary); margin: 0;">Diagnóstico por Competencias</h2>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">Análisis de las 9 áreas del examen</span>
+            </div>
+          </div>
+          <p style="font-size: 0.9rem; color: var(--text-dark); line-height: 1.5; margin-bottom: 1.25rem;">
+            Inspecciona tu nivel de dominio en las 9 competencias requeridas (croquizado, extrusión, revolución, ensamblajes, propiedades de masa y tiempo límite) con retroalimentación automática.
           </p>
         </div>
-        <a href="diagnostico.html" class="btn" style="width: 100%; text-align: center;">Ver Diagnóstico</a>
+        <a href="diagnostico.html" class="btn btn-outline" style="text-align: center; font-weight: 700;">🔍 Ver Diagnóstico Detallado</a>
       </div>
 
-      <!-- Opción 2: Banco de Ejercicios -->
-      <div class="mode-card">
+      <!-- Tarjeta 2: Simulador de Examen Cronometrado -->
+      <div class="cswa-grid-card">
         <div>
-          <div class="mode-icon">📐</div>
-          <h3 style="color: var(--primary); font-size: 1.25rem; margin-bottom: 0.5rem;">Banco de Ejercicios</h3>
-          <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.25rem;">
-            Practica croquizado, modelado de piezas 3D, modificación dimensional, propiedades de masa (Masa/CG) y ensamblajes a tu propio ritmo.
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+            <div style="font-size: 2rem; background: #FEF3C7; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 10px; color: #D97706;">⏱️</div>
+            <div>
+              <h2 style="font-size: 1.25rem; color: var(--primary); margin: 0;">Simulador Examen Cronometrado</h2>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">Prueba de 180 Minutos (240 Pts)</span>
+            </div>
+          </div>
+          <p style="font-size: 0.9rem; color: var(--text-dark); line-height: 1.5; margin-bottom: 1.25rem;">
+            Pone a prueba tus capacidades en un entorno con presión de tiempo real, piezas con variables globales ($A, B, C$), modificaciones y ensambles mecánicos.
           </p>
         </div>
-        <a href="#banco-ejercicios" class="btn btn-outline" style="width: 100%; text-align: center;" onclick="alert('Accediendo al Banco de Ejercicios CSWA...')">Explorar Ejercicios</a>
-      </div>
-
-      <!-- Opción 3: Simulador Cronometrado -->
-      <div class="mode-card" style="border-top: 4px solid var(--accent);">
-        <div>
-          <div class="mode-icon">⏱️</div>
-          <h3 style="color: var(--primary); font-size: 1.25rem; margin-bottom: 0.5rem;">Simuladores Integrales</h3>
-          <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.25rem;">
-            Rinde pruebas diagnósticas e integrales cronometradas que simulan la restricción de tiempo y dificultad del examen oficial.
-          </p>
-        </div>
-        <button class="btn" style="width: 100%; background: var(--accent-hover);" onclick="runDiagnosticQuiz('sim_diag', {})">Iniciar Simulador</button>
+        <a href="simulador.html" class="btn" style="text-align: center; font-weight: 700;">🚀 Rendir Simulacro de Examen</a>
       </div>
 
     </section>
 
-    <!-- Información del Examen Oficial CSWA -->
-    <section class="official-info-card">
-      <h3 style="color: var(--primary); font-size: 1.2rem; margin-bottom: 1rem;">ℹ️ Información del Examen Oficial CSWA</h3>
-      <div class="grid-2" style="grid-template-columns: 1fr 1fr; gap: 2rem;">
-        <div>
-          <h4 style="color: var(--primary-light); font-size: 0.95rem; margin-bottom: 0.5rem;">Estructura del Examen Oficial:</h4>
-          <ul style="font-size: 0.9rem; color: var(--text-dark); margin-left: 1.2rem; line-height: 1.6;">
-            <li><strong>Duración total:</strong> 3 horas (180 minutos).</li>
-            <li><strong>Puntuación mínima de aprobación:</strong> 70% (240 de 320 puntos).</li>
-            <li><strong>Requisito de software:</strong> SOLIDWORKS 2021 o superior.</li>
-            <li><strong>Evaluaciones:</strong> Piezas 3D, modificaciones dimensionales, propiedades de masa y ensamblajes mecánicos.</li>
+    <!-- Sección Inferior: Desglose de Requisitos Oficiales del Examen -->
+    <div class="grid-2" style="grid-template-columns: 2fr 1fr; gap: 1.5rem;">
+      
+      <!-- Lista de Competencias -->
+      <section class="card">
+        <h2 class="card-title" style="font-size: 1.3rem; margin-bottom: 1rem;">🎯 Las 9 Competencias Evaluadas en el CSWA</h2>
+        
+        <div id="cswa-competencies-summary">
+          <div class="competency-item">
+            <span>1. Herramientas de Croquizado y Relaciones 2D</span>
+            <span class="badge badge-info">Croquis</span>
+          </div>
+          <div class="competency-item">
+            <span>2. Modelado de Piezas Básicas e Intermedias</span>
+            <span class="badge badge-info">Piezas 3D</span>
+          </div>
+          <div class="competency-item">
+            <span>3. Modificación Dimensional Paramétrica</span>
+            <span class="badge badge-info">Variables A, B, C</span>
+          </div>
+          <div class="competency-item">
+            <span>4. Propiedades Físicas y Cálculo de Masa ($g$)</span>
+            <span class="badge badge-info">Masa</span>
+          </div>
+          <div class="competency-item">
+            <span>5. Interpretación de Planos Técnicos 2D</span>
+            <span class="badge badge-info">Planos</span>
+          </div>
+          <div class="competency-item">
+            <span>6. Operaciones de Revolución y Patrones</span>
+            <span class="badge badge-info">Sólidos</span>
+          </div>
+          <div class="competency-item">
+            <span>7. Ensamblaje de Componentes y Componente Fijo (f)</span>
+            <span class="badge badge-info">Ensamblajes</span>
+          </div>
+          <div class="competency-item">
+            <span>8. Relaciones de Posición Estándar y Mecánicas</span>
+            <span class="badge badge-info">Mates</span>
+          </div>
+          <div class="competency-item">
+            <span>9. Rendimiento y Velocidad Bajo Presión de Tiempo</span>
+            <span class="badge badge-info">180 Minutos</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Panel de Datos del Examen Oficial -->
+      <aside class="space-y">
+        <div class="card" style="background: var(--bg-light);">
+          <h3 style="font-size: 1rem; color: var(--primary); margin-bottom: 0.75rem;">📋 Ficha Técnica del Examen Oficial</h3>
+          <ul style="list-style: none; font-size: 0.85rem; line-height: 1.8; color: var(--text-dark);">
+            <li><strong>Duración Total:</strong> 180 Minutos</li>
+            <li><strong>Puntaje Máximo:</strong> 240 Puntos</li>
+            <li><strong>Puntaje Aprobatorio:</strong> 165 Puntos (70%)</li>
+            <li><strong>Plataforma:</strong> Tangix TesterPRO Client</li>
+            <li><strong>Software:</strong> SOLIDWORKS 2021+</li>
+            <li><strong>Formato respuestas:</strong> Múltiple opción e ingreso de masa decimal</li>
           </ul>
         </div>
-        <div>
-          <h4 style="color: var(--primary-light); font-size: 0.95rem; margin-bottom: 0.5rem;">Enlace Oficial Dassault Systèmes:</h4>
-          <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">
-            Consulta la documentación, requisitos vigentes y compra de cupones oficiales en la plataforma de certificación de SOLIDWORKS:
+
+        <div class="card" style="background: var(--primary); color: var(--white);">
+          <h3 style="font-size: 1rem; color: var(--accent); margin-bottom: 0.5rem;">💡 Tip CSWA</h3>
+          <p style="font-size: 0.85rem; opacity: 0.9; line-height: 1.5;">
+            Inicia siempre verificando que el sistema de unidades esté configurado en <strong>MMGS</strong> o <strong>IPS</strong> según las especificaciones del gráfico antes de extruir.
           </p>
-          <a href="https://www.solidworks.com/certifications" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="font-size: 0.85rem;">🌐 Visitar Portal Oficial de Certificaciones</a>
         </div>
-      </div>
-    </section>
+      </aside>
+
+    </div>
 
   </main>
 
   <footer>
-    <p>&copy; 2026 SOLIDWORKS ACADEMY - Formación por Competencias & Preparación CSWA</p>
+    <p>&copy; 2026 SOLIDWORKS ACADEMY - Preparación para Certificación Internacional CSWA</p>
   </footer>
 
   <!-- Scripts de la Aplicación -->
   <script src="../assets/js/app.js"></script>
   <script src="../assets/js/cswa.js"></script>
-  <script src="../assets/js/quiz.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Calcular índice al cargar
+      if (typeof AppState !== 'undefined') {
+        const index = AppState.calculateCSWAIndex();
+        const display = document.getElementById('cswa-index-display');
+        const tag = document.getElementById('cswa-status-tag');
+        
+        if (display) display.textContent = index + '%';
+        if (tag) {
+          if (index >= 85) {
+            tag.className = 'badge badge-success';
+            tag.textContent = 'Preparación Avanzada';
+          } else if (index >= 70) {
+            tag.className = 'badge badge-info';
+            tag.textContent = 'Competente (CSWA Ready)';
+          } else if (index >= 40) {
+            tag.className = 'badge badge-warning';
+            tag.textContent = 'En Desarrollo';
+          } else {
+            tag.className = 'badge badge-danger';
+            tag.textContent = 'Nivel Inicial';
+          }
+        }
+      }
+    });
+  </script>
 </body>
 </html>
+```
+
+### Summary of `cswa/index.html`:
+- Updated navigation bar with correct relative paths (`../index.html`, `../dashboard.html`, `../aula/index.html`, `../cswa/index.html`, `../proyecto.html`).
+- Integrated dynamic CSWA index calculation linked to `AppState` (`app.js` and `cswa.js`).
+- Provided structured navigation to `diagnostico.html` and `simulador.html` alongside a breakdown of all 9 CSWA competency evaluation areas.
