@@ -8,23 +8,25 @@
   <!-- Hojas de Estilo Institucionales -->
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/components.css">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
     .lesson-hero {
       background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
       color: var(--white);
-      padding: 2rem;
-      border-radius: 12px;
+      padding: 2.25rem 2rem;
+      border-radius: var(--radius-md);
       margin-bottom: 2rem;
       box-shadow: var(--shadow-md);
     }
 
     .lesson-meta-bar {
       display: flex;
-      gap: 1.5rem;
+      gap: 1.25rem;
       margin-top: 1rem;
       font-size: 0.85rem;
-      color: var(--accent);
+      color: var(--accent-light);
       flex-wrap: wrap;
     }
 
@@ -32,17 +34,26 @@
       border-left: 4px solid var(--accent);
       background: var(--bg-light);
       padding: 1.25rem;
-      border-radius: 0 8px 8px 0;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
       margin-bottom: 1.25rem;
+      position: relative;
+      padding-left: 3.5rem;
     }
 
     .step-number {
+      position: absolute;
+      left: 1rem;
+      top: 1.25rem;
+      width: 1.8rem;
+      height: 1.8rem;
+      background: var(--accent);
+      color: var(--primary-dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-weight: 800;
-      color: var(--primary);
-      text-transform: uppercase;
-      font-size: 0.8rem;
-      letter-spacing: 0.5px;
-      margin-bottom: 0.3rem;
+      font-size: 0.85rem;
     }
 
     .shortcut-tag {
@@ -59,7 +70,7 @@
     .cswa-tip-box {
       background: #EFF6FF;
       border: 1px solid #BFDBFE;
-      border-radius: 8px;
+      border-radius: var(--radius-sm);
       padding: 1.25rem;
       margin: 1.5rem 0;
     }
@@ -71,6 +82,33 @@
       color: #1E40AF;
       font-weight: 700;
       margin-bottom: 0.5rem;
+    }
+
+    .tab-container {
+      display: flex;
+      gap: 0.5rem;
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 1.5rem;
+      overflow-x: auto;
+    }
+
+    .tab-btn {
+      padding: 0.75rem 1.25rem;
+      border: none;
+      background: none;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+      font-weight: 700;
     }
 
     .param-table {
@@ -90,21 +128,32 @@
       background: var(--bg-light);
       color: var(--primary);
     }
+
+    .quiz-option {
+      display: block;
+      padding: 0.75rem 1rem;
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .quiz-option:hover {
+      border-color: var(--accent);
+      background: #F0F9FF;
+    }
+
+    .quiz-option input {
+      margin-right: 0.75rem;
+    }
   </style>
 </head>
 <body>
 
-  <!-- Navegación Principal -->
-  <nav class="navbar">
-    <a href="../index.html" class="brand"><span>SOLIDWORKS</span> ACADEMY</a>
-    <ul class="nav-links">
-      <li><a href="../index.html">Inicio</a></li>
-      <li><a href="../dashboard.html">Dashboard</a></li>
-      <li><a href="../aula/index.html" class="active">Aula Virtual</a></li>
-      <li><a href="../cswa/index.html">CSWA Center</a></li>
-      <li><a href="../proyecto.html">Proyecto Final</a></li>
-    </ul>
-  </nav>
+  <!-- Barra de Navegación Dinámica Institucional -->
+  <header class="navbar"></header>
 
   <main class="container">
 
@@ -112,199 +161,214 @@
     <header class="lesson-hero">
       <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
         <div>
-          <span class="badge badge-info" style="margin-bottom: 0.5rem; display: inline-block;">Módulo 3: Modelado de Sólidos</span>
+          <span class="badge badge-info" style="margin-bottom: 0.5rem; display: inline-flex; align-items: center; gap: 0.35rem;">
+            <i class="fa-solid fa-layer-group"></i> Módulo 3: Modelado de Sólidos Fundamental
+          </span>
           <h1 style="font-size: 2.2rem; color: var(--white); margin: 0.2rem 0;">Semana 5: Extrusión y Revolución de Saliente/Corte</h1>
           <p style="opacity: 0.9; font-size: 1rem; max-width: 700px; margin-top: 0.5rem;">
-            Aprende a transformar bocetos 2D cerrados en volumen tridimensional mediante operaciones fundamentales de adición y sustracción de material.
+            Aprende a transformar croquis 2D cerrados en volumen tridimensional mediante operaciones fundamentales de adición y sustracción de material.
           </p>
         </div>
         <div>
-          <button id="mark-completed-btn" class="btn" style="background: var(--success);" onclick="completeWeek5()">
-            ✓ Marcar Semana como Completada
+          <button id="mark-completed-btn" class="btn" style="background: var(--success); color: white;" onclick="completeWeek5()">
+            <i class="fa-solid fa-check"></i> Marcar Semana como Completada
           </button>
         </div>
       </div>
 
       <div class="lesson-meta-bar">
-        <span>⏱️ Duración: 3 Horas Académicas</span>
-        <span>🎯 Competencia CSWA: Operaciones de Sólidos (Saliente/Corte)</span>
-        <span>📄 Tipo de Contenido: Teórico - Práctico</span>
+        <span><i class="fa-regular fa-clock"></i> Carga Horaria: 3 hrs lectivas</span>
+        <span><i class="fa-solid fa-award"></i> Competencia CSWA: Operaciones de Sólidos (Saliente y Corte)</span>
+        <span><i class="fa-solid fa-cubes"></i> Versión SW: 2021+</span>
       </div>
     </header>
 
+    <!-- Tip Oficial CSWA -->
+    <section class="cswa-tip-box" style="margin-top: 0;">
+      <div class="cswa-tip-header">
+        <i class="fa-solid fa-lightbulb text-xl"></i>
+        <span>Condiciones Finales de Extrusión en el Examen CSWA</span>
+      </div>
+      <p style="color: #1E3A8A; font-size: 0.95rem; margin: 0;">
+        En el examen oficial, seleccionar la condición final adecuada garantiza la respuesta paramétrica del sólido:
+        <br>• <strong>Hasta la profundidad especificada (Blind):</strong> Para cotas de profundidad fijas.
+        <br>• <strong>Por Todo (Through All):</strong> Ideal en barrenos que deben atravesar la pieza sin importar futuros cambios de espesor.
+        <br>• <strong>Plano Medio (Mid Plane):</strong> Mantiene la extrusión simétrica respecto al plano principal.
+      </p>
+    </section>
+
     <div class="grid-2" style="grid-template-columns: 2.5fr 1fr; gap: 1.5rem;">
 
-      <!-- Contenido Principal de la Lección -->
+      <!-- Contenido Principal -->
       <div>
 
-        <!-- Bloque 1: Operaciones de Extrusión -->
-        <article class="card">
-          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">1. Operación de Extrusión (Extrude Boss/Base & Extrude Cut)</h2>
-          <p style="line-height: 1.6; color: var(--text-dark); margin-bottom: 1rem;">
-            La extrusión proyecta un perfil de croquis plano cerrado a lo largo de un vector perpendicular al plano del croquis. Dependiendo de la condición final seleccionada, se puede añadir material (<strong>Saliente Extruido</strong>) o extraer volumen (<strong>Corte Extruido</strong>).
+        <!-- Pestañas de Navegación Didáctica -->
+        <div class="tab-container">
+          <button class="tab-btn active" onclick="switchTab('fundamento')"><i class="fa-solid fa-book-open mr-1"></i> 1. Fundamento</button>
+          <button class="tab-btn" onclick="switchTab('operaciones')"><i class="fa-solid fa-cubes mr-1"></i> 2. Operaciones 3D</button>
+          <button class="tab-btn" onclick="switchTab('procedimiento')"><i class="fa-solid fa-list-check mr-1"></i> 3. Procedimiento</button>
+          <button class="tab-btn" onclick="switchTab('evaluacion')"><i class="fa-solid fa-pen-to-square mr-1"></i> 4. Evaluación</button>
+        </div>
+
+        <!-- TAB 1: FUNDAMENTO CONCEPTUAL -->
+        <article id="tab-fundamento" class="card">
+          <h2 class="card-title"><i class="fa-solid fa-bullseye text-swCyan"></i> 1. Resultado de Aprendizaje</h2>
+          <p>
+            Al finalizar esta sesión, serás capaz de <strong>generar sólidez 3D paramétrica</strong> mediante operaciones de <strong>Extrusión y Revolución</strong> (adición y sustracción de material), configurando adecuadamente las condiciones finales (Blind, Through All, Mid Plane) y utilizando ejes constructivos para piezas cilíndricas.
           </p>
 
-          <div class="cswa-tip-box">
-            <div class="cswa-tip-header">
-              <span>💡 Condiciones Finales de Extrusión en CSWA</span>
-            </div>
-            <p style="font-size: 0.9rem; color: #1E3A8A; margin: 0;">
-              En las pruebas oficiales, seleccionar la condición final correcta asegura que la pieza responda bien ante cambios paramétricos:
-              <br>• <strong>Hasta la profundidad especificada (Blind):</strong> Para dimensiones de espesor fijas.
-              <br>• <strong>Por todo (Through All):</strong> Ideal para barrenos pasantes que deben atravesar la pieza sin importar si su espesor cambia.
-              <br>• <strong>Plano Medio (Mid Plane):</strong> Mantiene la extrusión simétrica respecto al plano de origen.
-            </p>
+          <h2 class="card-title" style="margin-top: 1.5rem;"><i class="fa-solid fa-cube text-swCyan"></i> 2. Conceptos de Extrusión y Revolución</h2>
+          <p style="line-height: 1.6;">
+            Las operaciones 3D transforman contornos bidimensionales en volumen mecánico:
+          </p>
+          <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem; font-size: 0.95rem;" class="space-y">
+            <li><strong style="color: var(--primary);">Extrusión (Extrude):</strong> Proyecta un contorno 2D perpendicularmente a su plano de dibujo a lo largo de una distancia vectorizada.</li>
+            <li><strong style="color: var(--primary);">Revolución (Revolve):</strong> Gira un contorno 2D alrededor de un eje central o línea constructiva ($360^\circ$ o ángulo parcial).</li>
+            <li><strong style="color: var(--primary);">Sustracción de Material (Cut):</strong> Remueve volumen de sólidos previamente construidos utilizando croquis de corte.</li>
+          </ul>
+
+          <!-- Visor Gráfico Interactivo de Operaciones 3D -->
+          <div class="cad-viewport">
+            <svg viewBox="0 0 600 240" style="width: 100%; height: 100%;">
+              <rect x="0" y="0" width="600" height="240" fill="#0f172a"/>
+              <!-- Extruded Prism Base -->
+              <path d="M 120 170 L 260 170 L 300 130 L 160 130 Z" fill="#00B3E0" opacity="0.6"/>
+              <path d="M 120 170 L 120 100 L 260 100 L 260 170 Z" fill="#0090B3" opacity="0.8"/>
+              <path d="M 260 170 L 260 100 L 300 60 L 300 130 Z" fill="#00738F" opacity="0.9"/>
+              <!-- Revolved Shaft -->
+              <path d="M 400 170 C 460 170 460 70 400 70 Z" fill="none" stroke="#38bdf8" stroke-width="2" stroke-dasharray="3"/>
+              <ellipse cx="400" cy="120" rx="15" ry="50" fill="#00B3E0" opacity="0.85"/>
+              <path d="M 400 70 L 500 70 L 500 170 L 400 170 Z" fill="#00738F" opacity="0.5"/>
+              <!-- Axis Line -->
+              <line x1="380" y1="120" x2="520" y2="120" stroke="#ef4444" stroke-width="2" stroke-dasharray="6"/>
+              <text x="450" y="115" fill="#ef4444" font-size="10" font-weight="bold">Eje de Giro</text>
+              <text x="300" y="40" fill="#38bdf8" font-size="12" font-weight="bold" text-anchor="middle">MODELADO DE SÓLIDOS: EXTRUSIÓN Y REVOLUCIÓN</text>
+            </svg>
           </div>
         </article>
 
-        <!-- Bloque 2: Operaciones de Revolución -->
-        <article class="card">
-          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">2. Operación de Revolución (Revolve Boss/Base & Revolve Cut)</h2>
-          <p style="line-height: 1.6; color: var(--text-dark); margin-bottom: 1rem;">
-            La revolución gira un contorno 2D alrededor de un eje central (línea constructiva o eje). Es la herramienta idónea para piezas cilíndricas, cónicas, poleas, ejes paso a paso y casquillos.
-          </p>
+        <!-- TAB 2: OPERACIONES 3D Y CONDICIONES FINALES -->
+        <article id="tab-operaciones" class="card" style="display: none;">
+          <h2 class="card-title"><i class="fa-solid fa-cubes text-swCyan"></i> Matriz de Operaciones Volumétricas</h2>
+          <p style="margin-bottom: 1rem;">Comparativo de aplicaciones técnicas entre extrusión y revolución:</p>
 
           <table class="param-table">
             <thead>
               <tr>
                 <th>Operación</th>
                 <th>Requisito de Croquis</th>
-                <th>Aplicación Principal en Mecánica</th>
+                <th>Aplicación Mecánica Principal</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td><strong>Saliente Extruido</strong></td>
-                <td>Croquis cerrado de cualquier forma</td>
-                <td>Prismas, placas, bloques base y soportes.</td>
+                <td>Perfil 2D cerrado</td>
+                <td>Prismas, bloques base, bridas planas y soportes.</td>
               </tr>
               <tr>
                 <td><strong>Corte Extruido</strong></td>
-                <td>Croquis cerrado dibujado en cara o plano</td>
-                <td>Agujeros, chaveteros, muescas y ranuras rectangulares.</td>
+                <td>Perfil 2D dibujado sobre cara o plano</td>
+                <td>Barrenos pasantes, chaveteros, vaciados y muescas.</td>
               </tr>
               <tr>
                 <td><strong>Saliente Revolucionado</strong></td>
-                <td>Perfil cerrado + Eje constructivo de giro</td>
-                <td>Ejes graduados, poleas, bocinas y cuencos.</td>
+                <td>Perfil cerrado + Eje constructivo</td>
+                <td>Ejes escalonados, poleas, casquillos y botellas.</td>
               </tr>
               <tr>
                 <td><strong>Corte Revolucionado</strong></td>
-                <td>Perfil cerrado + Eje de giro constructivo</td>
-                <td>Avellanados complejos, biseles cilíndricos y ranuras circulares.</td>
+                <td>Perfil cerrado + Eje constructivo</td>
+                <td>Biseles cilíndricos, avellanados complejos y gargantas.</td>
               </tr>
             </tbody>
           </table>
+        </article>
 
-          <!-- CAD Viewport Esquemático -->
-          <div class="cad-viewport" style="margin-top: 1.5rem;">
-            <div style="text-align: center;">
-              <div style="font-size: 3rem; margin-bottom: 0.5rem;">🧊🌀</div>
-              <p style="font-size: 0.95rem; font-weight: 700; color: var(--white);">Vista 3D: Revolución de Eje Escalonado (360°)</p>
-              <p style="font-size: 0.8rem; opacity: 0.8;">Operación: Revolve Boss/Base | Eje: Línea Constructiva Central</p>
-            </div>
-            <div class="cad-viewport-controls">
-              <button type="button" class="cad-btn-icon" onclick="alert('Ángulo de revolución verificado: 360.00°')">🔄 Verificar Ángulo</button>
-            </div>
+        <!-- TAB 3: PROCEDIMIENTO PASO A PASO -->
+        <article id="tab-procedimiento" class="card" style="display: none;">
+          <h2 class="card-title"><i class="fa-solid fa-list-check text-swCyan"></i> Procedimiento Guiado Paso a Paso</h2>
+          <p style="margin-bottom: 1.5rem;">Ejecuta las siguientes acciones en tu software SOLIDWORKS:</p>
+
+          <div class="step-box">
+            <div class="step-number">1</div>
+            <h4 style="color: var(--primary);">Construir un Eje Escalonado por Revolución</h4>
+            <p>Abre un croquis en el plano <strong>Alzado</strong>. Traza una <em>Línea Constructiva</em> horizontal coincidente con el Origen. Dibuja el perfil de la mitad superior del eje.</p>
+          </div>
+
+          <div class="step-box">
+            <div class="step-number">2</div>
+            <h4 style="color: var(--primary);">Aplicar Cotas de Diámetro Simétrico</h4>
+            <p>Selecciona la arista horizontal y la línea constructiva. Desplaza el cursor hacia abajo para acotar el <strong>Diámetro Total</strong> en lugar del radio.</p>
+          </div>
+
+          <div class="step-box">
+            <div class="step-number">3</div>
+            <h4 style="color: var(--primary);">Ejecutar Revolución 360° y Corte Pasante</h4>
+            <p>Aplica <strong>Revolución de Saliente</strong> a $360^\circ$. Luego, abre un croquis en la cara frontal, dibuja un círculo y aplica <strong>Corte Extruido > Por Todo</strong>.</p>
           </div>
         </article>
 
-        <!-- Bloque 3: Paso a Paso Práctico -->
-        <article class="card">
-          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">3. Guía Práctica Paso a Paso: Casquillo Cilíndrico Escalonado</h2>
-          <p style="font-size: 0.95rem; color: var(--text-dark); margin-bottom: 1rem;">
-            Sigue estos pasos en tu software SOLIDWORKS para modelar una pieza revolucionada con corte extruido:
-          </p>
+        <!-- TAB 4: EVALUACIÓN Y CUESTIONARIO -->
+        <article id="tab-evaluacion" class="card" style="display: none;">
+          <h2 class="card-title"><i class="fa-solid fa-pen-to-square text-swCyan"></i> Cuestionario de Comprobación - Semana 5</h2>
+          <p style="margin-bottom: 1.5rem;">Responde a las siguientes preguntas para validar tu aprendizaje:</p>
 
-          <div class="step-box">
-            <div class="step-number">Paso 1</div>
-            <h4 style="margin: 0 0 0.3rem 0; color: var(--primary);">Línea de Centro y Medio Perfil</h4>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">
-              En el plano <strong>Alzado</strong>, dibuja una <em>Línea Constructiva</em> vertical que pase por el Origen. A la derecha, dibuja la mitad del perfil exterior del casquillo.
-            </p>
-          </div>
+          <form id="quiz-form-w5">
+            <div style="margin-bottom: 1.5rem;">
+              <p style="font-weight: 600; margin-bottom: 0.75rem;">1. ¿Qué condición final de corte garantiza que un barreno atraviese la pieza completamente sin importar cambios futuros de espesor?</p>
+              <label class="quiz-option"><input type="radio" name="q1" value="A"> A) Hasta la profundidad especificada (Blind)</label>
+              <label class="quiz-option"><input type="radio" name="q1" value="B"> B) Por Todo (Through All)</label>
+              <label class="quiz-option"><input type="radio" name="q1" value="C"> C) Plano Medio (Mid Plane)</label>
+            </div>
 
-          <div class="step-box">
-            <div class="step-number">Paso 2</div>
-            <h4 style="margin: 0 0 0.3rem 0; color: var(--primary);">Acotado de Diámetros Simétricos</h4>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">
-              Selecciona la entidad y la línea constructiva. Mueve el cursor al lado opuesto para aplicar una <strong>Cota de Diámetro</strong> en lugar de radio.
-            </p>
-          </div>
+            <div style="margin-bottom: 1.5rem;">
+              <p style="font-weight: 600; margin-bottom: 0.75rem;">2. ¿Qué elemento de croquis es indispensable para ejecutar la operación Revolución de Saliente/Base?</p>
+              <label class="quiz-option"><input type="radio" name="q2" value="A"> A) Un eje constructivo o línea de revolución</label>
+              <label class="quiz-option"><input type="radio" name="q2" value="B"> B) Un redondeo de croquis 2D</label>
+              <label class="quiz-option"><input type="radio" name="q2" value="C"> C) Un bloque de referencia externo</label>
+            </div>
 
-          <div class="step-box">
-            <div class="step-number">Paso 3</div>
-            <h4 style="margin: 0 0 0.3rem 0; color: var(--primary);">Revolución 360° y Barreno Pasante</h4>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">
-              Ejecuta <strong>Revolución de Saliente/Base</strong> a 360°. Luego, abre un croquis en una cara plana frontal, dibuja un círculo y aplica <strong>Corte Extruido > Por Todo</strong>.
-            </p>
-          </div>
+            <button type="button" class="btn" onclick="evaluarQuizSemana5()"><i class="fa-solid fa-check"></i> Validar Respuestas y Guardar Avance</button>
+            <div id="quiz-feedback-w5" style="margin-top: 1rem; display: none;"></div>
+          </form>
         </article>
+
+        <!-- Navegación entre Semanas -->
+        <div style="display: flex; justify-content: space-between; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
+          <a href="semana4.html" class="btn btn-outline"><i class="fa-solid fa-arrow-left"></i> Semana 4</a>
+          <a href="semana6.html" class="btn">Semana 6 <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
 
       </div>
 
-      <!-- Barra Lateral: Progreso y Cuestionario de Validación -->
-      <aside>
-
-        <!-- Resumen de la Lección -->
+      <!-- Barra Lateral (Sidebar) -->
+      <aside class="space-y">
         <div class="card">
-          <h3 class="card-title" style="font-size: 1.1rem; margin-bottom: 0.75rem;">📋 Resumen de la Lección</h3>
-          <ul style="list-style: none; font-size: 0.85rem; color: var(--text-muted);" class="space-y">
-            <li style="display: flex; align-items: center; gap: 0.5rem;">
-              <span>✅</span> Extrusión Saliente y Corte
-            </li>
-            <li style="display: flex; align-items: center; gap: 0.5rem;">
-              <span>✅</span> Revolución alrededor de Eje
-            </li>
-            <li style="display: flex; align-items: center; gap: 0.5rem;">
-              <span>✅</span> Condiciones: Hasta profundidad, Por Todo
-            </li>
-            <li style="display: flex; align-items: center; gap: 0.5rem;">
-              <span>✅</span> Cotas de Diámetro Simétrico
-            </li>
+          <h3 class="card-title" style="font-size: 1rem;"><i class="fa-solid fa-chart-line text-swCyan"></i> Estado de la Lección</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">Progreso registrado en esta semana:</p>
+          <div class="progress-container"><div id="week-progress-bar" class="progress-bar" style="width: 0%;"></div></div>
+          <span id="week-status-badge" class="badge badge-warning" style="margin-top: 0.5rem;">Pendiente</span>
+        </div>
+
+        <div class="card">
+          <h3 class="card-title" style="font-size: 1rem;"><i class="fa-solid fa-folder-open text-swCyan"></i> Recursos Descargables</h3>
+          <ul style="list-style: none; font-size: 0.85rem;" class="space-y">
+            <li><a href="#" onclick="alert('Descargando Guía PDF de Operaciones 3D'); return false;"><i class="fa-solid fa-file-pdf text-red-500 mr-1"></i> Guía PDF Extrusión y Revolución</a></li>
+            <li><a href="#" onclick="alert('Descargando Pieza Casquillo Escalonado SLDPRT'); return false;"><i class="fa-solid fa-cube text-swCyan mr-1"></i> Pieza Casquillo (.SLDPRT)</a></li>
           </ul>
         </div>
 
-        <!-- Cuestionario Rápido de Validación -->
-        <div class="card">
-          <h3 class="card-title" style="font-size: 1.1rem; margin-bottom: 0.75rem;">📝 Comprobación de Lectura</h3>
-          <form id="week5-quiz-form" onsubmit="evaluateWeek5Quiz(event)">
-            <p style="font-size: 0.85rem; font-weight: 600; color: var(--primary); margin-bottom: 0.5rem;">
-              1. ¿Qué condición final de corte garantiza que un barreno atraviese la pieza completamente sin importar su espesor futuro?
-            </p>
-            <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.85rem; margin-bottom: 1rem;">
-              <label><input type="radio" name="w5q1" value="A" required> Hasta la profundidad especificada (Blind)</label>
-              <label><input type="radio" name="w5q1" value="B"> Por todo (Through All)</label>
-              <label><input type="radio" name="w5q1" value="C"> Hasta la superficie</label>
-            </div>
-
-            <p style="font-size: 0.85rem; font-weight: 600; color: var(--primary); margin-bottom: 0.5rem;">
-              2. ¿Qué elemento indispensable requiere la operación Revolución de Saliente para poder calcular el volumen?
-            </p>
-            <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.85rem; margin-bottom: 1.25rem;">
-              <label><input type="radio" name="w5q2" value="A" required> Un eje constructivo o línea de revolución</label>
-              <label><input type="radio" name="w5q2" value="B"> Un redondeo de esquina</label>
-              <label><input type="radio" name="w5q2" value="C"> Dos croquis separados</label>
-            </div>
-
-            <button type="submit" class="btn btn-outline" style="width: 100%; font-size: 0.85rem;">Validar Respuestas</button>
-          </form>
+        <div class="card" style="background: var(--primary); color: var(--white);">
+          <h3 style="color: var(--accent); font-size: 1rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-award mr-1"></i> CSWA Practice Center</h3>
+          <p style="font-size: 0.85rem; opacity: 0.9; margin-bottom: 1rem;">
+            Evalúa tu velocidad en extrusiones y revoluciones con preguntas tipo examen.
+          </p>
+          <a href="../cswa/index.html" class="btn" style="width: 100%; text-align: center; font-size: 0.85rem;">Ir al Centro CSWA</a>
         </div>
-
-        <!-- Navegación entre Semanas -->
-        <div class="card" style="text-align: center;">
-          <h4 style="font-size: 0.9rem; color: var(--primary); margin-bottom: 0.75rem;">Navegación Curricular</h4>
-          <div style="display: flex; justify-content: space-between; gap: 0.5rem;">
-            <a href="semana4.html" class="btn btn-outline" style="font-size: 0.8rem; flex: 1;">⬅️ Sem. 4</a>
-            <a href="index.html" class="btn btn-outline" style="font-size: 0.8rem; flex: 1;">Índice</a>
-            <a href="semana6.html" class="btn" style="font-size: 0.8rem; flex: 1;">Sem. 6 ➡️</a>
-          </div>
-        </div>
-
       </aside>
 
     </div>
-
   </main>
 
   <footer>
@@ -313,48 +377,65 @@
 
   <!-- Scripts de la Aplicación -->
   <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/cswa.js"></script>
+  <script src="../assets/js/quiz.js"></script>
+  <script src="../assets/js/navbar.js"></script>
+
   <script>
-    function completeWeek5() {
-      AppState.markWeekCompleted(5);
-      
-      const btn = document.getElementById('mark-completed-btn');
-      if (btn) {
-        btn.textContent = '✓ Semana 5 Completada';
-        btn.disabled = true;
-        btn.style.opacity = '0.8';
-      }
-      alert('🎉 ¡Semana 5 registrada como completada en tu expediente!');
-    }
-
-    function evaluateWeek5Quiz(e) {
-      e.preventDefault();
-      const form = document.getElementById('week5-quiz-form');
-      const formData = new FormData(form);
-
-      const q1 = formData.get('w5q1');
-      const q2 = formData.get('w5q2');
-
-      if (q1 === 'B' && q2 === 'A') {
-        alert('🎯 ¡Excelente! Has respondido correctamente ambas preguntas sobre extrusiones y revoluciones.');
-        AppState.recordQuizResult('semana5_quiz', 100, { operaciones: 80, piezas: 70 });
-        completeWeek5();
-      } else {
-        alert('⚠️ Hay respuestas incorrectas. Revisa las condiciones finales de corte y la necesidad del eje de revolución.');
-      }
-    }
-
-    // Verificar si ya fue completada al cargar
     document.addEventListener('DOMContentLoaded', () => {
       const progress = AppState.getUserProgress();
       if (progress.completedWeeks && progress.completedWeeks.includes(5)) {
-        const btn = document.getElementById('mark-completed-btn');
-        if (btn) {
-          btn.textContent = '✓ Semana 5 Completada';
-          btn.disabled = true;
-          btn.style.opacity = '0.8';
-        }
+        actualizarUICompletado();
       }
     });
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('article[id^="tab-"]').forEach(content => content.style.display = 'none');
+
+      event.currentTarget.classList.add('active');
+      document.getElementById('tab-' + tabId).style.display = 'block';
+    }
+
+    function actualizarUICompletado() {
+      const progressBar = document.getElementById('week-progress-bar');
+      const badge = document.getElementById('week-status-badge');
+      const btn = document.getElementById('mark-completed-btn');
+
+      if (progressBar) progressBar.style.width = '100%';
+      if (badge) {
+        badge.className = 'badge badge-success';
+        badge.textContent = 'Completado';
+      }
+      if (btn) {
+        btn.textContent = '✓ Semana 5 Completada';
+        btn.disabled = true;
+        btn.style.opacity = '0.85';
+      }
+    }
+
+    function completeWeek5() {
+      AppState.markWeekCompleted(5);
+      AppState.recordQuizResult('semana5_quiz', 100, { operaciones: 80, piezas: 70 });
+      actualizarUICompletado();
+      alert('🎉 ¡Semana 5 marcada como completada en tu expediente!');
+    }
+
+    function evaluarQuizSemana5() {
+      const isPassed = QuizEngine.evaluateQuiz({
+        formId: 'quiz-form-w5',
+        feedbackId: 'quiz-feedback-w5',
+        quizId: 'semana5_quiz',
+        weekNumber: 5,
+        answers: { q1: 'B', q2: 'A' },
+        competencyGains: { operaciones: 80, piezas: 70 },
+        successMsg: '<strong>¡Excelente!</strong> Respuestas correctas. La condición "Por Todo" (B) garantiza cortes pasantes permanentes y la revolución requiere un eje constructivo (A).'
+      });
+
+      if (isPassed) {
+        actualizarUICompletado();
+      }
+    }
   </script>
 </body>
 </html>
