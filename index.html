@@ -1,1 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOLIDWORKS ACADEMY | Plataforma de Entrenamiento CSWA</title>
 
+  <!-- Hojas de Estilo Institucionales -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+
+  <style>
+    /* Estilos específicos de la Landing Page Principal */
+    .hero-landing {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      color: var(--white);
+      padding: 4.5rem 2rem;
+      border-radius: 16px;
+      margin-bottom: 3rem;
+      box-shadow: var(--shadow-lg);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-landing h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      color: var(--white);
+    }
+
+    .hero-landing h1 span {
+      color: var(--accent);
+    }
+
+    .hero-landing p {
+      font-size: 1.2rem;
+      max-width: 820px;
+      margin: 0 auto 2rem auto;
+      opacity: 0.92;
+      line-height: 1.6;
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .feature-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem 1.5rem;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      text-align: center;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--accent);
+    }
+
+    .feature-icon {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      display: inline-block;
+    }
+
+    .feature-card h3 {
+      font-size: 1.25rem;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+      font-weight: 700;
+    }
+
+    .feature-card p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .banner-cswa {
+      background: #F0F9FF;
+      border-left: 5px solid var(--accent);
+      border-radius: 8px;
+      padding: 2rem;
+      margin-bottom: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .curriculum-preview-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+
+    .module-badge-preview {
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barra de Navegación Principal -->
+  <nav class="navbar">
+    <a href="index.html" class="brand"><span>SOLIDWORKS</span> ACADEMY</a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Inicio</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="aula/index.html">Aula Virtual</a></li>
+      <li><a href="cswa/index.html">CSWA Center</a></li>
+      <li><a href="proyecto.html">Proyecto Final</a></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+
+    <!-- Hero Section Principal -->
+    <header class="hero-landing">
+      <div style="font-size: 0.95rem; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); font-weight: 700; margin-bottom: 0.75rem;">
+        Plataforma Educativa para Principiantes
+      </div>
+      <h1>Domina SOLIDWORKS 2025+ y Certifícate en <span>CSWA</span></h1>
+      <p>
+        Un programa modular de 16 semanas diseñado por competencias para capacitarte desde cero en modelado paramétrico 3D, ensamblajes mecánicos, interpretación de planos y simulación oficial CSWA.
+      </p>
+      <div class="hero-actions">
+        <a href="dashboard.html" class="btn" style="font-size: 1.1rem; padding: 0.85rem 2rem;">🚀 Ingresar al Dashboard</a>
+        <a href="aula/index.html" class="btn btn-outline" style="font-size: 1.1rem; padding: 0.85rem 2rem; color: var(--white); border-color: var(--white);">📚 Explorar Aula Virtual</a>
+      </div>
+    </header>
+
+    <!-- Pilares Educativos de la Plataforma -->
+    <section>
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <h2 style="font-size: 2rem; color: var(--primary);">Arquitectura del Programa</h2>
+        <p style="color: var(--text-muted); max-width: 650px; margin: 0.5rem auto;">
+          Todo lo necesario para llevar tu aprendizaje de cero a nivel profesional sin requerir conexión a servidores externos.
+        </p>
+      </div>
+
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon">📚</div>
+          <h3>Aula Virtual 16 Semanas</h3>
+          <p>
+            Currículo distribuido en 8 módulos secuenciales con lecciones teóricas, guías paso a paso, ejercicios guiados y solución de errores típicos de CAD.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>Motor de Diagnóstico CSWA</h3>
+          <p>
+            Monitoreo en tiempo real de tus 9 competencias clave (croquizado, piezas, masa/CG, ensamblajes) guardado directamente en tu navegador.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">⏱️</div>
+          <h3>Simuladores Cronometrados</h3>
+          <p>
+            Exámenes de prueba autocorregibles con temporizador integrado para entrenar tu velocidad y precisión bajo condiciones de examen real.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">⚙️</div>
+          <h3>Proyecto Tornillo de Banco</h3>
+          <p>
+            Desarrollo práctico integrador de un ensamblaje mecánico completo con despiece, verificación de movimiento y análisis de masas.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Banner Destacado del CSWA Practice Center -->
+    <section class="banner-cswa">
+      <div>
+        <span class="badge badge-info" style="margin-bottom: 0.5rem;">Certificación Internacional</span>
+        <h3 style="font-size: 1.5rem; color: var(--primary); margin-bottom: 0.5rem;">Preparación Oficial CSWA (Certified SOLIDWORKS Associate)</h3>
+        <p style="color: var(--text-muted); max-width: 700px; margin: 0;">
+          Entrena con el banco de preguntas tipo examen y obtén un análisis detallado de debilidades con recomendaciones automáticas de estudio.
+        </p>
+      </div>
+      <div>
+        <a href="cswa/index.html" class="btn" style="padding: 0.75rem 1.5rem;">🎯 Probar CSWA Center</a>
+      </div>
+    </section>
+
+    <!-- Vista Previa de la Ruta de Aprendizaje -->
+    <section class="card">
+      <div class="card-header">
+        <h3 class="card-title">🗺️ Ruta de Aprendizaje (8 Módulos de Especialización)</h3>
+        <a href="aula/index.html" class="btn btn-outline" style="font-size: 0.85rem;">Ver 16 Semanas Completa</a>
+      </div>
+
+      <div class="curriculum-preview-list">
+        <div class="module-badge-preview">
+          <span class="badge badge-info" style="margin-bottom: 0.4rem;">Semanas 1 - 2</span>
+          <h4 style="color: var(--primary); font-size: 1.05rem; margin-bottom: 0.3rem;">Módulo 1: Introducción a SOLIDWORKS</h4>
+          <p style="font-size: 0.85rem; color: var(--text-muted);">Interfaz de usuario, planos de referencia, visualización 3D y configuración de unidades MMGS/IPS.</p>
+        </div>
+
+        <div class="module-badge-preview">
+          <span class="badge badge-info" style="margin-bottom: 0.4rem;">Semanas 3 - 4</span>
+          <h4 style="color: var(--primary); font-size: 1.05rem; margin-bottom: 0.3rem;">Módulo 2: Croquis 2D y Restricciones</h4>
+          <p style="font-size: 0.85rem; color: var(--text-muted);">Entidades 2D, cotas inteligentes, relaciones geométricas y croquis completamente definidos. (Eval. 1 - 15%).</p>
+        </div>
+
+        <div class="module-badge-preview">
+          <span class="badge badge-info" style="margin-bottom: 0.4rem;">Semanas 5 - 6</span>
+          <h4 style="color: var(--primary); font-size: 1.05rem; margin-bottom: 0.3rem;">Módulo 3: Modelado de Sólidos</h4>
+          <p style="font-size: 0.85rem; color: var(--text-muted);">Extrusiones, revoluciones, cortes, redondeos, vaciados y matrices de repetición.</p>
+        </div>
+
+        <div class="module-badge-preview">
+          <span class="badge badge-warning" style="margin-bottom: 0.4rem;">Semanas 7 - 8</span>
+          <h4 style="color: var(--primary); font-size: 1.05rem; margin-bottom: 0.3rem;">Módulo 4: Componentes Mecánicos</h4>
+          <p style="font-size: 0.85rem; color: var(--text-muted);">Interpretación de planos técnicos 2D y edición de cotas paramétricas. (Eval. 2 - 25%).</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 SOLIDWORKS ACADEMY - Formación por Competencias & Preparación para la Certificación CSWA</p>
+  </footer>
+
+  <!-- Scripts de la Aplicación -->
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
