@@ -1,255 +1,473 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SOLIDWORKS ACADEMY | Plataforma de Entrenamiento CSWA</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOLIDWORKS ACADEMY - Preparación Certificación CSWA</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Three.js CDN for 3D CAD Visualizations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-  <!-- Hojas de Estilo Institucionales -->
-  <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="stylesheet" href="assets/css/components.css">
-
-  <style>
-    /* Estilos específicos de la Landing Page Principal */
-    .hero-landing {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-      color: var(--white);
-      padding: 4.5rem 2rem;
-      border-radius: 16px;
-      margin-bottom: 3rem;
-      box-shadow: var(--shadow-lg);
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-landing h1 {
-      font-size: 3rem;
-      font-weight: 800;
-      line-height: 1.15;
-      margin-bottom: 1rem;
-      color: var(--white);
-    }
-
-    .hero-landing h1 span {
-      color: var(--accent);
-    }
-
-    .hero-landing p {
-      font-size: 1.2rem;
-      max-width: 820px;
-      margin: 0 auto 2rem auto;
-      opacity: 0.92;
-      line-height: 1.6;
-    }
-
-    .hero-actions {
-      display: flex;
-      justify-content: center;
-      gap: 1.25rem;
-      flex-wrap: wrap;
-    }
-
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 3rem;
-    }
-
-    .feature-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 2rem 1.5rem;
-      box-shadow: var(--shadow-sm);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-      text-align: center;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-md);
-      border-color: var(--accent);
-    }
-
-    .feature-icon {
-      font-size: 2.8rem;
-      margin-bottom: 1rem;
-      display: inline-block;
-    }
-
-    .feature-card h3 {
-      font-size: 1.25rem;
-      color: var(--primary);
-      margin-bottom: 0.75rem;
-      font-weight: 700;
-    }
-
-    .feature-card p {
-      font-size: 0.92rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-
-    .banner-cswa {
-      background: #F0F9FF;
-      border-left: 5px solid var(--accent);
-      border-radius: 8px;
-      padding: 2rem;
-      margin-bottom: 3rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 2rem;
-      flex-wrap: wrap;
-    }
-
-    .curriculum-preview-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.25rem;
-      margin-top: 1.5rem;
-    }
-
-    .module-badge-preview {
-      background: var(--bg-light);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.25rem;
-    }
-  </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        swDark: '#102A43',
+                        swCyan: '#00B3E0',
+                        swCyanHover: '#0090B3',
+                        swLightBg: '#F3F6F8',
+                        swSlate: '#1F2937',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #F3F6F8; color: #1F2937; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #E5E7EB; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #00B3E0; border-radius: 4px; }
+        .tab-btn.active { border-bottom: 3px solid #00B3E0; color: #00B3E0; font-weight: 700; }
+        canvas { touch-action: none; }
+    </style>
 </head>
-<body>
+<body class="h-screen flex flex-col overflow-hidden">
 
-  <!-- Barra de Navegación Principal -->
-  <nav class="navbar">
-    <a href="index.html" class="brand"><span>SOLIDWORKS</span> ACADEMY</a>
-    <ul class="nav-links">
-      <li><a href="index.html" class="active">Inicio</a></li>
-      <li><a href="dashboard.html">Dashboard</a></li>
-      <li><a href="aula/index.html">Aula Virtual</a></li>
-      <li><a href="cswa/index.html">CSWA Center</a></li>
-      <li><a href="proyecto.html">Proyecto Final</a></li>
-    </ul>
-  </nav>
+    <!-- TOP HEADER / NAV BAR -->
+    <header class="bg-swDark text-white shadow-lg flex-shrink-0 z-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('inicio')">
+                    <div class="w-10 h-10 bg-swCyan rounded-lg flex items-center justify-center text-swDark text-xl font-black shadow-md">
+                        SW
+                    </div>
+                    <div>
+                        <div class="font-extrabold text-lg tracking-wider text-white leading-none">SOLIDWORKS ACADEMY</div>
+                        <div class="text-xs text-swCyan font-medium tracking-wide">CURSO Y PREPARACIÓN CSWA</div>
+                    </div>
+                </div>
 
-  <main class="container">
+                <!-- Desktop Nav Links -->
+                <nav class="hidden lg:flex space-x-1 text-sm font-medium">
+                    <button onclick="switchTab('inicio')" class="nav-item px-3 py-2 rounded-md hover:text-swCyan transition">Inicio</button>
+                    <a href="dashboard.html" class="nav-item px-3 py-2 rounded-md hover:text-swCyan transition">Dashboard</a>
+                    <a href="aula/index.html" class="nav-item px-3 py-2 rounded-md hover:text-swCyan transition">Aula Virtual</a>
+                    <button onclick="switchTab('laboratorio')" class="nav-item px-3 py-2 rounded-md hover:text-swCyan transition">Lab CAD</button>
+                    <a href="cswa/index.html" class="nav-item px-3 py-2 rounded-md text-swCyan hover:bg-swCyan/10 rounded font-semibold transition"><i class="fa-solid fa-award mr-1"></i> CSWA Center</a>
+                    <a href="proyecto.html" class="nav-item px-3 py-2 rounded-md hover:text-swCyan transition">Proyecto Final</a>
+                    <button onclick="switchTab('recursos')" class="nav-item px-3 py-2 rounded-md hover:text-swCyan transition">Recursos</button>
+                    <button onclick="switchTab('certificacion')" class="nav-item px-3 py-2 rounded-md hover:text-swCyan transition">Certificación CSWA</button>
+                </nav>
 
-    <!-- Hero Section Principal -->
-    <header class="hero-landing">
-      <div style="font-size: 0.95rem; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); font-weight: 700; margin-bottom: 0.75rem;">
-        Plataforma Educativa para Principiantes
-      </div>
-      <h1>Domina SOLIDWORKS 2025+ y Certifícate en <span>CSWA</span></h1>
-      <p>
-        Un programa modular de 16 semanas diseñado por competencias para capacitarte desde cero en modelado paramétrico 3D, ensamblajes mecánicos, interpretación de planos y simulación oficial CSWA.
-      </p>
-      <div class="hero-actions">
-        <a href="dashboard.html" class="btn" style="font-size: 1.1rem; padding: 0.85rem 2rem;">🚀 Ingresar al Dashboard</a>
-        <a href="aula/index.html" class="btn btn-outline" style="font-size: 1.1rem; padding: 0.85rem 2rem; color: var(--white); border-color: var(--white);">📚 Explorar Aula Virtual</a>
-      </div>
+                <!-- Mobile Menu Button -->
+                <div class="lg:hidden">
+                    <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-white focus:outline-none p-2">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-swDark/95 border-b border-gray-700 px-4 pt-2 pb-4 space-y-2 text-sm font-medium">
+            <button onclick="switchTab('inicio')" class="block w-full text-left px-3 py-2 rounded-md hover:bg-gray-700">Inicio</button>
+            <a href="dashboard.html" class="block w-full text-left px-3 py-2 rounded-md hover:bg-gray-700">Dashboard</a>
+            <a href="aula/index.html" class="block w-full text-left px-3 py-2 rounded-md hover:bg-gray-700">Aula Virtual</a>
+            <button onclick="switchTab('laboratorio')" class="block w-full text-left px-3 py-2 rounded-md hover:bg-gray-700">Laboratorio CAD</button>
+            <a href="cswa/index.html" class="block w-full text-left px-3 py-2 rounded-md text-swCyan hover:bg-gray-700 font-bold"><i class="fa-solid fa-award mr-1"></i> CSWA Practice Center</a>
+            <a href="proyecto.html" class="block w-full text-left px-3 py-2 rounded-md hover:bg-gray-700">Proyecto Final</a>
+            <button onclick="switchTab('recursos')" class="block w-full text-left px-3 py-2 rounded-md hover:bg-gray-700">Recursos</button>
+            <button onclick="switchTab('certificacion')" class="block w-full text-left px-3 py-2 rounded-md hover:bg-gray-700">Certificación CSWA</button>
+        </div>
     </header>
 
-    <!-- Pilares Educativos de la Plataforma -->
-    <section>
-      <div style="text-align: center; margin-bottom: 2rem;">
-        <h2 style="font-size: 2rem; color: var(--primary);">Arquitectura del Programa</h2>
-        <p style="color: var(--text-muted); max-width: 650px; margin: 0.5rem auto;">
-          Todo lo necesario para llevar tu aprendizaje de cero a nivel profesional sin requerir conexión a servidores externos.
-        </p>
-      </div>
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="flex-1 overflow-y-auto custom-scrollbar p-4 md:p-6 bg-swLightBg" id="mainContent">
 
-      <div class="feature-grid">
-        <div class="feature-card">
-          <div class="feature-icon">📚</div>
-          <h3>Aula Virtual 16 Semanas</h3>
-          <p>
-            Currículo distribuido en 8 módulos secuenciales con lecciones teóricas, guías paso a paso, ejercicios guiados y solución de errores típicos de CAD.
-          </p>
-        </div>
+        <!-- ==================== TAB 1: INICIO ==================== -->
+        <section id="tab-inicio" class="tab-content max-w-7xl mx-auto space-y-8">
+            <!-- Hero Banner -->
+            <div class="bg-gradient-to-r from-swDark to-slate-800 text-white rounded-2xl p-6 md:p-10 shadow-xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between">
+                <div class="md:w-2/3 space-y-4 z-10">
+                    <span class="bg-swCyan/20 text-swCyan border border-swCyan/30 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">Formación Profesional CAD</span>
+                    <h1 class="text-3xl md:text-4xl lg:text-5xl font-black tracking-tight leading-tight">SOLIDWORKS PARA PRINCIPIANTES</h1>
+                    <p class="text-gray-300 text-base md:text-lg">Curso Virtual Interactivo de 16 semanas diseñado por ingenieros y pedagogos para dominar el diseño 3D y superar con éxito la certificación internacional <strong class="text-swCyan">CSWA (Certified SOLIDWORKS Associate)</strong>.</p>
+                    <div class="flex flex-wrap gap-4 pt-2">
+                        <a href="aula/index.html" class="bg-swCyan hover:bg-swCyanHover text-swDark font-bold px-6 py-3 rounded-lg shadow-lg hover:shadow-cyan-500/20 transition flex items-center gap-2">
+                            <i class="fa-solid fa-play"></i> Iniciar Aula Virtual
+                        </a>
+                        <a href="cswa/index.html" class="bg-white/10 hover:bg-white/20 border border-white/30 text-white font-semibold px-6 py-3 rounded-lg backdrop-blur-sm transition flex items-center gap-2">
+                            <i class="fa-solid fa-chart-line"></i> Evaluar Nivel CSWA
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/3 mt-6 md:mt-0 flex justify-center z-10">
+                    <div class="w-48 h-48 md:w-56 md:h-56 bg-swCyan/10 border-2 border-swCyan/30 rounded-2xl flex flex-col items-center justify-center text-center p-4 backdrop-blur-md">
+                        <i class="fa-solid fa-certificate text-5xl text-swCyan mb-3 animate-pulse"></i>
+                        <span class="font-extrabold text-xl text-white">Certificación CSWA</span>
+                        <span class="text-xs text-gray-300 mt-1">SOLIDWORKS Official Associate</span>
+                        <div class="mt-3 bg-swCyan text-swDark text-xs font-bold px-3 py-1 rounded-full">Examen 100% Simulado</div>
+                    </div>
+                </div>
+            </div>
 
-        <div class="feature-card">
-          <div class="feature-icon">📊</div>
-          <h3>Motor de Diagnóstico CSWA</h3>
-          <p>
-            Monitoreo en tiempo real de tus 9 competencias clave (croquizado, piezas, masa/CG, ensamblajes) guardado directamente en tu navegador.
-          </p>
-        </div>
+            <!-- Highlights Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 flex items-start space-x-4">
+                    <div class="p-3 bg-blue-50 text-swDark rounded-lg"><i class="fa-regular fa-clock text-2xl"></i></div>
+                    <div>
+                        <h3 class="font-bold text-gray-900">16 Semanas</h3>
+                        <p class="text-xs text-gray-500">3 hrs/semana (48 hrs lectivas totales)</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 flex items-start space-x-4">
+                    <div class="p-3 bg-cyan-50 text-swCyan rounded-lg"><i class="fa-solid fa-cubes text-2xl"></i></div>
+                    <div>
+                        <h3 class="font-bold text-gray-900">8 Módulos Completos</h3>
+                        <p class="text-xs text-gray-500">Croquis, piezas, ensamblajes y masa</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 flex items-start space-x-4">
+                    <div class="p-3 bg-emerald-50 text-emerald-600 rounded-lg"><i class="fa-solid fa-gears text-2xl"></i></div>
+                    <div>
+                        <h3 class="font-bold text-gray-900">Proyecto Real</h3>
+                        <p class="text-xs text-gray-500">Diseño completo de Tornillo de Banco</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 flex items-start space-x-4">
+                    <div class="p-3 bg-amber-50 text-amber-600 rounded-lg"><i class="fa-solid fa-bullseye text-2xl"></i></div>
+                    <div>
+                        <h3 class="font-bold text-gray-900">CSWA Engine</h3>
+                        <p class="text-xs text-gray-500">Diagnóstico automático de 9 áreas</p>
+                    </div>
+                </div>
+            </div>
 
-        <div class="feature-card">
-          <div class="feature-icon">⏱️</div>
-          <h3>Simuladores Cronometrados</h3>
-          <p>
-            Exámenes de prueba autocorregibles con temporizador integrado para entrenar tu velocidad y precisión bajo condiciones de examen real.
-          </p>
-        </div>
+            <!-- Curriculum Syllabus Breakdown -->
+            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                <h2 class="text-2xl font-extrabold text-swDark mb-6 flex items-center gap-2">
+                    <i class="fa-solid fa-graduation-cap text-swCyan"></i> Estructura del Curso (8 Módulos / 16 Semanas)
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" id="inicioModulesGrid">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+        </section>
 
-        <div class="feature-card">
-          <div class="feature-icon">⚙️</div>
-          <h3>Proyecto Tornillo de Banco</h3>
-          <p>
-            Desarrollo práctico integrador de un ensamblaje mecánico completo con despiece, verificación de movimiento y análisis de masas.
-          </p>
-        </div>
-      </div>
-    </section>
+        <!-- ==================== TAB 2: LABORATORIO CAD ==================== -->
+        <section id="tab-laboratorio" class="tab-content hidden max-w-7xl mx-auto space-y-6">
+            <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <h1 class="text-2xl font-bold text-swDark flex items-center gap-2">
+                        <i class="fa-solid fa-drafting-compass text-swCyan"></i> Laboratorio CAD Interactivo
+                    </h1>
+                    <p class="text-sm text-gray-500">Visualizador 3D, generador de planos técnicos y calculadora de propiedades de masa</p>
+                </div>
+                <div class="flex gap-2">
+                    <button onclick="setLabShape('cube')" class="px-3 py-1.5 bg-gray-100 hover:bg-swCyan hover:text-white rounded text-xs font-semibold transition">Bloque Extruido</button>
+                    <button onclick="setLabShape('cylinder')" class="px-3 py-1.5 bg-gray-100 hover:bg-swCyan hover:text-white rounded text-xs font-semibold transition">Eje con Revolución</button>
+                    <button onclick="setLabShape('bracket')" class="px-3 py-1.5 bg-gray-100 hover:bg-swCyan hover:text-white rounded text-xs font-semibold transition">Soporte Perforado</button>
+                </div>
+            </div>
 
-    <!-- Banner Destacado del CSWA Practice Center -->
-    <section class="banner-cswa">
-      <div>
-        <span class="badge badge-info" style="margin-bottom: 0.5rem;">Certificación Internacional</span>
-        <h3 style="font-size: 1.5rem; color: var(--primary); margin-bottom: 0.5rem;">Preparación Oficial CSWA (Certified SOLIDWORKS Associate)</h3>
-        <p style="color: var(--text-muted); max-width: 700px; margin: 0;">
-          Entrena con el banco de preguntas tipo examen y obtén un análisis detallado de debilidades con recomendaciones automáticas de estudio.
-        </p>
-      </div>
-      <div>
-        <a href="cswa/index.html" class="btn" style="padding: 0.75rem 1.5rem;">🎯 Probar CSWA Center</a>
-      </div>
-    </section>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- 3D Viewer Canvas -->
+                <div class="lg:col-span-2 bg-slate-900 rounded-xl overflow-hidden shadow-md flex flex-col h-[480px] relative">
+                    <div class="bg-slate-800 text-gray-300 text-xs px-4 py-2 flex justify-between items-center border-b border-slate-700">
+                        <span><i class="fa-solid fa-cube text-swCyan mr-2"></i> VISTA DE MODELADO 3D (INTERACTIVO)</span>
+                        <span class="text-slate-400">Arrastra para rotar | Rueda para Zoom</span>
+                    </div>
+                    <div id="threeCanvasContainer" class="w-full flex-1 relative">
+                        <!-- Three.js Canvas injected here -->
+                    </div>
+                </div>
 
-    <!-- Vista Previa de la Ruta de Aprendizaje -->
-    <section class="card">
-      <div class="card-header">
-        <h3 class="card-title">🗺️ Ruta de Aprendizaje (8 Módulos de Especialización)</h3>
-        <a href="aula/index.html" class="btn btn-outline" style="font-size: 0.85rem;">Ver 16 Semanas Completa</a>
-      </div>
+                <!-- Parameter Inspector & Mass Calculator -->
+                <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-4">
+                    <h3 class="font-bold text-swDark border-b pb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-calculator text-swCyan"></i> Inspector de Propiedades
+                    </h3>
 
-      <div class="curriculum-preview-list">
-        <div class="module-badge-preview">
-          <span class="badge badge-info" style="margin-bottom: 0.4rem;">Semanas 1 - 2</span>
-          <h4 style="color: var(--primary); font-size: 1.05rem; margin-bottom: 0.3rem;">Módulo 1: Introducción a SOLIDWORKS</h4>
-          <p style="font-size: 0.85rem; color: var(--text-muted);">Interfaz de usuario, planos de referencia, visualización 3D y configuración de unidades MMGS/IPS.</p>
-        </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">Material Asignado</label>
+                        <select id="labMaterialSelect" onchange="updateLabCalculations()" class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-swCyan outline-none">
+                            <option value="7850">Acero al Carbono (1020) - 7850 kg/m³</option>
+                            <option value="2700">Aluminio 6061-T6 - 2700 kg/m³</option>
+                            <option value="8500">Latón (Brass) - 8500 kg/m³</option>
+                            <option value="1020">ABS Plástico - 1020 kg/m³</option>
+                            <option value="8960">Cobre Puro - 8960 kg/m³</option>
+                        </select>
+                    </div>
 
-        <div class="module-badge-preview">
-          <span class="badge badge-info" style="margin-bottom: 0.4rem;">Semanas 3 - 4</span>
-          <h4 style="color: var(--primary); font-size: 1.05rem; margin-bottom: 0.3rem;">Módulo 2: Croquis 2D y Restricciones</h4>
-          <p style="font-size: 0.85rem; color: var(--text-muted);">Entidades 2D, cotas inteligentes, relaciones geométricas y croquis completamente definidos. (Eval. 1 - 15%).</p>
-        </div>
+                    <div class="space-y-3 pt-2">
+                        <div>
+                            <div class="flex justify-between text-xs text-gray-600 mb-1">
+                                <span>Dimensión A (Longitud)</span>
+                                <span class="font-semibold" id="valA">100 mm</span>
+                            </div>
+                            <input type="range" id="rangeA" min="50" max="200" value="100" oninput="updateLabCalculations()" class="w-full accent-swCyan">
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs text-gray-600 mb-1">
+                                <span>Dimensión B (Ancho / Diámetro)</span>
+                                <span class="font-semibold" id="valB">50 mm</span>
+                            </div>
+                            <input type="range" id="rangeB" min="20" max="120" value="50" oninput="updateLabCalculations()" class="w-full accent-swCyan">
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs text-gray-600 mb-1">
+                                <span>Dimensión C (Altura / Perforación)</span>
+                                <span class="font-semibold" id="valC">30 mm</span>
+                            </div>
+                            <input type="range" id="rangeC" min="10" max="80" value="30" oninput="updateLabCalculations()" class="w-full accent-swCyan">
+                        </div>
+                    </div>
 
-        <div class="module-badge-preview">
-          <span class="badge badge-info" style="margin-bottom: 0.4rem;">Semanas 5 - 6</span>
-          <h4 style="color: var(--primary); font-size: 1.05rem; margin-bottom: 0.3rem;">Módulo 3: Modelado de Sólidos</h4>
-          <p style="font-size: 0.85rem; color: var(--text-muted);">Extrusiones, revoluciones, cortes, redondeos, vaciados y matrices de repetición.</p>
-        </div>
+                    <!-- Calculated Properties Box -->
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-lg space-y-2 pt-3">
+                        <div class="text-xs text-gray-500 font-bold uppercase">Resultados de Masa</div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Volumen:</span>
+                            <span class="font-bold text-swDark" id="calcVol">150,000.00 mm³</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Masa Calculada:</span>
+                            <span class="font-bold text-swCyan" id="calcMass">1,177.50 gramos</span>
+                        </div>
+                        <div class="flex justify-between text-xs text-gray-500 border-t pt-2">
+                            <span>Centro de Gravedad (X, Y, Z):</span>
+                            <span class="font-mono text-gray-700" id="calcCG">(0.00, 0.00, 0.00)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <div class="module-badge-preview">
-          <span class="badge badge-warning" style="margin-bottom: 0.4rem;">Semanas 7 - 8</span>
-          <h4 style="color: var(--primary); font-size: 1.05rem; margin-bottom: 0.3rem;">Módulo 4: Componentes Mecánicos</h4>
-          <p style="font-size: 0.85rem; color: var(--text-muted);">Interpretación de planos técnicos 2D y edición de cotas paramétricas. (Eval. 2 - 25%).</p>
-        </div>
-      </div>
-    </section>
+        <!-- ==================== TAB 3: RECURSOS ==================== -->
+        <section id="tab-recursos" class="tab-content hidden max-w-7xl mx-auto space-y-6">
+            <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+                <h1 class="text-2xl font-bold text-swDark mb-4">Biblioteca de Recursos y Descargas</h1>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                    <div class="p-4 border rounded-lg hover:border-swCyan transition">
+                        <i class="fa-solid fa-file-pdf text-red-500 text-2xl mb-2"></i>
+                        <h4 class="font-bold text-swDark">Guía de Atajos de Teclado CSWA</h4>
+                        <p class="text-xs text-gray-500 mt-1">Hoja de referencia rápida de comandos y atajos de SolidWorks.</p>
+                        <button onclick="downloadResource('Guia_Atajos_SolidWorks.pdf')" class="mt-3 text-xs bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold px-3 py-1.5 rounded">Descargar PDF</button>
+                    </div>
+                    <div class="p-4 border rounded-lg hover:border-swCyan transition">
+                        <i class="fa-solid fa-folder-archive text-amber-500 text-2xl mb-2"></i>
+                        <h4 class="font-bold text-swDark">Plantillas de Planos Normalizados</h4>
+                        <p class="text-xs text-gray-500 mt-1">Archivos de formato ISO / ANSI A4 y A3 (.slddrt).</p>
+                        <button onclick="downloadResource('Plantillas_Planos_ISO_ANSI.zip')" class="mt-3 text-xs bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold px-3 py-1.5 rounded">Descargar ZIP</button>
+                    </div>
+                    <div class="p-4 border rounded-lg hover:border-swCyan transition">
+                        <i class="fa-solid fa-cube text-swCyan text-2xl mb-2"></i>
+                        <h4 class="font-bold text-swDark">Banco de Planos Tipo CSWA</h4>
+                        <p class="text-xs text-gray-500 mt-1">20 Ejercicios resueltos en plano 2D con cotas de prueba.</p>
+                        <button onclick="downloadResource('Planos_Ejercicios_CSWA.pdf')" class="mt-3 text-xs bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold px-3 py-1.5 rounded">Descargar PDF</button>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  </main>
+        <!-- ==================== TAB 4: CERTIFICACIÓN CSWA ==================== -->
+        <section id="tab-certificacion" class="tab-content hidden max-w-7xl mx-auto space-y-6">
+            <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-6">
+                <div class="border-b pb-4">
+                    <span class="text-xs font-bold text-swCyan uppercase">Información Oficial del Examen</span>
+                    <h1 class="text-2xl font-bold text-swDark">Certificación Internacional CSWA (Certified SOLIDWORKS Associate)</h1>
+                </div>
 
-  <footer>
-    <p>&copy; 2026 SOLIDWORKS ACADEMY - Formación por Competencias & Preparación para la Certificación CSWA</p>
-  </footer>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+                    <div class="space-y-3">
+                        <h3 class="font-bold text-swDark text-base">Requisitos y Formato Oficial del Examen</h3>
+                        <ul class="space-y-2 text-xs text-gray-600 list-disc pl-4">
+                            <li><strong>Duración del examen:</strong> 3 Horas (180 minutos).</li>
+                            <li><strong>Calificación mínima de aprobación:</strong> 70% (165 puntos de 240 puntos posibles).</li>
+                            <li><strong>Software requerido:</strong> SOLIDWORKS 2021 o superior (con Tangent Edges enabled).</li>
+                            <li><strong>Política de reintento:</strong> Esperar un periodo mínimo de 14 días en caso de no aprobar.</li>
+                            <li><strong>Enlace Oficial de Inscripción:</strong> <a href="https://www.solidworks.com/certifications" target="_blank" class="text-swCyan font-bold hover:underline">solidworks.com/certifications</a></li>
+                        </ul>
+                    </div>
 
-  <!-- Scripts de la Aplicación -->
-  <script src="assets/js/app.js"></script>
+                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl space-y-3">
+                        <h3 class="font-bold text-swDark text-sm">Lista de Chequeo para el Día del Examen</h3>
+                        <div class="space-y-2 text-xs">
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" class="accent-swCyan">
+                                <span>Verificar conexión a internet estable para el cliente Tangix TesterPRO.</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" class="accent-swCyan">
+                                <span>Tener plantilla de pieza configurada en Milímetros (MMGS) e Pulgadas (IPS).</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" class="accent-swCyan">
+                                <span>Saber modificar variables globales (A, B, C) rápidamente.</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" class="accent-swCyan">
+                                <span>Saber calcular la masa y el centro de masa con precisión decimal.</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- MAIN JAVASCRIPT LOGIC -->
+    <script>
+        const curriculumData = [
+            { module: 1, moduleTitle: "INTRODUCCIÓN A SOLIDWORKS", weeks: [{ week: 1, title: "Entorno e Interfaz" }, { week: 2, title: "Modelado Paramétrico" }] },
+            { module: 2, moduleTitle: "CROQUIS Y RESTRICCIONES", weeks: [{ week: 3, title: "Entidades y Relaciones" }, { week: 4, title: "Evaluación Práctica 1" }] },
+            { module: 3, moduleTitle: "MODELADO DE SÓLIDOS", weeks: [{ week: 5, title: "Extrusión y Revolución" }, { week: 6, title: "Vaciados y Matrices" }] },
+            { module: 4, moduleTitle: "COMPONENTES MECÁNICOS", weeks: [{ week: 7, title: "Bridas, Poleas y Ejes" }, { week: 8, title: "Evaluación Práctica 2" }] },
+            { module: 5, moduleTitle: "ENSAMBLAJES", weeks: [{ week: 9, title: "Relaciones Estándar" }, { week: 10, title: "Relaciones Avanzadas e Interferencias" }] },
+            { module: 6, moduleTitle: "PROPIEDADES FÍSICAS", weeks: [{ week: 11, title: "Materiales y Masa" }, { week: 12, title: "Evaluación Práctica 3" }] },
+            { module: 7, moduleTitle: "PREPARACIÓN CSWA", weeks: [{ week: 13, title: "Estrategia CSWA" }, { week: 14, title: "Ensamblajes Complejos" }] },
+            { module: 8, moduleTitle: "SIMULACROS Y PROYECTO", weeks: [{ week: 15, title: "Simulacro Diagnóstico" }, { week: 16, title: "Evaluación Final" }] }
+        ];
+
+        window.onload = function() {
+            renderInicioModules();
+            initThreeJS();
+            updateLabCalculations();
+        };
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            const target = document.getElementById('tab-' + tabId);
+            if(target) target.classList.remove('hidden');
+            document.getElementById('mobileMenu').classList.add('hidden');
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        }
+
+        function renderInicioModules() {
+            const grid = document.getElementById('inicioModulesGrid');
+            grid.innerHTML = curriculumData.map(mod => `
+                <div class="border border-gray-200 rounded-xl p-4 bg-gray-50 hover:bg-white hover:border-swCyan hover:shadow-md transition">
+                    <span class="text-[10px] font-black uppercase text-swCyan bg-swCyan/10 px-2 py-0.5 rounded">Módulo ${mod.module}</span>
+                    <h4 class="font-bold text-swDark text-sm mt-2 mb-2">${mod.moduleTitle}</h4>
+                    <ul class="text-xs space-y-1 text-gray-600">
+                        ${mod.weeks.map(w => `<li><a href="aula/semana${w.week}.html" class="hover:text-swCyan transition"><i class="fa-solid fa-angle-right text-swCyan text-[10px] mr-1"></i> Sem ${w.week}: ${w.title}</a></li>`).join('')}
+                    </ul>
+                </div>
+            `).join('');
+        }
+
+        let scene, camera, renderer, currentMesh;
+
+        function initThreeJS() {
+            const container = document.getElementById('threeCanvasContainer');
+            if(!container) return;
+
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x0f172a);
+
+            camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+            camera.position.set(150, 150, 200);
+            camera.lookAt(0, 0, 0);
+
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            container.appendChild(renderer.domElement);
+
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+            scene.add(ambientLight);
+
+            const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            dirLight.position.set(100, 200, 150);
+            scene.add(dirLight);
+
+            const grid = new THREE.GridHelper(300, 20, 0x00B3E0, 0x334155);
+            scene.add(grid);
+
+            setLabShape('cube');
+
+            let isDragging = false;
+            let prevMouse = { x: 0, y: 0 };
+
+            renderer.domElement.addEventListener('mousedown', e => { isDragging = true; prevMouse = { x: e.clientX, y: e.clientY }; });
+            renderer.domElement.addEventListener('mousemove', e => {
+                if(!isDragging || !currentMesh) return;
+                const deltaX = e.clientX - prevMouse.x;
+                const deltaY = e.clientY - prevMouse.y;
+                currentMesh.rotation.y += deltaX * 0.01;
+                currentMesh.rotation.x += deltaY * 0.01;
+                prevMouse = { x: e.clientX, y: e.clientY };
+                renderer.render(scene, camera);
+            });
+            window.addEventListener('mouseup', () => { isDragging = false; });
+
+            renderer.render(scene, camera);
+        }
+
+        function setLabShape(type) {
+            if(!scene) return;
+            if(currentMesh) scene.remove(currentMesh);
+
+            const material = new THREE.MeshStandardMaterial({ color: 0x00B3E0, metalness: 0.4, roughness: 0.3 });
+
+            let geometry;
+            const dimA = parseFloat(document.getElementById('rangeA').value);
+            const dimB = parseFloat(document.getElementById('rangeB').value);
+            const dimC = parseFloat(document.getElementById('rangeC').value);
+
+            if(type === 'cube') {
+                geometry = new THREE.BoxGeometry(dimA, dimC, dimB);
+            } else if(type === 'cylinder') {
+                geometry = new THREE.CylinderGeometry(dimB/2, dimB/2, dimA, 32);
+            } else {
+                geometry = new THREE.TorusGeometry(dimB, dimC/2, 16, 100);
+            }
+
+            currentMesh = new THREE.Mesh(geometry, material);
+            scene.add(currentMesh);
+            renderer.render(scene, camera);
+            updateLabCalculations();
+        }
+
+        function updateLabCalculations() {
+            const dimA = parseFloat(document.getElementById('rangeA').value);
+            const dimB = parseFloat(document.getElementById('rangeB').value);
+            const dimC = parseFloat(document.getElementById('rangeC').value);
+
+            document.getElementById('valA').innerText = dimA + ' mm';
+            document.getElementById('valB').innerText = dimB + ' mm';
+            document.getElementById('valC').innerText = dimC + ' mm';
+
+            const density = parseFloat(document.getElementById('labMaterialSelect').value);
+
+            const volumeMm3 = dimA * dimB * dimC;
+            const volumeM3 = volumeMm3 / 1e9;
+            const massKg = volumeM3 * density;
+            const massGrams = massKg * 1000;
+
+            document.getElementById('calcVol').innerText = volumeMm3.toLocaleString('es-ES', {minimumFractionDigits:2}) + ' mm³';
+            document.getElementById('calcMass').innerText = massGrams.toLocaleString('es-ES', {minimumFractionDigits:2}) + ' gramos';
+
+            if(currentMesh && scene && renderer) {
+                currentMesh.scale.set(dimA/100, dimC/30, dimB/50);
+                renderer.render(scene, camera);
+            }
+        }
+
+        function downloadResource(filename) {
+            alert(`Iniciando descarga simulada del archivo: ${filename}`);
+        }
+    </script>
 </body>
 </html>
