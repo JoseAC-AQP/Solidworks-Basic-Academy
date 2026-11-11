@@ -1,1 +1,28 @@
+# IDEs y Editores de código
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
 
+# Archivos de SO y temporales
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# Archivos de respaldo de SOLIDWORKS y temporales de CAD
+~$*.sldprt
+~$*.sldasm
+~$*.slddrw
+*.tmp
+
+# Dependencias (si aplica en un futuro desarrollo Node.js)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Archivos de distribución / builds locales
+dist/
+build/
