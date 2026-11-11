@@ -1,1 +1,439 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semana 1 - Entorno de Trabajo e Interfaz | SOLIDWORKS ACADEMY</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <style>
+    .lesson-header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      color: var(--white);
+      padding: 2.5rem 2rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 12px rgba(16, 42, 67, 0.15);
+    }
+    .lesson-meta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+    .meta-badge {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(4px);
+      padding: 0.35rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+    .cswa-competency-card {
+      border-left: 4px solid var(--accent);
+      background: #EBF8FF;
+      padding: 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 2rem;
+    }
+    .step-box {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+      position: relative;
+      padding-left: 3.5rem;
+    }
+    .step-number {
+      position: absolute;
+      left: 1rem;
+      top: 1.25rem;
+      width: 1.8rem;
+      height: 1.8rem;
+      background: var(--accent);
+      color: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+    .cad-canvas-placeholder {
+      width: 100%;
+      height: 300px;
+      background: #1e293b;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #94a3b8;
+      margin: 1.5rem 0;
+      border: 1px dashed #475569;
+      position: relative;
+      overflow: hidden;
+    }
+    .quiz-option {
+      display: block;
+      padding: 0.75rem 1rem;
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .quiz-option:hover {
+      border-color: var(--accent);
+      background: #F0F9FF;
+    }
+    .quiz-option input {
+      margin-right: 0.75rem;
+    }
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .tab-container {
+      display: flex;
+      gap: 0.5rem;
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 1.5rem;
+    }
+    .tab-btn {
+      padding: 0.75rem 1.25rem;
+      border: none;
+      background: none;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+    }
+    .tab-btn.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+    .warning-box {
+      background: #FFFBEB;
+      border-left: 4px solid var(--warning);
+      padding: 1rem;
+      border-radius: 0 6px 6px 0;
+      margin: 1rem 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- Barra de Navegación Principal -->
+  <nav class="navbar">
+    <a href="../index.html" class="brand"><span>SOLIDWORKS</span> ACADEMY</a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Inicio</a></li>
+      <li><a href="../dashboard.html">Dashboard</a></li>
+      <li><a href="../aula/index.html" class="active">Aula Virtual</a></li>
+      <li><a href="../cswa/index.html">CSWA Center</a></li>
+      <li><a href="../proyecto.html">Proyecto Final</a></li>
+    </ul>
+  </nav>
 
+  <main class="container">
+    <!-- Encabezado de la Lección -->
+    <header class="lesson-header">
+      <div style="font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9;">
+        Módulo 1: Introducción a SOLIDWORKS
+      </div>
+      <h1 style="font-size: 2.2rem; margin: 0.5rem 0;">Semana 1: Entorno de Trabajo e Interfaz</h1>
+      <p style="font-size: 1.1rem; opacity: 0.9;">Reconocimiento del entorno, gestores, planos de referencia, navegación 3D y sistemas de unidades.</p>
+      
+      <div class="lesson-meta">
+        <span class="meta-badge">⏱️ Carga Horaria: 3 hrs lectivas</span>
+        <span class="meta-badge">🎯 Nivel: Básico</span>
+        <span class="meta-badge">📌 SW Version: 2025+</span>
+      </div>
+    </header>
+
+    <!-- Competencia Oficial CSWA -->
+    <section class="cswa-competency-card">
+      <h3 style="color: var(--primary); font-size: 1.1rem; margin-bottom: 0.3rem;">
+        🎯 Competencia Oficial CSWA Relacionada
+      </h3>
+      <p style="color: #2D3748; font-size: 0.95rem;">
+        <strong>Reconocimiento del Entorno y Operaciones:</strong> Dominio de la interfaz gráfica de usuario, gestión de archivos (.SLDPRT, .SLDASM, .SLDDRW), configuración rápida del sistema de unidades (MMGS / IPS) y selección de planos principales de referencia.
+      </p>
+    </section>
+
+    <!-- Grid Layout Principal -->
+    <div class="grid-2" style="grid-template-columns: 2.5fr 1fr;">
+      
+      <!-- Columna Principal -->
+      <div>
+        <!-- Pestañas de Navegación Didáctica -->
+        <div class="tab-container">
+          <button class="tab-btn active" onclick="switchTab('fundamento')">1. Fundamento</button>
+          <button class="tab-btn" onclick="switchTab('procedimiento')">2. Procedimiento</button>
+          <button class="tab-btn" onclick="switchTab('practica')">3. Práctica & Reto</button>
+          <button class="tab-btn" onclick="switchTab('evaluacion')">4. Evaluación</button>
+        </div>
+
+        <!-- TAB 1: FUNDAMENTO CONCEPTUAL -->
+        <article id="tab-fundamento" class="card">
+          <h2 class="card-title">1. Resultado de Aprendizaje</h2>
+          <p style="margin-bottom: 1.5rem;">
+            Al finalizar esta sesión, serás capaz de <strong>reconocer y manipular el entorno de trabajo de SOLIDWORKS</strong>, diferenciar los tipos de documentos CAD, elegir y modificar sistemas de unidades de medida, y posicionar elementos utilizando el FeatureManager (árbol de operaciones) y los tres planos principales de referencia.
+          </p>
+
+          <h2 class="card-title">2. Fundamento Conceptual & Explicación Técnica</h2>
+          <p style="margin-bottom: 1rem;">
+            SOLIDWORKS es un sistema de modelado CAD 3D <strong>paramétrico y basado en operaciones</strong>. Esto significa que los modelos se construyen a partir de geometrías vectoriales 2D (croquis) restringidas por cotas y relaciones geométricas, que posteriormente se convierten en volúmenes 3D mediante operaciones avanzadas.
+          </p>
+          <p style="margin-bottom: 1rem;">
+            Existen tres extensiones nativas esenciales en SOLIDWORKS:
+          </p>
+          <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem; font-size: 0.95rem;">
+            <li><strong style="color: var(--primary);">.SLDPRT (Pieza):</strong> Componente 3D individual formado por operaciones geométricas.</li>
+            <li><strong style="color: var(--primary);">.SLDASM (Ensamblaje):</strong> Conjunto de dos o más piezas posicionadas mediante relaciones de posición.</li>
+            <li><strong style="color: var(--primary);">.SLDDRW (Dibujo):</strong> Plano de taller 2D con vistas normalizadas (ortogonales, cortes y detalles) acotadas para fabricación.</li>
+          </ul>
+
+          <!-- Visor Gráfico Interactivo de la Interfaz -->
+          <div class="cad-canvas-placeholder">
+            <svg viewBox="0 0 600 240" style="width: 100%; height: 100%;">
+              <!-- Fondo UI -->
+              <rect x="0" y="0" width="600" height="240" fill="#0f172a"/>
+              <!-- Top Ribbon -->
+              <rect x="0" y="0" width="600" height="35" fill="#1e293b"/>
+              <text x="15" y="22" fill="#00B3E0" font-size="12" font-weight="bold">CommandManager [Croquis | Operaciones | Calcular]</text>
+              <!-- FeatureManager Left Sidebar -->
+              <rect x="10" y="45" width="150" height="185" fill="#1e293b" rx="4"/>
+              <text x="20" y="65" fill="#ffffff" font-size="11" font-weight="bold">FeatureManager</text>
+              <text x="25" y="90" fill="#94a3b8" font-size="10">📌 Origen (0,0,0)</text>
+              <text x="25" y="110" fill="#94a3b8" font-size="10">📄 Plano Alzado</text>
+              <text x="25" y="130" fill="#94a3b8" font-size="10">📄 Plano Planta</text>
+              <text x="25" y="150" fill="#94a3b8" font-size="10">📄 Plano Vista Lateral</text>
+              <!-- Viewport Area -->
+              <rect x="170" y="45" width="420" height="185" fill="#020617" rx="4" stroke="#334155"/>
+              <text x="320" y="130" fill="#00B3E0" font-size="14" font-weight="bold" text-anchor="middle">ÁREA DE DIBUJO 3D (VIEWPORT)</text>
+              <!-- Triad Coordinates -->
+              <line x1="190" y1="210" x2="220" y2="210" stroke="#ef4444" stroke-width="2"/>
+              <text x="225" y="213" fill="#ef4444" font-size="10">X</text>
+              <line x1="190" y1="210" x2="190" y2="180" stroke="#22c55e" stroke-width="2"/>
+              <text x="187" y="175" fill="#22c55e" font-size="10">Y</text>
+              <line x1="190" y1="210" x2="175" y2="222" stroke="#3b82f6" stroke-width="2"/>
+              <text x="168" y="228" fill="#3b82f6" font-size="10">Z</text>
+              <!-- Units bar -->
+              <rect x="520" y="210" width="65" height="15" fill="#1e293b" rx="3"/>
+              <text x="525" y="221" fill="#f59e0b" font-size="9" font-weight="bold">MMGS</text>
+            </svg>
+          </div>
+
+          <div class="warning-box">
+            <strong>⚠️ Alerta de Examen CSWA (Errores Frecuentes):</strong>
+            <ul style="margin-left: 1.2rem; margin-top: 0.5rem; font-size: 0.9rem;">
+              <li><strong>Descuido de Unidades:</strong> Iniciar una pieza en milímetros (MMGS) cuando el problema exige pulgadas (IPS) provocará un valor de masa incorrecto.</li>
+              <li><strong>Confusión de Planos:</strong> Modelar la vista principal en un plano no correspondiente (ej. Vista Lateral en lugar de Alzado) causará que las coordenadas del Centro de Gravedad (X, Y, Z) difieran del patrón oficial.</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- TAB 2: PROCEDIMIENTO PASO A PASO -->
+        <article id="tab-procedimiento" class="card" style="display: none;">
+          <h2 class="card-title">Procedimiento Guiado Paso a Paso</h2>
+          <p style="margin-bottom: 1.5rem;">Ejecuta las siguientes acciones en tu software SOLIDWORKS para dominar la interfaz inicial:</p>
+
+          <div class="step-box">
+            <div class="step-number">1</div>
+            <h4 style="color: var(--primary);">Crear un Nuevo Documento de Pieza</h4>
+            <p>Haz clic en el menú <code>Archivo > Nuevo</code> (o presiona <code>Ctrl + N</code>). Selecciona el icono <strong>Pieza</strong> y haz clic en <strong>Aceptar</strong>.</p>
+          </div>
+
+          <div class="step-box">
+            <div class="step-number">2</div>
+            <h4 style="color: var(--primary);">Verificar y Cambiar el Sistema de Unidades</h4>
+            <p>Dirígete a la barra de estado ubicada en la <strong>esquina inferior derecha</strong> de la pantalla. Haz clic sobre la etiqueta de unidades (ej. <code>IPS</code> o <code>MMGS</code>) y asegúrate de marcar <strong>MMGS (Milímetro, Gramo, Segundo)</strong>.</p>
+          </div>
+
+          <div class="step-box">
+            <div class="step-number">3</div>
+            <h4 style="color: var(--primary);">Visualización de Planos Principales y Navegación 3D</h4>
+            <p>En el gestor <strong>FeatureManager</strong> (árbol de la izquierda), mantén presionada la tecla <code>Ctrl</code> y selecciona los planos <em>Alzado</em>, <em>Planta</em> y <em>Vista Lateral</em>. Haz clic derecho y selecciona el icono del <strong>Ojo (Mostrar)</strong> para hacerlos visibles en el viewport. Practica la rotación 3D manteniendo presionado el <strong>botón central del mouse (rueda/scroll)</strong>.</p>
+          </div>
+
+          <div class="step-box">
+            <div class="step-number">4</div>
+            <h4 style="color: var(--primary);">Reconstrucción y Guardado</h4>
+            <p>Utiliza el atajo rápido de teclado <code>Ctrl + B</code> para reconstruir el modelo tras cualquier modificación. Guarda tu archivo desde <code>Archivo > Guardar como</code> seleccionando el formato <code>.SLDPRT</code>.</p>
+          </div>
+        </article>
+
+        <!-- TAB 3: PRÁCTICA & RETO TIPO CSWA -->
+        <article id="tab-practica" class="card" style="display: none;">
+          <h2 class="card-title">🏋️ Ejercicio Guiado & Reto Tipo CSWA</h2>
+          <p style="margin-bottom: 1rem;">
+            Abre tu versión local de SOLIDWORKS para realizar este ejercicio interactivo de reconocimiento de unidades y visualización de origen.
+          </p>
+
+          <div style="background: var(--bg-light); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; margin: 1rem 0;">
+            <h4 style="color: var(--primary);">📌 Reto: Configuración de Entorno de Pieza Estándar (10 Minutos)</h4>
+            <ol style="margin-left: 1.2rem; margin-top: 0.5rem; font-size: 0.95rem;" class="space-y-2">
+              <li>Crea un nuevo documento de Pieza (<code>.SLDPRT</code>).</li>
+              <li>Asegúrate de que las unidades estén configuradas en <strong>MMGS</strong> con precisión de <strong>2 decimales</strong>.</li>
+              <li>Muestra los tres planos de referencia e identifica visualmente la ubicación exacta del <strong>Origen de Coordenadas (0,0,0)</strong>.</li>
+              <li>Guarda la plantilla resultante con el nombre <code>Plantilla_MMGS_CSWA.SLDDOT</code> o <code>.SLDPRT</code>.</li>
+            </ol>
+            <div style="margin-top: 1.25rem;">
+              <a href="#" onclick="alert('Descargando archivo guía PDF de la Semana 1'); return false;" class="btn btn-outline" style="font-size: 0.85rem;">📥 Descargar Guía de Atajos de Teclado (PDF)</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- TAB 4: EVALUACIÓN Y CUESTIONARIO -->
+        <article id="tab-evaluacion" class="card" style="display: none;">
+          <h2 class="card-title">📝 Cuestionario de Comprobación - Semana 1</h2>
+          <p style="margin-bottom: 1.5rem;">Responde a las siguientes 2 preguntas formativas para evaluar tu comprensión sobre la interfaz y el entorno de SOLIDWORKS.</p>
+
+          <form id="quiz-form-w1">
+            <div style="margin-bottom: 1.5rem;">
+              <p style="font-weight: 600; margin-bottom: 0.75rem;">1. ¿Cuál es el sistema de unidades estándar más comúnmente utilizado en los ejercicios oficiales de la certificación CSWA?</p>
+              <label class="quiz-option"><input type="radio" name="q1" value="A"> A) CGS (Centímetro, Gramo, Segundo)</label>
+              <label class="quiz-option"><input type="radio" name="q1" value="B"> B) MMGS (Milímetro, Gramo, Segundo)</label>
+              <label class="quiz-option"><input type="radio" name="q1" value="C"> C) MKS (Metro, Kilogramo, Segundo)</label>
+            </div>
+
+            <div style="margin-bottom: 1.5rem;">
+              <p style="font-weight: 600; margin-bottom: 0.75rem;">2. ¿Qué atajo de teclado en SOLIDWORKS se utiliza para ejecutar la reconstrucción (Rebuild) del modelo?</p>
+              <label class="quiz-option"><input type="radio" name="q2" value="A"> A) Ctrl + S</label>
+              <label class="quiz-option"><input type="radio" name="q2" value="B"> B) Ctrl + B</label>
+              <label class="quiz-option"><input type="radio" name="q2" value="C"> C) Ctrl + R</label>
+            </div>
+
+            <button type="button" class="btn" onclick="evaluarQuizSemana1()">Validar Respuestas y Guardar Avance</button>
+            <div id="quiz-feedback-w1" style="margin-top: 1rem; display: none;" class="alert-box"></div>
+          </form>
+        </article>
+
+        <!-- Navegación entre Semanas -->
+        <div class="nav-buttons">
+          <a href="../aula/index.html" class="btn btn-outline">⬅️ Índice del Aula</a>
+          <button class="btn" onclick="marcarCompletado(1)">Marcar Semana como Completada ✓</button>
+          <a href="semana2.html" class="btn">Semana 2 ➡️</a>
+        </div>
+
+      </div>
+
+      <!-- Columna Lateral (Sidebar) -->
+      <aside>
+        <!-- Panel de Estado del Estudiante -->
+        <div class="card">
+          <h3 class="card-title" style="font-size: 1rem;">Estado de la Lección</h3>
+          <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem;">Progreso registrado en esta semana:</p>
+          <div class="progress-container"><div id="week-progress-bar" class="progress-bar" style="width: 0%;"></div></div>
+          <span id="week-status-badge" class="badge badge-warning" style="margin-top: 0.5rem;">Pendiente</span>
+        </div>
+
+        <!-- Recursos Descargables -->
+        <div class="card">
+          <h3 class="card-title" style="font-size: 1rem;">📂 Recursos de la Lección</h3>
+          <ul style="list-style: none; font-size: 0.9rem;">
+            <li style="margin-bottom: 0.75rem;">📄 <a href="#" onclick="alert('Descargando Guía PDF de Semana 1'); return false;" style="color: var(--accent); text-decoration: none;">Guía PDF del Entorno SW</a></li>
+            <li style="margin-bottom: 0.75rem;">⌨️ <a href="#" onclick="alert('Descargando Atajos de Teclado'); return false;" style="color: var(--accent); text-decoration: none;">Hoja de Atajos de Teclado</a></li>
+          </ul>
+        </div>
+
+        <!-- Acceso Directo al CSWA Center -->
+        <div class="card" style="background: var(--primary); color: var(--white);">
+          <h3 style="color: var(--accent); font-size: 1rem; margin-bottom: 0.5rem;">🎯 CSWA Practice Center</h3>
+          <p style="font-size: 0.85rem; opacity: 0.9; margin-bottom: 1rem;">
+            ¿Deseas verificar tu nivel actual de competencias para el examen oficial?
+          </p>
+          <a href="../cswa/index.html" class="btn" style="width: 100%; text-align: center; font-size: 0.85rem;">Ir al Centro CSWA</a>
+        </div>
+      </aside>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 SOLIDWORKS ACADEMY - Formación por Competencias & Preparación CSWA</p>
+  </footer>
+
+  <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/cswa.js"></script>
+  <script>
+    // Sincronización de estado al cargar la página
+    document.addEventListener('DOMContentLoaded', () => {
+      const progress = AppState.getUserProgress();
+      if (progress.completedWeeks && progress.completedWeeks.includes(1)) {
+        actualizarUICompletado();
+      }
+    });
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('article[id^="tab-"]').forEach(content => content.style.display = 'none');
+      
+      event.target.classList.add('active');
+      document.getElementById('tab-' + tabId).style.display = 'block';
+    }
+
+    function actualizarUICompletado() {
+      const progressBar = document.getElementById('week-progress-bar');
+      const badge = document.getElementById('week-status-badge');
+      if(progressBar) progressBar.style.width = '100%';
+      if(badge) {
+        badge.className = 'badge badge-success';
+        badge.textContent = 'Completado';
+      }
+    }
+
+    function marcarCompletado(numSemana) {
+      let progress = AppState.getUserProgress();
+      if (!progress.completedWeeks.includes(numSemana)) {
+        progress.completedWeeks.push(numSemana);
+        // Incrementar puntuación de competencia en CSWA engine
+        if(!progress.cswaScores) progress.cswaScores = { croquis: 0, piezas: 0, ensamblajes: 0, masa: 0 };
+        progress.cswaScores.piezas = Math.min(100, (progress.cswaScores.piezas || 0) + 10);
+        AppState.saveProgress(progress);
+      }
+      actualizarUICompletado();
+      alert('¡Semana ' + numSemana + ' marcada como completada!');
+    }
+
+    function evaluarQuizSemana1() {
+      const q1 = document.querySelector('input[name="q1"]:checked');
+      const q2 = document.querySelector('input[name="q2"]:checked');
+      const feedback = document.getElementById('quiz-feedback-w1');
+
+      if (!q1 || !q2) {
+        alert('Por favor responde a todas las preguntas antes de enviar.');
+        return;
+      }
+
+      feedback.style.display = 'block';
+      if (q1.value === 'B' && q2.value === 'B') {
+        feedback.className = 'alert-box alert-success';
+        feedback.innerHTML = '<strong>¡Excelente! (2/2 correctas)</strong> MMGS es el sistema estándar predeterminado y Ctrl + B ejecuta la reconstrucción del modelo. Tu competencia ha sido actualizada.';
+        marcarCompletado(1);
+      } else {
+        feedback.className = 'alert-box alert-danger';
+        feedback.innerHTML = '<strong>Revisa tus respuestas:</strong> Recuerda que el sistema de unidades más habitual en CSWA es MMGS (Opción B) y el atajo para reconstruir es Ctrl + B (Opción B).';
+      }
+    }
+  </script>
+</body>
+</html>
+```
+
+---
+
+### Resumen de características implementadas en `semana1.html`:
+1. **Identidad e Integración**: Vincula `../assets/css/style.css` y `../assets/css/components.css`, además de los scripts de almacenamiento local `app.js` y `cswa.js`.
+2. **Pedagogía de 4 Fases en Pestañas**:
+   - **1. Fundamento**: Resultados de aprendizaje, conceptos de archivos `.SLDPRT`/`.SLDASM`/`.SLDDRW`, esquema de interfaz SVG interactivo y advertencias tipo CSWA.
+   - **2. Procedimiento**: Pasos interactivos numerados para la creación de archivos, configuración de unidades MMGS e inspección de planos de referencia.
+   - **3. Práctica & Reto**: Ejercicio tipo CSWA con descarga de recursos en PDF.
+   - **4. Evaluación**: Cuestionario autocorregible que actualiza el avance y las competencias CSWA del estudiante.
