@@ -8,23 +8,25 @@
   <!-- Hojas de Estilo Institucionales -->
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/components.css">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
     .lesson-hero {
       background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
       color: var(--white);
-      padding: 2rem;
-      border-radius: 12px;
+      padding: 2.25rem 2rem;
+      border-radius: var(--radius-md);
       margin-bottom: 2rem;
       box-shadow: var(--shadow-md);
     }
 
     .lesson-meta-bar {
       display: flex;
-      gap: 1.5rem;
+      gap: 1.25rem;
       margin-top: 1rem;
       font-size: 0.85rem;
-      color: var(--accent);
+      color: var(--accent-light);
       flex-wrap: wrap;
     }
 
@@ -32,17 +34,26 @@
       border-left: 4px solid var(--accent);
       background: var(--bg-light);
       padding: 1.25rem;
-      border-radius: 0 8px 8px 0;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
       margin-bottom: 1.25rem;
+      position: relative;
+      padding-left: 3.5rem;
     }
 
     .step-number {
+      position: absolute;
+      left: 1rem;
+      top: 1.25rem;
+      width: 1.8rem;
+      height: 1.8rem;
+      background: var(--accent);
+      color: var(--primary-dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-weight: 800;
-      color: var(--primary);
-      text-transform: uppercase;
-      font-size: 0.8rem;
-      letter-spacing: 0.5px;
-      margin-bottom: 0.3rem;
+      font-size: 0.85rem;
     }
 
     .shortcut-tag {
@@ -59,7 +70,7 @@
     .cswa-tip-box {
       background: #EFF6FF;
       border: 1px solid #BFDBFE;
-      border-radius: 8px;
+      border-radius: var(--radius-sm);
       padding: 1.25rem;
       margin: 1.5rem 0;
     }
@@ -71,6 +82,33 @@
       color: #1E40AF;
       font-weight: 700;
       margin-bottom: 0.5rem;
+    }
+
+    .tab-container {
+      display: flex;
+      gap: 0.5rem;
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 1.5rem;
+      overflow-x: auto;
+    }
+
+    .tab-btn {
+      padding: 0.75rem 1.25rem;
+      border: none;
+      background: none;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+      font-weight: 700;
     }
 
     .param-table {
@@ -90,21 +128,32 @@
       background: var(--bg-light);
       color: var(--primary);
     }
+
+    .quiz-option {
+      display: block;
+      padding: 0.75rem 1rem;
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .quiz-option:hover {
+      border-color: var(--accent);
+      background: #F0F9FF;
+    }
+
+    .quiz-option input {
+      margin-right: 0.75rem;
+    }
   </style>
 </head>
 <body>
 
-  <!-- Navegación Principal -->
-  <nav class="navbar">
-    <a href="../index.html" class="brand"><span>SOLIDWORKS</span> ACADEMY</a>
-    <ul class="nav-links">
-      <li><a href="../index.html">Inicio</a></li>
-      <li><a href="../dashboard.html">Dashboard</a></li>
-      <li><a href="../aula/index.html" class="active">Aula Virtual</a></li>
-      <li><a href="../cswa/index.html">CSWA Center</a></li>
-      <li><a href="../proyecto.html">Proyecto Final</a></li>
-    </ul>
-  </nav>
+  <!-- Barra de Navegación Dinámica Institucional -->
+  <header class="navbar"></header>
 
   <main class="container">
 
@@ -112,197 +161,227 @@
     <header class="lesson-hero">
       <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
         <div>
-          <span class="badge badge-info" style="margin-bottom: 0.5rem; display: inline-block;">Módulo 4: Componentes Mecánicos</span>
+          <span class="badge badge-info" style="margin-bottom: 0.5rem; display: inline-flex; align-items: center; gap: 0.35rem;">
+            <i class="fa-solid fa-layer-group"></i> Módulo 4: Componentes Mecánicos y Modificación Paramétrica
+          </span>
           <h1 style="font-size: 2.2rem; color: var(--white); margin: 0.2rem 0;">Semana 7: Modelado Paramétrico de Bridas, Poleas y Ejes</h1>
           <p style="opacity: 0.9; font-size: 1rem; max-width: 700px; margin-top: 0.5rem;">
-            Integra operaciones de revolución, extrusión, chaveteros y barrenos normados para construir piezas mecánicas reales orientadas al estándar CSWA.
+            Integra operaciones de revolución, extrusión, chaveteros normados y barrenos distribuidos para construir elementos reales de transmisión mecánica.
           </p>
         </div>
         <div>
-          <button id="mark-completed-btn" class="btn" style="background: var(--success);" onclick="completeWeek7()">
-            ✓ Marcar Semana como Completada
+          <button id="mark-completed-btn" class="btn" style="background: var(--success); color: white;" onclick="completeWeek7()">
+            <i class="fa-solid fa-check"></i> Marcar Semana como Completada
           </button>
         </div>
       </div>
 
       <div class="lesson-meta-bar">
-        <span>⏱️ Duración: 3 Horas Académicas</span>
-        <span>🎯 Competencia CSWA: Modelado avanzado de piezas y chaveteros DIN/ANSI</span>
-        <span>📄 Tipo de Contenido: Teórico - Práctico</span>
+        <span><i class="fa-regular fa-clock"></i> Carga Horaria: 3 hrs lectivas</span>
+        <span><i class="fa-solid fa-award"></i> Competencia CSWA: Piezas de Transmisión y Chaveteros DIN/ANSI</span>
+        <span><i class="fa-solid fa-cubes"></i> Versión SW: 2021+</span>
       </div>
     </header>
 
+    <!-- Tip Oficial CSWA -->
+    <section class="cswa-tip-box" style="margin-top: 0;">
+      <div class="cswa-tip-header">
+        <i class="fa-solid fa-lightbulb text-xl"></i>
+        <span>Estrategia para Acotar Chaveteros en el Examen CSWA</span>
+      </div>
+      <p style="color: #1E3A8A; font-size: 0.95rem; margin: 0;">
+        Al modelar chaveteros en ejes o mazas de poleas, acota siempre la profundidad del chavetero desde el cuadrante opuesto del diámetro o desde el centro del eje utilizando la cota normalizada ($D + t_2$). Esto garantiza que al variar el diámetro nominal $D$ en etapas posteriores, la profundidad efectiva de la chaveta se mantenga intacta.
+      </p>
+    </section>
+
     <div class="grid-2" style="grid-template-columns: 2.5fr 1fr; gap: 1.5rem;">
 
-      <!-- Contenido Principal de la Lección -->
+      <!-- Contenido Principal -->
       <div>
 
-        <!-- Bloque 1: Estrategias de Modelado para Componentes de Transmisión -->
-        <article class="card">
-          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">1. Metodología de Modelado en Piezas de Transmisión</h2>
-          <p style="line-height: 1.6; color: var(--text-dark); margin-bottom: 1rem;">
-            Los elementos de transmisión mecánica (poleas en V, ejes de transmisión escalonados y bridas de acoplamiento) comparten simetría axial. La estrategia más eficiente combina una revolución base primaria con operaciones secundarias de corte paramétrico.
+        <!-- Pestañas de Navegación Didáctica -->
+        <div class="tab-container">
+          <button class="tab-btn active" onclick="switchTab('fundamento')"><i class="fa-solid fa-book-open mr-1"></i> 1. Fundamento</button>
+          <button class="tab-btn" onclick="switchTab('dimensionamiento')"><i class="fa-solid fa-ruler-combined mr-1"></i> 2. Dimensionamiento</button>
+          <button class="tab-btn" onclick="switchTab('procedimiento')"><i class="fa-solid fa-list-check mr-1"></i> 3. Procedimiento</button>
+          <button class="tab-btn" onclick="switchTab('evaluacion')"><i class="fa-solid fa-pen-to-square mr-1"></i> 4. Evaluación</button>
+        </div>
+
+        <!-- TAB 1: FUNDAMENTO CONCEPTUAL -->
+        <article id="tab-fundamento" class="card">
+          <h2 class="card-title"><i class="fa-solid fa-bullseye text-swCyan"></i> 1. Resultado de Aprendizaje</h2>
+          <p>
+            Al finalizar esta sesión, serás capaz de <strong>diseñar componentes mecánicos de transmisión</strong> (poleas trapezoidales, bridas de acoplamiento y ejes escalonados), combinando revoluciones simétricas, cortes de chaveteros bajo norma DIN 6885 / ANSI B17.1 y matrices circulares de sujeción.
           </p>
 
-          <ul style="margin-left: 1.25rem; font-size: 0.95rem; color: var(--text-dark); line-height: 1.7; margin-bottom: 1rem;">
-            <li><strong>Revolución Primaria:</strong> Define el cuerpo volométrico con cotas de diámetro simétrico respecto al eje principal.</li>
-            <li><strong>Chaveteros (Keyways):</strong> Cortados mediante perfil extruido respetando normativas (DIN 6885 / ANSI B17.1).</li>
-            <li><strong>Distribución de Barrenos:</strong> Generados usando una Matriz Circular a partir de una única operación de corte origen.</li>
+          <h2 class="card-title" style="margin-top: 1.5rem;"><i class="fa-solid fa-gears text-swCyan"></i> 2. Metodología en Piezas de Transmisión</h2>
+          <p style="line-height: 1.6;">
+            Los elementos rotativos comparten simetría axial. Construirlos mediante una secuencia jerárquica optimiza el rendimiento paramétrico:
+          </p>
+          <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem; font-size: 0.95rem;" class="space-y">
+            <li><strong style="color: var(--primary);">Cuerpo Base Revolucionado:</strong> Genera el perfil exterior, cubos y canales de correa en una sola operación de $360^\circ$.</li>
+            <li><strong style="color: var(--primary);">Alojamiento de Chaveta (Keyway):</strong> Corte extruido pasante en el agujero central para transmitir torque sin deslizamiento.</li>
+            <li><strong style="color: var(--primary);">Patrón de Barrenos de Aligeramiento / Brida:</strong> Operación única replicada mediante Matriz Circular.</li>
           </ul>
 
-          <div class="cswa-tip-box">
-            <div class="cswa-tip-header">
-              <span>💡 Estrategia para Eludir Errores de Reconstrucción en CSWA</span>
-            </div>
-            <p style="font-size: 0.9rem; color: #1E3A8A; margin: 0;">
-              Al modelar chaveteros en ejes o mallas de poleas, acota siempre la profundidad desde la superficie cilíndrica tangencial o desde el centro del eje con la cota $T2$ normalizada. Esto evita que el chavetero pierda la profundidad correcta al modificar el diámetro global $D$.
-            </p>
+          <!-- Visor Gráfico Técnico SVG -->
+          <div class="cad-viewport">
+            <svg viewBox="0 0 600 240" style="width: 100%; height: 100%;">
+              <rect x="0" y="0" width="600" height="240" fill="#0f172a"/>
+              <!-- Outer Pulley Circle -->
+              <circle cx="220" cy="120" r="75" fill="none" stroke="#00B3E0" stroke-width="3"/>
+              <!-- Pitch Circle Dashed -->
+              <circle cx="220" cy="120" r="62" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="5,4"/>
+              <!-- Hub Circle -->
+              <circle cx="220" cy="120" r="32" fill="none" stroke="#00B3E0" stroke-width="2"/>
+              <!-- Shaft Bore with Keyway -->
+              <path d="M 206 108 L 216 108 L 216 102 L 224 102 L 224 108 A 16 16 0 1 1 206 108 Z" fill="#1e293b" stroke="#f59e0b" stroke-width="2"/>
+              <!-- Centerlines -->
+              <line x1="130" y1="120" x2="310" y2="120" stroke="#ef4444" stroke-width="1" stroke-dasharray="8,3,2,3"/>
+              <line x1="220" y1="30" x2="220" y2="210" stroke="#ef4444" stroke-width="1" stroke-dasharray="8,3,2,3"/>
+              <!-- Cross Section View on Right -->
+              <rect x="380" y="45" width="70" height="150" fill="#1e293b" stroke="#00B3E0" stroke-width="2"/>
+              <!-- V-Groove Cutout -->
+              <polygon points="380,45 450,45 430,72 400,72" fill="#0f172a" stroke="#38bdf8" stroke-width="2"/>
+              <polygon points="380,195 450,195 430,168 400,168" fill="#0f172a" stroke="#38bdf8" stroke-width="2"/>
+              <!-- Bore Tunnel -->
+              <rect x="380" y="104" width="70" height="32" fill="#0f172a" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4"/>
+              <!-- Labels -->
+              <text x="300" y="25" fill="#38bdf8" font-size="12" font-weight="bold" text-anchor="middle">POLEA EN V CON CHAVETERO NORMALIZADO (DIN 6885)</text>
+              <text x="495" y="65" fill="#38bdf8" font-size="10">Canal α = 36°</text>
+              <text x="495" y="124" fill="#f59e0b" font-size="10">Chavetero Pasante</text>
+            </svg>
           </div>
         </article>
 
-        <!-- Bloque 2: Parámetros Técnicos de Poleas y Bridas -->
-        <article class="card">
-          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">2. Dimensionamiento Paramétrico de Una Polea en V</h2>
-          <p style="line-height: 1.6; color: var(--text-dark); margin-bottom: 1rem;">
-            El canal de la polea requiere acotación angular precisa para alojar la correa sin interferencias.
-          </p>
+        <!-- TAB 2: DIMENSIONAMIENTO PARAMÉTRICO -->
+        <article id="tab-dimensionamiento" class="card" style="display: none;">
+          <h2 class="card-title"><i class="fa-solid fa-ruler-combined text-swCyan"></i> Parámetros Técnicos de Diseño</h2>
+          <p style="margin-bottom: 1rem;">Criterios de acotación y operaciones recomendadas para componentes rotativos:</p>
 
           <table class="param-table">
             <thead>
               <tr>
-                <th>Elemento de la Polea</th>
-                <th>Cota / Operación SW</th>
-                <th>Efecto en el Modelo 3D</th>
+                <th>Elemento Mecánico</th>
+                <th>Cota / Operación SOLIDWORKS</th>
+                <th>Función en el Modelo Paramétrico</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td><strong>Diámetro Primitivo ($D_p$)</strong></td>
                 <td>Cota de diámetro simétrico en croquis de revolución</td>
-                <td>Determina la velocidad tangencial y relación de transmisión.</td>
+                <td>Define la relación de transmisión y el diámetro efectivo de la correa.</td>
               </tr>
               <tr>
                 <td><strong>Ángulo del Canal ($\alpha$)</strong></td>
                 <td>Cota angular simétrica ($34^\circ - 38^\circ$)</td>
-                <td>Corte por revolución o vaciado trapezoidal del canal.</td>
+                <td>Asegura el acuñamiento correcto de la correa trapezoidal en V.</td>
               </tr>
               <tr>
-                <td><strong>Alojamiento de Chaveta</strong></td>
-                <td>Corte extruido > Por todo o profundidad dada</td>
-                <td>Transfiere el torque entre la polea y el eje sin deslizamiento.</td>
+                <td><strong>Chavetero ($b \times t_2$)</strong></td>
+                <td>Corte extruido > Por Todo (Through All)</td>
+                <td>Aloja la chaveta paralela según norma DIN 6885 / ANSI B17.1.</td>
+              </tr>
+              <tr>
+                <td><strong>Brida de Acoplamiento</strong></td>
+                <td>Matriz Circular de barrenos pasantes</td>
+                <td>Distribuye uniformemente los pernos de fijación alrededor del eje.</td>
               </tr>
             </tbody>
           </table>
+        </article>
 
-          <!-- CAD Viewport Esquemático -->
-          <div class="cad-viewport" style="margin-top: 1.5rem;">
-            <div style="text-align: center;">
-              <div style="font-size: 3rem; margin-bottom: 0.5rem;">⚙️🏎️</div>
-              <p style="font-size: 0.95rem; font-weight: 700; color: var(--white);">Vista 3D: Polea Trapezoidal con Chavetero y Brida ($D_p = 120\text{ mm}$)</p>
-              <p style="font-size: 0.8rem; opacity: 0.8;">Revolución Base + Corte Extruido Chavetero DIN 6885</p>
-            </div>
-            <div class="cad-viewport-controls">
-              <button type="button" class="cad-btn-icon" onclick="alert('Verificación de perfil: Canal trapezoidal de 36° sin interferencias')">🔄 Inspeccionar Canal</button>
-            </div>
+        <!-- TAB 3: PROCEDIMIENTO PASO A PASO -->
+        <article id="tab-procedimiento" class="card" style="display: none;">
+          <h2 class="card-title"><i class="fa-solid fa-list-check text-swCyan"></i> Guía Práctica: Polea de Acoplamiento con Chavetero</h2>
+          <p style="margin-bottom: 1.5rem;">Ejecuta los siguientes pasos en tu software SOLIDWORKS:</p>
+
+          <div class="step-box">
+            <div class="step-number">1</div>
+            <h4 style="color: var(--primary);">Trazar el Perfil de Revolución de la Polea</h4>
+            <p>Abre un croquis en el plano <strong>Alzado</strong>. Traza una <em>Línea Constructiva</em> horizontal coincidente con el Origen $(0,0,0)$. Dibuja la sección superior de la polea incluyendo la garganta trapezoidal en V ($\alpha = 36^\circ$) y acota los diámetros respecto al eje.</p>
+          </div>
+
+          <div class="step-box">
+            <div class="step-number">2</div>
+            <h4 style="color: var(--primary);">Ejecutar Revolución de Saliente/Base</h4>
+            <p>Selecciona <strong>Revolución de Saliente/Base</strong> a $360^\circ$ utilizando la línea constructiva horizontal como eje de giro.</p>
+          </div>
+
+          <div class="step-box">
+            <div class="step-number">3</div>
+            <h4 style="color: var(--primary);">Cortar el Chavetero Normalizado</h4>
+            <p>Abre un croquis en la cara frontal del cubo interior. Dibuja un rectángulo centrado verticalmente de $6\text{ mm}$ de ancho y acota la altura total desde el cuadrante inferior del agujero hasta el borde superior del chavetero. Aplica <strong>Corte Extruido > Por Todo</strong>.</p>
+          </div>
+
+          <div class="step-box">
+            <div class="step-number">4</div>
+            <h4 style="color: var(--primary);">Matriz Circular de Aligeramiento</h4>
+            <p>Crea un barreno pasante de $\emptyset 12\text{ mm}$ en el alma de la polea y multiplícalo en $6$ instancias equidistantes a $360^\circ$ con <strong>Matriz Circular</strong>.</p>
           </div>
         </article>
 
-        <!-- Bloque 3: Paso a Paso Práctico -->
-        <article class="card">
-          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">3. Guía Práctica Paso a Paso: Polea de Acoplamiento con Chavetero</h2>
-          <p style="font-size: 0.95rem; color: var(--text-dark); margin-bottom: 1rem;">
-            Sigue estos pasos en SOLIDWORKS para construir una polea paramétrica completa:
-          </p>
+        <!-- TAB 4: EVALUACIÓN Y CUESTIONARIO -->
+        <article id="tab-evaluacion" class="card" style="display: none;">
+          <h2 class="card-title"><i class="fa-solid fa-pen-to-square text-swCyan"></i> Cuestionario de Comprobación - Semana 7</h2>
+          <p style="margin-bottom: 1.5rem;">Responde a las siguientes preguntas para validar tu aprendizaje sobre componentes mecánicos:</p>
 
-          <div class="step-box">
-            <div class="step-number">Paso 1</div>
-            <h4 style="margin: 0 0 0.3rem 0; color: var(--primary);">Perfil de Revolución de la Polea</h4>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">
-              En el plano <strong>Alzado</strong>, dibuja una línea constructiva horizontal sobre el Origen. Traza la mitad del perfil de la polea incluyendo el canal trapezoidal en V. Acota diámetros externos e internos.
-            </p>
-          </div>
+          <form id="quiz-form-w7">
+            <div style="margin-bottom: 1.5rem;">
+              <p style="font-weight: 600; margin-bottom: 0.75rem;">1. ¿Qué operación de SOLIDWORKS es la más eficiente para crear la geometría base circular de una polea o brida?</p>
+              <label class="quiz-option"><input type="radio" name="q1" value="A"> A) Extrusión de saliente plano a plano</label>
+              <label class="quiz-option"><input type="radio" name="q1" value="B"> B) Revolución de Saliente/Base con Eje Constructivo</label>
+              <label class="quiz-option"><input type="radio" name="q1" value="C"> C) Recubrimiento con curvas guía</label>
+            </div>
 
-          <div class="step-box">
-            <div class="step-number">Paso 2</div>
-            <h4 style="margin: 0 0 0.3rem 0; color: var(--primary);">Revolución 360°</h4>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">
-              Aplica <strong>Revolución de Saliente/Base</strong> a $360^\circ$ alrededor del eje horizontal.
-            </p>
-          </div>
+            <div style="margin-bottom: 1.5rem;">
+              <p style="font-weight: 600; margin-bottom: 0.75rem;">2. ¿Qué técnica evita que un chavetero pierda la profundidad correcta cuando se modifica el diámetro del agujero central?</p>
+              <label class="quiz-option"><input type="radio" name="q2" value="A"> A) Acotar la profundidad respetando la distancia total desde el cuadrante opuesto o el eje normalizado</label>
+              <label class="quiz-option"><input type="radio" name="q2" value="B"> B) Dibujar el chavetero en una pieza separada</label>
+              <label class="quiz-option"><input type="radio" name="q2" value="C"> C) Fijar los vértices del croquis con la relación Fija</label>
+            </div>
 
-          <div class="step-box">
-            <div class="step-number">Paso 3</div>
-            <h4 style="margin: 0 0 0.3rem 0; color: var(--primary);">Construcción del Chavetero</h4>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">
-              Abre un croquis en la cara frontal del eje interior. Dibuja un rectángulo simétrico alineado con el eje vertical de $6\text{ mm}$ de ancho y profundidad acotada. Ejecuta <strong>Corte Extruido > Por Todo</strong>.
-            </p>
-          </div>
+            <button type="button" class="btn" onclick="evaluarQuizSemana7()"><i class="fa-solid fa-check"></i> Validar Respuestas y Guardar Avance</button>
+            <div id="quiz-feedback-w7" style="margin-top: 1rem; display: none;"></div>
+          </form>
         </article>
+
+        <!-- Navegación entre Semanas -->
+        <div style="display: flex; justify-content: space-between; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
+          <a href="semana6.html" class="btn btn-outline"><i class="fa-solid fa-arrow-left"></i> Semana 6</a>
+          <a href="semana8.html" class="btn">Semana 8 <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
 
       </div>
 
-      <!-- Barra Lateral: Progreso y Cuestionario de Validación -->
-      <aside>
-
-        <!-- Resumen de la Lección -->
+      <!-- Barra Lateral (Sidebar) -->
+      <aside class="space-y">
         <div class="card">
-          <h3 class="card-title" style="font-size: 1.1rem; margin-bottom: 0.75rem;">📋 Resumen de la Lección</h3>
-          <ul style="list-style: none; font-size: 0.85rem; color: var(--text-muted);" class="space-y">
-            <li style="display: flex; align-items: center; gap: 0.5rem;">
-              <span>✅</span> Revolución de perfiles complejos
-            </li>
-            <li style="display: flex; align-items: center; gap: 0.5rem;">
-              <span>✅</span> Modelado de Chaveteros (DIN/ANSI)
-            </li>
-            <li style="display: flex; align-items: center; gap: 0.5rem;">
-              <span>✅</span> Acotación angular de canales en V
-            </li>
-            <li style="display: flex; align-items: center; gap: 0.5rem;">
-              <span>✅</span> Intención de diseño en transmisiones
-            </li>
+          <h3 class="card-title" style="font-size: 1rem;"><i class="fa-solid fa-chart-line text-swCyan"></i> Estado de la Lección</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">Progreso registrado en esta semana:</p>
+          <div class="progress-container"><div id="week-progress-bar" class="progress-bar" style="width: 0%;"></div></div>
+          <span id="week-status-badge" class="badge badge-warning" style="margin-top: 0.5rem;">Pendiente</span>
+        </div>
+
+        <div class="card">
+          <h3 class="card-title" style="font-size: 1rem;"><i class="fa-solid fa-folder-open text-swCyan"></i> Recursos Descargables</h3>
+          <ul style="list-style: none; font-size: 0.85rem;" class="space-y">
+            <li><a href="#" onclick="alert('Descargando Tabla de Chaveteros DIN 6885 / ANSI'); return false;"><i class="fa-solid fa-file-pdf text-red-500 mr-1"></i> Tabla Chaveteros DIN 6885 (.PDF)</a></li>
+            <li><a href="#" onclick="alert('Descargando Pieza Polea Trapezoidal SLDPRT'); return false;"><i class="fa-solid fa-cube text-swCyan mr-1"></i> Polea en V Modelo (.SLDPRT)</a></li>
           </ul>
         </div>
 
-        <!-- Cuestionario Rápido de Validación -->
-        <div class="card">
-          <h3 class="card-title" style="font-size: 1.1rem; margin-bottom: 0.75rem;">📝 Comprobación de Lectura</h3>
-          <form id="week7-quiz-form" onsubmit="evaluateWeek7Quiz(event)">
-            <p style="font-size: 0.85rem; font-weight: 600; color: var(--primary); margin-bottom: 0.5rem;">
-              1. ¿Qué operación de SOLIDWORKS es la más eficiente para crear la geometría base circular de una polea o brida?
-            </p>
-            <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.85rem; margin-bottom: 1rem;">
-              <label><input type="radio" name="w7q1" value="A" required> Extrusión de Saliente plano a plano</label>
-              <label><input type="radio" name="w7q1" value="B"> Revolución de Saliente/Base con Eje Constructivo</label>
-              <label><input type="radio" name="w7q1" value="C"> Recubrimiento con curvas guía</label>
-            </div>
-
-            <p style="font-size: 0.85rem; font-weight: 600; color: var(--primary); margin-bottom: 0.5rem;">
-              2. ¿Qué técnica evita que un chavetero pierda la profundidad correcta cuando se modifica el diámetro del eje?
-            </p>
-            <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.85rem; margin-bottom: 1.25rem;">
-              <label><input type="radio" name="w7q2" value="A" required> Acotar la profundidad respetando la distancia total o tangente normalizada</label>
-              <label><input type="radio" name="w7q2" value="B"> Dibujar el chavetero en una pieza separada</label>
-              <label><input type="radio" name="w7q2" value="C"> Fijar la geometría con cotas no parametrizadas</label>
-            </div>
-
-            <button type="submit" class="btn btn-outline" style="width: 100%; font-size: 0.85rem;">Validar Respuestas</button>
-          </form>
+        <div class="card" style="background: var(--primary); color: var(--white);">
+          <h3 style="color: var(--accent); font-size: 1rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-award mr-1"></i> CSWA Practice Center</h3>
+          <p style="font-size: 0.85rem; opacity: 0.9; margin-bottom: 1rem;">
+            Prepárate para la Evaluación Práctica 2 poniendo a prueba tu modelado paramétrico.
+          </p>
+          <a href="../cswa/index.html" class="btn" style="width: 100%; text-align: center; font-size: 0.85rem;">Ir al Centro CSWA</a>
         </div>
-
-        <!-- Navegación entre Semanas -->
-        <div class="card" style="text-align: center;">
-          <h4 style="font-size: 0.9rem; color: var(--primary); margin-bottom: 0.75rem;">Navegación Curricular</h4>
-          <div style="display: flex; justify-content: space-between; gap: 0.5rem;">
-            <a href="semana6.html" class="btn btn-outline" style="font-size: 0.8rem; flex: 1;">⬅️ Sem. 6</a>
-            <a href="index.html" class="btn btn-outline" style="font-size: 0.8rem; flex: 1;">Índice</a>
-            <a href="semana8.html" class="btn" style="font-size: 0.8rem; flex: 1;">Sem. 8 ➡️</a>
-          </div>
-        </div>
-
       </aside>
 
     </div>
-
   </main>
 
   <footer>
@@ -311,54 +390,65 @@
 
   <!-- Scripts de la Aplicación -->
   <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/cswa.js"></script>
+  <script src="../assets/js/quiz.js"></script>
+  <script src="../assets/js/navbar.js"></script>
+
   <script>
-    function completeWeek7() {
-      AppState.markWeekCompleted(7);
-      
-      const btn = document.getElementById('mark-completed-btn');
-      if (btn) {
-        btn.textContent = '✓ Semana 7 Completada';
-        btn.disabled = true;
-        btn.style.opacity = '0.8';
-      }
-      alert('🎉 ¡Semana 7 registrada como completada en tu expediente!');
-    }
-
-    function evaluateWeek7Quiz(e) {
-      e.preventDefault();
-      const form = document.getElementById('week7-quiz-form');
-      const formData = new FormData(form);
-
-      const q1 = formData.get('w7q1');
-      const q2 = formData.get('w7q2');
-
-      if (q1 === 'B' && q2 === 'A') {
-        alert('🎯 ¡Excelente! Has respondido correctamente ambas preguntas sobre el modelado de componentes mecánicos.');
-        AppState.recordQuizResult('semana7_quiz', 100, { piezas: 85, operaciones: 80 });
-        completeWeek7();
-      } else {
-        alert('⚠️ Hay respuestas incorrectas. Revisa la técnica de revolución base y la acotación paramétrica de chaveteros.');
-      }
-    }
-
-    // Verificar si ya fue completada al cargar
     document.addEventListener('DOMContentLoaded', () => {
       const progress = AppState.getUserProgress();
       if (progress.completedWeeks && progress.completedWeeks.includes(7)) {
-        const btn = document.getElementById('mark-completed-btn');
-        if (btn) {
-          btn.textContent = '✓ Semana 7 Completada';
-          btn.disabled = true;
-          btn.style.opacity = '0.8';
-        }
+        actualizarUICompletado();
       }
     });
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('article[id^="tab-"]').forEach(content => content.style.display = 'none');
+
+      event.currentTarget.classList.add('active');
+      document.getElementById('tab-' + tabId).style.display = 'block';
+    }
+
+    function actualizarUICompletado() {
+      const progressBar = document.getElementById('week-progress-bar');
+      const badge = document.getElementById('week-status-badge');
+      const btn = document.getElementById('mark-completed-btn');
+
+      if (progressBar) progressBar.style.width = '100%';
+      if (badge) {
+        badge.className = 'badge badge-success';
+        badge.textContent = 'Completado';
+      }
+      if (btn) {
+        btn.textContent = '✓ Semana 7 Completada';
+        btn.disabled = true;
+        btn.style.opacity = '0.85';
+      }
+    }
+
+    function completeWeek7() {
+      AppState.markWeekCompleted(7);
+      AppState.recordQuizResult('semana7_quiz', 100, { piezas: 85, operaciones: 80 });
+      actualizarUICompletado();
+      alert('🎉 ¡Semana 7 marcada como completada en tu expediente!');
+    }
+
+    function evaluarQuizSemana7() {
+      const isPassed = QuizEngine.evaluateQuiz({
+        formId: 'quiz-form-w7',
+        feedbackId: 'quiz-feedback-w7',
+        quizId: 'semana7_quiz',
+        weekNumber: 7,
+        answers: { q1: 'B', q2: 'A' },
+        competencyGains: { piezas: 85, operaciones: 80 },
+        successMsg: '<strong>¡Excelente!</strong> Respuestas correctas. La Revolución de Saliente/Base (B) crea el cuerpo simétrico y acotar desde el cuadrante opuesto (A) mantiene la profundidad del chavetero.'
+      });
+
+      if (isPassed) {
+        actualizarUICompletado();
+      }
+    }
   </script>
 </body>
 </html>
-```
-
-### Summary of `aula/semana7.html`:
-- Covers modeling strategies for transmission components (pulleys, shafts, flanges) using revoluted solids, DIN/ANSI keyways (chaveteros), and V-belt groove dimensioning.
-- Provides a step-by-step practical guide for creating a pulley with a keyway slot.
-- Includes a self-correcting validation quiz connected to `AppState` in `LocalStorage` (`app.js`).
