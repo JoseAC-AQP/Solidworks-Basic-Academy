@@ -8,23 +8,25 @@
   <!-- Hojas de Estilo Institucionales -->
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/components.css">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
     .lesson-hero {
       background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
       color: var(--white);
-      padding: 2rem;
-      border-radius: 12px;
+      padding: 2.25rem 2rem;
+      border-radius: var(--radius-md);
       margin-bottom: 2rem;
       box-shadow: var(--shadow-md);
     }
 
     .lesson-meta-bar {
       display: flex;
-      gap: 1.5rem;
+      gap: 1.25rem;
       margin-top: 1rem;
       font-size: 0.85rem;
-      color: var(--accent);
+      color: var(--accent-light);
       flex-wrap: wrap;
     }
 
@@ -32,17 +34,26 @@
       border-left: 4px solid var(--accent);
       background: var(--bg-light);
       padding: 1.25rem;
-      border-radius: 0 8px 8px 0;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
       margin-bottom: 1.25rem;
+      position: relative;
+      padding-left: 3.5rem;
     }
 
     .step-number {
+      position: absolute;
+      left: 1rem;
+      top: 1.25rem;
+      width: 1.8rem;
+      height: 1.8rem;
+      background: var(--accent);
+      color: var(--primary-dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-weight: 800;
-      color: var(--primary);
-      text-transform: uppercase;
-      font-size: 0.8rem;
-      letter-spacing: 0.5px;
-      margin-bottom: 0.3rem;
+      font-size: 0.85rem;
     }
 
     .shortcut-tag {
@@ -59,7 +70,7 @@
     .cswa-tip-box {
       background: #EFF6FF;
       border: 1px solid #BFDBFE;
-      border-radius: 8px;
+      border-radius: var(--radius-sm);
       padding: 1.25rem;
       margin: 1.5rem 0;
     }
@@ -71,6 +82,33 @@
       color: #1E40AF;
       font-weight: 700;
       margin-bottom: 0.5rem;
+    }
+
+    .tab-container {
+      display: flex;
+      gap: 0.5rem;
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 1.5rem;
+      overflow-x: auto;
+    }
+
+    .tab-btn {
+      padding: 0.75rem 1.25rem;
+      border: none;
+      background: none;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+      font-weight: 700;
     }
 
     .param-table {
@@ -90,21 +128,32 @@
       background: var(--bg-light);
       color: var(--primary);
     }
+
+    .quiz-option {
+      display: block;
+      padding: 0.75rem 1rem;
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .quiz-option:hover {
+      border-color: var(--accent);
+      background: #F0F9FF;
+    }
+
+    .quiz-option input {
+      margin-right: 0.75rem;
+    }
   </style>
 </head>
 <body>
 
-  <!-- Navegación Principal -->
-  <nav class="navbar">
-    <a href="../index.html" class="brand"><span>SOLIDWORKS</span> ACADEMY</a>
-    <ul class="nav-links">
-      <li><a href="../index.html">Inicio</a></li>
-      <li><a href="../dashboard.html">Dashboard</a></li>
-      <li><a href="../aula/index.html" class="active">Aula Virtual</a></li>
-      <li><a href="../cswa/index.html">CSWA Center</a></li>
-      <li><a href="../proyecto.html">Proyecto Final</a></li>
-    </ul>
-  </nav>
+  <!-- Barra de Navegación Dinámica Institucional -->
+  <header class="navbar"></header>
 
   <main class="container">
 
@@ -112,36 +161,57 @@
     <header class="lesson-hero">
       <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
         <div>
-          <span class="badge badge-info" style="margin-bottom: 0.5rem; display: inline-block;">Módulo 7: Preparación Intensiva CSWA</span>
+          <span class="badge badge-info" style="margin-bottom: 0.5rem; display: inline-flex; align-items: center; gap: 0.35rem;">
+            <i class="fa-solid fa-award"></i> Módulo 7: Preparación Intensiva CSWA
+          </span>
           <h1 style="font-size: 2.2rem; color: var(--white); margin: 0.2rem 0;">Semana 13: Interpretación de Problemas Tipo CSWA y Gestión de Tiempo</h1>
           <p style="opacity: 0.9; font-size: 1rem; max-width: 700px; margin-top: 0.5rem;">
             Estrategias ágiles de modelado, vinculación de ecuaciones globales ($A, B, C$) y distribución óptima de los 180 minutos del examen oficial.
           </p>
         </div>
         <div>
-          <button id="mark-completed-btn" class="btn" style="background: var(--success);" onclick="completeWeek13()">
-            ✓ Marcar Semana como Completada
+          <button id="mark-completed-btn" class="btn" style="background: var(--success); color: white;" onclick="completeWeek13()">
+            <i class="fa-solid fa-check"></i> Marcar Semana como Completada
           </button>
         </div>
       </div>
 
       <div class="lesson-meta-bar">
-        <span>⏱️ Duración: 3 Horas Académicas</span>
-        <span>🎯 Competencia CSWA: Resolución bajo presión de tiempo y ecuaciones paramétricas</span>
-        <span>📄 Tipo de Contenido: Teórico - Práctico</span>
+        <span><i class="fa-regular fa-clock"></i> Carga Horaria: 3 hrs lectivas</span>
+        <span><i class="fa-solid fa-stopwatch"></i> Competencia CSWA: Resolución bajo presión de tiempo y ecuaciones</span>
+        <span><i class="fa-solid fa-book"></i> Tipo: Teórico - Práctico</span>
       </div>
     </header>
 
+    <!-- Tip Oficial CSWA -->
+    <section class="cswa-tip-box" style="margin-top: 0;">
+      <div class="cswa-tip-header">
+        <i class="fa-solid fa-lightbulb text-xl"></i>
+        <span>Regla del 80/20 en Selección del Plano de Inicio</span>
+      </div>
+      <p style="color: #1E3A8A; font-size: 0.95rem; margin: 0;">
+        El 80% de los fallos por falta de tiempo ocurren por elegir el plano equivocado para el primer croquis. Selecciona siempre la vista que muestre la <strong>silueta contorneada más compleja</strong> (usualmente la vista Frontal/Alzado), reduciendo la necesidad de múltiples extrusiones posteriores.
+      </p>
+    </section>
+
     <div class="grid-2" style="grid-template-columns: 2.5fr 1fr; gap: 1.5rem;">
 
-      <!-- Contenido Principal de la Lección -->
+      <!-- Contenido Principal -->
       <div>
 
-        <!-- Bloque 1: Estructura del Examen Oficial y Distribución de Tiempo -->
-        <article class="card">
-          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">1. Anatomía del Examen CSWA y Distribución de Tiempo</h2>
+        <!-- Pestañas de Navegación Didáctica -->
+        <div class="tab-container">
+          <button class="tab-btn active" onclick="switchTab(event, 'anatomia')"><i class="fa-solid fa-stopwatch-20 mr-1"></i> 1. Anatomía del Examen</button>
+          <button class="tab-btn" onclick="switchTab(event, 'ecuaciones')"><i class="fa-solid fa-square-root-variable mr-1"></i> 2. Variables Globales</button>
+          <button class="tab-btn" onclick="switchTab(event, 'procedimiento')"><i class="fa-solid fa-list-check mr-1"></i> 3. Flujo Rápido CSWA</button>
+          <button class="tab-btn" onclick="switchTab(event, 'evaluacion')"><i class="fa-solid fa-pen-to-square mr-1"></i> 4. Evaluación</button>
+        </div>
+
+        <!-- TAB 1: ANATOMÍA DEL EXAMEN OFICIAL Y DISTRIBUCIÓN DE TIEMPO -->
+        <article id="tab-anatomia" class="card">
+          <h2 class="card-title"><i class="fa-solid fa-chart-pie text-swCyan"></i> 1. Anatomía del Examen CSWA y Distribución de Tiempo (180 min)</h2>
           <p style="line-height: 1.6; color: var(--text-dark); margin-bottom: 1rem;">
-            El examen oficial de certificación CSWA (Certified SOLIDWORKS Associate) emitido por Dassault Systèmes consta de <strong>14 a 30 preguntas</strong> (dependiendo de la versión del cliente Tangix TesterPRO) con una puntuación máxima de <strong>240 puntos</strong>. Se requiere un mínimo de <strong>165 puntos (70%)</strong> para obtener el diploma oficial.
+            El examen oficial de certificación CSWA (Certified SOLIDWORKS Associate) emitido por Dassault Systèmes consta de <strong>14 preguntas</strong> en el cliente Tangix TesterPRO con una puntuación máxima de <strong>240 puntos</strong>. Se requiere un mínimo de <strong>165 puntos (70%)</strong> para obtener la certificación oficial.
           </p>
 
           <table class="param-table">
@@ -156,7 +226,7 @@
             <tbody>
               <tr>
                 <td><strong>Teoría General y Planos 2D</strong></td>
-                <td>5 - 8 Cuestionarios</td>
+                <td>5 - 8 Preguntas</td>
                 <td>15 Minutos totales</td>
                 <td>25 - 40 Puntos</td>
               </tr>
@@ -188,144 +258,177 @@
                 <td><strong>Colchón de Revisión y Reconstrucción</strong></td>
                 <td>Comprobación de unidades y cotas</td>
                 <td>40 Minutos sobrantes</td>
-                <td>--</td>
+                <td>—</td>
               </tr>
             </tbody>
           </table>
-
-          <div class="cswa-tip-box">
-            <div class="cswa-tip-header">
-              <span>💡 Regla del 80/20 en Selección del Plano de Inicio</span>
-            </div>
-            <p style="font-size: 0.9rem; color: #1E3A8A; margin: 0;">
-              El 80% de los fallos por falta de tiempo ocurren por elegir el plano equivocado para el primer croquis. Selecciona siempre la vista que muestre la <strong>silueta contorneada más compleja</strong> (usualmente la vista Frontal/Alzado), reduciendo la necesidad de múltiples extrusiones posteriores.
-            </p>
-          </div>
         </article>
 
-        <!-- Bloque 2: Tablas de Ecuaciones y Variables Globales -->
-        <article class="card">
-          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">2. Automatización mediante Variables Globales (= "A", = "B", = "C")</h2>
+        <!-- TAB 2: TABLAS DE ECUACIONES Y VARIABLES GLOBALES -->
+        <article id="tab-ecuaciones" class="card" style="display: none;">
+          <h2 class="card-title"><i class="fa-solid fa-square-root-variable text-swCyan"></i> 2. Automatización mediante Variables Globales (<code>= "A"</code>, <code>= "B"</code>, <code>= "C"</code>)</h2>
           <p style="line-height: 1.6; color: var(--text-dark); margin-bottom: 1rem;">
-            En el examen CSWA, una misma pieza base se reutiliza en 3 o 4 preguntas sucesivas cambiando únicamente las dimensiones fundamentales ($A, B, C$). Configurar una <strong>Tabla de Ecuaciones</strong> ahorra hasta 15 minutos en modificaciones dimensionales.
+            En el examen CSWA, una misma pieza base se reutiliza en 3 o 4 preguntas sucesivas cambiando únicamente las dimensiones fundamentales ($A, B, C$). Configurar una <strong>Tabla de Ecuaciones</strong> ahorra hasta 15 minutos en modificaciones dimensionales y elimina errores de edición manual.
           </p>
 
           <h3 style="font-size: 1.1rem; color: var(--primary); margin: 1.25rem 0 0.5rem 0;">Pasos para Crear Variables Globales en SOLIDWORKS:</h3>
-          <ol style="margin-left: 1.25rem; font-size: 0.95rem; color: var(--text-dark); line-height: 1.7;">
-            <li>Dirígete al menú principal <code>Herramientas > Ecuaciones...</code> (o haz clic derecho en la carpeta <em>Ecuaciones</em> del árbol).</li>
-            <li>En la columna <strong>Nombre de la variable global</strong>, escribe <code>"A"</code> y asigna su valor numérico (ej. <code>120</code>). Repite para <code>"B"</code> y <code>"C"</code>.</li>
-            <li>Al colocar una cota inteligente en el croquis, escribe el signo igual <span class="shortcut-tag">=</span>, selecciona <em>Variables globales</em> y elige <code>"A"</code>.</li>
+          <ol style="margin-left: 1.25rem; font-size: 0.95rem; color: var(--text-dark); line-height: 1.75; margin-bottom: 1.5rem;">
+            <li>Dirígete al menú principal <code>Herramientas > Ecuaciones...</code> (o haz clic derecho en la carpeta <em>Ecuaciones</em> del FeatureManager).</li>
+            <li>En la columna <strong>Nombre de la variable global</strong>, escribe <code>"A"</code> y asigna su valor numérico inicial (ej. <code>120</code>). Repite para <code>"B"</code> y <code>"C"</code>.</li>
+            <li>Al colocar una cota inteligente en el croquis, escribe el signo igual <span class="shortcut-tag">=</span>, selecciona <em>Variables globales</em> y elige <code>"A"</code> (aparecerá un icono rojo $\Sigma$ junto a la cota).</li>
           </ol>
 
-          <!-- CAD Viewport Esquemático -->
-          <div class="cad-viewport" style="margin-top: 1.5rem;">
-            <div style="text-align: center;">
-              <div style="font-size: 3rem; margin-bottom: 0.5rem;">📐⚡</div>
-              <p style="font-size: 0.95rem; font-weight: 700; color: var(--white);">Demostración: Cotas Vinculadas a Variables Globales = "A", = "B"</p>
-              <p style="font-size: 0.8rem; opacity: 0.8;">Modificación Instantánea: Cambio en Tabla de Ecuaciones > Reconstruir (Ctrl+B)</p>
-            </div>
-            <div class="cad-viewport-controls">
-              <button type="button" class="cad-btn-icon" onclick="alert('Variables Globales vinculadas: A=120mm, B=65mm, C=30mm')">🔗 Verificar Ecuaciones</button>
-            </div>
+          <!-- Visor Gráfico Técnico SVG: Gestor de Ecuaciones y Cotas Vinculadas -->
+          <div class="cad-viewport" style="padding: 1rem;">
+            <svg viewBox="0 0 600 245" style="width: 100%; height: 100%;">
+              <rect x="0" y="0" width="600" height="245" fill="#0f172a"/>
+              
+              <!-- Título -->
+              <text x="300" y="24" fill="#38bdf8" font-size="12" font-weight="bold" text-anchor="middle">AUTOMATIZACIÓN PARAMÉTRICA: GESTOR DE ECUACIONES (= "A", = "B", = "C")</text>
+
+              <!-- Tabla Simulada de Ecuaciones (Izquierda) -->
+              <rect x="35" y="48" width="255" height="155" rx="6" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+              <rect x="35" y="48" width="255" height="28" rx="6" fill="#0284c7"/>
+              <text x="162" y="66" fill="#ffffff" font-size="10.5" font-weight="bold" text-anchor="middle">Variables Globales (Ecuaciones)</text>
+              
+              <text x="50" y="96" fill="#38bdf8" font-size="10.5" font-weight="bold" font-family="monospace">"A"  =  120.00 mm</text>
+              <text x="200" y="96" fill="#94a3b8" font-size="9.5">(Longitud)</text>
+
+              <line x1="45" y1="106" x2="280" y2="106" stroke="#334155" stroke-width="1"/>
+              <text x="50" y="126" fill="#38bdf8" font-size="10.5" font-weight="bold" font-family="monospace">"B"  =   65.00 mm</text>
+              <text x="200" y="126" fill="#94a3b8" font-size="9.5">(Ancho)</text>
+
+              <line x1="45" y1="136" x2="280" y2="136" stroke="#334155" stroke-width="1"/>
+              <text x="50" y="156" fill="#38bdf8" font-size="10.5" font-weight="bold" font-family="monospace">"C"  =   30.00 mm</text>
+              <text x="200" y="156" fill="#94a3b8" font-size="9.5">(Altura)</text>
+
+              <text x="162" y="188" fill="#22c55e" font-size="9.5" font-weight="bold" text-anchor="middle">Reconstruir: Ctrl + B (Actualización Instantánea)</text>
+
+              <!-- Flecha de Vinculación -->
+              <line x1="295" y1="125" x2="335" y2="125" stroke="#f59e0b" stroke-width="2.5"/>
+              <polygon points="335,125 326,120 326,130" fill="#f59e0b"/>
+
+              <!-- Bloque Paramétrico con Cotas Sigma (Derecha) -->
+              <rect x="355" y="75" width="180" height="90" fill="#1e293b" stroke="#00B3E0" stroke-width="2.5"/>
+              <!-- Cota Sigma A -->
+              <line x1="355" y1="172" x2="355" y2="195" stroke="#94a3b8" stroke-width="1"/>
+              <line x1="535" y1="172" x2="535" y2="195" stroke="#94a3b8" stroke-width="1"/>
+              <line x1="355" y1="188" x2="535" y2="188" stroke="#f59e0b" stroke-width="1.5"/>
+              <text x="445" y="203" fill="#f59e0b" font-size="10.5" font-weight="bold" text-anchor="middle">Σ 120.00 (="A")</text>
+
+              <!-- Cota Sigma C -->
+              <line x1="540" y1="75" x2="565" y2="75" stroke="#94a3b8" stroke-width="1"/>
+              <line x1="540" y1="165" x2="565" y2="165" stroke="#94a3b8" stroke-width="1"/>
+              <line x1="558" y1="75" x2="558" y2="165" stroke="#f59e0b" stroke-width="1.5"/>
+              <text x="565" y="124" fill="#f59e0b" font-size="10" font-weight="bold">Σ C</text>
+            </svg>
           </div>
         </article>
 
-        <!-- Bloque 3: Guía Práctica Paso a Paso -->
-        <article class="card">
-          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">3. Guía Práctica Paso a Paso: Flujo Rápido de Respuesta CSWA</h2>
-          <p style="font-size: 0.95rem; color: var(--text-dark); margin-bottom: 1rem;">
-            Sigue este flujo estandarizado al abordar una pregunta práctica de modelado tipo CSWA:
+        <!-- TAB 3: PROCEDIMIENTO PASO A PASO -->
+        <article id="tab-procedimiento" class="card" style="display: none;">
+          <h2 class="card-title"><i class="fa-solid fa-list-check text-swCyan"></i> 3. Flujo Rápido de Respuesta CSWA en 3 Fases</h2>
+          <p style="font-size: 0.95rem; color: var(--text-dark); margin-bottom: 1.5rem;">
+            Aplica esta metodología estandarizada al abordar cualquier problema práctico de modelado tipo CSWA:
           </p>
 
           <div class="step-box">
-            <div class="step-number">Fase 1</div>
-            <h4 style="margin: 0 0 0.3rem 0; color: var(--primary);">Verificación del Sistema de Unidades y Material</h4>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">
-              Antes de dibujar una sola línea, ajusta la esquina inferior derecha a <strong>MMGS</strong> o <strong>IPS</strong> según requiera el enunciado. Asigna inmediatamente el material en el árbol (ej. <em>Acero al carbono 1020</em>).
-            </p>
+            <div class="step-number">1</div>
+            <h4 style="color: var(--primary);">Fase 1: Verificación del Sistema de Unidades y Material</h4>
+            <p>Antes de dibujar una sola línea, ajusta la barra inferior derecha a <strong>MMGS</strong> o <strong>IPS</strong> según requiera el enunciado. Asigna inmediatamente el material en el FeatureManager (ej. <em>Acero al carbono 1020</em>).</p>
           </div>
 
           <div class="step-box">
-            <div class="step-number">Fase 2</div>
-            <h4 style="margin: 0 0 0.3rem 0; color: var(--primary);">Definición del Origen (0,0,0) y Primer Croquis</h4>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">
-              Ubica la esquina o centro del croquis en el punto del Origen especificado en la ilustración de referencia. Asegúrate de que el croquis muestre el estado <strong>Completamente Definido</strong>.
-            </p>
+            <div class="step-number">2</div>
+            <h4 style="color: var(--primary);">Fase 2: Definición del Origen (0,0,0) y Primer Croquis</h4>
+            <p>Ubica la esquina o centro del croquis en el punto del Origen especificado en el plano de referencia. Asegúrate de que el croquis muestre el estado <strong>Completamente definido</strong> (líneas en negro) antes de extruir.</p>
           </div>
 
           <div class="step-box">
-            <div class="step-number">Fase 3</div>
-            <h4 style="margin: 0 0 0.3rem 0; color: var(--primary);">Extracción de Propiedades y Control Decimal</h4>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">
-              Consulta <code>Calcular > Propiedades de masa</code>. Si la pregunta requiere entrada manual, copia el valor redondeado a 2 decimales. Si es opción múltiple, verifica la opción dentro del margen de $\pm 0.5\%$.
-            </p>
+            <div class="step-number">3</div>
+            <h4 style="color: var(--primary);">Fase 3: Extracción de Propiedades y Control Decimal</h4>
+            <p>Consulta <code>Calcular > Propiedades físicas</code>. Si la pregunta requiere ingreso manual, escribe el valor redondeado a 2 decimales. Si es de opción múltiple, verifica que tu resultado esté dentro del margen de tolerancia oficial de $\pm 0.5\%$ (o $\pm 1.00	ext{ g}$).</p>
           </div>
         </article>
 
+        <!-- TAB 4: EVALUACIÓN Y CUESTIONARIO -->
+        <article id="tab-evaluacion" class="card" style="display: none;">
+          <h2 class="card-title"><i class="fa-solid fa-pen-to-square text-swCyan"></i> 4. Cuestionario de Comprobación - Semana 13</h2>
+          <p style="margin-bottom: 1.5rem;">Responde a las siguientes preguntas para validar tu dominio sobre la metodología del examen CSWA:</p>
+
+          <form id="quiz-form-w13">
+            <div style="margin-bottom: 1.5rem;">
+              <p style="font-weight: 600; margin-bottom: 0.75rem; color: var(--primary);">
+                1. ¿Qué carácter se debe ingresar en la casilla de Cota Inteligente para vincular una variable global previamente definida?
+              </p>
+              <label class="quiz-option"><input type="radio" name="w13q1" value="A"> A) El signo de dólar ($)</label>
+              <label class="quiz-option"><input type="radio" name="w13q1" value="B"> B) El signo de igual (=)</label>
+              <label class="quiz-option"><input type="radio" name="w13q1" value="C"> C) El signo de porcentaje (%)</label>
+            </div>
+
+            <div style="margin-bottom: 1.5rem;">
+              <p style="font-weight: 600; margin-bottom: 0.75rem; color: var(--primary);">
+                2. ¿Cuál es el puntaje mínimo requerido para aprobar el examen oficial CSWA de Dassault Systèmes?
+              </p>
+              <label class="quiz-option"><input type="radio" name="w13q2" value="A"> A) 50% (120 Puntos)</label>
+              <label class="quiz-option"><input type="radio" name="w13q2" value="B"> B) 70% (165 Puntos de 240)</label>
+              <label class="quiz-option"><input type="radio" name="w13q2" value="C"> C) 90% (216 Puntos)</label>
+            </div>
+
+            <button type="button" class="btn" onclick="evaluarQuizSemana13()">
+              <i class="fa-solid fa-check"></i> Validar Respuestas y Guardar Avance
+            </button>
+            <div id="quiz-feedback-w13" style="margin-top: 1rem; display: none;"></div>
+          </form>
+        </article>
+
+        <!-- Navegación entre Semanas -->
+        <div style="display: flex; justify-content: space-between; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
+          <a href="semana12.html" class="btn btn-outline"><i class="fa-solid fa-arrow-left"></i> Semana 12</a>
+          <a href="index.html" class="btn btn-outline"><i class="fa-solid fa-list"></i> Índice Aula</a>
+          <a href="semana14.html" class="btn">Semana 14 <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
       </div>
 
-      <!-- Barra Lateral: Progreso y Cuestionario de Validación -->
-      <aside>
-
-        <!-- Resumen de la Lección -->
+      <!-- Barra Lateral (Sidebar) -->
+      <aside class="space-y">
         <div class="card">
-          <h3 class="card-title" style="font-size: 1.1rem; margin-bottom: 0.75rem;">📋 Resumen de la Lección</h3>
-          <ul style="list-style: none; font-size: 0.85rem; color: var(--text-muted);" class="space-y">
+          <h3 class="card-title" style="font-size: 1rem;"><i class="fa-solid fa-chart-line text-swCyan"></i> Estado de la Lección</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">Progreso registrado en esta semana:</p>
+          <div class="progress-container"><div id="week-progress-bar" class="progress-bar" style="width: 0%;"></div></div>
+          <span id="week-status-badge" class="badge badge-warning" style="margin-top: 0.5rem;">Pendiente</span>
+          <ul style="list-style: none; font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--border);" class="space-y">
             <li style="display: flex; align-items: center; gap: 0.5rem;">
-              <span>✅</span> Estructura del examen oficial CSWA
+              <i class="fa-solid fa-check-circle text-swCyan"></i> Estructura CSWA (240 pts)
             </li>
             <li style="display: flex; align-items: center; gap: 0.5rem;">
-              <span>✅</span> Creación de Variables Globales (= "A")
+              <i class="fa-solid fa-check-circle text-swCyan"></i> Variables Globales <code>="A"</code>
             </li>
             <li style="display: flex; align-items: center; gap: 0.5rem;">
-              <span>✅</span> Gestión de tiempo (180 minutos)
-            </li>
-            <li style="display: flex; align-items: center; gap: 0.5rem;">
-              <span>✅</span> Tolerancia de respuesta decimal
+              <i class="fa-solid fa-check-circle text-swCyan"></i> Gestión 180 Minutos
             </li>
           </ul>
         </div>
 
-        <!-- Cuestionario Rápido de Validación -->
         <div class="card">
-          <h3 class="card-title" style="font-size: 1.1rem; margin-bottom: 0.75rem;">📝 Comprobación de Lectura</h3>
-          <form id="week13-quiz-form" onsubmit="evaluateWeek13Quiz(event)">
-            <p style="font-size: 0.85rem; font-weight: 600; color: var(--primary); margin-bottom: 0.5rem;">
-              1. ¿Qué carácter se debe ingresar en la casilla de Cota Inteligente para vincular una variable global previamente definida?
-            </p>
-            <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.85rem; margin-bottom: 1rem;">
-              <label><input type="radio" name="w13q1" value="A" required> El signo de dólar ($)</label>
-              <label><input type="radio" name="w13q1" value="B"> El signo de igual (=)</label>
-              <label><input type="radio" name="w13q1" value="C"> El signo de porcentaje (%)</label>
-            </div>
-
-            <p style="font-size: 0.85rem; font-weight: 600; color: var(--primary); margin-bottom: 0.5rem;">
-              2. ¿Cuál es el puntaje mínimo requerido para aprobar el examen oficial CSWA de Dassault Systèmes?
-            </p>
-            <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.85rem; margin-bottom: 1.25rem;">
-              <label><input type="radio" name="w13q2" value="A" required> 50% (120 Puntos)</label>
-              <label><input type="radio" name="w13q2" value="B"> 70% (165 Puntos de 240)</label>
-              <label><input type="radio" name="w13q2" value="C"> 90% (216 Puntos)</label>
-            </div>
-
-            <button type="submit" class="btn btn-outline" style="width: 100%; font-size: 0.85rem;">Validar Respuestas</button>
-          </form>
+          <h3 class="card-title" style="font-size: 1rem;"><i class="fa-solid fa-folder-open text-swCyan"></i> Recursos Descargables</h3>
+          <ul style="list-style: none; font-size: 0.85rem;" class="space-y">
+            <li><a href="#" onclick="alert('Descargando Guía de Estrategia y Tiempos CSWA (.PDF)'); return false;"><i class="fa-solid fa-file-pdf text-red-500 mr-1"></i> Guía Estrategia CSWA (.PDF)</a></li>
+            <li><a href="#" onclick="alert('Descargando Archivo de Ecuaciones Ejemplo (.TXT)'); return false;"><i class="fa-solid fa-file-code text-swCyan mr-1"></i> Plantilla Ecuaciones (.TXT)</a></li>
+          </ul>
         </div>
 
-        <!-- Navegación entre Semanas -->
-        <div class="card" style="text-align: center;">
-          <h4 style="font-size: 0.9rem; color: var(--primary); margin-bottom: 0.75rem;">Navegación Curricular</h4>
-          <div style="display: flex; justify-content: space-between; gap: 0.5rem;">
-            <a href="semana12.html" class="btn btn-outline" style="font-size: 0.8rem; flex: 1;">⬅️ Sem. 12</a>
-            <a href="index.html" class="btn btn-outline" style="font-size: 0.8rem; flex: 1;">Índice</a>
-            <a href="semana14.html" class="btn" style="font-size: 0.8rem; flex: 1;">Sem. 14 ➡️</a>
-          </div>
+        <div class="card" style="background: var(--primary); color: var(--white);">
+          <h3 style="color: var(--accent); font-size: 1rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-award mr-1"></i> CSWA Practice Center</h3>
+          <p style="font-size: 0.85rem; opacity: 0.9; margin-bottom: 1rem;">
+            Entrena con problemas cronometrados de modificación paramétrica con variables A, B y C.
+          </p>
+          <a href="../cswa/index.html" class="btn" style="width: 100%; text-align: center; font-size: 0.85rem;">Ir al Centro CSWA</a>
         </div>
-
       </aside>
 
     </div>
-
   </main>
 
   <footer>
@@ -334,54 +437,67 @@
 
   <!-- Scripts de la Aplicación -->
   <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/cswa.js"></script>
+  <script src="../assets/js/quiz.js"></script>
+  <script src="../assets/js/navbar.js"></script>
+
   <script>
-    function completeWeek13() {
-      AppState.markWeekCompleted(13);
-      
-      const btn = document.getElementById('mark-completed-btn');
-      if (btn) {
-        btn.textContent = '✓ Semana 13 Completada';
-        btn.disabled = true;
-        btn.style.opacity = '0.8';
-      }
-      alert('🎉 ¡Semana 13 registrada como completada en tu expediente!');
-    }
-
-    function evaluateWeek13Quiz(e) {
-      e.preventDefault();
-      const form = document.getElementById('week13-quiz-form');
-      const formData = new FormData(form);
-
-      const q1 = formData.get('w13q1');
-      const q2 = formData.get('w13q2');
-
-      if (q1 === 'B' && q2 === 'B') {
-        alert('🎯 ¡Excelente! Has respondido correctamente ambas preguntas sobre la metodología del examen CSWA.');
-        AppState.recordQuizResult('semana13_quiz', 100, { tiempo_limite: 85, modificacion: 85 });
-        completeWeek13();
-      } else {
-        alert('⚠️ Hay respuestas incorrectas. Revisa cómo vincular variables con = y los requisitos mínimos de aprobación del examen.');
-      }
-    }
-
-    // Verificar si ya fue completada al cargar
     document.addEventListener('DOMContentLoaded', () => {
       const progress = AppState.getUserProgress();
       if (progress.completedWeeks && progress.completedWeeks.includes(13)) {
-        const btn = document.getElementById('mark-completed-btn');
-        if (btn) {
-          btn.textContent = '✓ Semana 13 Completada';
-          btn.disabled = true;
-          btn.style.opacity = '0.8';
-        }
+        actualizarUICompletado();
       }
     });
+
+    function switchTab(e, tabId) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('article[id^="tab-"]').forEach(content => content.style.display = 'none');
+
+      if (e && e.currentTarget) {
+        e.currentTarget.classList.add('active');
+      }
+      document.getElementById('tab-' + tabId).style.display = 'block';
+    }
+
+    function actualizarUICompletado() {
+      const progressBar = document.getElementById('week-progress-bar');
+      const badge = document.getElementById('week-status-badge');
+      const btn = document.getElementById('mark-completed-btn');
+
+      if (progressBar) progressBar.style.width = '100%';
+      if (badge) {
+        badge.className = 'badge badge-success';
+        badge.textContent = 'Completado';
+      }
+      if (btn) {
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Semana 13 Completada';
+        btn.disabled = true;
+        btn.style.opacity = '0.85';
+      }
+    }
+
+    function completeWeek13() {
+      AppState.markWeekCompleted(13);
+      AppState.recordQuizResult('semana13_quiz', 100, { tiempo_limite: 85, modificacion: 85 });
+      actualizarUICompletado();
+      alert('🎉 ¡Semana 13 registrada como completada en tu expediente!');
+    }
+
+    function evaluarQuizSemana13() {
+      const isPassed = QuizEngine.evaluateQuiz({
+        formId: 'quiz-form-w13',
+        feedbackId: 'quiz-feedback-w13',
+        quizId: 'semana13_quiz',
+        weekNumber: 13,
+        answers: { w13q1: 'B', w13q2: 'B' },
+        competencyGains: { tiempo_limite: 85, modificacion: 85 },
+        successMsg: '<strong>🎯 ¡Excelente!</strong> Respuestas correctas. El signo igual (=) vincula variables globales en cotas inteligentes (B) y el puntaje mínimo de aprobación CSWA es 165 puntos de 240 (70%) (B).'
+      });
+
+      if (isPassed) {
+        actualizarUICompletado();
+      }
+    }
   </script>
 </body>
 </html>
-```
-
-### Summary of `aula/semana13.html`:
-- Initiates **Module 7: Intensive CSWA Preparation**.
-- Details CSWA exam structure, time allocation strategies for the 180-minute test limit, global variable management (`="A"`, `="B"`, `="C"`), and fast sketching techniques.
-- Includes a reading check quiz and progress tracking integration with `AppState` in `LocalStorage` (`app.js`).
