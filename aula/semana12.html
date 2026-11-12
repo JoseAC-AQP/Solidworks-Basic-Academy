@@ -3,46 +3,57 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Semana 11: Asignación de Materiales y Propiedades de Masa | SOLIDWORKS ACADEMY</title>
+  <title>Semana 12: Evaluación Práctica 3 - Ensamblajes y Propiedades Físicas | SOLIDWORKS ACADEMY</title>
   
   <!-- Hojas de Estilo Institucionales -->
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/components.css">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
     .lesson-hero {
       background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
       color: var(--white);
-      padding: 2rem;
-      border-radius: 12px;
+      padding: 2.25rem 2rem;
+      border-radius: var(--radius-md);
       margin-bottom: 2rem;
       box-shadow: var(--shadow-md);
     }
 
     .lesson-meta-bar {
       display: flex;
-      gap: 1.5rem;
+      gap: 1.25rem;
       margin-top: 1rem;
       font-size: 0.85rem;
-      color: var(--accent);
+      color: var(--accent-light);
       flex-wrap: wrap;
     }
 
     .step-box {
-      border-left: 4px solid var(--accent);
+      border-left: 4px solid var(--warning);
       background: var(--bg-light);
       padding: 1.25rem;
-      border-radius: 0 8px 8px 0;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
       margin-bottom: 1.25rem;
+      position: relative;
+      padding-left: 3.5rem;
     }
 
     .step-number {
+      position: absolute;
+      left: 1rem;
+      top: 1.25rem;
+      width: 1.8rem;
+      height: 1.8rem;
+      background: var(--warning);
+      color: var(--primary-dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-weight: 800;
-      color: var(--primary);
-      text-transform: uppercase;
-      font-size: 0.8rem;
-      letter-spacing: 0.5px;
-      margin-bottom: 0.3rem;
+      font-size: 0.85rem;
     }
 
     .shortcut-tag {
@@ -57,9 +68,9 @@
     }
 
     .cswa-tip-box {
-      background: #EFF6FF;
-      border: 1px solid #BFDBFE;
-      border-radius: 8px;
+      background: #FEF3C7;
+      border: 1px solid #FDE68A;
+      border-radius: var(--radius-sm);
       padding: 1.25rem;
       margin: 1.5rem 0;
     }
@@ -68,9 +79,36 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      color: #1E40AF;
+      color: #92400E;
       font-weight: 700;
       margin-bottom: 0.5rem;
+    }
+
+    .tab-container {
+      display: flex;
+      gap: 0.5rem;
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 1.5rem;
+      overflow-x: auto;
+    }
+
+    .tab-btn {
+      padding: 0.75rem 1.25rem;
+      border: none;
+      background: none;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+      font-weight: 700;
     }
 
     .param-table {
@@ -90,226 +128,278 @@
       background: var(--bg-light);
       color: var(--primary);
     }
+
+    .quiz-option {
+      display: block;
+      padding: 0.75rem 1rem;
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .quiz-option:hover {
+      border-color: var(--accent);
+      background: #F0F9FF;
+    }
+
+    .quiz-option input {
+      margin-right: 0.75rem;
+    }
   </style>
 </head>
 <body>
 
-  <!-- Navegación Principal -->
-  <nav class="navbar">
-    <a href="../index.html" class="brand"><span>SOLIDWORKS</span> ACADEMY</a>
-    <ul class="nav-links">
-      <li><a href="../index.html">Inicio</a></li>
-      <li><a href="../dashboard.html">Dashboard</a></li>
-      <li><a href="../aula/index.html" class="active">Aula Virtual</a></li>
-      <li><a href="../cswa/index.html">CSWA Center</a></li>
-      <li><a href="../proyecto.html">Proyecto Final</a></li>
-    </ul>
-  </nav>
+  <!-- Barra de Navegación Dinámica Institucional -->
+  <header class="navbar"></header>
 
   <main class="container">
 
-    <!-- Encabezado de la Lección -->
+    <!-- Encabezado de la Lección / Evaluación -->
     <header class="lesson-hero">
       <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
         <div>
-          <span class="badge badge-info" style="margin-bottom: 0.5rem; display: inline-block;">Módulo 6: Propiedades Físicas</span>
-          <h1 style="font-size: 2.2rem; color: var(--white); margin: 0.2rem 0;">Semana 11: Asignación de Materiales y Propiedades de Masa</h1>
+          <span class="badge badge-warning" style="margin-bottom: 0.5rem; display: inline-flex; align-items: center; gap: 0.35rem;">
+            <i class="fa-solid fa-clipboard-check"></i> Módulo 6: Evaluación Sumativa 3 (25%)
+          </span>
+          <h1 style="font-size: 2.2rem; color: var(--white); margin: 0.2rem 0;">Semana 12: Evaluación Práctica 3 - Ensamblajes y Propiedades Físicas</h1>
           <p style="opacity: 0.9; font-size: 1rem; max-width: 700px; margin-top: 0.5rem;">
-            Aprende a aplicar materiales de la biblioteca de SOLIDWORKS, configurar densidad física y extraer la masa y coordenadas del Centro de Gravedad (CG).
+            Integra componentes en un ensamblaje paramétrico (.SLDASM), aplica relaciones de posición estándar y angulares, y determina las coordenadas exactas del Centro de Gravedad (CG).
           </p>
         </div>
         <div>
-          <button id="mark-completed-btn" class="btn" style="background: var(--success);" onclick="completeWeek11()">
-            ✓ Marcar Semana como Completada
+          <button id="mark-completed-btn" class="btn" style="background: var(--success); color: white;" onclick="completeWeek12()">
+            <i class="fa-solid fa-check"></i> Marcar Semana como Completada
           </button>
         </div>
       </div>
 
       <div class="lesson-meta-bar">
-        <span>⏱️ Duración: 3 Horas Académicas</span>
-        <span>🎯 Competencia CSWA: Propiedades físicas, masa y Centro de Gravedad (CG)</span>
-        <span>📄 Tipo de Contenido: Teórico - Práctico</span>
+        <span><i class="fa-regular fa-clock"></i> Tiempo Límite: 60 Minutos</span>
+        <span><i class="fa-solid fa-award"></i> Competencia CSWA: Ensamblajes, relaciones angulares y Centro de Gravedad</span>
+        <span><i class="fa-solid fa-file-contract"></i> Ponderación: 25% Calificación Final</span>
       </div>
     </header>
 
+    <!-- Tip Oficial CSWA -->
+    <section class="cswa-tip-box" style="margin-top: 0;">
+      <div class="cswa-tip-header">
+        <i class="fa-solid fa-triangle-exclamation text-xl"></i>
+        <span>Alineación al Origen y Sistema de Coordenadas en Ensamblajes CSWA</span>
+      </div>
+      <p style="font-size: 0.95rem; color: #78350F; margin: 0;">
+        Antes de insertar componentes, asegúrate de trabajar en <strong>MMGS</strong>. El primer componente (<code>Base_Soporte.SLDPRT</code>) debe anclarse coincidiendo su origen con el origen del ensamblaje <strong>(f)</strong>; de lo contrario, las coordenadas $(X, Y, Z)$ del Centro de Masa no coincidirán con las opciones de respuesta.
+      </p>
+    </section>
+
     <div class="grid-2" style="grid-template-columns: 2.5fr 1fr; gap: 1.5rem;">
 
-      <!-- Contenido Principal de la Lección -->
+      <!-- Contenido Principal de la Evaluación -->
       <div>
 
-        <!-- Bloque 1: Biblioteca de Materiales y Densidad -->
-        <article class="card">
-          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">1. Asignación de Materiales y Propiedades Mecánicas</h2>
+        <!-- Pestañas de Navegación Didáctica -->
+        <div class="tab-container">
+          <button class="tab-btn active" onclick="switchTab(event, 'instrucciones')"><i class="fa-solid fa-book-open mr-1"></i> 1. Instrucciones</button>
+          <button class="tab-btn" onclick="switchTab(event, 'especificaciones')"><i class="fa-solid fa-drafting-compass mr-1"></i> 2. Especificaciones y Esquema</button>
+          <button class="tab-btn" onclick="switchTab(event, 'evaluacion')"><i class="fa-solid fa-pen-to-square mr-1"></i> 3. Formulario de Examen</button>
+        </div>
+
+        <!-- TAB 1: INSTRUCCIONES DE LA EVALUACIÓN -->
+        <article id="tab-instrucciones" class="card">
+          <h2 class="card-title"><i class="fa-solid fa-list-ol text-swCyan"></i> 1. Instrucciones del Examen Práctico de Ensamblaje</h2>
+          <p style="line-height: 1.6; color: var(--text-dark); margin-bottom: 1.25rem;">
+            Esta evaluación reproduce la sección de <strong>Ensamblajes y Modificación de Posición</strong> del examen oficial CSWA. Ejecuta el montaje en dos etapas:
+          </p>
+
+          <div class="step-box">
+            <div class="step-number">1</div>
+            <h4 style="color: var(--primary);">Anclar Base Fija al Origen (0,0,0)</h4>
+            <p>Crea un nuevo ensamblaje en <strong>MMGS</strong>, inserta <code>Base_Soporte.SLDPRT</code> haciendo clic directo en <strong>Aceptar (OK)</strong> para fijar su origen al origen global <strong>(f)</strong>.</p>
+          </div>
+
+          <div class="step-box">
+            <div class="step-number">2</div>
+            <h4 style="color: var(--primary);">Montar Brazo Articulado y Pasador (Etapa 1)</h4>
+            <p>Inserta <code>Pasador.SLDPRT</code> y <code>Brazo_Oscilante.SLDPRT</code> mediante relaciones <strong>Concéntrica</strong> y <strong>Coincidente</strong>. Aplica una relación de <strong>Ángulo = 30.00°</strong> entre la cara superior de la base y el brazo, verifica 0 interferencias y consulta el Centro de Gravedad.</p>
+          </div>
+
+          <div class="step-box">
+            <div class="step-number">3</div>
+            <h4 style="color: var(--primary);">Modificar Ángulo de Trabajo (Etapa 2)</h4>
+            <p>Edita la relación angular del brazo oscilante a <strong>Ángulo = 60.00°</strong>, reconstruye (<span class="shortcut-tag">Ctrl + B</span>) y registra las nuevas coordenadas $(X, Y, Z)$ del Centro de Gravedad.</p>
+          </div>
+        </article>
+
+        <!-- TAB 2: ESPECIFICACIONES Y ESQUEMA DEL ENSAMBLAJE -->
+        <article id="tab-especificaciones" class="card" style="display: none;">
+          <h2 class="card-title"><i class="fa-solid fa-ruler-combined text-swCyan"></i> 2. Parámetros del Ensamblaje: Mecanismo Brazo Oscilante</h2>
           <p style="line-height: 1.6; color: var(--text-dark); margin-bottom: 1rem;">
-            En SOLIDWORKS, la masa y las propiedades inerciales de un sólido dependen directamente del material asignado. La biblioteca integrada contiene aleaciones metálicas, plásticos y maderas con sus valores normalizados de <strong>densidad de masa</strong> ($\rho$), módulo de Elasticidad y límite elástico.
+            Configura los componentes y parámetros angulares correspondientes a cada etapa:
           </p>
 
           <table class="param-table">
             <thead>
               <tr>
-                <th>Material Común CSWA</th>
-                <th>Densidad Típica ($g/cm^3$)</th>
-                <th>Densidad en MMGS ($g/mm^3$)</th>
+                <th>Componente / Parámetro</th>
+                <th>Etapa 1 (Posición Inicial)</th>
+                <th>Etapa 2 (Posición Modificada)</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Acero Aleado Fundido (Cast Alloy Steel)</strong></td>
-                <td>7.30 g/cm³</td>
-                <td>0.0073 g/mm³</td>
+                <td><strong>Base_Soporte.SLDPRT</strong></td>
+                <td>Fija al Origen <code>(f)</code> — AISI 1020 Steel</td>
+                <td>Fija al Origen <code>(f)</code> — AISI 1020 Steel</td>
               </tr>
               <tr>
-                <td><strong>Acero al Carbono 1020 (AISI 1020 Steel)</strong></td>
-                <td>7.87 g/cm³</td>
-                <td>0.00787 g/mm³</td>
+                <td><strong>Pasador.SLDPRT</strong></td>
+                <td>Concéntrico + Coincidente — Cast Alloy Steel</td>
+                <td>Concéntrico + Coincidente — Cast Alloy Steel</td>
               </tr>
               <tr>
-                <td><strong>Aleación de Aluminio 1060 (1060 Alloy)</strong></td>
-                <td>2.70 g/cm³</td>
-                <td>0.0027 g/mm³</td>
+                <td><strong>Brazo_Oscilante.SLDPRT</strong></td>
+                <td>1060 Alloy — <strong>Ángulo $	heta = 30.00^\circ$</strong></td>
+                <td>1060 Alloy — <strong>Ángulo $	heta = 60.00^\circ$</strong></td>
               </tr>
               <tr>
-                <td><strong>Latón (Brass)</strong></td>
-                <td>8.50 g/cm³</td>
-                <td>0.0085 g/mm³</td>
-              </tr>
-              <tr>
-                <td><strong>Plástico ABS (ABS Plastic)</strong></td>
-                <td>1.02 g/cm³</td>
-                <td>0.00102 g/mm³</td>
+                <td><strong>Sistema de Unidades</strong></td>
+                <td>MMGS (Milímetro, Gramo, Segundo)</td>
+                <td>MMGS (Milímetro, Gramo, Segundo)</td>
               </tr>
             </tbody>
           </table>
 
-          <div class="cswa-tip-box">
-            <div class="cswa-tip-header">
-              <span>💡 Regla de Oro en el Examen CSWA</span>
-            </div>
-            <p style="font-size: 0.9rem; color: #1E3A8A; margin: 0;">
-              Si el material asignado no coincide exactamente con el especificado en el enunciado (ej. confundir <em>Acero Aleado Fundido</em> con <em>Acero al Carbono 1020</em>), el resultado numérico de la masa será erróneo aunque la geometría 3D sea perfecta.
-            </p>
+          <!-- Visor Gráfico Técnico SVG -->
+          <div class="cad-viewport" style="margin-top: 1.5rem; padding: 1rem;">
+            <svg viewBox="0 0 600 250" style="width: 100%; height: 100%;">
+              <rect x="0" y="0" width="600" height="250" fill="#0f172a"/>
+              
+              <!-- Título -->
+              <text x="300" y="24" fill="#38bdf8" font-size="12" font-weight="bold" text-anchor="middle">ENSAMBLAJE CSWA: MECANISMO DE BRAZO OSCILANTE (UNIDADES: MMGS)</text>
+
+              <!-- Base Soporte (f) -->
+              <path d="M 90 155 L 270 155 L 270 185 L 90 185 Z" fill="#1e293b" stroke="#00B3E0" stroke-width="2.5"/>
+              <path d="M 115 110 L 165 110 L 165 155 L 115 155 Z" fill="#1e293b" stroke="#00B3E0" stroke-width="2.5"/>
+              <text x="180" y="174" fill="#38bdf8" font-size="10.5" font-weight="bold" text-anchor="middle">Base_Soporte (f)</text>
+
+              <!-- Origen (0,0,0) -->
+              <circle cx="90" cy="185" r="4.5" fill="#ef4444"/>
+              <line x1="90" y1="185" x2="125" y2="185" stroke="#ef4444" stroke-width="1.8"/>
+              <line x1="90" y1="185" x2="90" y2="150" stroke="#22c55e" stroke-width="1.8"/>
+              <text x="85" y="202" fill="#ef4444" font-size="9.5" font-weight="bold">Origen (0,0,0)</text>
+
+              <!-- Brazo Oscilante inclinado a ángulo theta -->
+              <g transform="translate(140, 128) rotate(-30)">
+                <rect x="-15" y="-14" width="155" height="28" rx="14" fill="#334155" stroke="#f59e0b" stroke-width="2.5"/>
+                <circle cx="122" cy="0" r="6" fill="#0f172a" stroke="#f59e0b" stroke-width="1.5"/>
+                <text x="65" y="4" fill="#f8fafc" font-size="10" font-weight="bold" text-anchor="middle">Brazo_Oscilante</text>
+              </g>
+
+              <!-- Pasador en articulación -->
+              <circle cx="140" cy="128" r="8" fill="#0f172a" stroke="#38bdf8" stroke-width="2.5"/>
+              <circle cx="140" cy="128" r="3" fill="#38bdf8"/>
+
+              <!-- Línea horizontal de referencia y arco ángulo theta -->
+              <line x1="140" y1="128" x2="275" y2="128" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4,3"/>
+              <path d="M 225 128 A 85 85 0 0 0 213 85" fill="none" stroke="#22c55e" stroke-width="2"/>
+              <text x="233" y="108" fill="#22c55e" font-size="11" font-weight="bold">θ (30° / 60°)</text>
+
+              <!-- Panel Derecho de Datos -->
+              <rect x="330" y="55" width="240" height="145" rx="6" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+              <text x="450" y="78" fill="#38bdf8" font-size="11" font-weight="bold" text-anchor="middle">DATOS DE EVALUACIÓN CSWA</text>
+              
+              <text x="345" y="102" fill="#f8fafc" font-size="10" font-weight="bold">• Etapa 1 (θ = 30.00°):</text>
+              <text x="355" y="117" fill="#94a3b8" font-size="9.5">Determinar CG (X, Y, Z) en mm</text>
+
+              <text x="345" y="142" fill="#f8fafc" font-size="10" font-weight="bold">• Etapa 2 (θ = 60.00°):</text>
+              <text x="355" y="157" fill="#94a3b8" font-size="9.5">Recalcular CG (X, Y, Z) tras giro</text>
+
+              <text x="450" y="185" fill="#22c55e" font-size="10" font-weight="bold" text-anchor="middle">✓ Interferencias: 0.00 mm³</text>
+            </svg>
           </div>
         </article>
 
-        <!-- Bloque 2: Herramienta Propiedades de Masa y Sistema de Coordenadas -->
-        <article class="card">
-          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">2. Consulta de Propiedades de Masa y Sistemas de Coordenadas</h2>
-          <p style="line-height: 1.6; color: var(--text-dark); margin-bottom: 1rem;">
-            La herramienta <strong>Propiedades de Masa (Mass Properties)</strong> calcula instantáneamente el volumen, superficie, masa total y las coordenadas cuadráticas $(X, Y, Z)$ del <strong>Centro de Gravedad (CG)</strong>.
+        <!-- TAB 3: FORMULARIO EVALUATIVO -->
+        <article id="tab-evaluacion" class="card" style="display: none;">
+          <h2 class="card-title"><i class="fa-solid fa-pen-to-square text-swCyan"></i> 3. Formulario de Respuestas del Examen</h2>
+          <p style="font-size: 0.95rem; color: var(--text-dark); margin-bottom: 1.5rem;">
+            Consulta <em>Calcular > Propiedades físicas</em> en tu ensamblaje y selecciona las coordenadas del Centro de Gravedad obtenidas:
           </p>
 
-          <h3 style="font-size: 1.1rem; color: var(--primary); margin: 1.25rem 0 0.5rem 0;">Pasos para obtener las propiedades:</h3>
-          <ol style="margin-left: 1.25rem; font-size: 0.95rem; color: var(--text-dark); line-height: 1.7;">
-            <li>Dirígete a la pestaña <strong>Calcular > Propiedades de Masa</strong>.</li>
-            <li>En la ventana emergente, verifica que el sistema de unidades esté configurado en <strong>MMGS</strong>.</li>
-            <li>Revisa las coordenadas $(X, Y, Z)$ del Centro de Masa respecto al Origen predeterminado o un Sistema de Coordenadas personalizado.</li>
-          </ol>
+          <form id="week12-exam-form">
+            <div style="margin-bottom: 1.5rem;">
+              <p style="font-weight: 600; margin-bottom: 0.75rem; color: var(--primary);">
+                1. En la Etapa 1 ($	heta = 30.00^\circ$), ¿cuáles son las coordenadas $(X, Y, Z)$ del Centro de Gravedad del ensamblaje?
+              </p>
+              <label class="quiz-option"><input type="radio" name="w12q1" value="A" required> A) X = 78.40 mm, Y = 42.15 mm, Z = 25.00 mm</label>
+              <label class="quiz-option"><input type="radio" name="w12q1" value="B"> B) X = 84.62 mm, Y = 48.30 mm, Z = 25.00 mm</label>
+              <label class="quiz-option"><input type="radio" name="w12q1" value="C"> C) X = 92.10 mm, Y = 36.80 mm, Z = 25.00 mm</label>
+              <label class="quiz-option"><input type="radio" name="w12q1" value="D"> D) X = 80.05 mm, Y = 51.20 mm, Z = 25.00 mm</label>
+            </div>
 
-          <!-- CAD Viewport Esquemático -->
-          <div class="cad-viewport" style="margin-top: 1.5rem;">
-            <div style="text-align: center;">
-              <div style="font-size: 3rem; margin-bottom: 0.5rem;">⚖️📍</div>
-              <p style="font-size: 0.95rem; font-weight: 700; color: var(--white);">Cálculo de Masa: Sólido con Material Acero 1020</p>
-              <p style="font-size: 0.8rem; opacity: 0.8;">Masa: 1342.50 g | CG: X = 45.20 mm, Y = 12.80 mm, Z = 0.00 mm</p>
+            <div style="margin-bottom: 1.5rem;">
+              <p style="font-weight: 600; margin-bottom: 0.75rem; color: var(--primary);">
+                2. Tras modificar la relación angular a la Etapa 2 ($	heta = 60.00^\circ$), ¿cuáles son las nuevas coordenadas $(X, Y, Z)$ del Centro de Gravedad?
+              </p>
+              <label class="quiz-option"><input type="radio" name="w12q2" value="A" required> A) X = 71.18 mm, Y = 62.45 mm, Z = 25.00 mm</label>
+              <label class="quiz-option"><input type="radio" name="w12q2" value="B"> B) X = 65.90 mm, Y = 58.10 mm, Z = 25.00 mm</label>
+              <label class="quiz-option"><input type="radio" name="w12q2" value="C"> C) X = 74.50 mm, Y = 66.80 mm, Z = 25.00 mm</label>
+              <label class="quiz-option"><input type="radio" name="w12q2" value="D"> D) X = 68.25 mm, Y = 60.05 mm, Z = 25.00 mm</label>
             </div>
-            <div class="cad-viewport-controls">
-              <button type="button" class="cad-btn-icon" onclick="alert('Propiedades de masa consultadas: Masa = 1342.50g')">📊 Evaluar Masa</button>
-            </div>
-          </div>
+
+            <button type="button" class="btn" style="width: 100%; font-size: 1rem;" onclick="evaluateWeek12Exam()">
+              <i class="fa-solid fa-check-double"></i> Entregar Evaluación de la Semana 12
+            </button>
+            <div id="quiz-feedback-w12" style="margin-top: 1rem; display: none;"></div>
+          </form>
         </article>
 
-        <!-- Bloque 3: Guía Práctica Paso a Paso -->
-        <article class="card">
-          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">3. Guía Práctica Paso a Paso: Asignación de Material y Medición de Masa</h2>
-          <p style="font-size: 0.95rem; color: var(--text-dark); margin-bottom: 1rem;">
-            Sigue estos pasos en SOLIDWORKS para asignar material y consultar propiedades de masa:
-          </p>
-
-          <div class="step-box">
-            <div class="step-number">Paso 1</div>
-            <h4 style="margin: 0 0 0.3rem 0; color: var(--primary);">Acceder a la Biblioteca de Materiales</h4>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">
-              En el árbol de diseño FeatureManager, haz clic derecho sobre la entrada <strong>Material &lt;Sin especificar&gt;</strong> y selecciona <strong>Editar Material</strong>.
-            </p>
-          </div>
-
-          <div class="step-box">
-            <div class="step-number">Paso 2</div>
-            <h4 style="margin: 0 0 0.3rem 0; color: var(--primary);">Seleccionar y Aplicar Aleación de Aluminio 1060</h4>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">
-              Navega en la carpeta <code>Aleaciones de Aluminio > Aleación 1060</code>. Revisa su densidad ($2.70\text{ g/cm}^3$) y haz clic en <strong>Aplicar</strong> y luego en <strong>Cerrar</strong>.
-            </p>
-          </div>
-
-          <div class="step-box">
-            <div class="step-number">Paso 3</div>
-            <h4 style="margin: 0 0 0.3rem 0; color: var(--primary);">Consultar Propiedades en Pestaña Calcular</h4>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">
-              Abre <code>Calcular > Propiedades de masa</code>. Anota la masa total y las coordenadas del Centro de Gravedad $(X, Y, Z)$ obtenidas.
-            </p>
-          </div>
-        </article>
+        <!-- Navegación entre Semanas -->
+        <div style="display: flex; justify-content: space-between; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
+          <a href="semana11.html" class="btn btn-outline"><i class="fa-solid fa-arrow-left"></i> Semana 11</a>
+          <a href="index.html" class="btn btn-outline"><i class="fa-solid fa-list"></i> Índice Aula</a>
+          <a href="../proyecto.html" class="btn">Proyecto Final <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
 
       </div>
 
-      <!-- Barra Lateral: Progreso y Cuestionario de Validación -->
-      <aside>
-
-        <!-- Resumen de la Lección -->
+      <!-- Barra Lateral (Sidebar) -->
+      <aside class="space-y">
         <div class="card">
-          <h3 class="card-title" style="font-size: 1.1rem; margin-bottom: 0.75rem;">📋 Resumen de la Lección</h3>
-          <ul style="list-style: none; font-size: 0.85rem; color: var(--text-muted);" class="space-y">
+          <h3 class="card-title" style="font-size: 1rem;"><i class="fa-solid fa-chart-line text-swCyan"></i> Estado de la Evaluación</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">Progreso registrado en esta semana:</p>
+          <div class="progress-container"><div id="week-progress-bar" class="progress-bar" style="width: 0%;"></div></div>
+          <span id="week-status-badge" class="badge badge-warning" style="margin-top: 0.5rem;">Pendiente</span>
+          <ul style="list-style: none; font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--border);" class="space-y">
             <li style="display: flex; align-items: center; gap: 0.5rem;">
-              <span>✅</span> Asignación de Materiales en el Árbol
+              <i class="fa-solid fa-flag-checkered text-swCyan"></i> Cierre Módulo 6
             </li>
             <li style="display: flex; align-items: center; gap: 0.5rem;">
-              <span>✅</span> Densidad de Masa ($\rho$)
+              <i class="fa-solid fa-bullseye text-swCyan"></i> Ponderación: 25%
             </li>
             <li style="display: flex; align-items: center; gap: 0.5rem;">
-              <span>✅</span> Herramienta Propiedades de Masa
-            </li>
-            <li style="display: flex; align-items: center; gap: 0.5rem;">
-              <span>✅</span> Coordenadas del Centro de Gravedad (CG)
+              <i class="fa-regular fa-clock text-swCyan"></i> Límite: 60 Minutos
             </li>
           </ul>
         </div>
 
-        <!-- Cuestionario Rápido de Validación -->
         <div class="card">
-          <h3 class="card-title" style="font-size: 1.1rem; margin-bottom: 0.75rem;">📝 Comprobación de Lectura</h3>
-          <form id="week11-quiz-form" onsubmit="evaluateWeek11Quiz(event)">
-            <p style="font-size: 0.85rem; font-weight: 600; color: var(--primary); margin-bottom: 0.5rem;">
-              1. ¿En qué pestaña del CommandManager se encuentra el comando 'Propiedades de Masa'?
-            </p>
-            <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.85rem; margin-bottom: 1rem;">
-              <label><input type="radio" name="w11q1" value="A" required> En la pestaña Croquis</label>
-              <label><input type="radio" name="w11q1" value="B"> En la pestaña Calcular</label>
-              <label><input type="radio" name="w11q1" value="C"> En la pestaña Operaciones</label>
-            </div>
-
-            <p style="font-size: 0.85rem; font-weight: 600; color: var(--primary); margin-bottom: 0.5rem;">
-              2. Si una pieza 3D no tiene material asignado, ¿qué valor de densidad utilizará SOLIDWORKS por defecto para estimar la masa?
-            </p>
-            <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.85rem; margin-bottom: 1.25rem;">
-              <label><input type="radio" name="w11q1_2" value="A" required> Densidad cero o valor genérico (1.00 g/cm³)</label>
-              <label><input type="radio" name="w11q1_2" value="B"> Densidad del acero inoxidable (8.00 g/cm³)</label>
-              <label><input type="radio" name="w11q1_2" value="C"> La herramienta no funciona hasta asignar un material</label>
-            </div>
-
-            <button type="submit" class="btn btn-outline" style="width: 100%; font-size: 0.85rem;">Validar Respuestas</button>
-          </form>
+          <h3 class="card-title" style="font-size: 1rem;"><i class="fa-solid fa-folder-open text-swCyan"></i> Recursos de Evaluación</h3>
+          <ul style="list-style: none; font-size: 0.85rem;" class="space-y">
+            <li><a href="#" onclick="alert('Descargando Pack de Piezas Brazo Oscilante (.ZIP)'); return false;"><i class="fa-solid fa-file-zipper text-amber-500 mr-1"></i> Piezas Ensamblaje (.ZIP)</a></li>
+            <li><a href="#" onclick="alert('Descargando Plano de Montaje y Cotas (.PDF)'); return false;"><i class="fa-solid fa-file-pdf text-red-500 mr-1"></i> Plano de Montaje (.PDF)</a></li>
+          </ul>
         </div>
 
-        <!-- Navegación entre Semanas -->
-        <div class="card" style="text-align: center;">
-          <h4 style="font-size: 0.9rem; color: var(--primary); margin-bottom: 0.75rem;">Navegación Curricular</h4>
-          <div style="display: flex; justify-content: space-between; gap: 0.5rem;">
-            <a href="semana10.html" class="btn btn-outline" style="font-size: 0.8rem; flex: 1;">⬅️ Sem. 10</a>
-            <a href="index.html" class="btn btn-outline" style="font-size: 0.8rem; flex: 1;">Índice</a>
-            <a href="semana12.html" class="btn" style="font-size: 0.8rem; flex: 1;">Sem. 12 ➡️</a>
-          </div>
+        <div class="card" style="background: var(--primary); color: var(--white);">
+          <h3 style="color: var(--accent); font-size: 1rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-award mr-1"></i> CSWA Practice Center</h3>
+          <p style="font-size: 0.85rem; opacity: 0.9; margin-bottom: 1rem;">
+            Realiza el simulacro completo oficial CSWA una vez aprobada esta evaluación.
+          </p>
+          <a href="../cswa/index.html" class="btn" style="width: 100%; text-align: center; font-size: 0.85rem;">Ir al Centro CSWA</a>
         </div>
-
       </aside>
 
     </div>
@@ -322,54 +412,66 @@
 
   <!-- Scripts de la Aplicación -->
   <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/cswa.js"></script>
+  <script src="../assets/js/quiz.js"></script>
+  <script src="../assets/js/navbar.js"></script>
+
   <script>
-    function completeWeek11() {
-      AppState.markWeekCompleted(11);
-      
-      const btn = document.getElementById('mark-completed-btn');
-      if (btn) {
-        btn.textContent = '✓ Semana 11 Completada';
-        btn.disabled = true;
-        btn.style.opacity = '0.8';
-      }
-      alert('🎉 ¡Semana 11 registrada como completada en tu expediente!');
-    }
-
-    function evaluateWeek11Quiz(e) {
-      e.preventDefault();
-      const form = document.getElementById('week11-quiz-form');
-      const formData = new FormData(form);
-
-      const q1 = formData.get('w11q1');
-      const q2 = formData.get('w11q1_2');
-
-      if (q1 === 'B' && q2 === 'A') {
-        alert('🎯 ¡Excelente! Has respondido correctamente ambas preguntas sobre asignación de materiales y propiedades de masa.');
-        AppState.recordQuizResult('semana11_quiz', 100, { propiedades_fisicas: 90, piezas: 85 });
-        completeWeek11();
-      } else {
-        alert('⚠️ Hay respuestas incorrectas. Revisa la ubicación de la pestaña Calcular y el comportamiento de la densidad por defecto.');
-      }
-    }
-
-    // Verificar si ya fue completada al cargar
     document.addEventListener('DOMContentLoaded', () => {
       const progress = AppState.getUserProgress();
-      if (progress.completedWeeks && progress.completedWeeks.includes(11)) {
-        const btn = document.getElementById('mark-completed-btn');
-        if (btn) {
-          btn.textContent = '✓ Semana 11 Completada';
-          btn.disabled = true;
-          btn.style.opacity = '0.8';
-        }
+      if (progress.completedWeeks && progress.completedWeeks.includes(12)) {
+        actualizarUICompletado();
       }
     });
+
+    function switchTab(e, tabId) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('article[id^="tab-"]').forEach(content => content.style.display = 'none');
+
+      if (e && e.currentTarget) {
+        e.currentTarget.classList.add('active');
+      }
+      document.getElementById('tab-' + tabId).style.display = 'block';
+    }
+
+    function actualizarUICompletado() {
+      const progressBar = document.getElementById('week-progress-bar');
+      const badge = document.getElementById('week-status-badge');
+      const btn = document.getElementById('mark-completed-btn');
+
+      if (progressBar) progressBar.style.width = '100%';
+      if (badge) {
+        badge.className = 'badge badge-success';
+        badge.textContent = 'Completado';
+      }
+      if (btn) {
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Semana 12 Completada';
+        btn.disabled = true;
+        btn.style.opacity = '0.85';
+      }
+    }
+
+    function completeWeek12() {
+      AppState.markWeekCompleted(12);
+      actualizarUICompletado();
+      alert('🎉 ¡Evaluación de la Semana 12 registrada con éxito en tu expediente!');
+    }
+
+    function evaluateWeek12Exam() {
+      const isPassed = QuizEngine.evaluateQuiz({
+        formId: 'week12-exam-form',
+        feedbackId: 'quiz-feedback-w12',
+        quizId: 'semana12_eval3',
+        weekNumber: 12,
+        answers: { w12q1: 'B', w12q2: 'A' },
+        competencyGains: { ensamblajes: 95, relaciones_posicion: 90, propiedades_fisicas: 95 },
+        successMsg: '<strong>🎉 ¡Felicidades!</strong> Has aprobado la Evaluación Práctica 3 con <strong>100%</strong> (25% de la calificación final). Tus competencias CSWA de ensamblaje y centro de gravedad han sido registradas.'
+      });
+
+      if (isPassed) {
+        actualizarUICompletado();
+      }
+    }
   </script>
 </body>
 </html>
-```
-
-### Resumen de `aula/semana11.html`:
-- Cubre el **Módulo 6: Propiedades Físicas (Parte 1)**, enfocándose en la selección de materiales normados de la biblioteca de SOLIDWORKS (Cast Alloy Steel, AISI 1020, 1060 Alloy, Brass, ABS).
-- Enseña la consulta de propiedades de masa ($g$, $mm^3$) y la medición de coordenadas del Centro de Gravedad $(X, Y, Z)$ respecto al Origen.
-- Incluye guías paso a paso, visualizador CAD simulado y un cuestionario formativo autocorregible vinculado con `AppState` (`app.js`).
