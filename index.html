@@ -4,13 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SOLIDWORKS ACADEMY - Preparación Certificación CSWA</title>
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Three.js CDN for 3D CAD Visualizations -->
+
+    <!-- Three.js CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <script>
@@ -28,16 +32,43 @@
             }
         }
     </script>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-        body { font-family: 'Inter', sans-serif; background-color: #F3F6F8; color: #1F2937; }
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: #E5E7EB; border-radius: 4px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #00B3E0; border-radius: 4px; }
-        .tab-btn.active { border-bottom: 3px solid #00B3E0; color: #00B3E0; font-weight: 700; }
-        canvas { touch-action: none; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F3F6F8;
+            color: #1F2937;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #E5E7EB;
+            border-radius: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #00B3E0;
+            border-radius: 4px;
+        }
+
+        .tab-btn.active {
+            border-bottom: 3px solid #00B3E0;
+            color: #00B3E0;
+            font-weight: 700;
+        }
+
+        canvas {
+            touch-action: none;
+        }
     </style>
 </head>
+
 <body class="h-screen flex flex-col overflow-hidden">
 
     <!-- TOP HEADER / NAV BAR -->
@@ -99,7 +130,7 @@
                 <div class="md:w-2/3 space-y-4 z-10">
                     <span class="bg-swCyan/20 text-swCyan border border-swCyan/30 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">Formación Profesional CAD</span>
                     <h1 class="text-3xl md:text-4xl lg:text-5xl font-black tracking-tight leading-tight">SOLIDWORKS PARA PRINCIPIANTES</h1>
-                    <p class="text-gray-300 text-base md:text-lg">Curso Virtual Interactivo de 16 semanas diseñado por ingenieros y pedagogos para dominar el diseño 3D y superar con éxito la certificación internacional <strong class="text-swCyan">CSWA (Certified SOLIDWORKS Associate)</strong>.</p>
+                    <p class="text-gray-300 text-base md:text-lg">Curso Virtual Interactivo de 16 semanas diseñado por ingenieros y pedagogos para dominar el diseño 3D y superar con éxito la certificación CSWA.</p>
                     <div class="flex flex-wrap gap-4 pt-2">
                         <a href="aula/index.html" class="bg-swCyan hover:bg-swCyanHover text-swDark font-bold px-6 py-3 rounded-lg shadow-lg hover:shadow-cyan-500/20 transition flex items-center gap-2">
                             <i class="fa-solid fa-play"></i> Iniciar Aula Virtual
@@ -266,7 +297,7 @@
                         <i class="fa-solid fa-folder-archive text-amber-500 text-2xl mb-2"></i>
                         <h4 class="font-bold text-swDark">Plantillas de Planos Normalizados</h4>
                         <p class="text-xs text-gray-500 mt-1">Archivos de formato ISO / ANSI A4 y A3 (.slddrt).</p>
-                        <button onclick="downloadResource('Plantillas_Planos_ISO_ANSI.zip')" class="mt-3 text-xs bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold px-3 py-1.5 rounded">Descargar ZIP</button>
+                        <button onclick="downloadResource('Plantillas_Planos_ISO_ANSI.zip')" class="mt-3 text-xs bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold px-3 py-1.5 rounded">Descargar</button>
                     </div>
                     <div class="p-4 border rounded-lg hover:border-swCyan transition">
                         <i class="fa-solid fa-cube text-swCyan text-2xl mb-2"></i>
@@ -347,32 +378,43 @@
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             const target = document.getElementById('tab-' + tabId);
-            if(target) target.classList.remove('hidden');
-            document.getElementById('mobileMenu').classList.add('hidden');
+            if (target) target.classList.remove('hidden');
+
+            const mobileMenu = document.getElementById('mobileMenu');
+            if (mobileMenu) mobileMenu.classList.add('hidden');
         }
 
         function toggleMobileMenu() {
-            document.getElementById('mobileMenu').classList.toggle('hidden');
+            const mobileMenu = document.getElementById('mobileMenu');
+            if (mobileMenu) mobileMenu.classList.toggle('hidden');
         }
 
         function renderInicioModules() {
             const grid = document.getElementById('inicioModulesGrid');
+            if (!grid) return;
+
             grid.innerHTML = curriculumData.map(mod => `
                 <div class="border border-gray-200 rounded-xl p-4 bg-gray-50 hover:bg-white hover:border-swCyan hover:shadow-md transition">
                     <span class="text-[10px] font-black uppercase text-swCyan bg-swCyan/10 px-2 py-0.5 rounded">Módulo ${mod.module}</span>
                     <h4 class="font-bold text-swDark text-sm mt-2 mb-2">${mod.moduleTitle}</h4>
                     <ul class="text-xs space-y-1 text-gray-600">
-                        ${mod.weeks.map(w => `<li><a href="aula/semana${w.week}.html" class="hover:text-swCyan transition"><i class="fa-solid fa-angle-right text-swCyan text-[10px] mr-1"></i> Sem ${w.week}: ${w.title}</a></li>`).join('')}
+                        ${mod.weeks.map(w => `
+                            <li>
+                                <a href="aula/semana${w.week}.html" class="hover:text-swCyan transition">
+                                    <i class="fa-solid fa-angle-right text-swCyan text-[10px] mr-1"></i> Sem ${w.week} - ${w.title}
+                                </a>
+                            </li>
+                        `).join('')}
                     </ul>
                 </div>
             `).join('');
         }
 
-        let scene, camera, renderer, currentMesh;
+        let scene, camera, renderer, currentMesh, currentShapeType = 'cube';
 
         function initThreeJS() {
             const container = document.getElementById('threeCanvasContainer');
-            if(!container) return;
+            if (!container) return;
 
             scene = new THREE.Scene();
             scene.background = new THREE.Color(0x0f172a);
@@ -400,44 +442,134 @@
             let isDragging = false;
             let prevMouse = { x: 0, y: 0 };
 
-            renderer.domElement.addEventListener('mousedown', e => { isDragging = true; prevMouse = { x: e.clientX, y: e.clientY }; });
-            renderer.domElement.addEventListener('mousemove', e => {
-                if(!isDragging || !currentMesh) return;
+            renderer.domElement.addEventListener('pointerdown', e => {
+                isDragging = true;
+                prevMouse = { x: e.clientX, y: e.clientY };
+            });
+
+            renderer.domElement.addEventListener('pointermove', e => {
+                if (!isDragging || !currentMesh) return;
+
                 const deltaX = e.clientX - prevMouse.x;
                 const deltaY = e.clientY - prevMouse.y;
+
                 currentMesh.rotation.y += deltaX * 0.01;
                 currentMesh.rotation.x += deltaY * 0.01;
+
                 prevMouse = { x: e.clientX, y: e.clientY };
                 renderer.render(scene, camera);
             });
-            window.addEventListener('mouseup', () => { isDragging = false; });
+
+            window.addEventListener('pointerup', () => { isDragging = false; });
+            window.addEventListener('pointercancel', () => { isDragging = false; });
+
+            window.addEventListener('resize', () => {
+                if (!container || !camera || !renderer) return;
+                const width = container.clientWidth;
+                const height = container.clientHeight;
+                camera.aspect = width / height;
+                camera.updateProjectionMatrix();
+                renderer.setSize(width, height);
+                renderer.render(scene, camera);
+            });
 
             renderer.render(scene, camera);
         }
 
+        function buildBracketGeometry(width, height, thickness) {
+            const shape = new THREE.Shape();
+
+            const outerW = Math.max(30, width);
+            const outerH = Math.max(30, height);
+            const innerR = Math.max(8, Math.min(outerW * 0.22, thickness * 0.8));
+
+            shape.moveTo(-outerW / 2, -outerH / 2);
+            shape.lineTo(outerW / 2, -outerH / 2);
+            shape.lineTo(outerW / 2, outerH / 2);
+            shape.lineTo(-outerW / 2, outerH / 2);
+            shape.lineTo(-outerW / 2, -outerH / 2);
+
+            const hole = new THREE.Path();
+            hole.absarc(0, 0, innerR, 0, Math.PI * 2, false);
+
+            const hole2 = new THREE.Path();
+            hole2.absarc(0, -(outerH * 0.14), innerR * 0.8, 0, Math.PI * 2, false);
+
+            shape.holes.push(hole);
+            shape.holes.push(hole2);
+
+            const geometry = new THREE.ExtrudeGeometry(shape, {
+                depth: thickness,
+                bevelEnabled: false,
+                curveSegments: 20
+            });
+
+            geometry.center();
+
+            return geometry;
+        }
+
         function setLabShape(type) {
-            if(!scene) return;
-            if(currentMesh) scene.remove(currentMesh);
+            currentShapeType = type;
 
-            const material = new THREE.MeshStandardMaterial({ color: 0x00B3E0, metalness: 0.4, roughness: 0.3 });
+            if (!scene) return;
 
-            let geometry;
+            if (currentMesh) {
+                scene.remove(currentMesh);
+                currentMesh.geometry.dispose();
+                currentMesh.material.dispose();
+                currentMesh = null;
+            }
+
+            const material = new THREE.MeshStandardMaterial({
+                color: 0x00B3E0,
+                metalness: 0.4,
+                roughness: 0.3
+            });
+
             const dimA = parseFloat(document.getElementById('rangeA').value);
             const dimB = parseFloat(document.getElementById('rangeB').value);
             const dimC = parseFloat(document.getElementById('rangeC').value);
 
-            if(type === 'cube') {
+            let geometry;
+
+            if (type === 'cube') {
                 geometry = new THREE.BoxGeometry(dimA, dimC, dimB);
-            } else if(type === 'cylinder') {
-                geometry = new THREE.CylinderGeometry(dimB/2, dimB/2, dimA, 32);
+            } else if (type === 'cylinder') {
+                geometry = new THREE.CylinderGeometry(dimB / 2, dimB / 2, dimA, 32);
+            } else if (type === 'bracket') {
+                geometry = buildBracketGeometry(dimB, dimA, dimC);
             } else {
-                geometry = new THREE.TorusGeometry(dimB, dimC/2, 16, 100);
+                geometry = new THREE.TorusGeometry(dimB, dimC / 2, 16, 100);
             }
 
             currentMesh = new THREE.Mesh(geometry, material);
             scene.add(currentMesh);
+
             renderer.render(scene, camera);
             updateLabCalculations();
+        }
+
+        function getShapeVolumeMm3() {
+            const dimA = parseFloat(document.getElementById('rangeA').value);
+            const dimB = parseFloat(document.getElementById('rangeB').value);
+            const dimC = parseFloat(document.getElementById('rangeC').value);
+
+            if (currentShapeType === 'cube') {
+                return dimA * dimB * dimC;
+            }
+
+            if (currentShapeType === 'cylinder') {
+                return Math.PI * Math.pow(dimB / 2, 2) * dimA;
+            }
+
+            if (currentShapeType === 'bracket') {
+                const outerPlateArea = dimA * dimB;
+                const innerHoleArea = Math.PI * Math.pow(Math.max(4, dimC / 3), 2);
+                return (outerPlateArea - innerHoleArea) * dimC * 0.7;
+            }
+
+            return dimA * dimB * dimC;
         }
 
         function updateLabCalculations() {
@@ -450,17 +582,26 @@
             document.getElementById('valC').innerText = dimC + ' mm';
 
             const density = parseFloat(document.getElementById('labMaterialSelect').value);
+            const volumeMm3 = getShapeVolumeMm3();
 
-            const volumeMm3 = dimA * dimB * dimC;
             const volumeM3 = volumeMm3 / 1e9;
             const massKg = volumeM3 * density;
             const massGrams = massKg * 1000;
 
-            document.getElementById('calcVol').innerText = volumeMm3.toLocaleString('es-ES', {minimumFractionDigits:2}) + ' mm³';
-            document.getElementById('calcMass').innerText = massGrams.toLocaleString('es-ES', {minimumFractionDigits:2}) + ' gramos';
+            document.getElementById('calcVol').innerText = volumeMm3.toLocaleString('es-ES', { minimumFractionDigits: 2 }) + ' mm³';
+            document.getElementById('calcMass').innerText = massGrams.toLocaleString('es-ES', { minimumFractionDigits: 2 }) + ' gramos';
 
-            if(currentMesh && scene && renderer) {
-                currentMesh.scale.set(dimA/100, dimC/30, dimB/50);
+            if (currentMesh && scene && renderer) {
+                if (currentShapeType === 'cube') {
+                    currentMesh.scale.set(dimA / 100, dimC / 30, dimB / 50);
+                } else if (currentShapeType === 'cylinder') {
+                    currentMesh.scale.set(1, 1, 1);
+                } else if (currentShapeType === 'bracket') {
+                    currentMesh.scale.set(0.7, 0.7, 0.7);
+                } else {
+                    currentMesh.scale.set(1, 1, 1);
+                }
+
                 renderer.render(scene, camera);
             }
         }
