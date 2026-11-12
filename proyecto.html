@@ -4,13 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Proyecto Integrador - Tornillo de Banco | SOLIDWORKS ACADEMY</title>
-  
-  <!-- Hojas de Estilo Institucionales -->
+
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/components.css">
-  <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Three.js CDN for 3D CAD Visualizations -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
   <style>
@@ -31,7 +28,7 @@
     .project-hero h1 {
       font-size: 2.15rem;
       color: var(--white);
-      margin: 0.35rem 0 0.5rem 0;
+      margin: 0.35rem 0 0.5rem;
     }
 
     .project-hero p {
@@ -89,6 +86,7 @@
       border: 1px solid var(--border);
       padding: 0.7rem 0.9rem;
       text-align: left;
+      vertical-align: top;
     }
 
     .rubric-table th {
@@ -99,7 +97,7 @@
     .cad-diagnostic-bar {
       background: #0f172a;
       border-top: 1px solid #334155;
-      color: #94a3b8;
+      color: #cbd5e1;
       padding: 0.65rem 1rem;
       font-size: 0.82rem;
       display: flex;
@@ -109,24 +107,48 @@
       gap: 0.5rem;
     }
 
-    canvas {
+    #vise3dContainer canvas {
       touch-action: none;
       display: block;
+    }
+
+    .project-field {
+      width: 100%;
+      padding: 0.6rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+    }
+
+    .project-note {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 0.75rem;
+    }
+
+    @media (max-width: 700px) {
+      .project-hero {
+        padding: 1.5rem 1rem;
+      }
+      .project-hero h1 {
+        font-size: 1.7rem;
+      }
+      .rubric-table th, .rubric-table td {
+        padding: 0.55rem;
+        font-size: 0.82rem;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Barra de Navegación Dinámica Institucional -->
   <header class="navbar"></header>
 
   <main class="container">
 
-    <!-- Encabezado del Proyecto -->
     <header class="project-hero">
       <div>
         <span class="badge badge-info" style="display: inline-flex; align-items: center; gap: 0.35rem; margin-bottom: 0.4rem;">
-          <i class="fa-solid fa-award"></i> Semana 16 &bull; Evaluación Final de Grado (35%)
+          <i class="fa-solid fa-award" aria-hidden="true"></i> Semana 16 &bull; Evaluación Final de Grado (35%)
         </span>
         <h1>Proyecto Integrador: Tornillo de Banco Mecánico</h1>
         <p>
@@ -140,62 +162,63 @@
       </div>
     </header>
 
-    <!-- Layout de 2 Columnas -->
     <div class="grid-2" style="grid-template-columns: 2fr 1.15fr; gap: 1.5rem;">
 
-      <!-- Columna Izquierda: Especificaciones Técnicas y Despiece -->
       <div class="space-y">
-        
-        <!-- Descripción y Objetivos -->
-        <div class="card">
-          <h3 class="card-title" style="margin-bottom: 0.75rem;">
-            <i class="fa-solid fa-clipboard-list text-swCyan mr-1"></i> Objetivos del Proyecto Integrador
-          </h3>
+
+        <section class="card">
+          <h2 class="card-title" style="margin-bottom: 0.75rem;">
+            <i class="fa-solid fa-clipboard-list text-swCyan mr-1" aria-hidden="true"></i> Objetivos del Proyecto Integrador
+          </h2>
           <p style="font-size: 0.95rem; color: var(--text-dark); line-height: 1.6; margin-bottom: 1rem;">
-            El objetivo central de este proyecto es integrar todas las competencias desarrolladas a lo largo de las 16 semanas del programa: desde el croquizado restringido y modelado de piezas complejas hasta el ensamblaje funcional con relaciones avanzadas y cálculo de centro de masa.
+            El objetivo central de este proyecto es integrar las competencias desarrolladas a lo largo de las 16 semanas del programa: desde el croquizado restringido y el modelado de piezas hasta la asignación de materiales, la creación del ensamblaje y la comprobación de relaciones de posición.
           </p>
           <div style="display: flex; flex-wrap: wrap; gap: 1.25rem; font-size: 0.85rem; color: var(--text-muted); background: var(--bg-light); padding: 0.75rem 1rem; border-radius: var(--radius-sm);">
-            <span><i class="fa-regular fa-clock text-swCyan mr-1"></i> <strong>Tiempo estimado:</strong> 6 a 8 horas</span>
-            <span><i class="fa-solid fa-cubes text-swCyan mr-1"></i> <strong>Componentes totales:</strong> 6 piezas (10 instancias)</span>
-            <span><i class="fa-solid fa-laptop-code text-swCyan mr-1"></i> <strong>Software:</strong> SOLIDWORKS 2021+</span>
+            <span><i class="fa-regular fa-clock text-swCyan mr-1" aria-hidden="true"></i> <strong>Tiempo estimado:</strong> 6 a 8 horas</span>
+            <span><i class="fa-solid fa-cubes text-swCyan mr-1" aria-hidden="true"></i> <strong>Componentes totales:</strong> 6 piezas (10 instancias)</span>
+            <span><i class="fa-solid fa-laptop-code text-swCyan mr-1" aria-hidden="true"></i> <strong>Software:</strong> SOLIDWORKS 2021+</span>
           </div>
-        </div>
+        </section>
 
-        <!-- Visualizador CAD Interactivo 3D (Three.js heredado de Index.html) -->
-        <div class="card" style="padding: 0; overflow: hidden;">
-          <div class="card-header" style="padding: 1.25rem 1.5rem 0.75rem 1.5rem; margin-bottom: 0;">
-            <h3 class="card-title"><i class="fa-solid fa-cube text-swCyan mr-1"></i> Visor 3D Interactivo del Ensamblaje (.SLDASM)</h3>
+        <section class="card" style="padding: 0; overflow: hidden;" aria-labelledby="viewer-title">
+          <div class="card-header" style="padding: 1.25rem 1.5rem 0.75rem; margin-bottom: 0;">
+            <h2 class="card-title" id="viewer-title">
+              <i class="fa-solid fa-cube text-swCyan mr-1" aria-hidden="true"></i> Visor 3D Interactivo del Ensamblaje (.SLDASM)
+            </h2>
             <span class="badge badge-info" id="vise-view-mode">Vista Ensamblada</span>
           </div>
 
           <div id="vise3dContainer" style="width: 100%; height: 320px; background: #0f172a; position: relative;">
-            <div style="position: absolute; top: 0.75rem; left: 1rem; color: #94a3b8; font-size: 0.75rem; pointer-events: none; z-index: 10;">
-              <i class="fa-solid fa-computer-mouse text-swCyan mr-1"></i> Arrastra para rotar el ensamblaje 3D
+            <div style="position: absolute; top: 0.75rem; left: 1rem; color: #cbd5e1; font-size: 0.75rem; pointer-events: none; z-index: 10;">
+              <i class="fa-solid fa-computer-mouse text-swCyan mr-1" aria-hidden="true"></i> Arrastra para rotar el modelo 3D
             </div>
             <div class="cad-viewport-controls" style="z-index: 10;">
-              <button type="button" class="cad-btn-icon" onclick="toggleExplodedView()">
-                <i class="fa-solid fa-arrows-up-down-left-right mr-1"></i> Vista Explosionada
+              <button type="button" class="cad-btn-icon" id="toggle-exploded">
+                <i class="fa-solid fa-arrows-up-down-left-right mr-1" aria-hidden="true"></i> Vista Explosionada
               </button>
-              <button type="button" class="cad-btn-icon" onclick="runInterferenceCheck()">
-                <i class="fa-solid fa-magnifying-glass-chart mr-1"></i> Verificar Interferencias
+              <button type="button" class="cad-btn-icon" id="check-interference">
+                <i class="fa-solid fa-magnifying-glass-chart mr-1" aria-hidden="true"></i> Verificar Interferencias
               </button>
-              <button type="button" class="cad-btn-icon" onclick="resetViseCamera()">
-                <i class="fa-solid fa-compress mr-1"></i> Isométrica
+              <button type="button" class="cad-btn-icon" id="reset-camera">
+                <i class="fa-solid fa-compress mr-1" aria-hidden="true"></i> Isométrica
               </button>
             </div>
           </div>
 
           <div class="cad-diagnostic-bar">
-            <span id="cad-status-msg"><i class="fa-solid fa-circle-info text-swCyan mr-1"></i> Ensamblaje cargado: 6 componentes paramétricos listos para inspección.</span>
-            <span style="font-family: monospace; color: #38bdf8;">MMGS &bull; Origen en Base Fija (f)</span>
+            <span id="cad-status-msg" role="status" aria-live="polite">
+              <i class="fa-solid fa-circle-info text-swCyan mr-1" aria-hidden="true"></i> Vista demostrativa: 6 tipos de componentes y 10 instancias.
+            </span>
+            <span style="font-family: monospace; color: #38bdf8;">MMGS &bull; Origen en Base Fija</span>
           </div>
-        </div>
+        </section>
 
-        <!-- Lista de Piezas a Modelar (BOM) -->
-        <div class="card">
-          <h3 class="card-title"><i class="fa-solid fa-boxes-stacked text-swCyan mr-1"></i> Listado de Piezas del Ensamblaje (BOM)</h3>
+        <section class="card">
+          <h2 class="card-title">
+            <i class="fa-solid fa-boxes-stacked text-swCyan mr-1" aria-hidden="true"></i> Listado de Piezas del Ensamblaje (BOM)
+          </h2>
           <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">
-            Cada componente debe ser modelado de forma independiente en su propio archivo <code>.SLDPRT</code> asignando el material exacto especificado.
+            Cada componente debe modelarse de forma independiente en su propio archivo <code>.SLDPRT</code>, con el material especificado.
           </p>
 
           <div class="part-list-grid">
@@ -253,87 +276,104 @@
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
       </div>
 
-      <!-- Columna Derecha: Rúbrica de Evaluación y Formulario de Entrega -->
       <aside class="space-y">
 
-        <!-- Rúbrica de Evaluación -->
-        <div class="card">
-          <h3 class="card-title"><i class="fa-solid fa-scale-balanced text-swCyan mr-1"></i> Rúbrica Institucional de Evaluación</h3>
+        <section class="card">
+          <h2 class="card-title">
+            <i class="fa-solid fa-scale-balanced text-swCyan mr-1" aria-hidden="true"></i> Rúbrica Institucional de Evaluación
+          </h2>
           <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem;">
-            Tu entregable será evaluado considerando los siguientes 4 criterios técnicos:
+            Tu entregable será evaluado considerando estos cuatro criterios técnicos:
           </p>
 
           <table class="rubric-table">
             <thead>
               <tr>
-                <th>Criterio Evaluado</th>
-                <th>Peso</th>
+                <th scope="col">Criterio Evaluado</th>
+                <th scope="col">Peso</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Modelado Paramétrico y Cotas</strong><br><span style="font-size: 0.78rem; color: var(--text-muted);">Croquis completamente definidos sin errores de reconstrucción.</span></td>
+                <td>
+                  <strong>Modelado Paramétrico y Cotas</strong><br>
+                  <span style="font-size: 0.78rem; color: var(--text-muted);">Croquis completamente definidos y sin errores de reconstrucción.</span>
+                </td>
                 <td><strong style="color: var(--primary);">30%</strong></td>
               </tr>
               <tr>
-                <td><strong>Asignación de Materiales y Masa</strong><br><span style="font-size: 0.78rem; color: var(--text-muted);">Densidades correctas y precisión del Centro de Gravedad.</span></td>
+                <td>
+                  <strong>Asignación de Materiales y Masa</strong><br>
+                  <span style="font-size: 0.78rem; color: var(--text-muted);">Densidades correctas y precisión del centro de gravedad.</span>
+                </td>
                 <td><strong style="color: var(--primary);">25%</strong></td>
               </tr>
               <tr>
-                <td><strong>Relaciones de Posición en Ensamblaje</strong><br><span style="font-size: 0.78rem; color: var(--text-muted);">Movimiento libre de mordaza sin interferencias mecánicas.</span></td>
+                <td>
+                  <strong>Relaciones de Posición en Ensamblaje</strong><br>
+                  <span style="font-size: 0.78rem; color: var(--text-muted);">Movimiento libre de la mordaza y ausencia de interferencias.</span>
+                </td>
                 <td><strong style="color: var(--primary);">30%</strong></td>
               </tr>
               <tr>
-                <td><strong>Organización de Archivos y Despiece</strong><br><span style="font-size: 0.78rem; color: var(--text-muted);">Nombres estandarizados y configuración de vista explosionada.</span></td>
+                <td>
+                  <strong>Organización de Archivos y Despiece</strong><br>
+                  <span style="font-size: 0.78rem; color: var(--text-muted);">Nombres estandarizados y configuración de vista explosionada.</span>
+                </td>
                 <td><strong style="color: var(--primary);">15%</strong></td>
               </tr>
             </tbody>
           </table>
-        </div>
+        </section>
 
-        <!-- Formulario Simulador de Entrega -->
-        <div class="card" style="border-top: 4px solid var(--accent);">
-          <h3 class="card-title"><i class="fa-solid fa-cloud-arrow-up text-swCyan mr-1"></i> Entrega del Proyecto Integrador</h3>
+        <section class="card" style="border-top: 4px solid var(--accent);">
+          <h2 class="card-title">
+            <i class="fa-solid fa-cloud-arrow-up text-swCyan mr-1" aria-hidden="true"></i> Entrega del Proyecto Integrador
+          </h2>
           <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
-            Registra los resultados finales obtenidos en SOLIDWORKS al medir las <em>Propiedades de Masa</em> de tu ensamblaje finalizado.
+            Registra los resultados de las Propiedades de Masa de tu ensamblaje finalizado en SOLIDWORKS. La entrega se guarda en este navegador; no se suben archivos a un servidor.
           </p>
 
-          <form id="project-submission-form" onsubmit="handleProjectSubmit(event)">
+          <form id="project-submission-form">
             <div style="margin-bottom: 0.9rem;">
-              <label style="font-weight: 600; font-size: 0.85rem; display: block; margin-bottom: 0.3rem;">Masa Total del Ensamblaje (Gramos):</label>
-              <input type="number" id="input-mass" step="0.01" placeholder="Ej: 4250.75" required style="width: 100%; padding: 0.6rem; border: 1px solid var(--border); border-radius: var(--radius-sm);">
+              <label for="input-mass" style="font-weight: 600; font-size: 0.85rem; display: block; margin-bottom: 0.3rem;">Masa Total del Ensamblaje (gramos):</label>
+              <input type="number" id="input-mass" class="project-field" step="0.01" min="0.01" placeholder="Ej: 4250.75" required>
             </div>
 
             <div style="margin-bottom: 0.9rem;">
-              <label style="font-weight: 600; font-size: 0.85rem; display: block; margin-bottom: 0.3rem;">Coordenada X del Centro de Gravedad (mm):</label>
-              <input type="number" id="input-cgx" step="0.01" placeholder="Ej: 112.45" required style="width: 100%; padding: 0.6rem; border: 1px solid var(--border); border-radius: var(--radius-sm);">
+              <label for="input-cgx" style="font-weight: 600; font-size: 0.85rem; display: block; margin-bottom: 0.3rem;">Coordenada X del Centro de Gravedad (mm):</label>
+              <input type="number" id="input-cgx" class="project-field" step="0.01" placeholder="Ej: 112.45" required>
             </div>
 
             <div style="margin-bottom: 1.25rem;">
-              <label style="font-weight: 600; font-size: 0.85rem; display: block; margin-bottom: 0.3rem;">Enlace del Repositorio / Archivos (.ZIP):</label>
-              <input type="url" id="input-repo" placeholder="https://github.com/usuario/tornillo-banco-sw" required style="width: 100%; padding: 0.6rem; border: 1px solid var(--border); border-radius: var(--radius-sm);">
+              <label for="input-repo" style="font-weight: 600; font-size: 0.85rem; display: block; margin-bottom: 0.3rem;">Enlace del repositorio / archivos (.ZIP):</label>
+              <input type="url" id="input-repo" class="project-field" placeholder="https://github.com/usuario/tornillo-banco-sw" required>
             </div>
 
             <button type="submit" id="submit-project-btn" class="btn" style="width: 100%; text-align: center;">
-              <i class="fa-solid fa-check-circle mr-1"></i> Registrar Entrega del Proyecto
+              <i class="fa-solid fa-check-circle mr-1" aria-hidden="true"></i> Registrar Entrega del Proyecto
             </button>
           </form>
 
-          <div id="project-feedback" style="margin-top: 1rem; display: none;">
+          <div id="project-feedback" role="status" aria-live="polite" style="margin-top: 1rem; display: none;">
             <div class="alert-box alert-success">
               <div>
-                <strong><i class="fa-solid fa-circle-check mr-1"></i> ¡Proyecto Entregado Exitosamente!</strong>
+                <strong><i class="fa-solid fa-circle-check mr-1" aria-hidden="true"></i> ¡Proyecto registrado en este navegador!</strong>
                 <p style="font-size: 0.83rem; margin-top: 0.25rem;">
-                  Semana 16 acreditada y perfil de competencias CSWA actualizado. Puedes verificar tu progreso en el <a href="dashboard.html" style="font-weight: 700; text-decoration: underline;">Dashboard</a>.
+                  El registro local se guardó correctamente. Verifica tu progreso en el <a href="dashboard.html" style="font-weight: 700; text-decoration: underline;">Dashboard</a>.
                 </p>
               </div>
             </div>
           </div>
-        </div>
+
+          <p class="project-note">
+            La verificación de interferencias real debe ejecutarse en SOLIDWORKS; este visor web es únicamente demostrativo.
+          </p>
+        </section>
 
       </aside>
 
@@ -342,128 +382,209 @@
   </main>
 
   <footer>
-    <p>&copy; 2026 SOLIDWORKS ACADEMY - Formación por Competencias & Preparación CSWA</p>
+    <p>&copy; 2026 SOLIDWORKS ACADEMY - Formación por Competencias &amp; Preparación CSWA</p>
   </footer>
 
-  <!-- Scripts de la Aplicación -->
   <script src="assets/js/app.js"></script>
   <script src="assets/js/navbar.js"></script>
 
   <script>
     let scene, camera, renderer, viseGroup;
-    let parts = {};
+    const parts = {};
     let isExploded = false;
 
     document.addEventListener('DOMContentLoaded', () => {
       initVise3D();
 
-      // Verificar si el proyecto ya fue entregado previamente
-      if (typeof AppState !== 'undefined') {
-        const progress = AppState.getUserProgress();
-        if (progress.completedWeeks && progress.completedWeeks.includes(16)) {
+      document.getElementById('toggle-exploded').addEventListener('click', toggleExplodedView);
+      document.getElementById('check-interference').addEventListener('click', runInterferenceCheck);
+      document.getElementById('reset-camera').addEventListener('click', resetViseCamera);
+      document.getElementById('project-submission-form').addEventListener('submit', handleProjectSubmit);
+
+      try {
+        if (localStorage.getItem('viseProjectSubmission')) {
           setSubmittedUI();
         }
+      } catch (error) {
+        console.warn('No se pudo leer el registro local del proyecto.', error);
+      }
+
+      try {
+        if (window.AppState && typeof AppState.getUserProgress === 'function') {
+          const progress = AppState.getUserProgress();
+          if (progress && Array.isArray(progress.completedWeeks) && progress.completedWeeks.includes(16)) {
+            setSubmittedUI();
+          }
+        }
+      } catch (error) {
+        console.warn('No se pudo leer el progreso del usuario.', error);
       }
     });
 
     function initVise3D() {
       const container = document.getElementById('vise3dContainer');
-      if (!container || typeof THREE === 'undefined') return;
+      if (!container) return;
 
-      scene = new THREE.Scene();
-      scene.background = new THREE.Color(0x0f172a);
+      if (typeof THREE === 'undefined') {
+        showViewerMessage('No se pudo cargar el visor 3D. Revisa tu conexión e inténtalo de nuevo.');
+        return;
+      }
 
-      camera = new THREE.PerspectiveCamera(42, container.clientWidth / container.clientHeight, 0.1, 1000);
-      resetViseCamera();
+      try {
+        const width = Math.max(container.clientWidth, 1);
+        const height = Math.max(container.clientHeight, 1);
 
-      renderer = new THREE.WebGLRenderer({ antialias: true });
-      renderer.setSize(container.clientWidth, container.clientHeight);
-      container.appendChild(renderer.domElement);
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x0f172a);
 
-      // Iluminación CAD
-      scene.add(new THREE.AmbientLight(0xffffff, 0.65));
-      const dirLight = new THREE.DirectionalLight(0xffffff, 0.85);
-      dirLight.position.set(120, 180, 150);
-      scene.add(dirLight);
+        camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 1000);
+        camera.position.set(135, 115, 175);
+        camera.lookAt(0, 0, 0);
 
-      const grid = new THREE.GridHelper(260, 18, 0x00B3E0, 0x334155);
-      grid.position.y = -22;
-      scene.add(grid);
+        renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+        renderer.setSize(width, height);
+        container.appendChild(renderer.domElement);
 
-      viseGroup = new THREE.Group();
+        scene.add(new THREE.AmbientLight(0xffffff, 0.65));
 
-      // Materiales
-      const castIronMat = new THREE.MeshStandardMaterial({ color: 0x1e3a5f, metalness: 0.45, roughness: 0.4 });
-      const jawMat = new THREE.MeshStandardMaterial({ color: 0x00B3E0, metalness: 0.4, roughness: 0.35 });
-      const steelMat = new THREE.MeshStandardMaterial({ color: 0xcbd5e1, metalness: 0.75, roughness: 0.25 });
-      const plateMat = new THREE.MeshStandardMaterial({ color: 0xf59e0b, metalness: 0.5, roughness: 0.3 });
+        const dirLight = new THREE.DirectionalLight(0xffffff, 0.85);
+        dirLight.position.set(120, 180, 150);
+        scene.add(dirLight);
 
-      // 1. Base Fija
-      const baseGeo = new THREE.BoxGeometry(130, 16, 56);
-      const baseFixedJawGeo = new THREE.BoxGeometry(20, 32, 56);
-      parts.base = new THREE.Group();
-      const baseBody = new THREE.Mesh(baseGeo, castIronMat);
-      baseBody.position.y = -12;
-      const fixedJaw = new THREE.Mesh(baseFixedJawGeo, castIronMat);
-      fixedJaw.position.set(-55, 12, 0);
-      parts.base.add(baseBody, fixedJaw);
+        const grid = new THREE.GridHelper(260, 18, 0x00b3e0, 0x334155);
+        grid.position.y = -22;
+        scene.add(grid);
 
-      // 2. Mordaza Móvil
-      parts.slidingJaw = new THREE.Mesh(new THREE.BoxGeometry(24, 32, 54), jawMat);
-      parts.slidingJaw.position.set(5, 12, 0);
+        viseGroup = new THREE.Group();
 
-      // 3. Placas de Sujeción (x2)
-      parts.plateFixed = new THREE.Mesh(new THREE.BoxGeometry(4, 24, 52), plateMat);
-      parts.plateFixed.position.set(-43, 14, 0);
+        const castIronMat = new THREE.MeshStandardMaterial({ color: 0x1e3a5f, metalness: 0.45, roughness: 0.4 });
+        const jawMat = new THREE.MeshStandardMaterial({ color: 0x00b3e0, metalness: 0.4, roughness: 0.35 });
+        const steelMat = new THREE.MeshStandardMaterial({ color: 0xcbd5e1, metalness: 0.75, roughness: 0.25 });
+        const plateMat = new THREE.MeshStandardMaterial({ color: 0xf59e0b, metalness: 0.5, roughness: 0.3 });
 
-      parts.plateMoving = new THREE.Mesh(new THREE.BoxGeometry(4, 24, 52), plateMat);
-      parts.plateMoving.position.set(-9, 14, 0);
+        parts.base = new THREE.Group();
+        const baseBody = new THREE.Mesh(new THREE.BoxGeometry(130, 16, 56), castIronMat);
+        baseBody.position.y = -12;
 
-      // 4. Huso Roscado
-      const screwGeo = new THREE.CylinderGeometry(6, 6, 95, 24);
-      screwGeo.rotateZ(Math.PI / 2);
-      parts.screw = new THREE.Mesh(screwGeo, steelMat);
-      parts.screw.position.set(42, 8, 0);
+        const fixedJaw = new THREE.Mesh(new THREE.BoxGeometry(20, 32, 56), castIronMat);
+        fixedJaw.position.set(-55, 12, 0);
+        parts.base.add(baseBody, fixedJaw);
 
-      // 5. Palanca de Manivela
-      parts.handle = new THREE.Mesh(new THREE.CylinderGeometry(3.5, 3.5, 68, 20), steelMat);
-      parts.handle.position.set(86, 8, 0);
+        parts.slidingJaw = new THREE.Mesh(new THREE.BoxGeometry(24, 32, 54), jawMat);
+        parts.slidingJaw.position.set(5, 12, 0);
 
-      Object.values(parts).forEach(p => viseGroup.add(p));
-      scene.add(viseGroup);
+        parts.plateFixed = new THREE.Mesh(new THREE.BoxGeometry(4, 24, 52), plateMat);
+        parts.plateFixed.position.set(-43, 14, 0);
 
-      // Rotación interactiva con mouse/táctil
-      let isDragging = false;
-      let prevMouse = { x: 0, y: 0 };
+        parts.plateMoving = new THREE.Mesh(new THREE.BoxGeometry(4, 24, 52), plateMat);
+        parts.plateMoving.position.set(-9, 14, 0);
 
-      renderer.domElement.addEventListener('mousedown', e => {
-        isDragging = true;
-        prevMouse = { x: e.clientX, y: e.clientY };
-      });
-      window.addEventListener('mousemove', e => {
-        if (!isDragging) return;
-        viseGroup.rotation.y += (e.clientX - prevMouse.x) * 0.01;
-        viseGroup.rotation.x += (e.clientY - prevMouse.y) * 0.01;
-        prevMouse = { x: e.clientX, y: e.clientY };
+        const screwGeo = new THREE.CylinderGeometry(6, 6, 95, 24);
+        screwGeo.rotateZ(Math.PI / 2);
+        parts.screw = new THREE.Mesh(screwGeo, steelMat);
+        parts.screw.position.set(42, 8, 0);
+
+        const handleGeo = new THREE.CylinderGeometry(3.5, 3.5, 68, 20);
+        handleGeo.rotateZ(Math.PI / 2);
+        parts.handle = new THREE.Mesh(handleGeo, steelMat);
+        parts.handle.position.set(86, 8, 0);
+
+        parts.retentionScrews = [];
+        [-17, 17].forEach(z => {
+          [-40, -6].forEach(x => {
+            const screw = new THREE.Mesh(new THREE.CylinderGeometry(2.5, 2.5, 8, 16), steelMat);
+            screw.rotation.z = Math.PI / 2;
+            screw.position.set(x, 14, z);
+            parts.retentionScrews.push(screw);
+          });
+        });
+
+        [
+          parts.base,
+          parts.slidingJaw,
+          parts.plateFixed,
+          parts.plateMoving,
+          parts.screw,
+          parts.handle,
+          ...parts.retentionScrews
+        ].forEach(part => viseGroup.add(part));
+
+        scene.add(viseGroup);
+
+        let activePointerId = null;
+        let previousPoint = { x: 0, y: 0 };
+
+        renderer.domElement.addEventListener('pointerdown', event => {
+          activePointerId = event.pointerId;
+          previousPoint = { x: event.clientX, y: event.clientY };
+          renderer.domElement.setPointerCapture(event.pointerId);
+        });
+
+        renderer.domElement.addEventListener('pointermove', event => {
+          if (event.pointerId !== activePointerId || !viseGroup) return;
+
+          viseGroup.rotation.y += (event.clientX - previousPoint.x) * 0.01;
+          viseGroup.rotation.x += (event.clientY - previousPoint.y) * 0.01;
+          previousPoint = { x: event.clientX, y: event.clientY };
+          renderScene();
+        });
+
+        const releasePointer = event => {
+          if (event.pointerId === activePointerId) {
+            activePointerId = null;
+          }
+        };
+
+        renderer.domElement.addEventListener('pointerup', releasePointer);
+        renderer.domElement.addEventListener('pointercancel', releasePointer);
+
+        window.addEventListener('resize', resizeViewer);
+        renderScene();
+
+      } catch (error) {
+        console.error('No se pudo inicializar el visor 3D.', error);
+        if (renderer) renderer.dispose();
+        renderer = null;
+        showViewerMessage('El visor 3D no está disponible en este navegador.');
+      }
+    }
+
+    function showViewerMessage(message) {
+      const container = document.getElementById('vise3dContainer');
+      if (!container) return;
+
+      const notice = document.createElement('p');
+      notice.setAttribute('role', 'status');
+      notice.style.cssText = 'position:absolute; inset:3rem 1rem 1rem; display:grid; place-items:center; text-align:center; color:#e2e8f0;';
+      notice.textContent = message;
+      container.appendChild(notice);
+    }
+
+    function renderScene() {
+      if (renderer && scene && camera) {
         renderer.render(scene, camera);
-      });
-      window.addEventListener('mouseup', () => { isDragging = false; });
+      }
+    }
 
-      window.addEventListener('resize', () => {
-        if (!container) return;
-        camera.aspect = container.clientWidth / container.clientHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(container.clientWidth, container.clientHeight);
-        renderer.render(scene, camera);
-      });
+    function resizeViewer() {
+      const container = document.getElementById('vise3dContainer');
+      if (!container || !renderer || !camera) return;
 
-      renderer.render(scene, camera);
+      const width = Math.max(container.clientWidth, 1);
+      const height = Math.max(container.clientHeight, 1);
+
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+      renderer.setSize(width, height);
+      renderScene();
     }
 
     function toggleExplodedView() {
+      if (!parts.base) return;
+
       isExploded = !isExploded;
       const badge = document.getElementById('vise-view-mode');
-      const statusMsg = document.getElementById('cad-status-msg');
 
       if (isExploded) {
         parts.plateFixed.position.set(-34, 24, 0);
@@ -471,24 +592,42 @@
         parts.slidingJaw.position.set(18, 12, 0);
         parts.screw.position.set(68, 8, 0);
         parts.handle.position.set(122, 8, 0);
-        if (badge) { badge.textContent = 'Vista Explosionada'; badge.className = 'badge badge-warning'; }
-        if (statusMsg) statusMsg.innerHTML = '<i class="fa-solid fa-arrows-up-down-left-right text-swCyan mr-1"></i> Despiece activo: 6 componentes separados axialmente.';
+
+        parts.retentionScrews.forEach((screw, index) => {
+          screw.position.x += index % 2 === 0 ? -8 : 8;
+          screw.position.y += 8;
+        });
+
+        badge.textContent = 'Vista Explosionada';
+        badge.className = 'badge badge-warning';
+        setCadStatus('Vista explosionada demostrativa activa.');
       } else {
         parts.plateFixed.position.set(-43, 14, 0);
         parts.plateMoving.position.set(-9, 14, 0);
         parts.slidingJaw.position.set(5, 12, 0);
         parts.screw.position.set(42, 8, 0);
         parts.handle.position.set(86, 8, 0);
-        if (badge) { badge.textContent = 'Vista Ensamblada'; badge.className = 'badge badge-info'; }
-        if (statusMsg) statusMsg.innerHTML = '<i class="fa-solid fa-circle-info text-swCyan mr-1"></i> Ensamblaje cargado: 6 componentes paramétricos listos para inspección.';
+
+        parts.retentionScrews.forEach((screw, index) => {
+          screw.position.set(index < 2 ? -40 : -6, 14, index % 2 === 0 ? -17 : 17);
+        });
+
+        badge.textContent = 'Vista Ensamblada';
+        badge.className = 'badge badge-info';
+        setCadStatus('Vista demostrativa ensamblada: 6 tipos de componentes y 10 instancias.');
       }
-      if (renderer && scene && camera) renderer.render(scene, camera);
+
+      renderScene();
     }
 
     function runInterferenceCheck() {
+      setCadStatus('Este visor no calcula colisiones. Ejecuta Detección de interferencias en SOLIDWORKS para validar el ensamblaje.');
+    }
+
+    function setCadStatus(message) {
       const statusMsg = document.getElementById('cad-status-msg');
       if (statusMsg) {
-        statusMsg.innerHTML = '<span style="color: #22c55e; font-weight: 600;"><i class="fa-solid fa-circle-check mr-1"></i> Detección de Interferencias completada: 0 colisiones encontradas entre sólidos.</span>';
+        statusMsg.textContent = message;
       }
     }
 
@@ -496,48 +635,83 @@
       if (!camera) return;
       camera.position.set(135, 115, 175);
       camera.lookAt(0, 0, 0);
-      if (viseGroup) viseGroup.rotation.set(0, 0, 0);
-      if (renderer && scene) renderer.render(scene, camera);
+      if (viseGroup) {
+        viseGroup.rotation.set(0, 0, 0);
+      }
+      renderScene();
     }
 
     function setSubmittedUI() {
       const badge = document.getElementById('project-status-badge');
       const feedback = document.getElementById('project-feedback');
-      const btn = document.getElementById('submit-project-btn');
+      const button = document.getElementById('submit-project-btn');
 
       if (badge) {
-        badge.textContent = 'Entregado (Acreditado)';
+        badge.textContent = 'Entrega registrada';
         badge.className = 'badge badge-success';
       }
-      if (feedback) feedback.style.display = 'block';
-      if (btn) {
-        btn.innerHTML = '<i class="fa-solid fa-rotate mr-1"></i> Actualizar Entrega del Proyecto';
-        btn.style.background = 'var(--success)';
+
+      if (feedback) {
+        feedback.style.display = 'block';
+      }
+
+      if (button) {
+        button.innerHTML = '<i class="fa-solid fa-rotate mr-1" aria-hidden="true"></i> Actualizar Entrega del Proyecto';
+        button.style.background = 'var(--success)';
       }
     }
 
-    function handleProjectSubmit(e) {
-      e.preventDefault();
-      
-      if (typeof AppState !== 'undefined') {
-        AppState.markWeekCompleted(16);
-        
-        const updates = {
-          croquis: 100,
-          piezas: 95,
-          modificacion: 95,
-          interpretacion: 100,
-          operaciones: 95,
-          propiedades_fisicas: 95,
-          ensamblajes: 100,
-          relaciones_posicion: 95
-        };
+    function handleProjectSubmit(event) {
+      event.preventDefault();
 
-        AppState.recordQuizResult('proyecto_final_vise', 98, updates);
+      const mass = Number(document.getElementById('input-mass').value);
+      const cgx = Number(document.getElementById('input-cgx').value);
+      const repository = document.getElementById('input-repo').value.trim();
+
+      if (!Number.isFinite(mass) || mass <= 0 || !Number.isFinite(cgx) || !repository) {
+        event.currentTarget.reportValidity();
+        return;
+      }
+
+      const submission = {
+        mass,
+        cgx,
+        repository,
+        submittedAt: new Date().toISOString()
+      };
+
+      try {
+        localStorage.setItem('viseProjectSubmission', JSON.stringify(submission));
+      } catch (error) {
+        console.warn('No se pudo guardar la entrega en el navegador.', error);
+        setCadStatus('No se pudo guardar localmente; verifica la configuración de almacenamiento del navegador.');
+        return;
+      }
+
+      try {
+        if (window.AppState && typeof AppState.markWeekCompleted === 'function') {
+          AppState.markWeekCompleted(16);
+        }
+
+        if (window.AppState && typeof AppState.recordQuizResult === 'function') {
+          AppState.recordQuizResult('proyecto_final_vise', 98, {
+            croquis: 100,
+            piezas: 95,
+            modificacion: 95,
+            interpretacion: 100,
+            operaciones: 95,
+            propiedades_fisicas: 95,
+            ensamblajes: 100,
+            relaciones_posicion: 95
+          });
+        }
+      } catch (error) {
+        console.warn('La entrega se guardó localmente, pero no se pudo actualizar el progreso de la aplicación.', error);
       }
 
       setSubmittedUI();
     }
   </script>
 </body>
+</html>
 </html>
