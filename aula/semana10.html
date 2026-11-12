@@ -8,23 +8,25 @@
   <!-- Hojas de Estilo Institucionales -->
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/components.css">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
     .lesson-hero {
       background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
       color: var(--white);
-      padding: 2rem;
-      border-radius: 12px;
+      padding: 2.25rem 2rem;
+      border-radius: var(--radius-md);
       margin-bottom: 2rem;
       box-shadow: var(--shadow-md);
     }
 
     .lesson-meta-bar {
       display: flex;
-      gap: 1.5rem;
+      gap: 1.25rem;
       margin-top: 1rem;
       font-size: 0.85rem;
-      color: var(--accent);
+      color: var(--accent-light);
       flex-wrap: wrap;
     }
 
@@ -32,17 +34,26 @@
       border-left: 4px solid var(--accent);
       background: var(--bg-light);
       padding: 1.25rem;
-      border-radius: 0 8px 8px 0;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
       margin-bottom: 1.25rem;
+      position: relative;
+      padding-left: 3.5rem;
     }
 
     .step-number {
+      position: absolute;
+      left: 1rem;
+      top: 1.25rem;
+      width: 1.8rem;
+      height: 1.8rem;
+      background: var(--accent);
+      color: var(--primary-dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-weight: 800;
-      color: var(--primary);
-      text-transform: uppercase;
-      font-size: 0.8rem;
-      letter-spacing: 0.5px;
-      margin-bottom: 0.3rem;
+      font-size: 0.85rem;
     }
 
     .shortcut-tag {
@@ -59,7 +70,7 @@
     .cswa-tip-box {
       background: #EFF6FF;
       border: 1px solid #BFDBFE;
-      border-radius: 8px;
+      border-radius: var(--radius-sm);
       padding: 1.25rem;
       margin: 1.5rem 0;
     }
@@ -71,6 +82,33 @@
       color: #1E40AF;
       font-weight: 700;
       margin-bottom: 0.5rem;
+    }
+
+    .tab-container {
+      display: flex;
+      gap: 0.5rem;
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 1.5rem;
+      overflow-x: auto;
+    }
+
+    .tab-btn {
+      padding: 0.75rem 1.25rem;
+      border: none;
+      background: none;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+      font-weight: 700;
     }
 
     .param-table {
@@ -90,21 +128,32 @@
       background: var(--bg-light);
       color: var(--primary);
     }
+
+    .quiz-option {
+      display: block;
+      padding: 0.75rem 1rem;
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .quiz-option:hover {
+      border-color: var(--accent);
+      background: #F0F9FF;
+    }
+
+    .quiz-option input {
+      margin-right: 0.75rem;
+    }
   </style>
 </head>
 <body>
 
-  <!-- Navegación Principal -->
-  <nav class="navbar">
-    <a href="../index.html" class="brand"><span>SOLIDWORKS</span> ACADEMY</a>
-    <ul class="nav-links">
-      <li><a href="../index.html">Inicio</a></li>
-      <li><a href="../dashboard.html">Dashboard</a></li>
-      <li><a href="../aula/index.html" class="active">Aula Virtual</a></li>
-      <li><a href="../cswa/index.html">CSWA Center</a></li>
-      <li><a href="../proyecto.html">Proyecto Final</a></li>
-    </ul>
-  </nav>
+  <!-- Barra de Navegación Dinámica Institucional -->
+  <header class="navbar"></header>
 
   <main class="container">
 
@@ -112,34 +161,55 @@
     <header class="lesson-hero">
       <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
         <div>
-          <span class="badge badge-info" style="margin-bottom: 0.5rem; display: inline-block;">Módulo 5: Ensamblajes</span>
+          <span class="badge badge-info" style="margin-bottom: 0.5rem; display: inline-flex; align-items: center; gap: 0.35rem;">
+            <i class="fa-solid fa-cubes"></i> Módulo 5: Ensamblajes
+          </span>
           <h1 style="font-size: 2.2rem; color: var(--white); margin: 0.2rem 0;">Semana 10: Relaciones Avanzadas y Detección de Interferencias</h1>
           <p style="opacity: 0.9; font-size: 1rem; max-width: 700px; margin-top: 0.5rem;">
             Aprende a aplicar relaciones de posición de límite, cinemáticas mecánicas y diagnosticar traslapes de volumen sólido mediante la herramienta de Detección de Interferencias.
           </p>
         </div>
         <div>
-          <button id="mark-completed-btn" class="btn" style="background: var(--success);" onclick="completeWeek10()">
-            ✓ Marcar Semana como Completada
+          <button id="mark-completed-btn" class="btn" style="background: var(--success); color: white;" onclick="completeWeek10()">
+            <i class="fa-solid fa-check"></i> Marcar Semana como Completada
           </button>
         </div>
       </div>
 
       <div class="lesson-meta-bar">
-        <span>⏱️ Duración: 3 Horas Académicas</span>
-        <span>🎯 Competencia CSWA: Relaciones de posición mecánicas y diagnóstico de volumen</span>
-        <span>📄 Tipo de Contenido: Teórico - Práctico</span>
+        <span><i class="fa-regular fa-clock"></i> Carga Horaria: 3 hrs lectivas</span>
+        <span><i class="fa-solid fa-award"></i> Competencia CSWA: Relaciones mecánicas y diagnóstico de volumen</span>
+        <span><i class="fa-solid fa-book"></i> Tipo: Teórico - Práctico</span>
       </div>
     </header>
 
+    <!-- Tip Oficial CSWA -->
+    <section class="cswa-tip-box" style="margin-top: 0;">
+      <div class="cswa-tip-header">
+        <i class="fa-solid fa-lightbulb text-xl"></i>
+        <span>Ajuste Restringido de Ángulo y Distancia en Preguntas CSWA</span>
+      </div>
+      <p style="color: #1E3A8A; font-size: 0.95rem; margin: 0;">
+        En los simulacros CSWA de ensamblaje, con frecuencia se solicita posicionar una palanca a un ángulo exacto (ej. $	heta = 45.00^\circ$) o desplazar una corredera una distancia determinada. Utiliza una relación de <strong>Ángulo o Distancia Especificada</strong> (o edita los parámetros de límite) para fijar la postura exacta antes de consultar el Centro de Gravedad.
+      </p>
+    </section>
+
     <div class="grid-2" style="grid-template-columns: 2.5fr 1fr; gap: 1.5rem;">
 
-      <!-- Contenido Principal de la Lección -->
+      <!-- Contenido Principal -->
       <div>
 
-        <!-- Bloque 1: Relaciones Avanzadas y Mecánicas -->
-        <article class="card">
-          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">1. Relaciones de Posición Avanzadas y Mecánicas</h2>
+        <!-- Pestañas de Navegación Didáctica -->
+        <div class="tab-container">
+          <button class="tab-btn active" onclick="switchTab(event, 'avanzadas')"><i class="fa-solid fa-sliders mr-1"></i> 1. Relaciones Avanzadas</button>
+          <button class="tab-btn" onclick="switchTab(event, 'interferencias')"><i class="fa-solid fa-magnifying-glass-chart mr-1"></i> 2. Interferencias</button>
+          <button class="tab-btn" onclick="switchTab(event, 'procedimiento')"><i class="fa-solid fa-list-check mr-1"></i> 3. Procedimiento</button>
+          <button class="tab-btn" onclick="switchTab(event, 'evaluacion')"><i class="fa-solid fa-pen-to-square mr-1"></i> 4. Evaluación</button>
+        </div>
+
+        <!-- TAB 1: RELACIONES AVANZADAS Y MECÁNICAS -->
+        <article id="tab-avanzadas" class="card">
+          <h2 class="card-title"><i class="fa-solid fa-gears text-swCyan"></i> 1. Relaciones de Posición Avanzadas y Mecánicas</h2>
           <p style="line-height: 1.6; color: var(--text-dark); margin-bottom: 1rem;">
             Mientras que las relaciones estándar restringen movimientos absolutos, las <strong>Relaciones Avanzadas y Mecánicas</strong> simulan cinemática real. Permiten restringir rangos de desplazamiento (mínimo/máximo) o sincronizar movimientos rotacionales y traslacionales entre componentes.
           </p>
@@ -156,7 +226,7 @@
               <tr>
                 <td><strong>Límite de Distancia / Ángulo</strong></td>
                 <td>Avanzada</td>
-                <td>Permite el movimiento libre de una pieza entre un valor mínimo y máximo (ej. carril de $0\text{ mm}$ a $120\text{ mm}$).</td>
+                <td>Permite el movimiento libre de una pieza entre un valor mínimo y máximo (ej. carril de $0	ext{ mm}$ a $120	ext{ mm}$).</td>
               </tr>
               <tr>
                 <td><strong>Ancho (Width Mate)</strong></td>
@@ -176,144 +246,181 @@
               <tr>
                 <td><strong>Tornillo / Rosca (Screw)</strong></td>
                 <td>Mecánica</td>
-                <td>Convierte la rotación de un husillo en avance axial según el paso de rosca ($mm/\text{rev}$).</td>
+                <td>Convierte la rotación de un husillo en avance axial según el paso de rosca ($	ext{mm/rev}$).</td>
               </tr>
             </tbody>
           </table>
 
-          <div class="cswa-tip-box">
-            <div class="cswa-tip-header">
-              <span>💡 Ajuste Restringido de Ángulo en Preguntas CSWA</span>
-            </div>
-            <p style="font-size: 0.9rem; color: #1E3A8A; margin: 0;">
-              En los simulacros CSWA de ensamblaje, con frecuencia se solicita posicionar una palanca a un ángulo exacto (ej. $\theta = 45.00^\circ$). Utiliza una relación de <strong>Ángulo Especificado</strong> para fijar la postura antes de calcular la coordenada del Centro de Gravedad.
-            </p>
+          <!-- Visor Gráfico Técnico SVG: Width Mate y Límite de Distancia -->
+          <div class="cad-viewport" style="margin-top: 1.5rem; padding: 1rem;">
+            <svg viewBox="0 0 600 240" style="width: 100%; height: 100%;">
+              <rect x="0" y="0" width="600" height="240" fill="#0f172a"/>
+              
+              <!-- Título -->
+              <text x="300" y="24" fill="#38bdf8" font-size="12" font-weight="bold" text-anchor="middle">CINEMÁTICA DE CORREDERA: RELACIÓN DE ANCHO (WIDTH) + LÍMITE DE CARRERA</text>
+
+              <!-- Guía en U (Vista Superior) -->
+              <path d="M 60 65 L 320 65 L 320 185 L 60 185 L 60 160 L 295 160 L 295 90 L 60 90 Z" fill="#1e293b" stroke="#00B3E0" stroke-width="2.5"/>
+              <text x="190" y="55" fill="#38bdf8" font-size="10.5" font-weight="bold" text-anchor="middle">Guía Fija (Canal Interior = 70 mm)</text>
+
+              <!-- Bloque Deslizante Centrado (Width Mate) -->
+              <rect x="135" y="90" width="75" height="70" fill="#334155" stroke="#f59e0b" stroke-width="2.5"/>
+              <!-- Línea central de simetría -->
+              <line x1="45" y1="125" x2="340" y2="125" stroke="#ef4444" stroke-width="1" stroke-dasharray="8,3,2,3"/>
+              <text x="172" y="129" fill="#f8fafc" font-size="10.5" font-weight="bold" text-anchor="middle">Corredera</text>
+
+              <!-- Flechas de carrera límite -->
+              <line x1="210" y1="125" x2="295" y2="125" stroke="#22c55e" stroke-width="2" stroke-dasharray="4,3"/>
+              <polygon points="295,125 287,121 287,129" fill="#22c55e"/>
+              <text x="252" y="116" fill="#22c55e" font-size="9.5" font-weight="bold" text-anchor="middle">Carrera: 0-85 mm</text>
+
+              <!-- Panel de Diagnóstico Derecho -->
+              <rect x="355" y="55" width="215" height="140" rx="6" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+              <text x="462" y="78" fill="#38bdf8" font-size="11" font-weight="bold" text-anchor="middle">DIAGNÓSTICO DE VOLUMEN</text>
+              
+              <circle cx="375" cy="105" r="5" fill="#22c55e"/>
+              <text x="388" y="104" fill="#f8fafc" font-size="10" font-weight="bold">Width Mate Activo</text>
+              <text x="388" y="117" fill="#94a3b8" font-size="9">Centrado equidistante entre caras</text>
+
+              <circle cx="375" cy="143" r="5" fill="#f59e0b"/>
+              <text x="388" y="142" fill="#f8fafc" font-size="10" font-weight="bold">Límite de Distancia</text>
+              <text x="388" y="155" fill="#94a3b8" font-size="9">Min: 0.00 mm | Max: 85.00 mm</text>
+
+              <text x="462" y="182" fill="#22c55e" font-size="10" font-weight="bold" text-anchor="middle">✓ 0 Interferencias Detectadas</text>
+            </svg>
           </div>
         </article>
 
-        <!-- Bloque 2: Detección de Interferencias y Dinámica de Colisiones -->
-        <article class="card">
-          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">2. Detección de Interferencias (Interference Detection)</h2>
+        <!-- TAB 2: DETECCIÓN DE INTERFERENCIAS -->
+        <article id="tab-interferencias" class="card" style="display: none;">
+          <h2 class="card-title"><i class="fa-solid fa-magnifying-glass-chart text-swCyan"></i> 2. Detección de Interferencias (Interference Detection)</h2>
           <p style="line-height: 1.6; color: var(--text-dark); margin-bottom: 1rem;">
-            La colisión de volúmenes 3D en un ensamblaje provoca errores de montaje en fabricación. SOLIDWORKS incluye un motor de cálculo que identifica intersecciones de sólidos en tiempo real.
+            La colisión de volúmenes 3D en un ensamblaje provoca errores críticos de montaje en fabricación. SOLIDWORKS incluye un motor de cálculo volumétrico que identifica intersecciones de sólidos en tiempo real.
           </p>
 
-          <h3 style="font-size: 1.1rem; color: var(--primary); margin: 1.25rem 0 0.5rem 0;">Pasos para Ejecutar el Diagnóstico:</h3>
-          <ol style="margin-left: 1.25rem; font-size: 0.95rem; color: var(--text-dark); line-height: 1.7;">
-            <li>Dirígete a la pestaña <strong>Calcular > Detección de Interferencias</strong>.</li>
-            <li>Haz clic en <strong>Calcular</strong> para evaluar todo el ensamblaje o selecciona componentes específicos.</li>
-            <li>Revisa el volumen rojo resaltado. Los traslapes intencionados (como roscas estandarizadas o ajustes por prensa) se pueden marcar como <em>"Ignorar"</em>.</li>
+          <h3 style="font-size: 1.1rem; color: var(--primary); margin: 1.25rem 0 0.75rem 0;">Pasos para Ejecutar el Diagnóstico Volumétrico:</h3>
+          <ol style="margin-left: 1.25rem; font-size: 0.95rem; color: var(--text-dark); line-height: 1.75; margin-bottom: 1.5rem;">
+            <li>Dirígete a la pestaña <strong>Calcular > Detección de interferencias</strong> en el CommandManager.</li>
+            <li>En el PropertyManager, selecciona todo el ensamblaje de nivel superior o elige componentes específicos en <em>Componentes seleccionados</em>.</li>
+            <li>Haz clic en <strong>Calcular</strong> para generar la lista de volúmenes en conflicto ($	ext{mm}^3$).</li>
+            <li>Inspecciona cada volumen resaltado en rojo translúcido. Los traslapes intencionados (como roscas estandarizadas o ajustes por interferencia/prensa) pueden filtrarse marcando la opción <strong>Ignorar</strong>.</li>
           </ol>
 
-          <!-- CAD Viewport Esquemático -->
-          <div class="cad-viewport" style="margin-top: 1.5rem;">
-            <div style="text-align: center;">
-              <div style="font-size: 3rem; margin-bottom: 0.5rem;">⚠️🔍</div>
-              <p style="font-size: 0.95rem; font-weight: 700; color: var(--white);">Diagnóstico de Interferencias: Ensamblaje Corredera y Eje</p>
-              <p style="font-size: 0.8rem; opacity: 0.8;">Resultado del Análisis: 0 Interferencias Sólidas Detectadas</p>
+          <div class="cswa-tip-box" style="margin-bottom: 0;">
+            <div class="cswa-tip-header">
+              <i class="fa-solid fa-circle-info text-xl"></i>
+              <span>Detección de Colisiones Dinámica (Mover Componente)</span>
             </div>
-            <div class="cad-viewport-controls">
-              <button type="button" class="cad-btn-icon" onclick="alert('Análisis Ejecutado: 0 Volumenes de traslape detectados.')">🔍 Detección de Colisiones</button>
-            </div>
+            <p style="font-size: 0.9rem; color: #1E3A8A; margin: 0;">
+              Además del análisis estático, puedes activar <strong>Mover componente > Detección de colisión > Detener al colisionar</strong> para verificar si un mecanismo articulado choca en puntos intermedios de su trayectoria.
+            </p>
           </div>
         </article>
 
-        <!-- Bloque 3: Guía Práctica Paso a Paso -->
-        <article class="card">
-          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">3. Guía Práctica Paso a Paso: Ensamblaje de Mecanismo de Biela y Guía</h2>
-          <p style="font-size: 0.95rem; color: var(--text-dark); margin-bottom: 1rem;">
-            Sigue esta secuencia para aplicar relaciones de posición avanzadas y validar interferencias:
+        <!-- TAB 3: PROCEDIMIENTO PASO A PASO -->
+        <article id="tab-procedimiento" class="card" style="display: none;">
+          <h2 class="card-title"><i class="fa-solid fa-list-check text-swCyan"></i> 3. Guía Práctica: Mecanismo de Biela y Guía</h2>
+          <p style="font-size: 0.95rem; color: var(--text-dark); margin-bottom: 1.5rem;">
+            Sigue esta secuencia en SOLIDWORKS para aplicar relaciones avanzadas y validar ausencia de interferencias:
           </p>
 
           <div class="step-box">
-            <div class="step-number">Paso 1</div>
-            <h4 style="margin: 0 0 0.3rem 0; color: var(--primary);">Aplicar Relación de Ancho (Width Mate)</h4>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">
-              Abre el comando <strong>Relación de Posición > Avanzadas > Ancho</strong>. Selecciona las dos caras exteriores de la guía y las dos caras laterales del bloque deslizante para centrar la pieza automáticamente.
-            </p>
+            <div class="step-number">1</div>
+            <h4 style="color: var(--primary);">Aplicar Relación de Ancho (Width Mate)</h4>
+            <p>Abre el comando <strong>Relación de posición > Avanzadas > Ancho</strong>. En <em>Selecciones de ancho</em> elige las dos caras interiores de la guía fija; en <em>Selecciones de pestaña</em> elige las dos caras laterales del bloque deslizante para centrarlo automáticamente sin acotar distancias.</p>
           </div>
 
           <div class="step-box">
-            <div class="step-number">Paso 2</div>
-            <h4 style="margin: 0 0 0.3rem 0; color: var(--primary);">Establecer Límite de Distancia</h4>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">
-              Selecciona la cara frontal de la corredera y el tope fijo. En <strong>Relaciones Avanzadas > Límite de Distancia</strong>, define una carrera con $Min = 0\text{ mm}$ y $Max = 85\text{ mm}$.
-            </p>
+            <div class="step-number">2</div>
+            <h4 style="color: var(--primary);">Establecer Límite de Distancia</h4>
+            <p>Selecciona la cara frontal de la corredera y la cara interior del tope fijo. En <strong>Relaciones Avanzadas > Límite de distancia</strong>, define una carrera con $	ext{Mín} = 0	ext{ mm}$ y $	ext{Máx} = 85	ext{ mm}$.</p>
           </div>
 
           <div class="step-box">
-            <div class="step-number">Paso 3</div>
-            <h4 style="margin: 0 0 0.3rem 0; color: var(--primary);">Verificación de Interferencias de Trabajo</h4>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">
-              Mueve el mecanismo manualmente a la posición límite. Abre la pestaña <code>Calcular > Detección de interferencias</code> y confirma que la lista de resultados permanezca limpia.
-            </p>
+            <div class="step-number">3</div>
+            <h4 style="color: var(--primary);">Verificación de Interferencias en Posición Límite</h4>
+            <p>Arrastra el mecanismo manualmente hasta el extremo de su carrera ($85	ext{ mm}$). Abre <code>Calcular > Detección de interferencias</code>, presiona <strong>Calcular</strong> y confirma que el panel muestre <em>"Sin interferencias"</em>.</p>
           </div>
         </article>
+
+        <!-- TAB 4: EVALUACIÓN Y CUESTIONARIO -->
+        <article id="tab-evaluacion" class="card" style="display: none;">
+          <h2 class="card-title"><i class="fa-solid fa-pen-to-square text-swCyan"></i> 4. Cuestionario de Comprobación - Semana 10</h2>
+          <p style="margin-bottom: 1.5rem;">Responde a las siguientes preguntas para validar tu aprendizaje sobre relaciones avanzadas e interferencias:</p>
+
+          <form id="quiz-form-w10">
+            <div style="margin-bottom: 1.5rem;">
+              <p style="font-weight: 600; margin-bottom: 0.75rem; color: var(--primary);">
+                1. ¿Qué relación avanzada permite centrar automáticamente una pestaña o bloque plano entre dos caras sin acotar distancias?
+              </p>
+              <label class="quiz-option"><input type="radio" name="w10q1" value="A"> A) Relación de Ancho (Width Mate)</label>
+              <label class="quiz-option"><input type="radio" name="w10q1" value="B"> B) Relación Concéntrica</label>
+              <label class="quiz-option"><input type="radio" name="w10q1" value="C"> C) Relación Tangente</label>
+            </div>
+
+            <div style="margin-bottom: 1.5rem;">
+              <p style="font-weight: 600; margin-bottom: 0.75rem; color: var(--primary);">
+                2. ¿Dónde se encuentra la herramienta "Detección de interferencias" en la interfaz de SOLIDWORKS?
+              </p>
+              <label class="quiz-option"><input type="radio" name="w10q2" value="A"> A) En la pestaña Croquis</label>
+              <label class="quiz-option"><input type="radio" name="w10q2" value="B"> B) En la pestaña Calcular</label>
+              <label class="quiz-option"><input type="radio" name="w10q2" value="C"> C) En el menú de Renderizado</label>
+            </div>
+
+            <button type="button" class="btn" onclick="evaluarQuizSemana10()">
+              <i class="fa-solid fa-check"></i> Validar Respuestas y Guardar Avance
+            </button>
+            <div id="quiz-feedback-w10" style="margin-top: 1rem; display: none;"></div>
+          </form>
+        </article>
+
+        <!-- Navegación entre Semanas -->
+        <div style="display: flex; justify-content: space-between; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
+          <a href="semana9.html" class="btn btn-outline"><i class="fa-solid fa-arrow-left"></i> Semana 9</a>
+          <a href="index.html" class="btn btn-outline"><i class="fa-solid fa-list"></i> Índice Aula</a>
+          <a href="semana11.html" class="btn">Semana 11 <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
 
       </div>
 
-      <!-- Barra Lateral: Progreso y Cuestionario de Validación -->
-      <aside>
-
-        <!-- Resumen de la Lección -->
+      <!-- Barra Lateral (Sidebar) -->
+      <aside class="space-y">
         <div class="card">
-          <h3 class="card-title" style="font-size: 1.1rem; margin-bottom: 0.75rem;">📋 Resumen de la Lección</h3>
-          <ul style="list-style: none; font-size: 0.85rem; color: var(--text-muted);" class="space-y">
+          <h3 class="card-title" style="font-size: 1rem;"><i class="fa-solid fa-chart-line text-swCyan"></i> Estado de la Lección</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">Progreso registrado en esta semana:</p>
+          <div class="progress-container"><div id="week-progress-bar" class="progress-bar" style="width: 0%;"></div></div>
+          <span id="week-status-badge" class="badge badge-warning" style="margin-top: 0.5rem;">Pendiente</span>
+          <ul style="list-style: none; font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--border);" class="space-y">
             <li style="display: flex; align-items: center; gap: 0.5rem;">
-              <span>✅</span> Relaciones Avanzadas (Ancho y Límites)
+              <i class="fa-solid fa-check-circle text-swCyan"></i> Width Mate y Límites
             </li>
             <li style="display: flex; align-items: center; gap: 0.5rem;">
-              <span>✅</span> Relaciones Mecánicas (Rosca, Engranaje)
+              <i class="fa-solid fa-check-circle text-swCyan"></i> Mates Mecánicos
             </li>
             <li style="display: flex; align-items: center; gap: 0.5rem;">
-              <span>✅</span> Diagnóstico de Interferencias
-            </li>
-            <li style="display: flex; align-items: center; gap: 0.5rem;">
-              <span>✅</span> Restricciones Angulares CSWA
+              <i class="fa-solid fa-check-circle text-swCyan"></i> Detección de Colisiones
             </li>
           </ul>
         </div>
 
-        <!-- Cuestionario Rápido de Validación -->
         <div class="card">
-          <h3 class="card-title" style="font-size: 1.1rem; margin-bottom: 0.75rem;">📝 Comprobación de Lectura</h3>
-          <form id="week10-quiz-form" onsubmit="evaluateWeek10Quiz(event)">
-            <p style="font-size: 0.85rem; font-weight: 600; color: var(--primary); margin-bottom: 0.5rem;">
-              1. ¿Qué relación avanzada permite centrar automáticamente una pestaña o bloque plano entre dos caras sin acotar distancias?
-            </p>
-            <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.85rem; margin-bottom: 1rem;">
-              <label><input type="radio" name="w10q1" value="A" required> Relación de Ancho (Width Mate)</label>
-              <label><input type="radio" name="w10q1" value="B"> Relación Concéntrica</label>
-              <label><input type="radio" name="w10q1" value="C"> Relación Tangente</label>
-            </div>
-
-            <p style="font-size: 0.85rem; font-weight: 600; color: var(--primary); margin-bottom: 0.5rem;">
-              2. ¿Dónde se encuentra la herramienta 'Detección de Interferencias' en la barra de herramientas de SOLIDWORKS?
-            </p>
-            <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.85rem; margin-bottom: 1.25rem;">
-              <label><input type="radio" name="w10q1_2" value="A" required> En la pestaña Croquis</label>
-              <label><input type="radio" name="w10q1_2" value="B"> En la pestaña Calcular</label>
-              <label><input type="radio" name="w10q1_2" value="C"> En el menú de Renderizado</label>
-            </div>
-
-            <button type="submit" class="btn btn-outline" style="width: 100%; font-size: 0.85rem;">Validar Respuestas</button>
-          </form>
+          <h3 class="card-title" style="font-size: 1rem;"><i class="fa-solid fa-folder-open text-swCyan"></i> Recursos Descargables</h3>
+          <ul style="list-style: none; font-size: 0.85rem;" class="space-y">
+            <li><a href="#" onclick="alert('Descargando Ensamblaje Mecanismo Biela-Guía (.ZIP)'); return false;"><i class="fa-solid fa-file-zipper text-amber-500 mr-1"></i> Mecanismo Biela-Guía (.ZIP)</a></li>
+            <li><a href="#" onclick="alert('Descargando Checklist de Validación de Interferencias (.PDF)'); return false;"><i class="fa-solid fa-file-pdf text-red-500 mr-1"></i> Checklist Interferencias (.PDF)</a></li>
+          </ul>
         </div>
 
-        <!-- Navegación entre Semanas -->
-        <div class="card" style="text-align: center;">
-          <h4 style="font-size: 0.9rem; color: var(--primary); margin-bottom: 0.75rem;">Navegación Curricular</h4>
-          <div style="display: flex; justify-content: space-between; gap: 0.5rem;">
-            <a href="semana9.html" class="btn btn-outline" style="font-size: 0.8rem; flex: 1;">⬅️ Sem. 9</a>
-            <a href="index.html" class="btn btn-outline" style="font-size: 0.8rem; flex: 1;">Índice</a>
-            <a href="semana11.html" class="btn" style="font-size: 0.8rem; flex: 1;">Sem. 11 ➡️</a>
-          </div>
+        <div class="card" style="background: var(--primary); color: var(--white);">
+          <h3 style="color: var(--accent); font-size: 1rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-award mr-1"></i> CSWA Practice Center</h3>
+          <p style="font-size: 0.85rem; opacity: 0.9; margin-bottom: 1rem;">
+            Pon a prueba el ajuste angular y cálculo de propiedades físicas en ensamblajes CSWA.
+          </p>
+          <a href="../cswa/index.html" class="btn" style="width: 100%; text-align: center; font-size: 0.85rem;">Ir al Centro CSWA</a>
         </div>
-
       </aside>
 
     </div>
-
   </main>
 
   <footer>
@@ -322,54 +429,67 @@
 
   <!-- Scripts de la Aplicación -->
   <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/cswa.js"></script>
+  <script src="../assets/js/quiz.js"></script>
+  <script src="../assets/js/navbar.js"></script>
+
   <script>
-    function completeWeek10() {
-      AppState.markWeekCompleted(10);
-      
-      const btn = document.getElementById('mark-completed-btn');
-      if (btn) {
-        btn.textContent = '✓ Semana 10 Completada';
-        btn.disabled = true;
-        btn.style.opacity = '0.8';
-      }
-      alert('🎉 ¡Semana 10 registrada como completada en tu expediente!');
-    }
-
-    function evaluateWeek10Quiz(e) {
-      e.preventDefault();
-      const form = document.getElementById('week10-quiz-form');
-      const formData = new FormData(form);
-
-      const q1 = formData.get('w10q1');
-      const q2 = formData.get('w10q1_2');
-
-      if (q1 === 'A' && q2 === 'B') {
-        alert('🎯 ¡Excelente! Has respondido correctamente ambas preguntas sobre relaciones avanzadas e interferencias.');
-        AppState.recordQuizResult('semana10_quiz', 100, { ensamblajes: 85, relaciones_posicion: 80 });
-        completeWeek10();
-      } else {
-        alert('⚠️ Hay respuestas incorrectas. Revisa el uso de la relación de ancho y la ubicación de las herramientas en la pestaña Calcular.');
-      }
-    }
-
-    // Verificar si ya fue completada al cargar
     document.addEventListener('DOMContentLoaded', () => {
       const progress = AppState.getUserProgress();
       if (progress.completedWeeks && progress.completedWeeks.includes(10)) {
-        const btn = document.getElementById('mark-completed-btn');
-        if (btn) {
-          btn.textContent = '✓ Semana 10 Completada';
-          btn.disabled = true;
-          btn.style.opacity = '0.8';
-        }
+        actualizarUICompletado();
       }
     });
+
+    function switchTab(e, tabId) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('article[id^="tab-"]').forEach(content => content.style.display = 'none');
+
+      if (e && e.currentTarget) {
+        e.currentTarget.classList.add('active');
+      }
+      document.getElementById('tab-' + tabId).style.display = 'block';
+    }
+
+    function actualizarUICompletado() {
+      const progressBar = document.getElementById('week-progress-bar');
+      const badge = document.getElementById('week-status-badge');
+      const btn = document.getElementById('mark-completed-btn');
+
+      if (progressBar) progressBar.style.width = '100%';
+      if (badge) {
+        badge.className = 'badge badge-success';
+        badge.textContent = 'Completado';
+      }
+      if (btn) {
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Semana 10 Completada';
+        btn.disabled = true;
+        btn.style.opacity = '0.85';
+      }
+    }
+
+    function completeWeek10() {
+      AppState.markWeekCompleted(10);
+      AppState.recordQuizResult('semana10_quiz', 100, { ensamblajes: 85, relaciones_posicion: 80 });
+      actualizarUICompletado();
+      alert('🎉 ¡Semana 10 registrada como completada en tu expediente!');
+    }
+
+    function evaluarQuizSemana10() {
+      const isPassed = QuizEngine.evaluateQuiz({
+        formId: 'quiz-form-w10',
+        feedbackId: 'quiz-feedback-w10',
+        quizId: 'semana10_quiz',
+        weekNumber: 10,
+        answers: { w10q1: 'A', w10q2: 'B' },
+        competencyGains: { ensamblajes: 85, relaciones_posicion: 80 },
+        successMsg: '<strong>🎯 ¡Excelente!</strong> Respuestas correctas. La Relación de Ancho (A) centra simétricamente una pestaña entre dos caras y la Detección de interferencias está en la pestaña Calcular (B).'
+      });
+
+      if (isPassed) {
+        actualizarUICompletado();
+      }
+    }
   </script>
 </body>
 </html>
-```
-
-### Summary of `aula/semana10.html`:
-- Covers **Módulo 5: Ensamblajes (Parte 2)**, focusing on advanced mates (Width, Limit Distance/Angle) and mechanical mates (Screw, Gear).
-- Teaches interference detection methods, solid collision inspection, and angle-constrained assembly setups for CSWA tasks.
-- Includes step-by-step assembly guides, simulated CAD viewport verification, and a self-correcting validation quiz connected to `AppState` (`app.js`).
