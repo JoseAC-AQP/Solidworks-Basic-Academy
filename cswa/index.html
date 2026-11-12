@@ -8,21 +8,50 @@
   <!-- Hojas de estilo institucionales -->
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/components.css">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
     .aula-hero {
       background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
       color: var(--white);
-      padding: 2.5rem 2rem;
-      border-radius: 12px;
+      padding: 2.25rem 2rem;
+      border-radius: var(--radius-md);
       margin-bottom: 2rem;
       box-shadow: var(--shadow-md);
+    }
+
+    .filter-bar {
+      display: flex;
+      gap: 0.5rem;
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 1.5rem;
+      overflow-x: auto;
+    }
+
+    .filter-btn {
+      padding: 0.75rem 1.25rem;
+      border: none;
+      background: none;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .filter-btn.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+      font-weight: 700;
     }
 
     .module-card {
       background: var(--white);
       border: 1px solid var(--border);
-      border-radius: 10px;
+      border-radius: var(--radius-md);
       padding: 1.5rem;
       margin-bottom: 1.5rem;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -53,8 +82,8 @@
     .week-card {
       background: var(--bg-light);
       border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1rem;
+      border-radius: var(--radius-sm);
+      padding: 1.15rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -67,6 +96,10 @@
       transform: translateY(-2px);
     }
 
+    .week-card.completed {
+      border-left: 4px solid var(--success);
+    }
+
     .week-badge {
       font-size: 0.75rem;
       font-weight: 700;
@@ -74,6 +107,9 @@
       letter-spacing: 0.5px;
       color: var(--accent);
       margin-bottom: 0.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     .week-title {
@@ -87,23 +123,14 @@
       font-size: 0.85rem;
       color: var(--text-dark);
       margin-bottom: 1rem;
-      line-height: 1.4;
+      line-height: 1.45;
     }
   </style>
 </head>
 <body>
 
-  <!-- Barra de Navegación Principal (Rutas Relativas) -->
-  <nav class="navbar">
-    <a href="../index.html" class="brand"><span>SOLIDWORKS</span> ACADEMY</a>
-    <ul class="nav-links">
-      <li><a href="../index.html">Inicio</a></li>
-      <li><a href="../dashboard.html">Dashboard</a></li>
-      <li><a href="../aula/index.html" class="active">Aula Virtual</a></li>
-      <li><a href="../cswa/index.html">CSWA Center</a></li>
-      <li><a href="../proyecto.html">Proyecto Final</a></li>
-    </ul>
-  </nav>
+  <!-- Barra de Navegación Dinámica Institucional -->
+  <header class="navbar"></header>
 
   <main class="container">
 
@@ -111,249 +138,259 @@
     <header class="aula-hero">
       <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
         <div>
-          <span class="badge badge-info" style="margin-bottom: 0.5rem; display: inline-block;">Programa Formativo de 16 Semanas</span>
-          <h1 style="font-size: 2.3rem; margin: 0.2rem 0; color: var(--white);">Aula Virtual de Aprendizaje</h1>
+          <span class="badge badge-info" style="margin-bottom: 0.5rem; display: inline-flex; align-items: center; gap: 0.35rem;">
+            <i class="fa-solid fa-graduation-cap"></i> Programa Formativo de 16 Semanas (48 hrs lectivas)
+          </span>
+          <h1 style="font-size: 2.2rem; margin: 0.2rem 0; color: var(--white);">Aula Virtual de Aprendizaje</h1>
           <p style="opacity: 0.9; font-size: 1rem; max-width: 680px; margin-top: 0.5rem;">
-            Accede al material teórico-práctico, guías guiadas paso a paso, ejercicios interactivos y evaluaciones sumativas organizadas por módulos de desarrollo.
+            Accede al material teórico-práctico, guías paso a paso, esquemas técnicos CAD y evaluaciones sumativas organizadas por módulos de competencia.
           </p>
         </div>
         
-        <div style="background: rgba(255,255,255,0.12); padding: 1.25rem 1.75rem; border-radius: 12px; text-align: center; backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,0.2);">
-          <div style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent);">Progreso Académico</div>
-          <div id="course-progress-display" style="font-size: 2.8rem; font-weight: 800; margin: 0.2rem 0; color: var(--white);">0%</div>
+        <div style="background: rgba(255,255,255,0.12); padding: 1.25rem 1.75rem; border-radius: var(--radius-md); text-align: center; backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,0.2); min-width: 210px;">
+          <div style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent-light);">Progreso Académico</div>
+          <div id="course-progress-display" style="font-size: 2.75rem; font-weight: 800; margin: 0.2rem 0; color: var(--white);">0%</div>
           <span id="weeks-completed-tag" class="badge badge-warning">0 de 16 Semanas</span>
         </div>
       </div>
     </header>
 
+    <!-- Filtros Rápidos del Plan Curricular -->
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filterModules(event, 'all')"><i class="fa-solid fa-layer-group mr-1"></i> Todos los Módulos (16 Semanas)</button>
+      <button class="filter-btn" onclick="filterModules(event, 'fundamentos')"><i class="fa-solid fa-cubes mr-1"></i> Fundamentos y Sólidos (M1 - M4)</button>
+      <button class="filter-btn" onclick="filterModules(event, 'avanzado')"><i class="fa-solid fa-gears mr-1"></i> Ensamblajes y CSWA (M5 - M8)</button>
+      <button class="filter-btn" onclick="filterModules(event, 'evaluaciones')"><i class="fa-solid fa-award mr-1"></i> Solo Evaluaciones Sumativas</button>
+    </div>
+
     <!-- Módulo 1 -->
-    <section class="module-card">
+    <section class="module-card" data-group="fundamentos">
       <div class="module-header">
         <div>
           <span class="badge badge-info">Módulo 1</span>
           <h2 style="font-size: 1.25rem; color: var(--primary); margin: 0.25rem 0 0 0;">Introducción a SOLIDWORKS y Entorno de Trabajo</h2>
         </div>
-        <span style="font-size: 0.85rem; color: var(--text-muted);">Semanas 1 - 2</span>
+        <span style="font-size: 0.85rem; color: var(--text-muted);"><i class="fa-regular fa-calendar mr-1"></i> Semanas 1 - 2</span>
       </div>
       <div class="week-grid">
-        <div class="week-card">
+        <div class="week-card" data-week="1" data-type="leccion">
           <div>
-            <div class="week-badge">Semana 1</div>
+            <div class="week-badge"><span>Semana 1</span><span class="status-slot"></span></div>
             <div class="week-title">Entorno de Trabajo e Interfaz</div>
             <div class="week-desc">Reconocimiento del entorno, gestores, planos de referencia, navegación 3D y sistemas de unidades.</div>
           </div>
-          <a href="semana1.html" class="btn btn-outline" style="text-align: center; font-size: 0.85rem;">Ingresar a Lección ➔</a>
+          <a href="semana1.html" class="btn btn-outline" style="text-align: center; font-size: 0.85rem;">Ingresar a Lección <i class="fa-solid fa-arrow-right ml-1"></i></a>
         </div>
-        <div class="week-card">
+        <div class="week-card" data-week="2" data-type="leccion">
           <div>
-            <div class="week-badge">Semana 2</div>
+            <div class="week-badge"><span>Semana 2</span><span class="status-slot"></span></div>
             <div class="week-title">Modelado Paramétrico y Operaciones Base</div>
             <div class="week-desc">Lógica de parámetros, el Origen (0,0,0), intención del diseño y uso del FeatureManager.</div>
           </div>
-          <a href="semana2.html" class="btn btn-outline" style="text-align: center; font-size: 0.85rem;">Ingresar a Lección ➔</a>
+          <a href="semana2.html" class="btn btn-outline" style="text-align: center; font-size: 0.85rem;">Ingresar a Lección <i class="fa-solid fa-arrow-right ml-1"></i></a>
         </div>
       </div>
     </section>
 
     <!-- Módulo 2 -->
-    <section class="module-card">
+    <section class="module-card" data-group="fundamentos">
       <div class="module-header">
         <div>
           <span class="badge badge-info">Módulo 2</span>
           <h2 style="font-size: 1.25rem; color: var(--primary); margin: 0.25rem 0 0 0;">Croquis y Restricciones Geométricas 2D</h2>
         </div>
-        <span style="font-size: 0.85rem; color: var(--text-muted);">Semanas 3 - 4</span>
+        <span style="font-size: 0.85rem; color: var(--text-muted);"><i class="fa-regular fa-calendar mr-1"></i> Semanas 3 - 4</span>
       </div>
       <div class="week-grid">
-        <div class="week-card">
+        <div class="week-card" data-week="3" data-type="leccion">
           <div>
-            <div class="week-badge">Semana 3</div>
+            <div class="week-badge"><span>Semana 3</span><span class="status-slot"></span></div>
             <div class="week-title">Herramientas de Croquizado y Relaciones</div>
             <div class="week-desc">Entidades 2D, cotas inteligentes y matriz explícita de relaciones geométricas.</div>
           </div>
-          <a href="semana3.html" class="btn btn-outline" style="text-align: center; font-size: 0.85rem;">Ingresar a Lección ➔</a>
+          <a href="semana3.html" class="btn btn-outline" style="text-align: center; font-size: 0.85rem;">Ingresar a Lección <i class="fa-solid fa-arrow-right ml-1"></i></a>
         </div>
-        <div class="week-card">
+        <div class="week-card" data-week="4" data-type="evaluacion">
           <div>
-            <div class="week-badge">Semana 4 (Evaluación)</div>
+            <div class="week-badge" style="color: var(--warning);"><span>Semana 4 (Evaluación)</span><span class="status-slot"></span></div>
             <div class="week-title">Evaluación Práctica 1 - Croquis Completo</div>
             <div class="week-desc">Examen práctico de croquizado 2D restringido con variables globales y cálculo de área (15%).</div>
           </div>
-          <a href="semana4.html" class="btn" style="text-align: center; font-size: 0.85rem;">Rendir Evaluación ➔</a>
+          <a href="semana4.html" class="btn" style="text-align: center; font-size: 0.85rem;">Rendir Evaluación <i class="fa-solid fa-arrow-right ml-1"></i></a>
         </div>
       </div>
     </section>
 
     <!-- Módulo 3 -->
-    <section class="module-card">
+    <section class="module-card" data-group="fundamentos">
       <div class="module-header">
         <div>
           <span class="badge badge-info">Módulo 3</span>
           <h2 style="font-size: 1.25rem; color: var(--primary); margin: 0.25rem 0 0 0;">Modelado de Sólidos Fundamental</h2>
         </div>
-        <span style="font-size: 0.85rem; color: var(--text-muted);">Semanas 5 - 6</span>
+        <span style="font-size: 0.85rem; color: var(--text-muted);"><i class="fa-regular fa-calendar mr-1"></i> Semanas 5 - 6</span>
       </div>
       <div class="week-grid">
-        <div class="week-card">
+        <div class="week-card" data-week="5" data-type="leccion">
           <div>
-            <div class="week-badge">Semana 5</div>
+            <div class="week-badge"><span>Semana 5</span><span class="status-slot"></span></div>
             <div class="week-title">Extrusión y Revolución de Saliente/Corte</div>
             <div class="week-desc">Extrude Boss/Cut, Revolve Boss/Cut, condiciones finales (Blind, Through All, Mid Plane).</div>
           </div>
-          <a href="semana5.html" class="btn btn-outline" style="text-align: center; font-size: 0.85rem;">Ingresar a Lección ➔</a>
+          <a href="semana5.html" class="btn btn-outline" style="text-align: center; font-size: 0.85rem;">Ingresar a Lección <i class="fa-solid fa-arrow-right ml-1"></i></a>
         </div>
-        <div class="week-card">
+        <div class="week-card" data-week="6" data-type="leccion">
           <div>
-            <div class="week-badge">Semana 6</div>
+            <div class="week-badge"><span>Semana 6</span><span class="status-slot"></span></div>
             <div class="week-title">Redondeos, Chaflanes, Vaciados y Matrices</div>
             <div class="week-desc">Operaciones 3D de acabado (Fillet, Chamfer, Shell) y matrices de repetición paramétricas.</div>
           </div>
-          <a href="semana6.html" class="btn btn-outline" style="text-align: center; font-size: 0.85rem;">Ingresar a Lección ➔</a>
+          <a href="semana6.html" class="btn btn-outline" style="text-align: center; font-size: 0.85rem;">Ingresar a Lección <i class="fa-solid fa-arrow-right ml-1"></i></a>
         </div>
       </div>
     </section>
 
     <!-- Módulo 4 -->
-    <section class="module-card">
+    <section class="module-card" data-group="fundamentos">
       <div class="module-header">
         <div>
           <span class="badge badge-info">Módulo 4</span>
           <h2 style="font-size: 1.25rem; color: var(--primary); margin: 0.25rem 0 0 0;">Componentes Mecánicos y Modificación Paramétrica</h2>
         </div>
-        <span style="font-size: 0.85rem; color: var(--text-muted);">Semanas 7 - 8</span>
+        <span style="font-size: 0.85rem; color: var(--text-muted);"><i class="fa-regular fa-calendar mr-1"></i> Semanas 7 - 8</span>
       </div>
       <div class="week-grid">
-        <div class="week-card">
+        <div class="week-card" data-week="7" data-type="leccion">
           <div>
-            <div class="week-badge">Semana 7</div>
+            <div class="week-badge"><span>Semana 7</span><span class="status-slot"></span></div>
             <div class="week-title">Bridas, Poleas y Ejes de Transmisión</div>
             <div class="week-desc">Modelado de transmisiones mecánicas, canales en V y chaveteros según norma DIN/ANSI.</div>
           </div>
-          <a href="semana7.html" class="btn btn-outline" style="text-align: center; font-size: 0.85rem;">Ingresar a Lección ➔</a>
+          <a href="semana7.html" class="btn btn-outline" style="text-align: center; font-size: 0.85rem;">Ingresar a Lección <i class="fa-solid fa-arrow-right ml-1"></i></a>
         </div>
-        <div class="week-card">
+        <div class="week-card" data-week="8" data-type="evaluacion">
           <div>
-            <div class="week-badge">Semana 8 (Evaluación)</div>
+            <div class="week-badge" style="color: var(--warning);"><span>Semana 8 (Evaluación)</span><span class="status-slot"></span></div>
             <div class="week-title">Evaluación Práctica 2 - Interpretación 3D</div>
             <div class="week-desc">Examen de interpretación de planos 2D, modificación dimensional ($A, B, C$) y masa (25%).</div>
           </div>
-          <a href="semana8.html" class="btn" style="text-align: center; font-size: 0.85rem;">Rendir Evaluación ➔</a>
+          <a href="semana8.html" class="btn" style="text-align: center; font-size: 0.85rem;">Rendir Evaluación <i class="fa-solid fa-arrow-right ml-1"></i></a>
         </div>
       </div>
     </section>
 
     <!-- Módulo 5 -->
-    <section class="module-card">
+    <section class="module-card" data-group="avanzado">
       <div class="module-header">
         <div>
           <span class="badge badge-info">Módulo 5</span>
           <h2 style="font-size: 1.25rem; color: var(--primary); margin: 0.25rem 0 0 0;">Ensamblajes y Relaciones de Posición</h2>
         </div>
-        <span style="font-size: 0.85rem; color: var(--text-muted);">Semanas 9 - 10</span>
+        <span style="font-size: 0.85rem; color: var(--text-muted);"><i class="fa-regular fa-calendar mr-1"></i> Semanas 9 - 10</span>
       </div>
       <div class="week-grid">
-        <div class="week-card">
+        <div class="week-card" data-week="9" data-type="leccion">
           <div>
-            <div class="week-badge">Semana 9</div>
+            <div class="week-badge"><span>Semana 9</span><span class="status-slot"></span></div>
             <div class="week-title">Inserción y Relaciones Estándar</div>
             <div class="week-desc">Estructura .SLDASM, componente fijo de origen (f) y relaciones Coincidente/Concéntrica.</div>
           </div>
-          <a href="semana9.html" class="btn btn-outline" style="text-align: center; font-size: 0.85rem;">Ingresar a Lección ➔</a>
+          <a href="semana9.html" class="btn btn-outline" style="text-align: center; font-size: 0.85rem;">Ingresar a Lección <i class="fa-solid fa-arrow-right ml-1"></i></a>
         </div>
-        <div class="week-card">
+        <div class="week-card" data-week="10" data-type="leccion">
           <div>
-            <div class="week-badge">Semana 10</div>
+            <div class="week-badge"><span>Semana 10</span><span class="status-slot"></span></div>
             <div class="week-title">Relaciones Avanzadas e Interferencias</div>
             <div class="week-desc">Mates mecánicos, límites de distancia/ángulo y diagnóstico de colisiones entre sólidos.</div>
           </div>
-          <a href="semana10.html" class="btn btn-outline" style="text-align: center; font-size: 0.85rem;">Ingresar a Lección ➔</a>
+          <a href="semana10.html" class="btn btn-outline" style="text-align: center; font-size: 0.85rem;">Ingresar a Lección <i class="fa-solid fa-arrow-right ml-1"></i></a>
         </div>
       </div>
     </section>
 
     <!-- Módulo 6 -->
-    <section class="module-card">
+    <section class="module-card" data-group="avanzado">
       <div class="module-header">
         <div>
           <span class="badge badge-info">Módulo 6</span>
           <h2 style="font-size: 1.25rem; color: var(--primary); margin: 0.25rem 0 0 0;">Propiedades Físicas y Verificación de Modelos</h2>
         </div>
-        <span style="font-size: 0.85rem; color: var(--text-muted);">Semanas 11 - 12</span>
+        <span style="font-size: 0.85rem; color: var(--text-muted);"><i class="fa-regular fa-calendar mr-1"></i> Semanas 11 - 12</span>
       </div>
       <div class="week-grid">
-        <div class="week-card">
+        <div class="week-card" data-week="11" data-type="leccion">
           <div>
-            <div class="week-badge">Semana 11</div>
+            <div class="week-badge"><span>Semana 11</span><span class="status-slot"></span></div>
             <div class="week-title">Asignación de Materiales y Propiedades</div>
             <div class="week-desc">Biblioteca de materiales, densidad física, masa ($g$) y Centro de Gravedad ($X,Y,Z$).</div>
           </div>
-          <a href="semana11.html" class="btn btn-outline" style="text-align: center; font-size: 0.85rem;">Ingresar a Lección ➔</a>
+          <a href="semana11.html" class="btn btn-outline" style="text-align: center; font-size: 0.85rem;">Ingresar a Lección <i class="fa-solid fa-arrow-right ml-1"></i></a>
         </div>
-        <div class="week-card">
+        <div class="week-card" data-week="12" data-type="evaluacion">
           <div>
-            <div class="week-badge">Semana 12 (Evaluación)</div>
+            <div class="week-badge" style="color: var(--warning);"><span>Semana 12 (Evaluación)</span><span class="status-slot"></span></div>
             <div class="week-title">Evaluación Práctica 3 - Propiedades Físicas</div>
             <div class="week-desc">Examen de asignación de materiales, modificación dimensional y cálculo de masa (25%).</div>
           </div>
-          <a href="semana12.html" class="btn" style="text-align: center; font-size: 0.85rem;">Rendir Evaluación ➔</a>
+          <a href="semana12.html" class="btn" style="text-align: center; font-size: 0.85rem;">Rendir Evaluación <i class="fa-solid fa-arrow-right ml-1"></i></a>
         </div>
       </div>
     </section>
 
     <!-- Módulo 7 -->
-    <section class="module-card">
+    <section class="module-card" data-group="avanzado">
       <div class="module-header">
         <div>
           <span class="badge badge-info">Módulo 7</span>
           <h2 style="font-size: 1.25rem; color: var(--primary); margin: 0.25rem 0 0 0;">Preparación Intensiva CSWA</h2>
         </div>
-        <span style="font-size: 0.85rem; color: var(--text-muted);">Semanas 13 - 14</span>
+        <span style="font-size: 0.85rem; color: var(--text-muted);"><i class="fa-regular fa-calendar mr-1"></i> Semanas 13 - 14</span>
       </div>
       <div class="week-grid">
-        <div class="week-card">
+        <div class="week-card" data-week="13" data-type="leccion">
           <div>
-            <div class="week-badge">Semana 13</div>
+            <div class="week-badge"><span>Semana 13</span><span class="status-slot"></span></div>
             <div class="week-title">Estrategia CSWA y Gestión de Tiempo</div>
             <div class="week-desc">Descomposición de problemas, variables globales ($A,B,C$) y estrategia para los 180 min.</div>
           </div>
-          <a href="semana13.html" class="btn btn-outline" style="text-align: center; font-size: 0.85rem;">Ingresar a Lección ➔</a>
+          <a href="semana13.html" class="btn btn-outline" style="text-align: center; font-size: 0.85rem;">Ingresar a Lección <i class="fa-solid fa-arrow-right ml-1"></i></a>
         </div>
-        <div class="week-card">
+        <div class="week-card" data-week="14" data-type="leccion">
           <div>
-            <div class="week-badge">Semana 14</div>
-            <div class="week-title">Ensamblajes Combinados y Coordinadas</div>
+            <div class="week-badge"><span>Semana 14</span><span class="status-slot"></span></div>
+            <div class="week-title">Ensamblajes Combinados y Coordenadas</div>
             <div class="week-desc">Ensambles articulados multinivel, Sistemas de Coordenadas y corrección de mates.</div>
           </div>
-          <a href="semana14.html" class="btn btn-outline" style="text-align: center; font-size: 0.85rem;">Ingresar a Lección ➔</a>
+          <a href="semana14.html" class="btn btn-outline" style="text-align: center; font-size: 0.85rem;">Ingresar a Lección <i class="fa-solid fa-arrow-right ml-1"></i></a>
         </div>
       </div>
     </section>
 
     <!-- Módulo 8 -->
-    <section class="module-card">
+    <section class="module-card" data-group="avanzado">
       <div class="module-header">
         <div>
           <span class="badge badge-info">Módulo 8</span>
           <h2 style="font-size: 1.25rem; color: var(--primary); margin: 0.25rem 0 0 0;">Simulacros Oficiales y Cierre de Curso</h2>
         </div>
-        <span style="font-size: 0.85rem; color: var(--text-muted);">Semanas 15 - 16</span>
+        <span style="font-size: 0.85rem; color: var(--text-muted);"><i class="fa-regular fa-calendar mr-1"></i> Semanas 15 - 16</span>
       </div>
       <div class="week-grid">
-        <div class="week-card">
+        <div class="week-card" data-week="15" data-type="leccion">
           <div>
-            <div class="week-badge">Semana 15</div>
+            <div class="week-badge"><span>Semana 15</span><span class="status-slot"></span></div>
             <div class="week-title">Simulacro Diagnóstico y Reentrenamiento</div>
             <div class="week-desc">Prueba cronometrada de 90 min, auditoría de cuellos de botella y protocolos de recuperación.</div>
           </div>
-          <a href="semana15.html" class="btn btn-outline" style="text-align: center; font-size: 0.85rem;">Ingresar a Lección ➔</a>
+          <a href="semana15.html" class="btn btn-outline" style="text-align: center; font-size: 0.85rem;">Ingresar a Lección <i class="fa-solid fa-arrow-right ml-1"></i></a>
         </div>
-        <div class="week-card">
+        <div class="week-card" data-week="16" data-type="evaluacion">
           <div>
-            <div class="week-badge">Semana 16 (Cierre)</div>
+            <div class="week-badge" style="color: var(--success);"><span>Semana 16 (Cierre)</span><span class="status-slot"></span></div>
             <div class="week-title">Evaluación Final y Simulacro CSWA</div>
             <div class="week-desc">Entrega de Proyecto "Tornillo de Banco", simulacro CSWA de 180 min y acreditación final (35%).</div>
           </div>
-          <a href="semana16.html" class="btn" style="text-align: center; font-size: 0.85rem;">Cierre de Curso ➔</a>
+          <a href="semana16.html" class="btn" style="text-align: center; font-size: 0.85rem;">Cierre de Curso <i class="fa-solid fa-arrow-right ml-1"></i></a>
         </div>
       </div>
     </section>
@@ -366,28 +403,71 @@
 
   <!-- Scripts de la Aplicación -->
   <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/navbar.js"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // Calcular progreso académico
       if (typeof AppState !== 'undefined') {
         const progress = AppState.getUserProgress();
-        const completedCount = progress.completedWeeks ? progress.completedWeeks.length : 0;
+        const completedWeeks = progress.completedWeeks || [];
+        const completedCount = completedWeeks.length;
         const percentage = Math.round((completedCount / 16) * 100);
 
         const display = document.getElementById('course-progress-display');
         const tag = document.getElementById('weeks-completed-tag');
 
         if (display) display.textContent = percentage + '%';
-        if (tag) tag.textContent = `${completedCount} de 16 Semanas`;
+        if (tag) {
+          tag.textContent = `${completedCount} de 16 Semanas`;
+          if (completedCount === 16) {
+            tag.className = 'badge badge-success';
+          }
+        }
+
+        // Marcar tarjetas de semanas completadas desde LocalStorage
+        completedWeeks.forEach(weekNum => {
+          const card = document.querySelector(`.week-card[data-week="${weekNum}"]`);
+          if (card) {
+            card.classList.add('completed');
+            const slot = card.querySelector('.status-slot');
+            if (slot) {
+              slot.innerHTML = '<span class="badge badge-success" style="font-size: 0.65rem; padding: 0.15rem 0.45rem;"><i class="fa-solid fa-check"></i> Completada</span>';
+            }
+          }
+        });
       }
     });
+
+    function filterModules(e, filter) {
+      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+      if (e && e.currentTarget) {
+        e.currentTarget.classList.add('active');
+      }
+
+      document.querySelectorAll('.module-card').forEach(mod => {
+        const group = mod.getAttribute('data-group');
+        const cards = mod.querySelectorAll('.week-card');
+
+        if (filter === 'all') {
+          mod.style.display = 'block';
+          cards.forEach(c => c.style.display = 'flex');
+        } else if (filter === 'evaluaciones') {
+          let hasEval = false;
+          cards.forEach(c => {
+            if (c.getAttribute('data-type') === 'evaluacion') {
+              c.style.display = 'flex';
+              hasEval = true;
+            } else {
+              c.style.display = 'none';
+            }
+          });
+          mod.style.display = hasEval ? 'block' : 'none';
+        } else {
+          mod.style.display = (group === filter) ? 'block' : 'none';
+          cards.forEach(c => c.style.display = 'flex');
+        }
+      });
+    }
   </script>
 </body>
 </html>
-```
-
-### Summary of `aula/index.html`:
-- Updated navigation header using clean relative paths (`../index.html`, `../dashboard.html`, `../aula/index.html`, `../cswa/index.html`, `../proyecto.html`).
-- Organizes all 16 weekly lessons into their 8 respective modules.
-- Connects directly to `AppState` (`app.js`) to display real-time course completion percentage ($0\%$ to $100\%$) and the total count of completed weeks.
