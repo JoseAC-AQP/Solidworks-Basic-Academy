@@ -8,43 +8,50 @@
   <!-- Hojas de Estilo Institucionales -->
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/components.css">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
     .exam-header {
-      background: var(--primary);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
       color: var(--white);
-      padding: 1.25rem 2rem;
-      border-radius: 8px;
+      padding: 1.5rem 2rem;
+      border-radius: var(--radius-md);
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
       margin-bottom: 2rem;
-      box-shadow: 0 4px 12px rgba(16, 42, 67, 0.12);
+      box-shadow: var(--shadow-md);
     }
 
     .exam-title-box h1 {
-      font-size: 1.4rem;
-      margin-bottom: 0.25rem;
+      font-size: 1.65rem;
+      margin: 0.35rem 0;
       color: var(--white);
     }
 
     .exam-meta {
       font-size: 0.85rem;
-      color: var(--accent);
+      color: var(--accent-light);
       display: flex;
-      gap: 1rem;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      align-items: center;
     }
 
     .timer-container {
-      background: #FEF3C7;
+      background: #FFFBEB;
       border: 2px solid var(--warning);
-      border-radius: 8px;
-      padding: 0.5rem 1.25rem;
+      border-radius: var(--radius-sm);
+      padding: 0.65rem 1.4rem;
       text-align: center;
+      min-width: 165px;
     }
 
     .timer-label {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       color: #92400E;
       font-weight: 700;
       text-transform: uppercase;
@@ -52,26 +59,28 @@
     }
 
     .timer-value {
-      font-size: 1.8rem;
+      font-size: 1.95rem;
       font-weight: 800;
       color: #92400E;
-      font-family: monospace;
-      line-height: 1;
+      font-family: 'JetBrains Mono', monospace;
+      line-height: 1.1;
     }
 
     .question-card {
       background: var(--white);
       border: 1px solid var(--border);
-      border-radius: 10px;
+      border-radius: var(--radius-md);
       padding: 1.75rem;
       margin-bottom: 2rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      box-shadow: var(--shadow-sm);
     }
 
     .question-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
       border-bottom: 2px solid var(--bg-light);
       padding-bottom: 0.75rem;
       margin-bottom: 1.25rem;
@@ -86,7 +95,7 @@
     .question-points {
       background: #E0F2FE;
       color: #0369A1;
-      padding: 0.25rem 0.6rem;
+      padding: 0.25rem 0.7rem;
       border-radius: 12px;
       font-size: 0.8rem;
       font-weight: 700;
@@ -101,7 +110,7 @@
 
     .param-table th, .param-table td {
       border: 1px solid var(--border);
-      padding: 0.5rem 0.75rem;
+      padding: 0.6rem 0.75rem;
       text-align: left;
     }
 
@@ -112,14 +121,14 @@
 
     .options-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
       gap: 1rem;
       margin-top: 1.25rem;
     }
 
     .option-card {
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: var(--radius-sm);
       padding: 1rem;
       background: var(--bg-light);
       cursor: pointer;
@@ -132,6 +141,12 @@
     .option-card:hover {
       border-color: var(--accent);
       background: #F0F9FF;
+    }
+
+    .option-card.selected {
+      border-color: var(--accent);
+      background: #E0F2FE;
+      box-shadow: 0 0 0 2px rgba(0, 179, 224, 0.2);
     }
 
     .option-card input[type="radio"] {
@@ -152,59 +167,75 @@
       background: var(--primary);
       color: var(--white);
       padding: 1rem 1.5rem;
-      border-radius: 10px;
+      border-radius: var(--radius-md);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      flex-wrap: wrap;
+      gap: 1rem;
+      box-shadow: var(--shadow-lg);
       z-index: 100;
+    }
+
+    .validation-banner {
+      display: none;
+      background: #FEF2F2;
+      border: 1px solid #FECACA;
+      border-left: 4px solid var(--danger);
+      color: #991B1B;
+      padding: 0.85rem 1.25rem;
+      border-radius: var(--radius-sm);
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+      align-items: center;
+      justify-content: space-between;
     }
   </style>
 </head>
 <body>
 
-  <!-- Navegación Principal -->
-  <nav class="navbar">
-    <a href="/" class="brand"><span>SOLIDWORKS</span> ACADEMY</a>
-    <ul class="nav-links">
-      <li><a href="/">Inicio</a></li>
-      <li><a href="/dashboard.html">Dashboard</a></li>
-      <li><a href="/aula/">Aula Virtual</a></li>
-      <li><a href="/cswa/" class="active">CSWA Center</a></li>
-      <li><a href="/proyecto.html">Proyecto Final</a></li>
-    </ul>
-  </nav>
+  <!-- Barra de Navegación Dinámica Institucional -->
+  <header class="navbar"></header>
 
   <main class="container">
 
     <!-- Encabezado del Simulador y Temporizador -->
     <header class="exam-header">
       <div class="exam-title-box">
+        <span class="badge badge-info" style="display: inline-flex; align-items: center; gap: 0.35rem;">
+          <i class="fa-solid fa-stopwatch"></i> CSWA Practice Center &bull; Evaluación Cronometrada
+        </span>
         <h1>Simulacro de Examen Oficial CSWA</h1>
         <div class="exam-meta">
-          <span>📋 4 Ejercicios Prácticos</span>
-          <span>•</span>
-          <span>⏱️ Tiempo Límite: 45 Minutos</span>
-          <span>•</span>
-          <span>🎯 Puntaje Mínimo: 70%</span>
+          <span><i class="fa-solid fa-list-check mr-1"></i> 4 Ejercicios Prácticos (100 pts)</span>
+          <span>&bull;</span>
+          <span><i class="fa-regular fa-clock mr-1"></i> Tiempo Límite: 45 Minutos</span>
+          <span>&bull;</span>
+          <span><i class="fa-solid fa-bullseye mr-1"></i> Puntaje Mínimo: 70%</span>
         </div>
       </div>
       <div class="timer-container">
-        <div class="timer-label">Tiempo Restante</div>
+        <div class="timer-label"><i class="fa-solid fa-hourglass-half mr-1"></i> Tiempo Restante</div>
         <div id="quiz-timer" class="timer-value">45:00</div>
       </div>
     </header>
 
+    <!-- Alerta de Validación Inline (sin popups nativos) -->
+    <div id="exam-validation-alert" class="validation-banner">
+      <span><i class="fa-solid fa-circle-exclamation mr-1"></i> <strong>Faltan preguntas por responder:</strong> Completa los 4 ejercicios prácticos antes de entregar el simulacro.</span>
+      <button type="button" onclick="this.parentElement.style.display='none'" style="background: none; border: none; color: #991B1B; cursor: pointer; font-weight: 700;">&times;</button>
+    </div>
+
     <form id="cswa-exam-form">
 
       <!-- PREGUNTA 1: CROQUIS Y DENSIDAD -->
-      <article class="question-card">
+      <article class="question-card" id="card-q1">
         <div class="question-header">
-          <span class="question-number">Pregunta 1 de 4: Croquizado 2D y Área Total</span>
+          <span class="question-number"><i class="fa-solid fa-compass-drafting text-swCyan mr-1"></i> Pregunta 1 de 4: Croquizado 2D y Área Total</span>
           <span class="question-points">15 Puntos</span>
         </div>
         <p style="margin-bottom: 0.75rem; color: var(--text-dark);">
-          Modele el croquis 2D completamente definido en el plano Alzado utilizando el sistema de unidades <strong>MMGS (milímetro, gramo, segundo)</strong>. El croquis debe quedar completamente restringido respecto al origen.
+          Modele el croquis 2D completamente definido en el plano <strong>Alzado (Front Plane)</strong> utilizando el sistema de unidades <strong>MMGS (milímetro, gramo, segundo)</strong>. El croquis debe quedar completamente restringido respecto al origen.
         </p>
 
         <!-- Tabla de Parámetros -->
@@ -213,7 +244,7 @@
             <tr>
               <th>Parámetro</th>
               <th>Valor (mm)</th>
-              <th>Condición Geométricas</th>
+              <th>Condición Geométrica</th>
             </tr>
           </thead>
           <tbody>
@@ -235,16 +266,26 @@
           </tbody>
         </table>
 
-        <!-- Visualizador CAD Esquemático -->
-        <div class="cad-viewport">
-          <div style="text-align: center;">
-            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">✏️📐</div>
-            <p style="font-size: 0.9rem; font-weight: 600;">Plano de Referencia 2D - Placa Base con Muescas Angular</p>
-            <p style="font-size: 0.8rem; opacity: 0.8;">Cotas: A=120mm, B=65mm, R=15mm</p>
-          </div>
-          <div class="cad-viewport-controls">
-            <button type="button" class="cad-btn-icon" onclick="alert('Vista Alzado (Frontal) fijada')">🔍 Zoom Ajustar</button>
-          </div>
+        <!-- Plano Esquemático Técnico SVG -->
+        <div class="cad-viewport" style="padding: 1rem;">
+          <svg viewBox="0 0 600 220" style="width: 100%; height: 100%;">
+            <rect x="0" y="0" width="600" height="220" fill="#0f172a"/>
+            <!-- Ejes de referencia -->
+            <line x1="300" y1="20" x2="300" y2="200" stroke="#ef4444" stroke-width="1" stroke-dasharray="6,4"/>
+            <line x1="120" y1="165" x2="480" y2="165" stroke="#64748b" stroke-width="1" stroke-dasharray="4,4"/>
+            <!-- Perfil 2D -->
+            <path d="M 180 165 L 420 165 L 420 90 A 30 30 0 0 0 390 60 L 340 60 L 325 85 L 275 85 L 260 60 L 210 60 A 30 30 0 0 0 180 90 Z" fill="rgba(56, 189, 248, 0.14)" stroke="#38bdf8" stroke-width="2.5"/>
+            <!-- Origen -->
+            <circle cx="180" cy="165" r="4" fill="#ef4444"/>
+            <text x="150" y="182" fill="#ef4444" font-size="10" font-weight="bold">Origen (0,0)</text>
+            <!-- Cotas -->
+            <line x1="180" y1="192" x2="420" y2="192" stroke="#f59e0b" stroke-width="1.2"/>
+            <text x="300" y="188" fill="#f59e0b" font-size="11" font-weight="bold" text-anchor="middle">A = 120.00 mm</text>
+            <line x1="448" y1="60" x2="448" y2="165" stroke="#f59e0b" stroke-width="1.2"/>
+            <text x="495" y="116" fill="#f59e0b" font-size="11" font-weight="bold" text-anchor="middle">B = 65.00 mm</text>
+            <text x="205" y="50" fill="#22c55e" font-size="10" font-weight="bold">R = 15.00 mm (2x)</text>
+            <text x="300" y="22" fill="#94a3b8" font-size="10" text-anchor="middle">PLANO ALZADO (MMGS) - CROQUIS 2D COMPLETAMENTE DEFINIDO</text>
+          </svg>
         </div>
 
         <p style="font-weight: 700; color: var(--primary); margin-top: 1rem;">
@@ -272,9 +313,9 @@
       </article>
 
       <!-- PREGUNTA 2: MODELADO DE PIEZA Y MASA -->
-      <article class="question-card">
+      <article class="question-card" id="card-q2">
         <div class="question-header">
-          <span class="question-number">Pregunta 2 de 4: Modelado 3D y Propiedades de Masa</span>
+          <span class="question-number"><i class="fa-solid fa-cube text-swCyan mr-1"></i> Pregunta 2 de 4: Modelado 3D y Propiedades de Masa</span>
           <span class="question-points">30 Puntos</span>
         </div>
         <p style="margin-bottom: 0.75rem; color: var(--text-dark);">
@@ -295,7 +336,7 @@
             </tr>
             <tr>
               <td><strong>Material</strong></td>
-              <td>Acero aleado fundido (Cast Alloy Steel)</td>
+              <td>Acero aleado fundido (Cast Alloy Steel &bull; Densidad: 0.0073 g/mm³)</td>
             </tr>
             <tr>
               <td><strong>Cotas Principales</strong></td>
@@ -304,12 +345,27 @@
           </tbody>
         </table>
 
-        <div class="cad-viewport">
-          <div style="text-align: center;">
-            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🧊⚙️</div>
-            <p style="font-size: 0.9rem; font-weight: 600;">Vista Isométrica - Soporte Angular Escalonado</p>
-            <p style="font-size: 0.8rem; opacity: 0.8;">Material: Acero Aleado Fundido (Densidad: 0.0073 g/mm³)</p>
-          </div>
+        <!-- Vista Isométrica Esquemática SVG -->
+        <div class="cad-viewport" style="padding: 1rem;">
+          <svg viewBox="0 0 600 220" style="width: 100%; height: 100%;">
+            <rect x="0" y="0" width="600" height="220" fill="#0f172a"/>
+            <!-- Base Isométrica -->
+            <polygon points="180,145 330,185 430,135 280,95" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+            <polygon points="180,145 330,185 330,200 180,160" fill="#0f172a" stroke="#38bdf8" stroke-width="2"/>
+            <polygon points="330,185 430,135 430,150 330,200" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+            <!-- Pared Vertical -->
+            <polygon points="180,145 280,95 280,45 180,95" fill="#334155" stroke="#38bdf8" stroke-width="2"/>
+            <polygon points="280,45 305,52 305,102 280,95" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+            <polygon points="180,95 280,45 305,52 205,102" fill="#475569" stroke="#38bdf8" stroke-width="2"/>
+            <!-- Taladro Pasante -->
+            <ellipse cx="345" cy="142" rx="18" ry="10" fill="#0f172a" stroke="#22c55e" stroke-width="1.8"/>
+            <!-- Etiquetas -->
+            <text x="235" y="192" fill="#f59e0b" font-size="11" font-weight="bold">A = 100 mm</text>
+            <text x="415" y="172" fill="#f59e0b" font-size="11" font-weight="bold">B = 50 mm</text>
+            <text x="145" y="75" fill="#38bdf8" font-size="11" font-weight="bold">C = 25 mm</text>
+            <text x="385" y="122" fill="#22c55e" font-size="10" font-weight="bold">&Oslash;D = 12 mm</text>
+            <text x="300" y="22" fill="#94a3b8" font-size="10" text-anchor="middle">SOPORTE ANGULAR ESCALONADO - CAST ALLOY STEEL</text>
+          </svg>
         </div>
 
         <p style="font-weight: 700; color: var(--primary); margin-top: 1rem;">
@@ -337,9 +393,9 @@
       </article>
 
       <!-- PREGUNTA 3: MODIFICACIÓN DIMENSIONAL -->
-      <article class="question-card">
+      <article class="question-card" id="card-q3">
         <div class="question-header">
-          <span class="question-number">Pregunta 3 de 4: Modificación Dimensional del Modelo</span>
+          <span class="question-number"><i class="fa-solid fa-sliders text-swCyan mr-1"></i> Pregunta 3 de 4: Modificación Dimensional del Modelo</span>
           <span class="question-points">25 Puntos</span>
         </div>
         <p style="margin-bottom: 0.75rem; color: var(--text-dark);">
@@ -356,11 +412,11 @@
           <tbody>
             <tr>
               <td><strong>Nuevo Material</strong></td>
-              <td>Aleación de aluminio 1060 (1060 Alloy)</td>
+              <td>Aleación de aluminio 1060 (1060 Alloy &bull; Densidad: 0.0027 g/mm³)</td>
             </tr>
             <tr>
               <td><strong>Nuevas Cotas</strong></td>
-              <td>A = 110.00 mm, B = 55.00 mm, C = 30.00 mm</td>
+              <td>A = 110.00 mm, B = 55.00 mm, C = 30.00 mm (D permanece en 12.00 mm)</td>
             </tr>
           </tbody>
         </table>
@@ -390,21 +446,36 @@
       </article>
 
       <!-- PREGUNTA 4: ENSAMBLAJE Y CENTRO DE GRAVEDAD -->
-      <article class="question-card">
+      <article class="question-card" id="card-q4">
         <div class="question-header">
-          <span class="question-number">Pregunta 4 de 4: Ensamblaje y Centro de Gravedad (CG)</span>
+          <span class="question-number"><i class="fa-solid fa-gears text-swCyan mr-1"></i> Pregunta 4 de 4: Ensamblaje y Centro de Gravedad (CG)</span>
           <span class="question-points">30 Puntos</span>
         </div>
         <p style="margin-bottom: 0.75rem; color: var(--text-dark);">
           Cree el ensamblaje insertando la pieza base (fijada al Origen), el eje articulado y el pasador. Aplique las relaciones de posición <strong>Concéntrica</strong>, <strong>Coincidente</strong> y un ángulo restringido de <strong>45.00°</strong>.
         </p>
 
-        <div class="cad-viewport">
-          <div style="text-align: center;">
-            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🔩🧩</div>
-            <p style="font-size: 0.9rem; font-weight: 600;">Ensamblaje Soporte con Eje y Pasador</p>
-            <p style="font-size: 0.8rem; opacity: 0.8;">Restricción Angular A = 45.00° | Origen en Base Fija</p>
-          </div>
+        <!-- Esquema de Ensamblaje SVG -->
+        <div class="cad-viewport" style="padding: 1rem;">
+          <svg viewBox="0 0 600 220" style="width: 100%; height: 100%;">
+            <rect x="0" y="0" width="600" height="220" fill="#0f172a"/>
+            <!-- Base Fija -->
+            <rect x="140" y="135" width="180" height="35" rx="4" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+            <text x="230" y="157" fill="#38bdf8" font-size="10" font-weight="bold" text-anchor="middle">Base Fija (f)</text>
+            <!-- Pivote y Brazo a 45 grados -->
+            <circle cx="290" cy="135" r="10" fill="#f59e0b"/>
+            <line x1="290" y1="135" x2="410" y2="55" stroke="#22c55e" stroke-width="12" stroke-linecap="round"/>
+            <circle cx="290" cy="135" r="4" fill="#0f172a"/>
+            <!-- Arco Angular -->
+            <path d="M 345 135 A 55 55 0 0 0 330 96" fill="none" stroke="#f59e0b" stroke-width="1.5"/>
+            <text x="368" y="118" fill="#f59e0b" font-size="11" font-weight="bold">&alpha; = 45.00&deg;</text>
+            <!-- Sistema de Coordenadas -->
+            <line x1="140" y1="170" x2="185" y2="170" stroke="#ef4444" stroke-width="2"/>
+            <line x1="140" y1="170" x2="140" y2="125" stroke="#22c55e" stroke-width="2"/>
+            <text x="192" y="174" fill="#ef4444" font-size="10" font-weight="bold">+X</text>
+            <text x="132" y="118" fill="#22c55e" font-size="10" font-weight="bold">+Y</text>
+            <text x="300" y="22" fill="#94a3b8" font-size="10" text-anchor="middle">ENSAMBLAJE ARTICULADO (.SLDASM) - RELACIÓN ANGULAR 45.00&deg;</text>
+          </svg>
         </div>
 
         <p style="font-weight: 700; color: var(--primary); margin-top: 1rem;">
@@ -434,12 +505,15 @@
       <!-- BARRA FLOTANTE DE ENVIAR EXAMEN -->
       <div class="exam-nav-bar">
         <div>
-          <span style="font-weight: 600;">Asegúrate de haber respondido todas las preguntas.</span>
-          <div style="font-size: 0.8rem; opacity: 0.8;">Al hacer clic se registrará el resultado en tu expediente CSWA.</div>
+          <span style="font-weight: 600;"><i class="fa-solid fa-clipboard-check mr-1"></i> Progreso: <span id="answered-counter">0</span> de 4 preguntas respondidas</span>
+          <div style="font-size: 0.8rem; opacity: 0.85;">Al entregar se calculará tu calificación y actualizará tu perfil de competencias CSWA.</div>
         </div>
-        <button type="button" class="btn" style="background: var(--success); font-size: 1.05rem; padding: 0.7rem 1.8rem;" onclick="submitSimulacro()">
-          ✅ Finalizar y Entregar Examen
-        </button>
+        <div style="display: flex; gap: 0.75rem; align-items: center;">
+          <a href="diagnostico.html" class="btn btn-outline" style="color: var(--white); border-color: rgba(255,255,255,0.4);">Cancelar</a>
+          <button type="button" class="btn" style="background: var(--success); font-size: 1rem; padding: 0.7rem 1.6rem;" onclick="submitSimulacro()">
+            <i class="fa-solid fa-paper-plane mr-1"></i> Finalizar y Entregar Examen
+          </button>
+        </div>
       </div>
 
     </form>
@@ -454,41 +528,68 @@
   <script src="../assets/js/app.js"></script>
   <script src="../assets/js/cswa.js"></script>
   <script src="../assets/js/quiz.js"></script>
+  <script src="../assets/js/navbar.js"></script>
 
   <script>
-    // Inicializar el temporizador de 45 minutos al cargar la página
     document.addEventListener('DOMContentLoaded', () => {
-      QuizEngine.startQuiz({
-        formId: 'cswa-exam-form',
-        timeLimitMinutes: 45,
-        correctAnswers: {
-          q1: 'A',
-          q2: 'B',
-          q3: 'A',
-          q4: 'B'
-        },
-        competencyMap: {
-          croquis: 85,
-          piezas: 80,
-          modificacion: 90,
-          ensamblajes: 85,
-          propiedades_fisicas: 88,
-          tiempo_limite: 80
-        }
+      // Inicializar el temporizador de 45 minutos
+      if (typeof QuizEngine !== 'undefined') {
+        QuizEngine.startQuiz({
+          formId: 'cswa-exam-form',
+          timeLimitMinutes: 45,
+          correctAnswers: {
+            q1: 'A',
+            q2: 'B',
+            q3: 'A',
+            q4: 'B'
+          },
+          competencyMap: {
+            croquis: 85,
+            piezas: 80,
+            modificacion: 90,
+            ensamblajes: 85,
+            propiedades_fisicas: 88,
+            tiempo_limite: 80
+          }
+        });
+      }
+
+      // Resaltado visual de selección y contador dinámico
+      const radios = document.querySelectorAll('#cswa-exam-form input[type="radio"]');
+      radios.forEach(radio => {
+        radio.addEventListener('change', () => {
+          const groupName = radio.name;
+          document.querySelectorAll(`input[name="${groupName}"]`).forEach(input => {
+            input.closest('.option-card').classList.remove('selected');
+          });
+          radio.closest('.option-card').classList.add('selected');
+
+          const answered = new Set(
+            Array.from(document.querySelectorAll('#cswa-exam-form input[type="radio"]:checked')).map(r => r.name)
+          ).size;
+          const counter = document.getElementById('answered-counter');
+          if (counter) counter.textContent = answered;
+        });
       });
     });
 
-    // Función manual de envío y retroalimentación
     function submitSimulacro() {
       const form = document.getElementById('cswa-exam-form');
       const formData = new FormData(form);
+      const alertBox = document.getElementById('exam-validation-alert');
 
       if (!formData.get('q1') || !formData.get('q2') || !formData.get('q3') || !formData.get('q4')) {
-        alert('⚠️ Por favor responde todas las preguntas del examen antes de enviar.');
+        if (alertBox) {
+          alertBox.style.display = 'flex';
+          alertBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
         return;
       }
 
-      QuizEngine.submitQuiz();
+      if (alertBox) alertBox.style.display = 'none';
+      if (typeof QuizEngine !== 'undefined') {
+        QuizEngine.submitQuiz();
+      }
     }
   </script>
 </body>
