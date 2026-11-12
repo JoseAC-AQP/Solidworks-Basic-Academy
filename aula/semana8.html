@@ -8,23 +8,25 @@
   <!-- Hojas de Estilo Institucionales -->
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/components.css">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
     .lesson-hero {
-      background: linear-gradient(135deg, #1E3A8A 0%, var(--primary) 100%);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
       color: var(--white);
-      padding: 2rem;
-      border-radius: 12px;
+      padding: 2.25rem 2rem;
+      border-radius: var(--radius-md);
       margin-bottom: 2rem;
       box-shadow: var(--shadow-md);
     }
 
     .lesson-meta-bar {
       display: flex;
-      gap: 1.5rem;
+      gap: 1.25rem;
       margin-top: 1rem;
       font-size: 0.85rem;
-      color: var(--accent);
+      color: var(--accent-light);
       flex-wrap: wrap;
     }
 
@@ -32,17 +34,26 @@
       border-left: 4px solid var(--warning);
       background: var(--bg-light);
       padding: 1.25rem;
-      border-radius: 0 8px 8px 0;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
       margin-bottom: 1.25rem;
+      position: relative;
+      padding-left: 3.5rem;
     }
 
     .step-number {
+      position: absolute;
+      left: 1rem;
+      top: 1.25rem;
+      width: 1.8rem;
+      height: 1.8rem;
+      background: var(--warning);
+      color: var(--primary-dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-weight: 800;
-      color: var(--primary);
-      text-transform: uppercase;
-      font-size: 0.8rem;
-      letter-spacing: 0.5px;
-      margin-bottom: 0.3rem;
+      font-size: 0.85rem;
     }
 
     .shortcut-tag {
@@ -59,7 +70,7 @@
     .cswa-tip-box {
       background: #FEF3C7;
       border: 1px solid #FDE68A;
-      border-radius: 8px;
+      border-radius: var(--radius-sm);
       padding: 1.25rem;
       margin: 1.5rem 0;
     }
@@ -71,6 +82,33 @@
       color: #92400E;
       font-weight: 700;
       margin-bottom: 0.5rem;
+    }
+
+    .tab-container {
+      display: flex;
+      gap: 0.5rem;
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 1.5rem;
+      overflow-x: auto;
+    }
+
+    .tab-btn {
+      padding: 0.75rem 1.25rem;
+      border: none;
+      background: none;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+      font-weight: 700;
     }
 
     .param-table {
@@ -90,21 +128,32 @@
       background: var(--bg-light);
       color: var(--primary);
     }
+
+    .quiz-option {
+      display: block;
+      padding: 0.75rem 1rem;
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .quiz-option:hover {
+      border-color: var(--accent);
+      background: #F0F9FF;
+    }
+
+    .quiz-option input {
+      margin-right: 0.75rem;
+    }
   </style>
 </head>
 <body>
 
-  <!-- Navegación Principal -->
-  <nav class="navbar">
-    <a href="../index.html" class="brand"><span>SOLIDWORKS</span> ACADEMY</a>
-    <ul class="nav-links">
-      <li><a href="../index.html">Inicio</a></li>
-      <li><a href="../dashboard.html">Dashboard</a></li>
-      <li><a href="../aula/index.html" class="active">Aula Virtual</a></li>
-      <li><a href="../cswa/index.html">CSWA Center</a></li>
-      <li><a href="../proyecto.html">Proyecto Final</a></li>
-    </ul>
-  </nav>
+  <!-- Barra de Navegación Dinámica Institucional -->
+  <header class="navbar"></header>
 
   <main class="container">
 
@@ -112,53 +161,82 @@
     <header class="lesson-hero">
       <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
         <div>
-          <span class="badge badge-warning" style="margin-bottom: 0.5rem; display: inline-block;">Módulo 4: Evaluación Sumativa 2 (25%)</span>
+          <span class="badge badge-warning" style="margin-bottom: 0.5rem; display: inline-flex; align-items: center; gap: 0.35rem;">
+            <i class="fa-solid fa-clipboard-check"></i> Módulo 4: Evaluación Sumativa 2 (25%)
+          </span>
           <h1 style="font-size: 2.2rem; color: var(--white); margin: 0.2rem 0;">Semana 8: Evaluación Práctica 2 - Interpretación de Planos</h1>
           <p style="opacity: 0.9; font-size: 1rem; max-width: 700px; margin-top: 0.5rem;">
             Aplica modelado paramétrico avanzado 3D a partir de vistas de planos 2D ortogonales y calcula las propiedades de masa requeridas en el examen CSWA.
           </p>
         </div>
         <div>
-          <button id="mark-completed-btn" class="btn" style="background: var(--success);" onclick="completeWeek8()">
-            ✓ Marcar Semana como Completada
+          <button id="mark-completed-btn" class="btn" style="background: var(--success); color: white;" onclick="completeWeek8()">
+            <i class="fa-solid fa-check"></i> Marcar Semana como Completada
           </button>
         </div>
       </div>
 
       <div class="lesson-meta-bar">
-        <span>⏱️ Tiempo Límite: 60 Minutos</span>
-        <span>🎯 Competencia CSWA: Modelado 3D, modificación dimensional y propiedades de masa</span>
-        <span>📄 Ponderación: 25% Calificación Final</span>
+        <span><i class="fa-regular fa-clock"></i> Tiempo Límite: 60 Minutos</span>
+        <span><i class="fa-solid fa-award"></i> Competencia CSWA: Modelado 3D, modificación dimensional y propiedades de masa</span>
+        <span><i class="fa-solid fa-file-contract"></i> Ponderación: 25% Calificación Final</span>
       </div>
     </header>
+
+    <!-- Tip Oficial CSWA -->
+    <section class="cswa-tip-box" style="margin-top: 0;">
+      <div class="cswa-tip-header">
+        <i class="fa-solid fa-triangle-exclamation text-xl"></i>
+        <span>Reglas de Medición y Materiales en el Examen CSWA</span>
+      </div>
+      <p style="font-size: 0.95rem; color: #78350F; margin: 0;">
+        Configura el sistema de unidades en <strong>MMGS (Milímetro, Gramo, Segundo)</strong> antes de iniciar y asegúrate de ingresar el material exacto en el árbol de operaciones (<code>Acero aleado fundido / Cast Alloy Steel</code>). Una densidad incorrecta desviará el resultado de masa final aunque la geometría 3D sea perfecta.
+      </p>
+    </section>
 
     <div class="grid-2" style="grid-template-columns: 2.5fr 1fr; gap: 1.5rem;">
 
       <!-- Contenido Principal de la Evaluación -->
       <div>
 
-        <!-- Bloque 1: Instrucciones de la Evaluación -->
-        <article class="card">
-          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">1. Instrucciones del Examen Práctico</h2>
-          <p style="line-height: 1.6; color: var(--text-dark); margin-bottom: 1rem;">
-            Esta evaluación simula la sección principal del examen oficial CSWA (Modelado de piezas paramétricas con modificaciones dimensionales). Debes interpretar el plano 2D, modelar la pieza 3D en sistema <strong>MMGS (Milímetro, Gramo, Segundo)</strong>, asignar el material especificado y calcular la <strong>Masa Total ($g$)</strong>.
+        <!-- Pestañas de Navegación Didáctica -->
+        <div class="tab-container">
+          <button class="tab-btn active" onclick="switchTab(event, 'instrucciones')"><i class="fa-solid fa-book-open mr-1"></i> 1. Instrucciones</button>
+          <button class="tab-btn" onclick="switchTab(event, 'plano')"><i class="fa-solid fa-drafting-compass mr-1"></i> 2. Plano y Parámetros</button>
+          <button class="tab-btn" onclick="switchTab(event, 'evaluacion')"><i class="fa-solid fa-pen-to-square mr-1"></i> 3. Formulario de Examen</button>
+        </div>
+
+        <!-- TAB 1: INSTRUCCIONES DE LA EVALUACIÓN -->
+        <article id="tab-instrucciones" class="card">
+          <h2 class="card-title"><i class="fa-solid fa-list-ol text-swCyan"></i> 1. Instrucciones del Examen Práctico</h2>
+          <p style="line-height: 1.6; color: var(--text-dark); margin-bottom: 1.25rem;">
+            Esta evaluación simula la sección principal del examen oficial CSWA (Modelado de piezas paramétricas con modificaciones dimensionales). Sigue la secuencia recomendada para garantizar precisión:
           </p>
 
-          <div class="cswa-tip-box">
-            <div class="cswa-tip-header">
-              <span>⚠️ Reglas de Medición y Materiales</span>
-            </div>
-            <p style="font-size: 0.9rem; color: #78350F; margin: 0;">
-              Asegúrate de ingresar el material exacto en el árbol de operaciones (<code>Acero aleado fundido / Cast Alloy Steel</code>). Una densidad incorrecta desviará el resultado de masa final aunque la geometría 3D sea perfecta.
-            </p>
+          <div class="step-box">
+            <div class="step-number">1</div>
+            <h4 style="color: var(--primary);">Configurar Entorno y Variables Globales</h4>
+            <p>Abre una nueva pieza en SOLIDWORKS en unidades <strong>MMGS</strong>. Define las variables globales <strong>A</strong>, <strong>B</strong> y <strong>C</strong> en el gestor de ecuaciones (<em>Herramientas > Ecuaciones</em>) para actualizar la pieza rápidamente en la Etapa 2.</p>
+          </div>
+
+          <div class="step-box">
+            <div class="step-number">2</div>
+            <h4 style="color: var(--primary);">Modelado Etapa 1 y Cálculo de Masa Inicial</h4>
+            <p>Construye el <strong>Soporte Angular Escalonado con Barreno</strong> utilizando los valores de la Etapa 1, asigna el material <em>Acero aleado fundido (Cast Alloy Steel)</em> y consulta <strong>Calcular > Propiedades físicas</strong>.</p>
+          </div>
+
+          <div class="step-box">
+            <div class="step-number">3</div>
+            <h4 style="color: var(--primary);">Modificación Paramétrica (Etapa 2)</h4>
+            <p>Actualiza las variables globales <strong>A, B y C</strong> a los nuevos valores de la Etapa 2, cambia el material a <em>Aleación de aluminio 1060 (1060 Alloy)</em>, reconstruye (<span class="shortcut-tag">Ctrl + B</span>) y registra la nueva masa total.</p>
           </div>
         </article>
 
-        <!-- Bloque 2: Parámetros y Plano del Soporte Angular -->
-        <article class="card">
-          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">2. Especificaciones Paramétricas: Soporte Angular Escalonado</h2>
+        <!-- TAB 2: PARÁMETROS Y PLANO DEL SOPORTE ANGULAR -->
+        <article id="tab-plano" class="card" style="display: none;">
+          <h2 class="card-title"><i class="fa-solid fa-ruler-combined text-swCyan"></i> 2. Especificaciones Paramétricas: Soporte Angular Escalonado</h2>
           <p style="line-height: 1.6; color: var(--text-dark); margin-bottom: 1rem;">
-            Modele el sólido utilizando los siguientes parámetros globales:
+            Modele el sólido utilizando los siguientes parámetros globales para ambas etapas:
           </p>
 
           <table class="param-table">
@@ -193,86 +271,134 @@
             </tbody>
           </table>
 
-          <!-- CAD Viewport Interactivo -->
-          <div class="cad-viewport" style="margin-top: 1.5rem;">
-            <div style="text-align: center;">
-              <div style="font-size: 3rem; margin-bottom: 0.5rem;">🧊⚙️</div>
-              <p style="font-size: 0.95rem; font-weight: 700; color: var(--white);">Vista Isométrica: Soporte Angular Escalonado con Barreno</p>
-              <p style="font-size: 0.8rem; opacity: 0.8;">Material Etapa 1: Acero Aleado Fundido (Densidad: 0.0073 g/mm³)</p>
-            </div>
-            <div class="cad-viewport-controls">
-              <button type="button" class="cad-btn-icon" onclick="alert('Masa calculada en SOLIDWORKS Etapa 1: 1025.32 g')">📊 Calcular Masa Etapa 1</button>
-            </div>
+          <!-- Visor Gráfico Técnico SVG -->
+          <div class="cad-viewport" style="margin-top: 1.5rem; padding: 1rem;">
+            <svg viewBox="0 0 600 250" style="width: 100%; height: 100%;">
+              <rect x="0" y="0" width="600" height="250" fill="#0f172a"/>
+              
+              <!-- Título del Plano -->
+              <text x="300" y="24" fill="#38bdf8" font-size="12" font-weight="bold" text-anchor="middle">PLANO ORTOGONAL: SOPORTE ANGULAR ESCALONADO (UNIDADES: MMGS)</text>
+
+              <!-- Vista Frontal (Perfil en L Escalonado) -->
+              <polygon points="80,65 115,65 115,135 240,135 240,175 80,175" fill="#1e293b" stroke="#00B3E0" stroke-width="2.5"/>
+              <!-- Línea oculta del barreno en base -->
+              <line x1="175" y1="135" x2="175" y2="175" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4,3"/>
+              <line x1="205" y1="135" x2="205" y2="175" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4,3"/>
+              <line x1="190" y1="128" x2="190" y2="182" stroke="#ef4444" stroke-width="1" stroke-dasharray="6,2,2,2"/>
+
+              <!-- Cota A (Longitud Total) -->
+              <line x1="80" y1="180" x2="80" y2="205" stroke="#94a3b8" stroke-width="1"/>
+              <line x1="240" y1="180" x2="240" y2="205" stroke="#94a3b8" stroke-width="1"/>
+              <line x1="80" y1="198" x2="240" y2="198" stroke="#38bdf8" stroke-width="1.5"/>
+              <text x="160" y="213" fill="#38bdf8" font-size="11" font-weight="bold" text-anchor="middle">A (Longitud Total)</text>
+
+              <!-- Cota C (Altura Escalón) -->
+              <line x1="245" y1="135" x2="275" y2="135" stroke="#94a3b8" stroke-width="1"/>
+              <line x1="245" y1="175" x2="275" y2="175" stroke="#94a3b8" stroke-width="1"/>
+              <line x1="268" y1="135" x2="268" y2="175" stroke="#38bdf8" stroke-width="1.5"/>
+              <text x="276" y="159" fill="#38bdf8" font-size="11" font-weight="bold">C</text>
+
+              <!-- Vista Superior (Planta) -->
+              <rect x="350" y="75" width="160" height="80" fill="#1e293b" stroke="#00B3E0" stroke-width="2.5"/>
+              <!-- Arista del escalón vertical -->
+              <line x1="385" y1="75" x2="385" y2="155" stroke="#00B3E0" stroke-width="2"/>
+              <!-- Barreno Pasante -->
+              <circle cx="460" cy="115" r="15" fill="#0f172a" stroke="#f59e0b" stroke-width="2"/>
+              <line x1="438" y1="115" x2="482" y2="115" stroke="#ef4444" stroke-width="1" stroke-dasharray="6,2,2,2"/>
+              <line x1="460" y1="93" x2="460" y2="137" stroke="#ef4444" stroke-width="1" stroke-dasharray="6,2,2,2"/>
+
+              <!-- Cota B (Ancho Base) -->
+              <line x1="515" y1="75" x2="540" y2="75" stroke="#94a3b8" stroke-width="1"/>
+              <line x1="515" y1="155" x2="540" y2="155" stroke="#94a3b8" stroke-width="1"/>
+              <line x1="533" y1="75" x2="533" y2="155" stroke="#38bdf8" stroke-width="1.5"/>
+              <text x="542" y="119" fill="#38bdf8" font-size="11" font-weight="bold">B (Ancho)</text>
+
+              <!-- Leyenda inferior -->
+              <text x="430" y="182" fill="#f59e0b" font-size="10" text-anchor="middle">Barreno Pasante Ø 20 mm</text>
+              <text x="430" y="198" fill="#94a3b8" font-size="10" text-anchor="middle">Material Etapa 1: Acero Aleado Fundido (0.0073 g/mm³)</text>
+            </svg>
           </div>
         </article>
 
-        <!-- Bloque 3: Formulario Evaluativo -->
-        <article class="card">
-          <h2 class="card-title" style="font-size: 1.4rem; color: var(--primary);">3. Formulario de Respuestas del Examen</h2>
-          <p style="font-size: 0.95rem; color: var(--text-dark); margin-bottom: 1rem;">
-            Consulta las <em>Propiedades de Masa</em> de tu modelo 3D en SOLIDWORKS e ingresa los valores obtenidos:
+        <!-- TAB 3: FORMULARIO EVALUATIVO -->
+        <article id="tab-evaluacion" class="card" style="display: none;">
+          <h2 class="card-title"><i class="fa-solid fa-pen-to-square text-swCyan"></i> 3. Formulario de Respuestas del Examen</h2>
+          <p style="font-size: 0.95rem; color: var(--text-dark); margin-bottom: 1.5rem;">
+            Consulta las <em>Propiedades de Masa</em> de tu modelo 3D en SOLIDWORKS y selecciona los valores obtenidos:
           </p>
 
-          <form id="week8-exam-form" onsubmit="evaluateWeek8Exam(event)">
-            <div style="margin-bottom: 1.25rem;">
-              <label style="font-weight: 700; font-size: 0.9rem; color: var(--primary); display: block; margin-bottom: 0.4rem;">
+          <form id="week8-exam-form">
+            <div style="margin-bottom: 1.5rem;">
+              <p style="font-weight: 600; margin-bottom: 0.75rem; color: var(--primary);">
                 1. ¿Cuál es la masa total de la pieza en gramos ($g$) durante la Etapa 1 (Acero aleado fundido, A=100, B=50, C=25)?
-              </label>
-              <div style="display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.9rem;">
-                <label><input type="radio" name="w8q1" value="A" required> A) 948.50 g</label>
-                <label><input type="radio" name="w8q1" value="B"> B) 1025.32 g</label>
-                <label><input type="radio" name="w8q1" value="C"> C) 1150.00 g</label>
-                <label><input type="radio" name="w8q1" value="D"> D) 980.15 g</label>
-              </div>
+              </p>
+              <label class="quiz-option"><input type="radio" name="w8q1" value="A" required> A) 948.50 g</label>
+              <label class="quiz-option"><input type="radio" name="w8q1" value="B"> B) 1025.32 g</label>
+              <label class="quiz-option"><input type="radio" name="w8q1" value="C"> C) 1150.00 g</label>
+              <label class="quiz-option"><input type="radio" name="w8q1" value="D"> D) 980.15 g</label>
             </div>
 
             <div style="margin-bottom: 1.5rem;">
-              <label style="font-weight: 700; font-size: 0.9rem; color: var(--primary); display: block; margin-bottom: 0.4rem;">
+              <p style="font-weight: 600; margin-bottom: 0.75rem; color: var(--primary);">
                 2. Tras aplicar la modificación dimensional de la Etapa 2 (Aluminio 1060, A=110, B=55, C=30), ¿cuál es la nueva masa total de la pieza?
-              </label>
-              <div style="display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.9rem;">
-                <label><input type="radio" name="w8q2" value="A" required> A) 482.14 g</label>
-                <label><input type="radio" name="w8q2" value="B"> B) 512.60 g</label>
-                <label><input type="radio" name="w8q2" value="C"> C) 450.30 g</label>
-                <label><input type="radio" name="w8q2" value="D"> D) 498.90 g</label>
-              </div>
+              </p>
+              <label class="quiz-option"><input type="radio" name="w8q2" value="A" required> A) 482.14 g</label>
+              <label class="quiz-option"><input type="radio" name="w8q2" value="B"> B) 512.60 g</label>
+              <label class="quiz-option"><input type="radio" name="w8q2" value="C"> C) 450.30 g</label>
+              <label class="quiz-option"><input type="radio" name="w8q2" value="D"> D) 498.90 g</label>
             </div>
 
-            <button type="submit" class="btn" style="width: 100%; font-size: 1rem;">✅ Entregar Evaluación de la Semana 8</button>
+            <button type="button" class="btn" style="width: 100%; font-size: 1rem;" onclick="evaluateWeek8Exam()">
+              <i class="fa-solid fa-check-double"></i> Entregar Evaluación de la Semana 8
+            </button>
+            <div id="quiz-feedback-w8" style="margin-top: 1rem; display: none;"></div>
           </form>
         </article>
 
+        <!-- Navegación entre Semanas -->
+        <div style="display: flex; justify-content: space-between; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
+          <a href="semana7.html" class="btn btn-outline"><i class="fa-solid fa-arrow-left"></i> Semana 7</a>
+          <a href="index.html" class="btn btn-outline"><i class="fa-solid fa-list"></i> Índice Aula</a>
+          <a href="index.html" class="btn">Módulo 5 <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
       </div>
 
-      <!-- Barra Lateral: Estado y Navegación -->
-      <aside>
-
-        <!-- Resumen de Evaluación -->
+      <!-- Barra Lateral (Sidebar) -->
+      <aside class="space-y">
         <div class="card">
-          <h3 class="card-title" style="font-size: 1.1rem; margin-bottom: 0.75rem;">📋 Estado de Evaluación</h3>
-          <ul style="list-style: none; font-size: 0.85rem; color: var(--text-muted);" class="space-y">
+          <h3 class="card-title" style="font-size: 1rem;"><i class="fa-solid fa-chart-line text-swCyan"></i> Estado de la Evaluación</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">Progreso registrado en esta semana:</p>
+          <div class="progress-container"><div id="week-progress-bar" class="progress-bar" style="width: 0%;"></div></div>
+          <span id="week-status-badge" class="badge badge-warning" style="margin-top: 0.5rem;">Pendiente</span>
+          <ul style="list-style: none; font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--border);" class="space-y">
             <li style="display: flex; align-items: center; gap: 0.5rem;">
-              <span>📌</span> Módulo 4 Finalizado
+              <i class="fa-solid fa-flag-checkered text-swCyan"></i> Cierre Módulo 4
             </li>
             <li style="display: flex; align-items: center; gap: 0.5rem;">
-              <span>🎯</span> Ponderación: 25%
+              <i class="fa-solid fa-bullseye text-swCyan"></i> Ponderación: 25%
             </li>
             <li style="display: flex; align-items: center; gap: 0.5rem;">
-              <span>⏱️</span> Limite: 60 Minutos
+              <i class="fa-regular fa-clock text-swCyan"></i> Límite: 60 Minutos
             </li>
           </ul>
         </div>
 
-        <!-- Navegación Curricular -->
-        <div class="card" style="text-align: center;">
-          <h4 style="font-size: 0.9rem; color: var(--primary); margin-bottom: 0.75rem;">Navegación Curricular</h4>
-          <div style="display: flex; justify-content: space-between; gap: 0.5rem;">
-            <a href="semana7.html" class="btn btn-outline" style="font-size: 0.8rem; flex: 1;">⬅️ Sem. 7</a>
-            <a href="index.html" class="btn btn-outline" style="font-size: 0.8rem; flex: 1;">Índice</a>
-            <a href="index.html" class="btn" style="font-size: 0.8rem; flex: 1;">Módulo 5 ➡️</a>
-          </div>
+        <div class="card">
+          <h3 class="card-title" style="font-size: 1rem;"><i class="fa-solid fa-folder-open text-swCyan"></i> Recursos de Evaluación</h3>
+          <ul style="list-style: none; font-size: 0.85rem;" class="space-y">
+            <li><a href="#" onclick="alert('Descargando Plano Técnico Soporte Angular Escalonado (.PDF)'); return false;"><i class="fa-solid fa-file-pdf text-red-500 mr-1"></i> Plano 2D Acotado (.PDF)</a></li>
+            <li><a href="#" onclick="alert('Descargando Plantilla de Pieza MMGS (.PRTDOT)'); return false;"><i class="fa-solid fa-cube text-swCyan mr-1"></i> Plantilla MMGS (.PRTDOT)</a></li>
+          </ul>
         </div>
 
+        <div class="card" style="background: var(--primary); color: var(--white);">
+          <h3 style="color: var(--accent); font-size: 1rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-award mr-1"></i> CSWA Practice Center</h3>
+          <p style="font-size: 0.85rem; opacity: 0.9; margin-bottom: 1rem;">
+            Revisa tu radar de competencias CSWA tras completar la Evaluación Práctica 2.
+          </p>
+          <a href="../cswa/index.html" class="btn" style="width: 100%; text-align: center; font-size: 0.85rem;">Ir al Centro CSWA</a>
+        </div>
       </aside>
 
     </div>
@@ -285,54 +411,67 @@
 
   <!-- Scripts de la Aplicación -->
   <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/cswa.js"></script>
+  <script src="../assets/js/quiz.js"></script>
+  <script src="../assets/js/navbar.js"></script>
+
   <script>
-    function completeWeek8() {
-      AppState.markWeekCompleted(8);
-      
-      const btn = document.getElementById('mark-completed-btn');
-      if (btn) {
-        btn.textContent = '✓ Semana 8 Completada';
-        btn.disabled = true;
-        btn.style.opacity = '0.8';
-      }
-      alert('🎉 ¡Evaluación de la Semana 8 registrada con éxito en tu expediente!');
-    }
-
-    function evaluateWeek8Exam(e) {
-      e.preventDefault();
-      const form = document.getElementById('week8-exam-form');
-      const formData = new FormData(form);
-
-      const q1 = formData.get('w8q1');
-      const q2 = formData.get('w8q2');
-
-      if (q1 === 'B' && q2 === 'A') {
-        alert('🎉 ¡Felicidades! Has aprobado la Evaluación Práctica 2 con 100% (25% de la calificación final).');
-        AppState.recordQuizResult('semana8_eval2', 100, { piezas: 90, modificacion: 85, propiedades_fisicas: 85, interpretacion: 85 });
-        completeWeek8();
-      } else {
-        alert('⚠️ Hay inconsistencias en tus respuestas de masa. Verifica las variables A, B y C y la asignación del material.');
-      }
-    }
-
-    // Verificar estado al cargar
     document.addEventListener('DOMContentLoaded', () => {
       const progress = AppState.getUserProgress();
       if (progress.completedWeeks && progress.completedWeeks.includes(8)) {
-        const btn = document.getElementById('mark-completed-btn');
-        if (btn) {
-          btn.textContent = '✓ Semana 8 Completada';
-          btn.disabled = true;
-          btn.style.opacity = '0.8';
-        }
+        actualizarUICompletado();
       }
     });
+
+    function switchTab(e, tabId) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('article[id^="tab-"]').forEach(content => content.style.display = 'none');
+
+      if (e && e.currentTarget) {
+        e.currentTarget.classList.add('active');
+      }
+      document.getElementById('tab-' + tabId).style.display = 'block';
+    }
+
+    function actualizarUICompletado() {
+      const progressBar = document.getElementById('week-progress-bar');
+      const badge = document.getElementById('week-status-badge');
+      const btn = document.getElementById('mark-completed-btn');
+
+      if (progressBar) progressBar.style.width = '100%';
+      if (badge) {
+        badge.className = 'badge badge-success';
+        badge.textContent = 'Completado';
+      }
+      if (btn) {
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Semana 8 Completada';
+        btn.disabled = true;
+        btn.style.opacity = '0.85';
+      }
+    }
+
+    function completeWeek8() {
+      AppState.markWeekCompleted(8);
+      actualizarUICompletado();
+      alert('🎉 ¡Evaluación de la Semana 8 registrada con éxito en tu expediente!');
+    }
+
+    function evaluateWeek8Exam() {
+      const isPassed = QuizEngine.evaluateQuiz({
+        formId: 'week8-exam-form',
+        feedbackId: 'quiz-feedback-w8',
+        quizId: 'semana8_eval2',
+        weekNumber: 8,
+        answers: { w8q1: 'B', w8q2: 'A' },
+        competencyGains: { piezas: 90, modificacion: 85, propiedades_fisicas: 85, interpretacion: 85 },
+        successMsg: '<strong>🎉 ¡Felicidades!</strong> Has aprobado la Evaluación Práctica 2 con <strong>100%</strong> (25% de la calificación final). Tus competencias CSWA han sido actualizadas.'
+      });
+
+      if (isPassed) {
+        actualizarUICompletado();
+      }
+    }
   </script>
 </body>
 </html>
-```
-
-### Resumen de `aula/semana8.html`:
-- Cierra el **Módulo 4** representando la **Evaluación Práctica 2** (25% de la ponderación final del curso).
-- Simula la sección oficial del CSWA con interpretación de planos 2D, asignación de materiales (Acero Aleado Fundido y Aluminio 1060), modificaciones dimensionales ($A, B, C$) y cálculo de propiedades de masa ($g$).
 - Se conecta automáticamente con `AppState` en `LocalStorage` (`app.js`) para actualizar las competencias CSWA y registrar el avance del alumno.
