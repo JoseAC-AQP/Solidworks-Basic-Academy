@@ -3,424 +3,475 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lección de la semana 1: aprende la interfaz de SOLIDWORKS, los tipos de documentos, los planos y la configuración de unidades para prepararte para CSWA.">
+  <meta name="theme-color" content="#102A43">
   <title>Semana 1: Entorno de Trabajo e Interfaz | SOLIDWORKS ACADEMY</title>
-
-  <!-- Hojas de Estilo Institucionales -->
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/components.css">
-  <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
   <style>
+    :root {
+      --academy-navy: #102A43;
+      --academy-cyan: #00B3E0;
+      --academy-cyan-hover: #0090B3;
+      --academy-bg: #F3F6F8;
+      --academy-text: #1F2937;
+      --academy-muted: #526579;
+      --academy-border: #D8E1E8;
+      --academy-white: #FFFFFF;
+    }
+
+    .lesson-page { max-width: 1280px; }
     .lesson-hero {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-      color: var(--white);
-      padding: 2.25rem 2rem;
-      border-radius: var(--radius-md);
-      margin-bottom: 2rem;
-      box-shadow: var(--shadow-md);
-    }
-
-    .lesson-meta-bar {
-      display: flex;
-      gap: 1.25rem;
-      margin-top: 1rem;
-      font-size: 0.85rem;
-      color: var(--accent-light);
-      flex-wrap: wrap;
-    }
-
-    .step-box {
-      border-left: 4px solid var(--accent);
-      background: var(--bg-light);
-      padding: 1.25rem;
-      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-      margin-bottom: 1.25rem;
       position: relative;
-      padding-left: 3.5rem;
+      overflow: hidden;
+      padding: clamp(1.35rem, 4vw, 2.75rem);
+      margin-bottom: 1.5rem;
+      color: var(--academy-white);
+      border-radius: 1.25rem;
+      background: linear-gradient(120deg, #102A43 0%, #173F5F 68%, #155B78 100%);
+      box-shadow: 0 16px 36px rgba(16, 42, 67, 0.16);
     }
-
-    .step-number {
+    .lesson-hero::after {
+      content: "";
       position: absolute;
-      left: 1rem;
-      top: 1.25rem;
-      width: 1.8rem;
-      height: 1.8rem;
-      background: var(--accent);
-      color: var(--primary-dark);
+      width: 18rem;
+      height: 18rem;
+      right: -7rem;
+      top: -9rem;
+      border: 1px solid rgba(0, 179, 224, 0.3);
       border-radius: 50%;
-      display: flex;
+      box-shadow: 0 0 0 2rem rgba(0, 179, 224, 0.05), 0 0 0 4rem rgba(0, 179, 224, 0.035);
+      pointer-events: none;
+    }
+    .hero-layout, .hero-main, .hero-actions, .lesson-meta-bar, .meta-item { display: flex; }
+    .hero-layout { position: relative; z-index: 1; align-items: flex-start; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
+    .hero-main { flex: 1 1 34rem; min-width: 0; flex-direction: column; align-items: flex-start; }
+    .eyebrow {
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
+      gap: .5rem;
+      padding: .45rem .75rem;
+      color: #A8EEFF;
+      background: rgba(0, 179, 224, .13);
+      border: 1px solid rgba(0, 179, 224, .38);
+      border-radius: 999px;
+      font-size: .76rem;
       font-weight: 800;
-      font-size: 0.85rem;
+      letter-spacing: .07em;
+      text-transform: uppercase;
     }
+    .lesson-hero h1 { max-width: 850px; margin: .9rem 0 .65rem; color: var(--academy-white); font-size: clamp(1.8rem, 5vw, 3rem); line-height: 1.12; }
+    .lesson-hero .hero-summary { max-width: 750px; margin: 0; color: #D7E5EF; font-size: 1rem; }
+    .hero-actions { flex-wrap: wrap; gap: .65rem; margin-top: 1.2rem; }
+    .hero-actions .btn { min-height: 2.75rem; display: inline-flex; align-items: center; justify-content: center; gap: .5rem; }
+    .hero-actions .btn-primary { background: var(--academy-cyan); border-color: var(--academy-cyan); color: var(--academy-navy); font-weight: 800; }
+    .hero-actions .btn-primary:hover { background: #35C8E8; border-color: #35C8E8; }
+    .hero-actions .btn-quiet { color: white; border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.08); }
+    .hero-actions .btn-quiet:hover { background: rgba(255,255,255,.16); }
+    .lesson-meta-bar { flex-wrap: wrap; gap: .6rem; margin-top: 1.5rem; }
+    .meta-item { align-items: center; gap: .5rem; min-height: 2.5rem; padding: .45rem .7rem; color: #E1EDF5; background: rgba(255,255,255,.075); border: 1px solid rgba(255,255,255,.12); border-radius: .6rem; font-size: .84rem; }
+    .meta-item i { color: #5DDBF4; }
 
-    .shortcut-tag {
-      background: #E2E8F0;
-      color: #334155;
-      padding: 0.2rem 0.5rem;
-      border-radius: 4px;
-      font-family: monospace;
-      font-weight: bold;
-      font-size: 0.85rem;
-      border: 1px solid #CBD5E1;
+    .learning-callout {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: .8rem;
+      align-items: start;
+      padding: 1.1rem 1.2rem;
+      margin-bottom: 1.5rem;
+      color: var(--academy-text);
+      background: #EAF8FC;
+      border: 1px solid #BCEAF5;
+      border-inline-start: 4px solid var(--academy-cyan);
+      border-radius: .8rem;
     }
+    .callout-icon { display: grid; place-items: center; width: 2.4rem; height: 2.4rem; color: var(--academy-navy); background: rgba(0,179,224,.15); border-radius: .7rem; }
+    .learning-callout h2 { margin: 0 0 .25rem; color: var(--academy-navy); font-size: 1rem; }
+    .learning-callout p { margin: 0; color: #334B5E; font-size: .92rem; }
 
-    .cswa-tip-box {
-      background: #EFF6FF;
-      border: 1px solid #BFDBFE;
-      border-radius: var(--radius-sm);
-      padding: 1.25rem;
-      margin: 1.5rem 0;
-    }
-
-    .cswa-tip-header {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: #1E40AF;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-
+    .lesson-layout { display: grid; grid-template-columns: minmax(0, 1fr) 18rem; gap: 1.25rem; align-items: start; }
+    .lesson-main { min-width: 0; }
     .tab-container {
       display: flex;
-      gap: 0.5rem;
-      border-bottom: 2px solid var(--border);
-      margin-bottom: 1.5rem;
+      gap: .35rem;
+      padding: .4rem;
+      margin-bottom: 1rem;
       overflow-x: auto;
+      background: var(--academy-white);
+      border: 1px solid var(--academy-border);
+      border-radius: .85rem;
+      box-shadow: 0 4px 14px rgba(16,42,67,.045);
+      scrollbar-width: thin;
     }
-
     .tab-btn {
-      padding: 0.75rem 1.25rem;
-      border: none;
-      background: none;
-      font-weight: 600;
-      color: var(--text-muted);
-      cursor: pointer;
-      border-bottom: 3px solid transparent;
-      margin-bottom: -2px;
-      white-space: nowrap;
-      transition: all 0.2s ease;
-    }
-
-    .tab-btn.active {
-      color: var(--accent);
-      border-bottom-color: var(--accent);
+      flex: 0 0 auto;
+      min-height: 2.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .65rem .85rem;
+      color: var(--academy-muted);
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: .6rem;
+      font: inherit;
+      font-size: .88rem;
       font-weight: 700;
-    }
-
-    .quiz-option {
-      display: block;
-      padding: 0.75rem 1rem;
-      background: var(--bg-light);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      margin-bottom: 0.5rem;
+      white-space: nowrap;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: background .2s ease, color .2s ease, border-color .2s ease;
     }
+    .tab-btn:hover { color: var(--academy-navy); background: #F0F7FA; }
+    .tab-btn.active { color: var(--academy-navy); background: #E6F8FC; border-color: #B8EAF5; }
+    .tab-btn.active i { color: var(--academy-cyan-hover); }
+    .tab-btn:focus-visible, .lesson-page a:focus-visible, .lesson-page button:focus-visible, .quiz-option:focus-within { outline: 3px solid var(--academy-cyan); outline-offset: 3px; }
 
-    .quiz-option:hover {
-      border-color: var(--accent);
-      background: #F0F9FF;
+    .lesson-panel {
+      padding: clamp(1rem, 3vw, 1.65rem);
+      background: var(--academy-white);
+      border: 1px solid var(--academy-border);
+      border-radius: 1rem;
+      box-shadow: 0 6px 22px rgba(16,42,67,.055);
     }
+    .lesson-panel[hidden] { display: none; }
+    .panel-heading { display: flex; align-items: flex-start; gap: .8rem; margin-bottom: 1.1rem; }
+    .panel-heading-icon { flex: 0 0 2.65rem; width: 2.65rem; height: 2.65rem; display: grid; place-items: center; color: var(--academy-navy); background: #E4F8FC; border-radius: .8rem; font-size: 1.1rem; }
+    .panel-heading h2 { margin: 0; color: var(--academy-navy); font-size: clamp(1.2rem, 3vw, 1.5rem); }
+    .panel-heading p { margin: .25rem 0 0; color: var(--academy-muted); font-size: .9rem; }
+    .lesson-panel h3 { margin: 1.4rem 0 .55rem; color: var(--academy-navy); font-size: 1.08rem; }
+    .lesson-panel h3:first-of-type { margin-top: 1rem; }
+    .lesson-panel p, .lesson-panel li { color: #34495A; font-size: .95rem; }
+    .lesson-panel ul, .lesson-panel ol { padding-left: 1.35rem; margin: .6rem 0 1.1rem; }
+    .lesson-panel li { margin: .45rem 0; }
+    .file-type-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .75rem; margin: 1rem 0 1.25rem; }
+    .file-type-card { padding: .9rem; background: #F7FAFC; border: 1px solid var(--academy-border); border-radius: .75rem; }
+    .file-type-card code { display: inline-block; margin-bottom: .45rem; color: var(--academy-navy); background: #DFF6FB; border-color: #B9EAF4; font-weight: 800; }
+    .file-type-card p { margin: 0; font-size: .85rem; }
+    .cad-viewport { width: 100%; aspect-ratio: 2.2 / 1; min-height: 190px; margin: 1.1rem 0; overflow: hidden; background: #0F172A; border: 1px solid #28394D; border-radius: .8rem; }
+    .cad-viewport svg { display: block; width: 100%; height: 100%; }
+    .viewport-caption { margin: -.55rem 0 1.1rem; color: var(--academy-muted); font-size: .82rem; }
+    .exam-alert { margin-top: 1.25rem; padding: 1rem; color: #634A0B; background: #FFF8E6; border: 1px solid #F3D889; border-inline-start: 4px solid #E5A900; border-radius: .75rem; }
+    .exam-alert h3 { display: flex; align-items: center; gap: .5rem; margin: 0 0 .45rem; color: #795800; font-size: 1rem; }
+    .exam-alert ul { margin-bottom: 0; }
+    .exam-alert li { color: #5D4A1A; font-size: .9rem; }
+    .step-list { display: grid; gap: .8rem; margin-top: 1.1rem; }
+    .step-box { position: relative; padding: 1rem 1rem 1rem 4rem; background: #F7FAFC; border: 1px solid var(--academy-border); border-radius: .8rem; }
+    .step-number { position: absolute; left: 1rem; top: 1rem; width: 2rem; height: 2rem; display: grid; place-items: center; color: var(--academy-navy); background: #BDEFFA; border-radius: .65rem; font-weight: 900; }
+    .step-box h3 { margin: 0 0 .35rem; font-size: 1rem; }
+    .step-box p { margin: 0; font-size: .92rem; }
+    .shortcut-tag { display: inline-block; padding: .12rem .45rem; color: var(--academy-navy); background: #E8EEF3; border: 1px solid #CBD5DF; border-radius: .35rem; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .85rem; font-weight: 700; }
+    .challenge-card { padding: 1.1rem; background: linear-gradient(145deg, #F2FBFD, #FFFFFF); border: 1px solid #BCEAF5; border-radius: .85rem; }
+    .challenge-card h3 { margin-top: 0; }
+    .challenge-meta { display: inline-flex; align-items: center; gap: .4rem; margin-bottom: .6rem; padding: .35rem .6rem; color: var(--academy-navy); background: #DDF7FC; border-radius: 999px; font-size: .78rem; font-weight: 800; }
+    .quiz-question { margin: 0 0 1.25rem; padding: 0; border: 0; }
+    .quiz-question legend { margin-bottom: .65rem; color: var(--academy-navy); font-weight: 750; line-height: 1.45; }
+    .quiz-option { display: flex; align-items: flex-start; gap: .7rem; padding: .8rem .9rem; margin: .5rem 0; color: var(--academy-text); background: #F7FAFC; border: 1px solid var(--academy-border); border-radius: .7rem; cursor: pointer; transition: background .15s ease, border-color .15s ease; }
+    .quiz-option:hover { background: #EAF8FC; border-color: #8ADDEE; }
+    .quiz-option input { margin-top: .25rem; accent-color: var(--academy-cyan-hover); }
+    .quiz-actions { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; }
+    .quiz-actions .btn { min-height: 2.8rem; }
 
-    .quiz-option input {
-      margin-right: 0.75rem;
+    .lesson-sidebar { display: grid; gap: 1rem; position: sticky; top: 1rem; }
+    .side-card { padding: 1.1rem; background: var(--academy-white); border: 1px solid var(--academy-border); border-radius: .9rem; box-shadow: 0 5px 16px rgba(16,42,67,.045); }
+    .side-card h2 { display: flex; align-items: center; gap: .55rem; margin: 0 0 .7rem; color: var(--academy-navy); font-size: 1rem; }
+    .side-card h2 i { color: var(--academy-cyan-hover); }
+    .side-card p { margin: 0 0 .7rem; color: var(--academy-muted); font-size: .86rem; }
+    .progress-track { height: .65rem; overflow: hidden; background: #E5EDF2; border-radius: 99px; }
+    .progress-fill { width: 0; height: 100%; background: var(--academy-cyan); border-radius: inherit; transition: width .3s ease; }
+    .status-badge { display: inline-flex; margin-top: .7rem; padding: .35rem .65rem; color: #6A4D00; background: #FFF1C2; border-radius: 999px; font-size: .78rem; font-weight: 800; }
+    .status-badge.is-complete { color: #075B43; background: #D9F5E9; }
+    .resource-list { display: grid; gap: .55rem; padding: 0; margin: 0; list-style: none; }
+    .resource-list li { padding: .65rem .7rem; color: #536779; background: #F7FAFC; border: 1px solid var(--academy-border); border-radius: .6rem; font-size: .84rem; }
+    .resource-list i { margin-right: .4rem; color: var(--academy-cyan-hover); }
+    .resource-soon { display: inline-block; margin-left: .35rem; color: #607789; font-size: .72rem; font-weight: 700; }
+    .cswa-card { color: white; background: linear-gradient(145deg, #102A43, #173F5F); border-color: #173F5F; }
+    .cswa-card h2 { color: white; }
+    .cswa-card h2 i { color: #66DDF4; }
+    .cswa-card p { color: #D7E5EF; }
+    .cswa-card .btn { display: flex; justify-content: center; align-items: center; min-height: 2.75rem; color: var(--academy-navy); background: var(--academy-cyan); font-weight: 800; }
+    .lesson-footer-nav { display: flex; justify-content: space-between; gap: .75rem; margin-top: 1rem; padding-top: 1.1rem; border-top: 1px solid var(--academy-border); }
+    .lesson-footer-nav .btn { min-height: 2.75rem; display: inline-flex; align-items: center; justify-content: center; gap: .45rem; }
+
+    @media (max-width: 900px) {
+      .lesson-layout { grid-template-columns: minmax(0, 1fr); }
+      .lesson-sidebar { position: static; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .cswa-card { grid-column: 1 / -1; }
+    }
+    @media (max-width: 600px) {
+      .lesson-page { padding-inline: .75rem; }
+      .lesson-hero { border-radius: 1rem; margin-bottom: 1rem; }
+      .hero-actions { width: 100%; }
+      .hero-actions .btn { flex: 1 1 100%; }
+      .lesson-meta-bar { display: grid; grid-template-columns: 1fr; gap: .45rem; margin-top: 1rem; }
+      .meta-item { min-height: 2.35rem; }
+      .learning-callout { padding: .9rem; }
+      .tab-container { margin-inline: -.05rem; }
+      .tab-btn { min-height: 2.75rem; padding-inline: .75rem; }
+      .file-type-grid { grid-template-columns: 1fr; }
+      .cad-viewport { min-height: 160px; }
+      .lesson-sidebar { grid-template-columns: 1fr; }
+      .cswa-card { grid-column: auto; }
+      .lesson-footer-nav { display: grid; grid-template-columns: 1fr 1fr; }
+      .lesson-footer-nav .btn { padding-inline: .45rem; font-size: .85rem; }
+      .step-box { padding: .9rem .9rem .9rem 3.5rem; }
+      .step-number { left: .8rem; top: .85rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
     }
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#lesson-content">Saltar al contenido de la lección</a>
+  <header class="navbar" aria-label="Navegación principal"></header>
 
-  <!-- Barra de Navegación Dinámica -->
-  <header class="navbar"></header>
-
-  <main class="container">
-
-    <!-- Encabezado de la Lección -->
+  <main class="container lesson-page" id="lesson-content">
     <header class="lesson-hero">
-      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
-        <div>
-          <span class="badge badge-info" style="margin-bottom: 0.5rem; display: inline-flex; align-items: center; gap: 0.35rem;">
-            <i class="fa-solid fa-layer-group"></i> Módulo 1: Introducción a SOLIDWORKS
-          </span>
-          <h1 style="font-size: 2.2rem; color: var(--white); margin: 0.2rem 0;">Semana 1: Entorno de Trabajo e Interfaz</h1>
-          <p style="opacity: 0.9; font-size: 1rem; max-width: 700px; margin-top: 0.5rem;">
-            Reconocimiento de la interfaz de usuario, gestores de diseño, planos de referencia, navegación 3D y configuración de sistemas de unidades MMGS / IPS.
-          </p>
-        </div>
-        <div>
-          <button id="mark-completed-btn" class="btn" style="background: var(--success); color: white;" onclick="completeWeek1()">
-            <i class="fa-solid fa-check"></i> Marcar Semana como Completada
-          </button>
+      <div class="hero-layout">
+        <div class="hero-main">
+          <span class="eyebrow"><i class="fa-solid fa-cubes" aria-hidden="true"></i> Módulo 1 · Fundamentos de SOLIDWORKS</span>
+          <h1>Entorno de Trabajo e Interfaz</h1>
+          <p class="hero-summary">Conoce la interfaz, los documentos CAD, los planos de referencia y la configuración de unidades que usarás desde tu primera pieza hasta el examen CSWA.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#leccion-tabs" id="start-lesson-link"><i class="fa-solid fa-play" aria-hidden="true"></i> Empezar la lección</a>
+            <button type="button" id="mark-completed-btn" class="btn btn-quiet" onclick="completeWeek1()"><i class="fa-solid fa-check" aria-hidden="true"></i> Marcar semana completa</button>
+          </div>
         </div>
       </div>
-
-      <div class="lesson-meta-bar">
-        <span><i class="fa-regular fa-clock"></i> Carga Horaria: 3 hrs lectivas</span>
-        <span><i class="fa-solid fa-award"></i> Competencia CSWA: Entorno, Documentos y Unidades</span>
-        <span><i class="fa-solid fa-cubes"></i> Versión SW: 2021+</span>
+      <div class="lesson-meta-bar" aria-label="Detalles de la lección">
+        <span class="meta-item"><i class="fa-regular fa-clock" aria-hidden="true"></i> 3 horas lectivas</span>
+        <span class="meta-item"><i class="fa-solid fa-award" aria-hidden="true"></i> Competencia CSWA: entorno, documentos y unidades</span>
+        <span class="meta-item"><i class="fa-solid fa-cubes" aria-hidden="true"></i> SOLIDWORKS 2021+</span>
       </div>
     </header>
 
-    <!-- Competencia Oficial CSWA -->
-    <section class="cswa-tip-box" style="margin-top: 0;">
-      <div class="cswa-tip-header">
-        <i class="fa-solid fa-bullseye text-xl"></i>
-        <span>Competencia Oficial CSWA Relacionada</span>
+    <section class="learning-callout" aria-labelledby="competency-heading">
+      <div class="callout-icon"><i class="fa-solid fa-bullseye" aria-hidden="true"></i></div>
+      <div>
+        <h2 id="competency-heading">Objetivo de aprendizaje</h2>
+        <p>Al terminar, podrás reconocer la interfaz y el FeatureManager, diferenciar los documentos de pieza, ensamblaje y dibujo, elegir los planos de referencia y configurar unidades MMGS o IPS según el ejercicio.</p>
       </div>
-      <p style="color: #1E3A8A; font-size: 0.95rem; margin: 0;">
-        <strong>Reconocimiento del Entorno y Operaciones Base:</strong> Dominio de la interfaz gráfica de usuario, navegación en el árbol de diseño FeatureManager, diferenciación de tipos de archivo (.SLDPRT, .SLDASM, .SLDDRW), configuración inmediata del sistema de unidades (MMGS vs IPS) y alineación del origen con planos principales de referencia.
-      </p>
     </section>
 
-    <div class="grid-2" style="grid-template-columns: 2.5fr 1fr; gap: 1.5rem;">
-
-      <!-- Contenido Principal -->
-      <div>
-
-        <!-- Pestañas de Navegación Didáctica -->
-        <div class="tab-container">
-          <button class="tab-btn active" onclick="switchTab('fundamento')"><i class="fa-solid fa-book-open mr-1"></i> 1. Fundamento</button>
-          <button class="tab-btn" onclick="switchTab('procedimiento')"><i class="fa-solid fa-list-check mr-1"></i> 2. Procedimiento</button>
-          <button class="tab-btn" onclick="switchTab('practica')"><i class="fa-solid fa-dumbbell mr-1"></i> 3. Práctica & Reto</button>
-          <button class="tab-btn" onclick="switchTab('evaluacion')"><i class="fa-solid fa-pen-to-square mr-1"></i> 4. Evaluación</button>
+    <div class="lesson-layout">
+      <section class="lesson-main" aria-label="Contenido de la lección">
+        <div class="tab-container" id="leccion-tabs" role="tablist" aria-label="Secciones de la lección">
+          <button type="button" class="tab-btn active" id="tab-button-fundamento" role="tab" aria-selected="true" aria-controls="tab-fundamento" tabindex="0" onclick="switchTab('fundamento', event)"><i class="fa-solid fa-book-open" aria-hidden="true"></i> Fundamento</button>
+          <button type="button" class="tab-btn" id="tab-button-procedimiento" role="tab" aria-selected="false" aria-controls="tab-procedimiento" tabindex="-1" onclick="switchTab('procedimiento', event)"><i class="fa-solid fa-list-check" aria-hidden="true"></i> Procedimiento</button>
+          <button type="button" class="tab-btn" id="tab-button-practica" role="tab" aria-selected="false" aria-controls="tab-practica" tabindex="-1" onclick="switchTab('practica', event)"><i class="fa-solid fa-dumbbell" aria-hidden="true"></i> Práctica</button>
+          <button type="button" class="tab-btn" id="tab-button-evaluacion" role="tab" aria-selected="false" aria-controls="tab-evaluacion" tabindex="-1" onclick="switchTab('evaluacion', event)"><i class="fa-solid fa-pen-to-square" aria-hidden="true"></i> Evaluación</button>
         </div>
 
-        <!-- TAB 1: FUNDAMENTO CONCEPTUAL -->
-        <article id="tab-fundamento" class="card">
-          <h2 class="card-title"><i class="fa-solid fa-bullseye text-swCyan"></i> 1. Resultado de Aprendizaje</h2>
-          <p>
-            Al finalizar esta sesión, serás capaz de <strong>reconocer y manipular el entorno de trabajo de SOLIDWORKS</strong>, diferenciar los tres tipos de documentos CAD, elegir y modificar sistemas de unidades de medida, y posicionar elementos utilizando el FeatureManager y los planos principales de referencia.
-          </p>
-
-          <h2 class="card-title" style="margin-top: 1.5rem;"><i class="fa-solid fa-cubes text-swCyan"></i> 2. Fundamento Conceptual & Tipos de Archivo</h2>
-          <p>
-            SOLIDWORKS es un sistema de modelado CAD 3D <strong>paramétrico y basado en operaciones</strong>. La geometría tridimensional se construye mediante perfiles vectoriales 2D (croquis) restringidos por cotas y relaciones geométricas.
-          </p>
-          <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem; font-size: 0.95rem;" class="space-y">
-            <li><strong style="color: var(--primary);">.SLDPRT (Pieza):</strong> Componente 3D individual formado por operaciones geométricas sólidas o de superficie.</li>
-            <li><strong style="color: var(--primary);">.SLDASM (Ensamblaje):</strong> Conjunto de dos o más piezas vinculadas en el espacio 3D mediante relaciones de posición.</li>
-            <li><strong style="color: var(--primary);">.SLDDRW (Dibujo / Plano):</strong> Documento 2D normalizado que proyecta vistas ortogonales, cortes y acotaciones para fabricación.</li>
-          </ul>
-
-          <!-- Visor Gráfico Interactivo de la Interfaz -->
-          <div class="cad-viewport">
-            <svg viewBox="0 0 600 240" style="width: 100%; height: 100%;">
-              <rect x="0" y="0" width="600" height="240" fill="#0f172a"/>
-              <rect x="0" y="0" width="600" height="35" fill="#1e293b"/>
-              <text x="15" y="22" fill="#00B3E0" font-size="12" font-weight="bold">CommandManager [Croquis | Operaciones | Calcular]</text>
-              <rect x="10" y="45" width="150" height="185" fill="#1e293b" rx="4"/>
-              <text x="20" y="65" fill="#ffffff" font-size="11" font-weight="bold">FeatureManager</text>
-              <text x="25" y="90" fill="#94a3b8" font-size="10">📌 Origen (0,0,0)</text>
-              <text x="25" y="110" fill="#94a3b8" font-size="10">📄 Plano Alzado</text>
-              <text x="25" y="130" fill="#94a3b8" font-size="10">📄 Plano Planta</text>
-              <text x="25" y="150" fill="#94a3b8" font-size="10">📄 Plano Vista Lateral</text>
-              <rect x="170" y="45" width="420" height="185" fill="#020617" rx="4" stroke="#334155"/>
-              <text x="380" y="130" fill="#00B3E0" font-size="13" font-weight="bold" text-anchor="middle">ÁREA DE DIBUJO 3D (VIEWPORT)</text>
-              <line x1="190" y1="210" x2="220" y2="210" stroke="#ef4444" stroke-width="2"/>
-              <text x="225" y="213" fill="#ef4444" font-size="10">X</text>
-              <line x1="190" y1="210" x2="190" y2="180" stroke="#22c55e" stroke-width="2"/>
-              <text x="187" y="175" fill="#22c55e" font-size="10">Y</text>
-              <line x1="190" y1="210" x2="175" y2="222" stroke="#3b82f6" stroke-width="2"/>
-              <text x="168" y="228" fill="#3b82f6" font-size="10">Z</text>
-              <rect x="520" y="210" width="65" height="15" fill="#1e293b" rx="3"/>
-              <text x="525" y="221" fill="#f59e0b" font-size="9" font-weight="bold">MMGS</text>
+        <article id="tab-fundamento" class="lesson-panel" role="tabpanel" aria-labelledby="tab-button-fundamento" tabindex="0">
+          <div class="panel-heading">
+            <div class="panel-heading-icon"><i class="fa-solid fa-compass-drafting" aria-hidden="true"></i></div>
+            <div><h2>Fundamento conceptual</h2><p>Una primera mirada a la lógica de trabajo CAD paramétrico.</p></div>
+          </div>
+          <h3>¿Qué aprenderás en esta sesión?</h3>
+          <p>SOLIDWORKS es un sistema de diseño CAD 3D paramétrico y basado en operaciones. El modelo se construye a partir de croquis y operaciones; sus dimensiones y relaciones permiten modificar el diseño manteniendo la intención original.</p>
+          <h3>Los tres documentos principales</h3>
+          <div class="file-type-grid">
+            <section class="file-type-card"><code>.SLDPRT</code><p><strong>Pieza:</strong> componente 3D individual, creado con operaciones sólidas o de superficie.</p></section>
+            <section class="file-type-card"><code>.SLDASM</code><p><strong>Ensamblaje:</strong> conjunto de piezas relacionadas y posicionadas en el espacio 3D.</p></section>
+            <section class="file-type-card"><code>.SLDDRW</code><p><strong>Dibujo:</strong> plano 2D con vistas, cortes y cotas para comunicar el diseño.</p></section>
+          </div>
+          <h3>Elementos de la interfaz</h3>
+          <p>El <strong>CommandManager</strong> agrupa comandos según la tarea. El <strong>FeatureManager</strong> organiza planos, croquis y operaciones. El área gráfica o <strong>viewport</strong> es donde se observa e interactúa con el modelo; el origen y los planos de referencia ayudan a ubicarlo y orientarlo.</p>
+          <figure class="cad-viewport">
+            <svg viewBox="0 0 800 360" role="img" aria-labelledby="cad-title cad-desc" preserveAspectRatio="xMidYMid meet">
+              <title id="cad-title">Esquema de la interfaz de SOLIDWORKS</title>
+              <desc id="cad-desc">CommandManager en la parte superior, FeatureManager a la izquierda y área gráfica 3D a la derecha, con ejes y unidades MMGS.</desc>
+              <rect width="800" height="360" fill="#0F172A"/>
+              <rect width="800" height="52" fill="#1E293B"/>
+              <text x="24" y="33" fill="#5DDBF4" font-size="17" font-family="Arial,sans-serif" font-weight="bold">CommandManager · Croquis · Operaciones · Calcular</text>
+              <rect x="18" y="70" width="205" height="270" rx="8" fill="#1E293B"/>
+              <text x="34" y="101" fill="#FFFFFF" font-size="16" font-family="Arial,sans-serif" font-weight="bold">FeatureManager</text>
+              <text x="39" y="143" fill="#C5D3DF" font-size="14" font-family="Arial,sans-serif">Origen (0,0,0)</text>
+              <text x="39" y="178" fill="#C5D3DF" font-size="14" font-family="Arial,sans-serif">Plano Alzado</text>
+              <text x="39" y="213" fill="#C5D3DF" font-size="14" font-family="Arial,sans-serif">Plano Planta</text>
+              <text x="39" y="248" fill="#C5D3DF" font-size="14" font-family="Arial,sans-serif">Plano Vista Lateral</text>
+              <rect x="240" y="70" width="542" height="270" rx="8" fill="#020617" stroke="#334155" stroke-width="2"/>
+              <text x="510" y="202" fill="#5DDBF4" font-size="18" font-family="Arial,sans-serif" font-weight="bold" text-anchor="middle">ÁREA GRÁFICA 3D</text>
+              <line x1="280" y1="290" x2="324" y2="290" stroke="#F87171" stroke-width="4"/><text x="331" y="296" fill="#F87171" font-size="15" font-family="Arial,sans-serif">X</text>
+              <line x1="280" y1="290" x2="280" y2="246" stroke="#4ADE80" stroke-width="4"/><text x="274" y="238" fill="#4ADE80" font-size="15" font-family="Arial,sans-serif">Y</text>
+              <line x1="280" y1="290" x2="258" y2="310" stroke="#60A5FA" stroke-width="4"/><text x="242" y="329" fill="#60A5FA" font-size="15" font-family="Arial,sans-serif">Z</text>
+              <rect x="697" y="303" width="70" height="25" rx="6" fill="#1E293B"/><text x="732" y="321" fill="#5DDBF4" font-size="13" font-family="Arial,sans-serif" font-weight="bold" text-anchor="middle">MMGS</text>
             </svg>
-          </div>
+          </figure>
+          <p class="viewport-caption">Representación didáctica: la disposición exacta puede variar según la versión y personalización del espacio de trabajo.</p>
+          <aside class="exam-alert" aria-labelledby="exam-alert-heading">
+            <h3 id="exam-alert-heading"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Atención para el examen CSWA</h3>
+            <ul>
+              <li><strong>Verifica las unidades:</strong> MMGS e IPS no son intercambiables; usa las que indiquen las instrucciones del problema.</li>
+              <li><strong>Comprueba el plano:</strong> orientar el modelo en un plano distinto puede afectar su posición y las coordenadas del centro de gravedad.</li>
+            </ul>
+          </aside>
+        </article>
 
-          <div class="alert-box alert-warning" style="margin-top: 1.5rem;">
-            <i class="fa-solid fa-triangle-exclamation text-xl"></i>
-            <div>
-              <strong>⚠️ Alerta de Examen CSWA (Errores Frecuentes):</strong>
-              <ul style="margin-left: 1.2rem; margin-top: 0.5rem; font-size: 0.9rem;">
-                <li><strong>Descuido de Unidades:</strong> Iniciar un modelo en milímetros (MMGS) cuando el problema exige pulgadas (IPS) derivará en una masa calculada incorrecta.</li>
-                <li><strong>Confusión de Planos:</strong> Modelar la vista principal en un plano no correspondiente desplazará las coordenadas del Centro de Gravedad $(X, Y, Z)$.</li>
-              </ul>
-            </div>
+        <article id="tab-procedimiento" class="lesson-panel" role="tabpanel" aria-labelledby="tab-button-procedimiento" tabindex="0" hidden>
+          <div class="panel-heading"><div class="panel-heading-icon"><i class="fa-solid fa-list-check" aria-hidden="true"></i></div><div><h2>Procedimiento guiado</h2><p>Practica estas acciones directamente en SOLIDWORKS.</p></div></div>
+          <div class="step-list">
+            <section class="step-box"><span class="step-number" aria-hidden="true">1</span><h3>Crear una pieza nueva</h3><p>Abre <strong>Archivo &gt; Nuevo</strong> o usa <kbd class="shortcut-tag">Ctrl + N</kbd>. Selecciona la plantilla de pieza disponible y confirma.</p></section>
+            <section class="step-box"><span class="step-number" aria-hidden="true">2</span><h3>Verificar las unidades</h3><p>Revisa el indicador de unidades en la esquina inferior derecha. Selecciona <strong>MMGS</strong> (milímetro, gramo, segundo) o <strong>IPS</strong> según las unidades requeridas.</p></section>
+            <section class="step-box"><span class="step-number" aria-hidden="true">3</span><h3>Identificar planos y origen</h3><p>Localiza los planos Alzado, Planta y Vista Lateral en el FeatureManager. Selecciónalos para reconocer su orientación y ubica el origen del modelo.</p></section>
+            <section class="step-box"><span class="step-number" aria-hidden="true">4</span><h3>Reconstruir y guardar</h3><p>Prueba <kbd class="shortcut-tag">Ctrl + B</kbd> para reconstruir. Guarda con <strong>Archivo &gt; Guardar como</strong> y utiliza una ubicación y nombre descriptivos.</p></section>
           </div>
         </article>
 
-        <!-- TAB 2: PROCEDIMIENTO PASO A PASO -->
-        <article id="tab-procedimiento" class="card" style="display: none;">
-          <h2 class="card-title"><i class="fa-solid fa-list-check text-swCyan"></i> Procedimiento Guiado Paso a Paso</h2>
-          <p style="margin-bottom: 1.5rem;">Ejecuta las siguientes acciones en tu software SOLIDWORKS para dominar la interfaz inicial:</p>
-
-          <div class="step-box">
-            <div class="step-number">1</div>
-            <h4 style="color: var(--primary);">Crear un Nuevo Documento de Pieza</h4>
-            <p>Abre SOLIDWORKS, selecciona <code>Archivo > Nuevo</code> (o presiona <span class="shortcut-tag">Ctrl + N</span>). Haz doble clic sobre el icono <strong>Pieza</strong>.</p>
-          </div>
-
-          <div class="step-box">
-            <div class="step-number">2</div>
-            <h4 style="color: var(--primary);">Verificar y Configurar Unidades</h4>
-            <p>Observa la esquina inferior derecha de la pantalla. Haz clic sobre la etiqueta de unidades (ej. <code>IPS</code>) y selecciona <strong>MMGS (Milímetro, Gramo, Segundo)</strong>.</p>
-          </div>
-
-          <div class="step-box">
-            <div class="step-number">3</div>
-            <h4 style="color: var(--primary);">Visualizar Planos y Navegación 3D</h4>
-            <p>En el gestor <strong>FeatureManager</strong>, selecciona los tres planos manteniéndolos presionados con <span class="shortcut-tag">Ctrl</span>, haz clic derecho y activa el icono del <strong>Ojo (Mostrar)</strong>. Practica rotar la vista 3D manteniendo presionada la <strong>rueda central del mouse (scroll)</strong>.</p>
-          </div>
-
-          <div class="step-box">
-            <div class="step-number">4</div>
-            <h4 style="color: var(--primary);">Reconstruir y Guardar Documento</h4>
-            <p>Prueba el comando de reconstrucción rápida presionando <span class="shortcut-tag">Ctrl + B</span>. Guarda tu archivo desde <code>Archivo > Guardar como</code> con la extensión <code>.SLDPRT</code>.</p>
-          </div>
-        </article>
-
-        <!-- TAB 3: PRÁCTICA & RETO -->
-        <article id="tab-practica" class="card" style="display: none;">
-          <h2 class="card-title"><i class="fa-solid fa-dumbbell text-swCyan"></i> Ejercicio Guiado & Reto Tipo CSWA</h2>
-          <p style="margin-bottom: 1rem;">Abre tu versión local de SOLIDWORKS y completa el siguiente reto de configuración de entorno:</p>
-
-          <div style="background: var(--bg-light); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 1.25rem;">
-            <h4 style="color: var(--primary);"><i class="fa-solid fa-flag-checkered text-swCyan"></i> Reto: Plantilla Personalizada MMGS (10 Minutos)</h4>
-            <ol style="margin-left: 1.2rem; margin-top: 0.5rem; font-size: 0.95rem; line-height: 1.7;">
-              <li>Crea una nueva pieza (`.SLDPRT`).</li>
-              <li>Asegúrate de que las unidades estén configuradas en <strong>MMGS</strong> con precisión de 2 decimales en <code>Opciones > Propiedades de Documento > Unidades</code>.</li>
-              <li>Muestra los tres planos de referencia y verifica la ubicación exacta del <strong>Origen (0,0,0)</strong>.</li>
-              <li>Guarda la plantilla como <code>Plantilla_MMGS_CSWA.SLDDOT</code>.</li>
+        <article id="tab-practica" class="lesson-panel" role="tabpanel" aria-labelledby="tab-button-practica" tabindex="0" hidden>
+          <div class="panel-heading"><div class="panel-heading-icon"><i class="fa-solid fa-dumbbell" aria-hidden="true"></i></div><div><h2>Práctica y reto</h2><p>Configura tu entorno antes de comenzar a modelar.</p></div></div>
+          <section class="challenge-card">
+            <span class="challenge-meta"><i class="fa-regular fa-clock" aria-hidden="true"></i> Reto de 10 minutos</span>
+            <h3>Prepara una plantilla de pieza MMGS</h3>
+            <ol>
+              <li>Crea un documento de pieza nuevo.</li>
+              <li>Configura las unidades en MMGS y establece precisión de dos decimales en las propiedades del documento.</li>
+              <li>Muestra e identifica los tres planos de referencia y el origen (0,0,0).</li>
+              <li>Guarda la plantilla con el nombre <code>Plantilla_MMGS_CSWA.SLDDOT</code>, si tu versión permite guardar plantillas personalizadas.</li>
             </ol>
-            <div style="margin-top: 1.25rem;">
-              <button onclick="alert('Iniciando descarga simulada de la Guía de Atajos de Teclado (PDF)')" class="btn btn-outline" style="font-size: 0.85rem;">
-                <i class="fa-solid fa-file-pdf text-red-500"></i> Descargar Guía de Atajos (PDF)
-              </button>
-            </div>
+            <p><strong>Comprueba:</strong> vuelve a crear una pieza desde la plantilla y confirma que las unidades se mantienen.</p>
+          </section>
+          <div class="learning-callout" style="margin-top:1rem;margin-bottom:0">
+            <div class="callout-icon"><i class="fa-solid fa-folder-open" aria-hidden="true"></i></div>
+            <div><h2>Materiales de apoyo</h2><p>Las guías descargables de esta semana aún no están disponibles. Cuando se publiquen, aparecerán aquí y en la sección de recursos.</p></div>
           </div>
         </article>
 
-        <!-- TAB 4: EVALUACIÓN Y CUESTIONARIO -->
-        <article id="tab-evaluacion" class="card" style="display: none;">
-          <h2 class="card-title"><i class="fa-solid fa-pen-to-square text-swCyan"></i> Cuestionario de Comprobación - Semana 1</h2>
-          <p style="margin-bottom: 1.5rem;">Responde a las siguientes preguntas formativas para evaluar tu comprensión sobre la interfaz de SOLIDWORKS:</p>
-
+        <article id="tab-evaluacion" class="lesson-panel" role="tabpanel" aria-labelledby="tab-button-evaluacion" tabindex="0" hidden>
+          <div class="panel-heading"><div class="panel-heading-icon"><i class="fa-solid fa-pen-to-square" aria-hidden="true"></i></div><div><h2>Comprobación de conocimientos</h2><p>Responde todas las preguntas; necesitas acertar ambas para aprobar.</p></div></div>
           <form id="quiz-form-w1">
-            <div style="margin-bottom: 1.5rem;">
-              <p style="font-weight: 600; margin-bottom: 0.75rem;">1. ¿Cuál es el sistema de unidades estándar más utilizado en los problemas de modelado de la certificación CSWA?</p>
-              <label class="quiz-option"><input type="radio" name="q1" value="A"> A) CGS (Centímetro, Gramo, Segundo)</label>
-              <label class="quiz-option"><input type="radio" name="q1" value="B"> B) MMGS (Milímetro, Gramo, Segundo)</label>
-              <label class="quiz-option"><input type="radio" name="q1" value="C"> C) MKS (Metro, Kilogramo, Segundo)</label>
+            <fieldset class="quiz-question">
+              <legend>1. ¿Qué sistema de unidades corresponde a milímetro, gramo y segundo?</legend>
+              <label class="quiz-option"><input type="radio" name="q1" value="A"> <span>A) CGS (centímetro, gramo, segundo)</span></label>
+              <label class="quiz-option"><input type="radio" name="q1" value="B"> <span>B) MMGS (milímetro, gramo, segundo)</span></label>
+              <label class="quiz-option"><input type="radio" name="q1" value="C"> <span>C) MKS (metro, kilogramo, segundo)</span></label>
+            </fieldset>
+            <fieldset class="quiz-question">
+              <legend>2. ¿Qué atajo ejecuta una reconstrucción rápida del modelo?</legend>
+              <label class="quiz-option"><input type="radio" name="q2" value="A"> <span>A) Ctrl + S</span></label>
+              <label class="quiz-option"><input type="radio" name="q2" value="B"> <span>B) Ctrl + B</span></label>
+              <label class="quiz-option"><input type="radio" name="q2" value="C"> <span>C) Ctrl + R</span></label>
+            </fieldset>
+            <div class="quiz-actions">
+              <button type="button" class="btn btn-primary" onclick="evaluarQuizSemana1()"><i class="fa-solid fa-check" aria-hidden="true"></i> Validar respuestas</button>
+              <span id="quiz-feedback-w1" aria-live="polite" style="display:none"></span>
             </div>
-
-            <div style="margin-bottom: 1.5rem;">
-              <p style="font-weight: 600; margin-bottom: 0.75rem;">2. ¿Qué atajo de teclado ejecuta la reconstrucción inmediata (Rebuild) del modelo?</p>
-              <label class="quiz-option"><input type="radio" name="q2" value="A"> A) Ctrl + S</label>
-              <label class="quiz-option"><input type="radio" name="q2" value="B"> B) Ctrl + B</label>
-              <label class="quiz-option"><input type="radio" name="q2" value="C"> C) Ctrl + R</label>
-            </div>
-
-            <button type="button" class="btn" onclick="evaluarQuizSemana1()"><i class="fa-solid fa-check"></i> Validar Respuestas y Guardar Avance</button>
-            <div id="quiz-feedback-w1" style="margin-top: 1rem; display: none;"></div>
           </form>
         </article>
 
-        <!-- Navegación entre Semanas -->
-        <div style="display: flex; justify-content: space-between; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
-          <a href="../aula/index.html" class="btn btn-outline"><i class="fa-solid fa-arrow-left"></i> Índice del Aula</a>
-          <a href="semana2.html" class="btn">Semana 2 <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
+        <nav class="lesson-footer-nav" aria-label="Navegación entre lecciones">
+          <a href="index.html" class="btn btn-outline"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Índice del aula</a>
+          <a href="semana2.html" class="btn">Semana 2 <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+        </nav>
+      </section>
 
-      </div>
-
-      <!-- Barra Lateral (Sidebar) -->
-      <aside class="space-y">
-        <div class="card">
-          <h3 class="card-title" style="font-size: 1rem;"><i class="fa-solid fa-chart-line text-swCyan"></i> Estado de la Lección</h3>
-          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">Progreso registrado en esta semana:</p>
-          <div class="progress-container"><div id="week-progress-bar" class="progress-bar" style="width: 0%;"></div></div>
-          <span id="week-status-badge" class="badge badge-warning" style="margin-top: 0.5rem;">Pendiente</span>
-        </div>
-
-        <div class="card">
-          <h3 class="card-title" style="font-size: 1rem;"><i class="fa-solid fa-folder-open text-swCyan"></i> Recursos Descargables</h3>
-          <ul style="list-style: none; font-size: 0.85rem;" class="space-y">
-            <li><a href="#" onclick="alert('Descargando Guía PDF de la Semana 1'); return false;"><i class="fa-solid fa-file-pdf text-red-500 mr-1"></i> Guía PDF del Entorno SW</a></li>
-            <li><a href="#" onclick="alert('Descargando Hoja de Atajos'); return false;"><i class="fa-solid fa-keyboard text-swCyan mr-1"></i> Hoja de Atajos de Teclado</a></li>
+      <aside class="lesson-sidebar" aria-label="Información complementaria">
+        <section class="side-card">
+          <h2><i class="fa-solid fa-chart-line" aria-hidden="true"></i> Tu avance</h2>
+          <p>Progreso registrado para esta semana.</p>
+          <div class="progress-track" id="week-progress-track" role="progressbar" aria-label="Progreso de la semana 1" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="week-progress-bar" class="progress-fill"></div></div>
+          <span id="week-status-badge" class="status-badge">Pendiente</span>
+        </section>
+        <section class="side-card">
+          <h2><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> En esta semana</h2>
+          <ul class="resource-list">
+            <li><i class="fa-solid fa-file-lines" aria-hidden="true"></i> Guía PDF del entorno <span class="resource-soon">Próximamente</span></li>
+            <li><i class="fa-solid fa-keyboard" aria-hidden="true"></i> Hoja de atajos <span class="resource-soon">Próximamente</span></li>
           </ul>
-        </div>
-
-        <div class="card" style="background: var(--primary); color: var(--white);">
-          <h3 style="color: var(--accent); font-size: 1rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-award mr-1"></i> CSWA Practice Center</h3>
-          <p style="font-size: 0.85rem; opacity: 0.9; margin-bottom: 1rem;">
-            ¿Deseas evaluar tus competencias reales para el examen oficial de certificación?
-          </p>
-          <a href="../cswa/index.html" class="btn" style="width: 100%; text-align: center; font-size: 0.85rem;">Ir al Centro CSWA</a>
-        </div>
+        </section>
+        <section class="side-card cswa-card">
+          <h2><i class="fa-solid fa-award" aria-hidden="true"></i> Centro de práctica CSWA</h2>
+          <p>¿Quieres revisar tus competencias y conocer qué temas reforzar para el examen?</p>
+          <a href="../cswa/index.html" class="btn">Ir al Centro CSWA <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+        </section>
       </aside>
-
     </div>
   </main>
 
-  <footer>
-    <p>&copy; 2026 SOLIDWORKS ACADEMY - Formación por Competencias & Preparación CSWA</p>
-  </footer>
+  <footer><p>&copy; 2026 SOLIDWORKS ACADEMY - Formación por Competencias &amp; Preparación CSWA</p></footer>
 
-  <!-- Scripts de la Aplicación -->
   <script src="../assets/js/app.js"></script>
-  <script src="../assets/js/cswa.js"></script>
   <script src="../assets/js/quiz.js"></script>
   <script src="../assets/js/navbar.js"></script>
-
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const progress = AppState.getUserProgress();
-      if (progress.completedWeeks && progress.completedWeeks.includes(1)) {
-        actualizarUICompletado();
-      }
-    });
+    const lessonTabs = ['fundamento', 'procedimiento', 'practica', 'evaluacion'];
 
-    function switchTab(tabId) {
-      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-      document.querySelectorAll('article[id^="tab-"]').forEach(content => content.style.display = 'none');
+    function switchTab(tabId, sourceEvent) {
+      if (!lessonTabs.includes(tabId)) return;
+      const selectedButton = document.getElementById(`tab-button-${tabId}`);
+      if (!selectedButton) return;
 
-      event.currentTarget.classList.add('active');
-      document.getElementById('tab-' + tabId).style.display = 'block';
+      document.querySelectorAll('[role="tab"]').forEach(button => {
+        const selected = button === selectedButton;
+        button.classList.toggle('active', selected);
+        button.setAttribute('aria-selected', String(selected));
+        button.tabIndex = selected ? 0 : -1;
+      });
+      lessonTabs.forEach(id => {
+        const panel = document.getElementById(`tab-${id}`);
+        if (panel) panel.hidden = id !== tabId;
+      });
+      if (sourceEvent && sourceEvent.type === 'keydown') selectedButton.focus();
     }
+
+    document.getElementById('leccion-tabs').addEventListener('keydown', event => {
+      if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+      event.preventDefault();
+      const currentIndex = lessonTabs.indexOf(document.activeElement.id.replace('tab-button-', ''));
+      let nextIndex = currentIndex;
+      if (event.key === 'ArrowRight') nextIndex = (currentIndex + 1) % lessonTabs.length;
+      if (event.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + lessonTabs.length) % lessonTabs.length;
+      if (event.key === 'Home') nextIndex = 0;
+      if (event.key === 'End') nextIndex = lessonTabs.length - 1;
+      switchTab(lessonTabs[nextIndex], event);
+    });
 
     function actualizarUICompletado() {
       const progressBar = document.getElementById('week-progress-bar');
+      const progressTrack = document.getElementById('week-progress-track');
       const badge = document.getElementById('week-status-badge');
-      const btn = document.getElementById('mark-completed-btn');
-
+      const button = document.getElementById('mark-completed-btn');
       if (progressBar) progressBar.style.width = '100%';
+      if (progressTrack) progressTrack.setAttribute('aria-valuenow', '100');
       if (badge) {
-        badge.className = 'badge badge-success';
-        badge.textContent = 'Completado';
+        badge.classList.add('is-complete');
+        badge.textContent = 'Semana completada';
       }
-      if (btn) {
-        btn.textContent = '✓ Semana 1 Completada';
-        btn.disabled = true;
-        btn.style.opacity = '0.85';
+      if (button) {
+        button.innerHTML = '<i class="fa-solid fa-circle-check" aria-hidden="true"></i> Semana completada';
+        button.disabled = true;
+        button.setAttribute('aria-label', 'Semana 1 completada');
       }
     }
 
     function completeWeek1() {
+      if (typeof AppState === 'undefined') return;
       AppState.markWeekCompleted(1);
-      AppState.recordQuizResult('semana1_quiz', 100, { piezas: 20 });
       actualizarUICompletado();
-      alert('🎉 ¡Semana 1 marcada como completada en tu expediente!');
     }
 
     function evaluarQuizSemana1() {
-      const isPassed = QuizEngine.evaluateQuiz({
+      if (typeof QuizEngine === 'undefined') return;
+      const passed = QuizEngine.evaluateQuiz({
         formId: 'quiz-form-w1',
         feedbackId: 'quiz-feedback-w1',
         quizId: 'semana1_quiz',
         weekNumber: 1,
         answers: { q1: 'B', q2: 'B' },
         competencyGains: { piezas: 25 },
-        successMsg: '<strong>¡Excelente!</strong> Respuestas correctas. El sistema predeterminado es MMGS (B) y el atajo de reconstrucción es Ctrl + B (B).'
+        successMsg: '<strong>¡Excelente!</strong> MMGS corresponde a milímetro, gramo y segundo; Ctrl + B ejecuta una reconstrucción rápida.',
+        errorMsg: '<strong>Revisa tus respuestas.</strong> Vuelve al fundamento y al procedimiento, y luego inténtalo otra vez.'
       });
-
-      if (isPassed) {
-        actualizarUICompletado();
-      }
+      if (passed) actualizarUICompletado();
     }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof AppState !== 'undefined') {
+        const progress = AppState.getUserProgress();
+        if (progress.completedWeeks && progress.completedWeeks.includes(1)) actualizarUICompletado();
+      }
+    });
   </script>
 </body>
 </html>
