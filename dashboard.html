@@ -3,480 +3,240 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student Dashboard | SOLIDWORKS ACADEMY</title>
-  
-  <!-- Hojas de Estilo Institucionales -->
-  <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="stylesheet" href="assets/css/components.css">
-  <!-- FontAwesome Icons -->
+  <meta name="description" content="Panel de seguimiento del curso SOLIDWORKS ACADEMY y de preparación CSWA.">
+  <meta name="theme-color" content="#102A43">
+  <title>Dashboard | SOLIDWORKS ACADEMY</title>
+
+  <script>
+    tailwind = { config: { theme: { extend: { colors: {
+      swDark: '#102A43', swCyan: '#00B3E0', swCyanHover: '#0090B3', swLightBg: '#F3F6F8'
+    } } } } };
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Chart.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
   <style>
-    .dashboard-hero {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-      color: var(--white);
-      padding: 2.25rem 2rem;
-      border-radius: var(--radius-md);
-      margin-bottom: 2rem;
-      box-shadow: var(--shadow-md);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1.5rem;
+    :root {
+      --primary: #102A43;
+      --primary-light: #173F5F;
+      --accent: #00B3E0;
+      --accent-light: #7DD3FC;
+      --white: #FFFFFF;
+      --border: #CBD5E1;
+      --bg-light: #F3F6F8;
+      --text-dark: #1F2937;
+      --text-muted: #64748B;
+      --success: #10B981;
+      --warning: #F59E0B;
+      --danger: #EF4444;
+      --transition-fast: 160ms ease;
     }
 
-    .dashboard-welcome h1 {
-      font-size: 2rem;
-      color: var(--white);
-      margin: 0.3rem 0 0.4rem 0;
-    }
-
-    .dashboard-welcome p {
-      font-size: 1rem;
-      opacity: 0.9;
-    }
-
-    .stat-card-group {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.25rem;
-      margin-bottom: 2rem;
-    }
-
-    .stat-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 1.35rem;
-      box-shadow: var(--shadow-sm);
-      display: flex;
-      align-items: center;
-      gap: 1.15rem;
-      transition: transform 0.2s ease, border-color 0.2s ease;
-    }
-
-    .stat-card:hover {
-      transform: translateY(-2px);
-      border-color: var(--accent);
-    }
-
-    .stat-icon {
-      width: 52px;
-      height: 52px;
-      border-radius: var(--radius-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      flex-shrink: 0;
-    }
-
-    .stat-icon.primary { background: rgba(16, 42, 67, 0.1); color: var(--primary); }
-    .stat-icon.accent { background: rgba(0, 179, 224, 0.12); color: var(--accent); }
-    .stat-icon.success { background: rgba(16, 185, 129, 0.12); color: var(--success); }
-    .stat-icon.warning { background: rgba(245, 158, 11, 0.12); color: var(--warning); }
-
-    .stat-info .stat-value {
-      font-size: 1.7rem;
-      font-weight: 800;
-      color: var(--primary);
-      line-height: 1.1;
-    }
-
-    .stat-info .stat-label {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      font-weight: 600;
-      margin-top: 0.25rem;
-    }
-
-    .view-toggle-group {
-      display: flex;
-      gap: 0.4rem;
-    }
-
-    .view-toggle-btn {
-      padding: 0.35rem 0.7rem;
-      font-size: 0.78rem;
-      font-weight: 600;
-      border: 1px solid var(--border);
-      background: var(--bg-light);
-      color: var(--text-muted);
-      border-radius: var(--radius-sm);
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .view-toggle-btn.active {
-      background: var(--primary);
-      color: var(--white);
-      border-color: var(--primary);
-    }
-
-    .radar-wrapper {
-      position: relative;
-      height: 310px;
-      width: 100%;
-      margin: 0.5rem 0;
-    }
-
-    .recent-activity-list {
-      list-style: none;
-    }
-
-    .activity-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.85rem 0;
-      border-bottom: 1px solid var(--border);
-      gap: 0.5rem;
-    }
-
-    .activity-item:last-child {
-      border-bottom: none;
-    }
-
-    .activity-title {
-      font-weight: 600;
-      color: var(--text-dark);
-      font-size: 0.9rem;
-    }
-
-    .activity-date {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-    }
-
-    .quick-actions-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 0.85rem;
-    }
-
-    .quick-action-btn {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 1.15rem 0.75rem;
-      background: var(--bg-light);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      text-decoration: none;
-      color: var(--primary);
-      font-weight: 600;
-      font-size: 0.88rem;
-      transition: all var(--transition-fast);
-      text-align: center;
-    }
-
-    .quick-action-btn:hover {
-      background: var(--white);
-      border-color: var(--accent);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .quick-action-btn i {
-      font-size: 1.5rem;
-      color: var(--accent);
-      margin-bottom: 0.5rem;
-    }
-
-    .reset-confirm-panel {
-      display: none;
-      margin-top: 1rem;
-      padding: 0.9rem;
-      background: #FEF2F2;
-      border: 1px solid #FECACA;
-      border-radius: var(--radius-sm);
-      text-align: left;
-      font-size: 0.82rem;
-      color: #991B1B;
-    }
+    body { font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+    .dashboard-main { width: min(100% - 2rem, 1280px); margin-inline: auto; padding-block: 2rem; }
+    .dashboard-hero { background: linear-gradient(125deg, #102A43, #173F5F 68%, #155B78); color: white; border-radius: 1rem; padding: clamp(1.25rem, 4vw, 2rem); margin-bottom: 1.5rem; box-shadow: 0 8px 24px rgba(16,42,67,.12); }
+    .stat-card { background: white; border: 1px solid #CBD5E1; border-radius: .75rem; padding: 1.1rem; display: flex; align-items: center; gap: .9rem; min-width: 0; }
+    .stat-icon { width: 2.8rem; height: 2.8rem; display: grid; place-items: center; border-radius: .65rem; flex: none; }
+    .panel { background: white; border: 1px solid #CBD5E1; border-radius: .85rem; padding: 1.25rem; box-shadow: 0 4px 14px rgba(16,42,67,.05); }
+    .radar-wrapper { position: relative; height: 310px; max-width: 650px; margin: .5rem auto; }
+    .view-toggle-btn { border: 1px solid #CBD5E1; border-radius: .45rem; padding: .45rem .7rem; font-size: .8rem; font-weight: 600; background: #F3F6F8; color: #334155; }
+    .view-toggle-btn.active { background: #102A43; color: white; border-color: #102A43; }
+    .quick-action { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .45rem; padding: 1rem .5rem; min-height: 90px; border: 1px solid #CBD5E1; border-radius: .65rem; background: #F3F6F8; color: #102A43; text-align: center; font-size: .85rem; font-weight: 600; }
+    .quick-action:hover { background: white; border-color: #00B3E0; color: #102A43; }
+    .quick-action i { color: #00B3E0; font-size: 1.35rem; }
+    #competencies-list .progress-container { height: 8px; border-radius: 999px; overflow: hidden; background: #E2E8F0; }
+    #competencies-list .progress-bar { height: 100%; background: #00B3E0; border-radius: inherit; }
+    .reset-confirm { display: none; }
+    @media (max-width: 700px) { .dashboard-main { width: min(100% - 1rem, 1280px); padding-block: 1rem; } .radar-wrapper { height: 280px; } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; } }
   </style>
 </head>
-<body>
+<body class="min-h-screen flex flex-col bg-swLightBg text-slate-800">
+  <header class="navbar" aria-label="Navegación principal"></header>
 
-  <!-- Barra de Navegación Dinámica Institucional -->
-  <header class="navbar"></header>
-
-  <main class="container">
-
-    <!-- Header del Dashboard -->
-    <header class="dashboard-hero">
-      <div class="dashboard-welcome">
-        <span class="badge badge-info" style="display: inline-flex; align-items: center; gap: 0.35rem; margin-bottom: 0.35rem;">
-          <i class="fa-solid fa-gauge-high"></i> Panel Integral del Estudiante
-        </span>
-        <h1>Bienvenido de nuevo, Estudiante</h1>
-        <p>Continúa tu camino hacia la certificación internacional <strong>Certified SOLIDWORKS Associate (CSWA)</strong>.</p>
+  <main class="dashboard-main flex-1" id="mainContent">
+    <section class="dashboard-hero flex flex-col md:flex-row md:items-center md:justify-between gap-5" aria-labelledby="dashboard-title">
+      <div>
+        <span class="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/20 px-3 py-1 text-xs font-semibold"><i class="fa-solid fa-gauge-high" aria-hidden="true"></i> Panel del estudiante</span>
+        <h1 id="dashboard-title" class="mt-3 mb-2 text-3xl font-extrabold text-white">Dashboard de aprendizaje</h1>
+        <p class="mb-0 text-sm text-slate-200">Consulta tu avance del curso y tus indicadores de preparación CSWA.</p>
       </div>
-      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-        <a href="aula/index.html" class="btn" style="padding: 0.75rem 1.4rem; font-size: 0.95rem;">
-          <i class="fa-solid fa-play mr-1"></i> Continuar Aprendizaje
-        </a>
-        <a href="cswa/simulador.html" class="btn btn-outline" style="color: var(--white); border-color: rgba(255,255,255,0.4); padding: 0.75rem 1.2rem; font-size: 0.95rem;">
-          <i class="fa-solid fa-stopwatch mr-1"></i> Simulacro CSWA
-        </a>
-      </div>
-    </header>
-
-    <!-- Tarjetas de Métricas Globales -->
-    <section class="stat-card-group">
-      <div class="stat-card">
-        <div class="stat-icon accent"><i class="fa-solid fa-bullseye"></i></div>
-        <div class="stat-info">
-          <div id="cswa-index-val" class="stat-value">0%</div>
-          <div class="stat-label">Índice CSWA Global</div>
-        </div>
-      </div>
-
-      <div class="stat-card">
-        <div class="stat-icon primary"><i class="fa-solid fa-book-open-reader"></i></div>
-        <div class="stat-info">
-          <div id="completed-weeks-count" class="stat-value">0 / 16</div>
-          <div class="stat-label">Semanas Académicas</div>
-        </div>
-      </div>
-
-      <div class="stat-card">
-        <div class="stat-icon success"><i class="fa-solid fa-award"></i></div>
-        <div class="stat-info">
-          <div id="cswa-level-badge-dash" class="stat-value" style="font-size: 1.15rem;">En Inicio</div>
-          <div class="stat-label">Nivel Diagnóstico</div>
-        </div>
-      </div>
-
-      <div class="stat-card">
-        <div class="stat-icon warning"><i class="fa-regular fa-clock"></i></div>
-        <div class="stat-info">
-          <div id="last-activity-val" class="stat-value" style="font-size: 1.1rem;">Hoy</div>
-          <div class="stat-label">Última Actividad</div>
-        </div>
+      <div class="flex flex-wrap gap-3">
+        <a href="aula/index.html" class="inline-flex items-center gap-2 rounded-lg bg-swCyan px-4 py-3 font-bold text-swDark hover:bg-swCyanHover"><i class="fa-solid fa-play" aria-hidden="true"></i>Continuar aprendizaje</a>
+        <a href="cswa/simulador.html" class="inline-flex items-center gap-2 rounded-lg border border-white/40 px-4 py-3 font-semibold text-white hover:bg-white/10"><i class="fa-solid fa-stopwatch" aria-hidden="true"></i>Simulacro CSWA</a>
       </div>
     </section>
 
-    <!-- Layout de 2 Columnas -->
-    <div class="grid-2" style="grid-template-columns: 2fr 1.1fr; gap: 1.5rem;">
+    <section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-6" aria-label="Resumen del progreso">
+      <article class="stat-card"><span class="stat-icon bg-cyan-50 text-cyan-700"><i class="fa-solid fa-bullseye" aria-hidden="true"></i></span><div><div id="cswa-index-val" class="text-2xl font-extrabold text-swDark">0%</div><div class="text-xs font-semibold text-slate-600">Índice de preparación CSWA</div></div></article>
+      <article class="stat-card"><span class="stat-icon bg-blue-50 text-blue-800"><i class="fa-solid fa-book-open" aria-hidden="true"></i></span><div><div id="completed-weeks-count" class="text-2xl font-extrabold text-swDark">0 / 16</div><div class="text-xs font-semibold text-slate-600">Semanas completadas</div></div></article>
+      <article class="stat-card"><span class="stat-icon bg-emerald-50 text-emerald-700"><i class="fa-solid fa-award" aria-hidden="true"></i></span><div><div id="cswa-level-badge-dash" class="text-lg font-extrabold text-swDark">Nivel inicial</div><div class="text-xs font-semibold text-slate-600">Nivel de preparación</div></div></article>
+      <article class="stat-card"><span class="stat-icon bg-amber-50 text-amber-700"><i class="fa-regular fa-clock" aria-hidden="true"></i></span><div><div id="last-activity-val" class="text-base font-extrabold text-swDark">Sin actividad</div><div class="text-xs font-semibold text-slate-600">Estado de actividad</div></div></article>
+    </section>
 
-      <!-- Columna Principal: Resumen de Avance Curricular y Competencias -->
-      <div class="space-y">
-        
-        <!-- Progreso del Curso -->
-        <div class="card">
-          <div class="card-header">
-            <h3 class="card-title"><i class="fa-solid fa-chart-line text-swCyan mr-1"></i> Progreso General del Programa (16 Semanas)</h3>
-            <span id="progress-percentage-text" style="font-weight: 800; color: var(--accent); font-size: 1.05rem;">0%</span>
+    <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,2fr)_minmax(280px,1fr)] gap-6">
+      <div class="space-y-6">
+        <section class="panel" aria-labelledby="course-progress-title">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <h2 id="course-progress-title" class="mb-0 text-lg font-bold text-swDark"><i class="fa-solid fa-chart-line mr-2 text-swCyan" aria-hidden="true"></i>Progreso del curso</h2>
+            <span id="progress-percentage-text" class="font-extrabold text-swDark">0%</span>
           </div>
-          <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.75rem;">
-            Avance curricular acumulado basado en las lecciones completadas y evaluaciones sumativas entregadas.
-          </p>
-          <div class="progress-container" style="height: 14px;">
-            <div id="dashboard-progress-bar" class="progress-bar" style="width: 0%;"></div>
+          <p class="mt-3 mb-3 text-sm text-slate-600">Proporción de semanas marcadas como completadas en este navegador.</p>
+          <div class="h-3 w-full overflow-hidden rounded-full bg-slate-200" role="progressbar" aria-label="Progreso del curso" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="dashboard-progress-track">
+            <div id="dashboard-progress-bar" class="h-full rounded-full bg-swCyan transition-all" style="width:0%"></div>
           </div>
-          <div style="display: flex; justify-content: space-between; margin-top: 0.85rem; font-size: 0.82rem; color: var(--text-muted); flex-wrap: wrap; gap: 0.5rem;">
-            <span><i class="fa-solid fa-flag-checkered text-swCyan mr-1"></i> Módulo 1: Introducción</span>
-            <span><i class="fa-solid fa-pen-ruler text-swCyan mr-1"></i> Módulo 4: Evaluaciones</span>
-            <span><i class="fa-solid fa-gears text-swCyan mr-1"></i> Módulo 8: Proyecto Integrador</span>
-          </div>
-        </div>
+          <div class="mt-3 flex justify-between text-xs text-slate-500"><span id="progress-weeks-label">0 de 16 semanas</span><a href="aula/index.html" class="font-semibold text-sky-800 hover:underline">Ver ruta del curso</a></div>
+        </section>
 
-        <!-- Radar de Competencias CSWA (Chart.js heredado de Index.html + Barras) -->
-        <div class="card">
-          <div class="card-header" style="flex-wrap: wrap; gap: 0.5rem;">
-            <h3 class="card-title"><i class="fa-solid fa-chart-pie text-swCyan mr-1"></i> Competencias de Certificación Evaluadas</h3>
-            <div style="display: flex; align-items: center; gap: 0.5rem;">
-              <div class="view-toggle-group">
-                <button type="button" class="view-toggle-btn active" id="btn-view-radar" onclick="toggleCompetencyView('radar')">
-                  <i class="fa-solid fa-compass-drafting mr-1"></i> Radar
-                </button>
-                <button type="button" class="view-toggle-btn" id="btn-view-bars" onclick="toggleCompetencyView('bars')">
-                  <i class="fa-solid fa-bars-progress mr-1"></i> Barras
-                </button>
-              </div>
-              <a href="cswa/diagnostico.html" class="btn btn-outline" style="font-size: 0.78rem; padding: 0.35rem 0.7rem;">Diagnóstico</a>
+        <section class="panel" aria-labelledby="competencies-title">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <h2 id="competencies-title" class="mb-0 text-lg font-bold text-swDark"><i class="fa-solid fa-chart-pie mr-2 text-swCyan" aria-hidden="true"></i>Competencias CSWA</h2>
+            <div class="flex items-center gap-2" role="group" aria-label="Tipo de visualización">
+              <button type="button" class="view-toggle-btn active" id="btn-view-radar" aria-pressed="true" onclick="toggleCompetencyView('radar')"><i class="fa-solid fa-compass-drafting mr-1" aria-hidden="true"></i>Radar</button>
+              <button type="button" class="view-toggle-btn" id="btn-view-bars" aria-pressed="false" onclick="toggleCompetencyView('bars')"><i class="fa-solid fa-bars-progress mr-1" aria-hidden="true"></i>Barras</button>
             </div>
           </div>
-          <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">
-            Rendimiento estimado en las 9 áreas clave requeridas en el examen oficial de Dassault Systèmes:
-          </p>
-
-          <!-- Vista Gráfico Radar (Chart.js) -->
-          <div id="radar-chart-section" class="radar-wrapper">
-            <canvas id="cswaRadarChart"></canvas>
-          </div>
-
-          <!-- Vista Desglose por Barras (Alimentada por cswa.js) -->
-          <div id="competencies-list" style="display: none;">
-            <p style="color: var(--text-muted); font-size: 0.9rem;"><i class="fa-solid fa-spinner fa-spin mr-1"></i> Cargando estado de competencias...</p>
-          </div>
-        </div>
-
+          <p class="mt-3 text-sm text-slate-600">Puntajes guardados por el motor de competencias. El índice es una estimación formativa, no una calificación oficial.</p>
+          <div id="radar-chart-section" class="radar-wrapper"><canvas id="cswaRadarChart" role="img" aria-label="Gráfico radar de las nueve competencias CSWA"></canvas></div>
+          <div id="competencies-list" class="hidden" aria-label="Desglose de competencias"></div>
+          <p id="chart-unavailable" class="hidden text-sm text-slate-600" role="status">No se pudo cargar el gráfico. Puedes consultar el desglose de competencias en la vista de barras.</p>
+        </section>
       </div>
 
-      <!-- Barra Lateral: Accesos Rápidos y Últimos Logros -->
-      <aside class="space-y">
-
-        <!-- Accesos Rápidos -->
-        <div class="card">
-          <h3 class="card-title" style="margin-bottom: 1rem;"><i class="fa-solid fa-bolt text-swCyan mr-1"></i> Accesos Rápidos</h3>
-          <div class="quick-actions-grid">
-            <a href="aula/index.html" class="quick-action-btn">
-              <i class="fa-solid fa-graduation-cap"></i>
-              Aula Virtual
-            </a>
-            <a href="cswa/simulador.html" class="quick-action-btn">
-              <i class="fa-solid fa-stopwatch"></i>
-              Simulador CSWA
-            </a>
-            <a href="cswa/diagnostico.html" class="quick-action-btn">
-              <i class="fa-solid fa-chart-bar"></i>
-              Diagnóstico
-            </a>
-            <a href="proyecto.html" class="quick-action-btn">
-              <i class="fa-solid fa-gears"></i>
-              Proyecto Final
-            </a>
+      <aside class="space-y-6">
+        <section class="panel" aria-labelledby="quick-actions-title">
+          <h2 id="quick-actions-title" class="mb-4 text-lg font-bold text-swDark"><i class="fa-solid fa-bolt mr-2 text-swCyan" aria-hidden="true"></i>Accesos rápidos</h2>
+          <div class="grid grid-cols-2 gap-3">
+            <a href="aula/index.html" class="quick-action"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>Aula virtual</a>
+            <a href="cswa/simulador.html" class="quick-action"><i class="fa-solid fa-stopwatch" aria-hidden="true"></i>Simulador CSWA</a>
+            <a href="cswa/diagnostico.html" class="quick-action"><i class="fa-solid fa-chart-bar" aria-hidden="true"></i>Diagnóstico</a>
+            <a href="proyecto.html" class="quick-action"><i class="fa-solid fa-gears" aria-hidden="true"></i>Proyecto final</a>
           </div>
-        </div>
+        </section>
 
-        <!-- Registro de Actividad -->
-        <div class="card">
-          <div class="card-header">
-            <h3 class="card-title"><i class="fa-solid fa-clock-rotate-left text-swCyan mr-1"></i> Historial Reciente</h3>
+        <section class="panel" aria-labelledby="activity-title">
+          <h2 id="activity-title" class="mb-3 text-lg font-bold text-swDark"><i class="fa-solid fa-clock-rotate-left mr-2 text-swCyan" aria-hidden="true"></i>Actividad reciente</h2>
+          <p id="activity-summary" class="mb-0 text-sm text-slate-600" aria-live="polite">Aún no hay semanas completadas ni simulacros registrados.</p>
+        </section>
+
+        <section class="panel border-red-200" aria-labelledby="reset-title">
+          <h2 id="reset-title" class="mb-2 text-base font-bold text-swDark">Reiniciar datos de prueba</h2>
+          <p class="text-xs text-slate-600">Borra el progreso y los puntajes guardados localmente en este navegador.</p>
+          <button type="button" class="w-full rounded-lg border border-red-300 px-3 py-2 text-sm font-semibold text-red-700 hover:bg-red-50" onclick="toggleResetConfirm(true)"><i class="fa-solid fa-trash-can mr-1" aria-hidden="true"></i>Reiniciar progreso</button>
+          <div id="reset-confirm-box" class="reset-confirm mt-3 rounded-lg border border-red-200 bg-red-50 p-3" role="alertdialog" aria-labelledby="reset-confirm-title" aria-describedby="reset-confirm-description" aria-hidden="true">
+            <p id="reset-confirm-title" class="font-bold text-red-800">¿Confirmas reiniciar el progreso?</p>
+            <p id="reset-confirm-description" class="text-sm text-red-800">Se borrarán semanas completadas, resultados y puntajes de competencias.</p>
+            <div class="flex gap-2"><button type="button" class="flex-1 rounded bg-red-700 px-3 py-2 text-sm font-bold text-white hover:bg-red-800" onclick="executeResetProgress()">Sí, reiniciar</button><button type="button" class="flex-1 rounded border border-slate-300 bg-white px-3 py-2 text-sm font-semibold" onclick="toggleResetConfirm(false)">Cancelar</button></div>
           </div>
-          <ul id="activity-log-list" class="recent-activity-list">
-            <li class="activity-item">
-              <div>
-                <div class="activity-title">Inicio de Sesión en la Plataforma</div>
-                <div class="activity-date">Estado de LocalStorage sincronizado</div>
-              </div>
-              <span class="badge badge-info">Activo</span>
-            </li>
-          </ul>
-
-          <div style="margin-top: 1.25rem; text-align: center;">
-            <button type="button" class="btn btn-outline" style="font-size: 0.8rem; width: 100%; border-color: var(--danger); color: var(--danger);" onclick="toggleResetConfirm(true)">
-              <i class="fa-solid fa-trash-can mr-1"></i> Reiniciar Progreso de Prueba
-            </button>
-
-            <!-- Confirmación Inline sin confirm() nativo -->
-            <div id="reset-confirm-box" class="reset-confirm-panel">
-              <p style="margin-bottom: 0.65rem;"><strong>¿Confirmas reiniciar todo tu expediente?</strong> Se borrarán las semanas completadas y puntajes CSWA guardados.</p>
-              <div style="display: flex; gap: 0.5rem;">
-                <button type="button" class="btn" style="background: var(--danger); font-size: 0.78rem; padding: 0.35rem 0.75rem; flex: 1;" onclick="executeResetProgress()">Sí, reiniciar</button>
-                <button type="button" class="btn btn-outline" style="font-size: 0.78rem; padding: 0.35rem 0.75rem; flex: 1;" onclick="toggleResetConfirm(false)">Cancelar</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
+          <p id="reset-error" class="hidden mt-2 text-sm text-red-700" role="alert">No se pudo reiniciar el progreso.</p>
+        </section>
       </aside>
-
     </div>
-
   </main>
 
-  <footer>
-    <p>&copy; 2026 SOLIDWORKS ACADEMY - Formación por Competencias & Preparación CSWA</p>
+  <footer class="mt-auto border-t-2 border-swCyan bg-swDark px-4 py-6 text-center text-sm text-slate-300">
+    <p class="mb-0">&copy; 2026 SOLIDWORKS ACADEMY - Formación por Competencias y Preparación CSWA</p>
   </footer>
 
-  <!-- Scripts de la Aplicación -->
   <script src="assets/js/app.js"></script>
   <script src="assets/js/cswa.js"></script>
   <script src="assets/js/navbar.js"></script>
-
   <script>
     let radarChartInstance = null;
 
-    document.addEventListener('DOMContentLoaded', () => {
-      if (typeof AppState !== 'undefined') {
-        const progress = AppState.getUserProgress();
-        const completedCount = progress.completedWeeks ? progress.completedWeeks.length : 0;
-        const progressPct = Math.round((completedCount / 16) * 100);
+    const COMPETENCY_LABELS = {
+      croquis: 'Croquis 2D',
+      piezas: 'Piezas 3D',
+      modificacion: 'Modificación',
+      interpretacion: 'Interpretación',
+      operaciones: 'Operaciones',
+      propiedades_fisicas: 'Propiedades físicas',
+      ensamblajes: 'Ensamblajes',
+      relaciones_posicion: 'Relaciones y coordenadas',
+      tiempo_limite: 'Gestión del tiempo'
+    };
 
-        // Actualizar Barra y Contador de Progreso Curricular
-        const progressBar = document.getElementById('dashboard-progress-bar');
-        const progressText = document.getElementById('progress-percentage-text');
-        const weeksCountEl = document.getElementById('completed-weeks-count');
-
-        if (progressBar) progressBar.style.width = progressPct + '%';
-        if (progressText) progressText.textContent = progressPct + '%';
-        if (weeksCountEl) weeksCountEl.textContent = `${completedCount} / 16`;
-
-        // Actualizar Nivel de Diagnóstico Badge
-        const levelBadgeDash = document.getElementById('cswa-level-badge-dash');
-        if (levelBadgeDash && typeof getPreparationLevel === 'function') {
-          const overallIndex = AppState.calculateCSWAIndex();
-          const levelInfo = getPreparationLevel(overallIndex);
-          levelBadgeDash.textContent = levelInfo.title;
-        }
-
-        // Fecha de última actividad
-        const lastAct = document.getElementById('last-activity-val');
-        if (lastAct && progress.lastActivity) {
-          const d = new Date(progress.lastActivity);
-          lastAct.textContent = d.toLocaleDateString('es-ES', { month: 'short', day: 'numeric' });
-        }
-
-        // Renderizar Gráfico Radar con Chart.js
-        renderCSWARadarChart(progress.competencies || {});
+    function getPreparationStatus(score) {
+      if (window.CSWAEngine && typeof CSWAEngine.getCompetencyStatus === 'function') {
+        return CSWAEngine.getCompetencyStatus(score);
       }
-    });
+      if (score >= 85) return { label: 'Dominio demostrado', class: 'badge-success' };
+      if (score >= 70) return { label: 'Competente', class: 'badge-info' };
+      if (score >= 40) return { label: 'En desarrollo', class: 'badge-warning' };
+      return { label: 'Nivel inicial', class: 'badge-danger' };
+    }
 
-    function renderCSWARadarChart(comp) {
-      const ctx = document.getElementById('cswaRadarChart');
-      if (!ctx || typeof Chart === 'undefined') return;
+    function renderDashboard() {
+      if (!window.AppState) return;
+      const state = AppState.getUserProgress();
+      const summary = AppState.getCourseSummary();
+      const completedWeeks = Array.isArray(state.completedWeeks) ? state.completedWeeks : [];
+      const scores = state.cswaScores && typeof state.cswaScores === 'object' ? state.cswaScores : {};
+      const quizResults = state.quizResults && typeof state.quizResults === 'object' ? state.quizResults : {};
+      const overallIndex = Number(summary.cswaIndex) || 0;
+      const status = getPreparationStatus(overallIndex);
+      const hasActivity = completedWeeks.length > 0 || Object.keys(quizResults).length > 0 || Boolean(state.projectSubmitted);
+      const completedCount = Math.min(AppState.TOTAL_WEEKS || 16, completedWeeks.length);
+      const percent = Math.min(100, Math.max(0, Number(summary.completionPercent) || 0));
 
-      const labels = [
-        'Croquis 2D',
-        'Piezas 3D',
-        'Modificación',
-        'Interpretación',
-        'Operaciones',
-        'Prop. Físicas',
-        'Ensamblajes',
-        'Relaciones',
-        'Gestión Tiempo'
-      ];
+      document.getElementById('cswa-index-val').textContent = `${overallIndex}%`;
+      const level = document.getElementById('cswa-level-badge-dash');
+      level.textContent = status.label;
+      level.className = 'text-lg font-extrabold text-swDark';
+      document.getElementById('completed-weeks-count').textContent = `${completedCount} / ${summary.totalWeeks || 16}`;
+      document.getElementById('progress-percentage-text').textContent = `${percent}%`;
+      document.getElementById('dashboard-progress-bar').style.width = `${percent}%`;
+      const progressTrack = document.getElementById('dashboard-progress-track');
+      progressTrack.setAttribute('aria-valuenow', String(percent));
+      progressTrack.setAttribute('aria-valuetext', `${completedCount} de ${summary.totalWeeks || 16} semanas completadas (${percent}%)`);
+      document.getElementById('progress-weeks-label').textContent = `${completedCount} de ${summary.totalWeeks || 16} semanas completadas`;
+      document.getElementById('last-activity-val').textContent = hasActivity ? 'Registrada' : 'Sin actividad';
+      document.getElementById('activity-summary').textContent = hasActivity
+        ? `${completedCount} semana${completedCount === 1 ? '' : 's'} completada${completedCount === 1 ? '' : 's'}, ${Object.keys(quizResults).length} evaluación${Object.keys(quizResults).length === 1 ? '' : 'es'} registrada${Object.keys(quizResults).length === 1 ? '' : 's'}${state.projectSubmitted ? ' y proyecto final enviado' : ''}.`
+        : 'Aún no hay semanas completadas ni evaluaciones registradas.';
 
-      const values = [
-        comp.croquis || 0,
-        comp.piezas || 0,
-        comp.modificacion || 0,
-        comp.interpretacion || 0,
-        comp.operaciones || 0,
-        comp.propiedades_fisicas || 0,
-        comp.ensamblajes || 0,
-        comp.relaciones_posicion || 0,
-        comp.tiempo_limite || 0
-      ];
+      const labels = Object.keys(COMPETENCY_LABELS).map(key => COMPETENCY_LABELS[key]);
+      const values = Object.keys(COMPETENCY_LABELS).map(key => {
+        const value = Number(scores[key]);
+        return Number.isFinite(value) ? Math.min(100, Math.max(0, value)) : 0;
+      });
 
+      if (window.CSWAEngine && typeof CSWAEngine.renderDiagnosticPage === 'function') {
+        CSWAEngine.renderDiagnosticPage();
+      }
+      renderCSWARadarChart(labels, values);
+    }
+
+    function renderCSWARadarChart(labels, values) {
+      const canvas = document.getElementById('cswaRadarChart');
+      const unavailable = document.getElementById('chart-unavailable');
+      if (!canvas || typeof Chart === 'undefined') {
+        unavailable?.classList.remove('hidden');
+        document.getElementById('btn-view-radar')?.setAttribute('disabled', 'disabled');
+        toggleCompetencyView('bars');
+        return;
+      }
+
+      unavailable?.classList.add('hidden');
       if (radarChartInstance) radarChartInstance.destroy();
-
-      radarChartInstance = new Chart(ctx, {
+      radarChartInstance = new Chart(canvas, {
         type: 'radar',
         data: {
-          labels: labels,
+          labels,
           datasets: [
             {
-              label: 'Nivel Actual (%)',
+              label: 'Puntaje de competencia (%)',
               data: values,
-              backgroundColor: 'rgba(0, 179, 224, 0.22)',
+              backgroundColor: 'rgba(0, 179, 224, 0.18)',
               borderColor: '#00B3E0',
               pointBackgroundColor: '#102A43',
               pointBorderColor: '#00B3E0',
               borderWidth: 2
             },
             {
-              label: 'Umbral CSWA (70%)',
-              data: [70, 70, 70, 70, 70, 70, 70, 70, 70],
-              backgroundColor: 'rgba(16, 185, 129, 0.05)',
+              label: 'Referencia de preparación (70%)',
+              data: labels.map(() => 70),
+              backgroundColor: 'transparent',
               borderColor: '#10B981',
               borderDash: [5, 5],
               pointRadius: 0,
@@ -487,52 +247,55 @@
         options: {
           responsive: true,
           maintainAspectRatio: false,
-          scales: {
-            r: {
-              min: 0,
-              max: 100,
-              ticks: { stepSize: 20, backdropColor: 'transparent', font: { size: 10 } },
-              pointLabels: { font: { size: 11, weight: '600' }, color: '#102A43' },
-              grid: { color: '#E2E8F0' }
-            }
-          },
-          plugins: {
-            legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } }
-          }
+          scales: { r: { min: 0, max: 100, ticks: { stepSize: 20, backdropColor: 'transparent' } } },
+          plugins: { legend: { position: 'bottom' } }
         }
       });
     }
 
     function toggleCompetencyView(mode) {
-      const radarSec = document.getElementById('radar-chart-section');
-      const barsSec = document.getElementById('competencies-list');
-      const btnRadar = document.getElementById('btn-view-radar');
-      const btnBars = document.getElementById('btn-view-bars');
-
-      if (mode === 'radar') {
-        radarSec.style.display = 'block';
-        barsSec.style.display = 'none';
-        btnRadar.classList.add('active');
-        btnBars.classList.remove('active');
-      } else {
-        radarSec.style.display = 'none';
-        barsSec.style.display = 'block';
-        btnRadar.classList.remove('active');
-        btnBars.classList.add('active');
-      }
+      const radar = document.getElementById('radar-chart-section');
+      const bars = document.getElementById('competencies-list');
+      const radarButton = document.getElementById('btn-view-radar');
+      const barsButton = document.getElementById('btn-view-bars');
+      const showRadar = mode === 'radar' && !radarButton.disabled;
+      radar.classList.toggle('hidden', !showRadar);
+      bars.classList.toggle('hidden', showRadar);
+      radarButton.classList.toggle('active', showRadar);
+      barsButton.classList.toggle('active', !showRadar);
+      radarButton.setAttribute('aria-pressed', String(showRadar));
+      barsButton.setAttribute('aria-pressed', String(!showRadar));
+      if (showRadar && radarChartInstance) radarChartInstance.resize();
     }
 
     function toggleResetConfirm(show) {
       const box = document.getElementById('reset-confirm-box');
-      if (box) box.style.display = show ? 'block' : 'none';
+      if (!box) return;
+      box.classList.toggle('reset-confirm', !show);
+      box.setAttribute('aria-hidden', String(!show));
+      if (show) box.querySelector('button')?.focus();
     }
 
     function executeResetProgress() {
-      if (typeof AppState !== 'undefined') {
-        AppState.resetProgress();
-        window.location.reload();
+      const error = document.getElementById('reset-error');
+      if (!window.AppState) {
+        error?.classList.remove('hidden');
+        return;
       }
+      AppState.resetProgress();
+      renderDashboard();
+      toggleResetConfirm(false);
     }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderDashboard();
+      window.addEventListener('pageshow', renderDashboard);
+      window.addEventListener('appstate:progresschange', renderDashboard);
+      window.addEventListener('storage', event => {
+        if (event.key === (window.AppState?.STORAGE_KEY || 'SW_ACADEMY_USER_STATE') || event.key === null) renderDashboard();
+      });
+      document.addEventListener('keydown', event => { if (event.key === 'Escape') toggleResetConfirm(false); });
+    });
   </script>
 </body>
 </html>
