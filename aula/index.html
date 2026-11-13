@@ -6,7 +6,6 @@
   <meta name="description" content="Aula Virtual SOLIDWORKS ACADEMY: lecciones, prácticas y evaluaciones para preparar la certificación CSWA en 16 semanas.">
   <meta name="theme-color" content="#102A43">
   <title>Aula Virtual | SOLIDWORKS ACADEMY</title>
-
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/components.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -20,308 +19,70 @@
       margin-bottom: 1.5rem;
       box-shadow: var(--shadow-md);
     }
+    .hero-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
+    .hero-copy { flex: 1 1 20rem; min-width: 0; }
+    .hero-badge { margin-bottom: .5rem; display: inline-flex; align-items: center; gap: .35rem; }
+    .hero-title { font-size: clamp(1.75rem, 5vw, 2.3rem); margin: .2rem 0; color: var(--white); }
+    .hero-description { opacity: .95; font-size: 1rem; max-width: 680px; margin: .5rem 0 0; color: var(--white); }
+    .progress-panel { flex: 0 1 16rem; min-width: min(100%, 14rem); background: rgba(255,255,255,.12); padding: 1.25rem; border-radius: var(--radius-md); text-align: center; border: 1px solid rgba(255,255,255,.3); }
+    .progress-label { font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; color: var(--white); font-weight: 700; }
+    .progress-value { font-size: 2.5rem; font-weight: 800; margin: .2rem 0; color: var(--white); line-height: 1.2; }
+    .progress-track { height: .65rem; margin: .75rem 0; overflow: hidden; border-radius: 999px; background: rgba(255,255,255,.25); }
+    .progress-fill { width: 0; height: 100%; background: var(--accent); border-radius: inherit; transition: width .3s ease; }
+    .continue-link { display: inline-flex; justify-content: center; align-items: center; gap: .5rem; width: 100%; min-height: 2.75rem; margin-top: .85rem; }
+    .progress-note { margin: .75rem 0 0; font-size: .8rem; color: rgba(255,255,255,.85); }
 
-    .hero-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1.5rem;
+    .module-index { margin: 0 0 1.5rem; padding: 1rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); }
+    .module-index h2 { font-size: 1rem; margin: 0 0 .75rem; }
+    .module-index-links { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .module-index a { display: inline-flex; align-items: center; min-height: 2.75rem; padding: .45rem .75rem; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: .9rem; font-weight: 700; }
+    .module-index a:hover, .module-index a:focus-visible { background: var(--bg-light); border-color: var(--accent); }
+
+    .module-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: clamp(1rem, 3vw, 1.5rem); margin-bottom: 1.25rem; scroll-margin-top: 1rem; transition: box-shadow .2s ease, border-color .2s ease; }
+    .module-card:hover { box-shadow: var(--shadow-lg); border-color: var(--accent); }
+    .module-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--bg-light); padding-bottom: .75rem; margin-bottom: 1rem; flex-wrap: wrap; gap: .75rem; }
+    .module-header > div:first-child { flex: 1 1 18rem; min-width: 0; }
+    .module-title { font-size: 1.25rem; color: var(--primary); margin: .25rem 0 0; }
+    .module-duration { font-size: .85rem; color: var(--text-muted); margin: 0; }
+    .module-progress { flex: 0 1 12rem; min-width: 9rem; }
+    .module-progress-meta { display: flex; justify-content: space-between; gap: .5rem; margin-bottom: .3rem; color: var(--text-muted); font-size: .75rem; font-weight: 700; }
+    .module-progress-track { height: .4rem; overflow: hidden; border-radius: 99px; background: var(--border); }
+    .module-progress-fill { width: 0; height: 100%; background: var(--accent); border-radius: inherit; transition: width .3s ease; }
+    .module-card.is-complete .module-progress-fill { background: var(--success); }
+
+    .week-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 17.5rem), 1fr)); gap: 1rem; }
+    .week-card { min-width: 0; background: var(--bg-light); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 1.1rem; display: flex; flex-direction: column; justify-content: space-between; gap: 1rem; transition: background-color .2s ease, border-color .2s ease, transform .2s ease; }
+    .week-card:hover { background: var(--bg-card); border-color: var(--accent); transform: translateY(-2px); }
+    .week-card.completed { border-inline-start: 4px solid var(--success); }
+    .week-card.next-up { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(0,179,224,.13); }
+    .week-badge { font-size: .75rem; font-weight: 800; text-transform: uppercase; letter-spacing: .03em; color: var(--primary); margin-bottom: .35rem; display: flex; align-items: center; flex-wrap: wrap; gap: .4rem; }
+    .week-title { font-size: 1rem; font-weight: 700; color: var(--primary); margin-bottom: .5rem; }
+    .week-desc { font-size: .9rem; color: var(--text-dark); margin: 0; line-height: 1.5; }
+    .completion-status-dot { flex: 0 0 .65rem; width: .65rem; height: .65rem; border-radius: 50%; display: inline-block; background-color: var(--border); }
+    .completion-status-dot.completed { background-color: var(--success); }
+    .completion-label { font-size: .72rem; font-weight: 700; color: var(--success); }
+    .completion-label.is-next { color: var(--primary); background: rgba(0,179,224,.14); padding: .15rem .45rem; border-radius: 999px; }
+    .week-action { display: flex; justify-content: center; align-items: center; gap: .4rem; min-height: 2.75rem; text-align: center; font-size: .9rem; }
+    .week-action:focus-visible, .continue-link:focus-visible, .module-index a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+    .course-complete-message { display: none; margin: .75rem 0 0; color: var(--white); font-size: .85rem; font-weight: 700; }
+    .progress-panel.is-complete .course-complete-message { display: block; }
+
+    @media (max-width: 600px) {
+      .container { padding: 1rem .75rem; }
+      .aula-hero { margin-bottom: 1rem; }
+      .progress-panel { flex-basis: 100%; }
+      .module-index-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .module-index a { justify-content: center; text-align: center; padding-inline: .4rem; }
+      .module-duration { width: 100%; }
+      .module-progress { flex: 1 1 100%; }
     }
-
-    .hero-copy {
-      flex: 1 1 20rem;
-      min-width: 0;
-    }
-
-    .hero-badge {
-      margin-bottom: 0.5rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-    }
-
-    .hero-title {
-      font-size: clamp(1.75rem, 5vw, 2.3rem);
-      margin: 0.2rem 0;
-      color: var(--white);
-    }
-
-    .hero-description {
-      opacity: 0.95;
-      font-size: 1rem;
-      max-width: 680px;
-      margin: 0.5rem 0 0;
-      color: var(--white);
-    }
-
-    .progress-panel {
-      flex: 0 1 16rem;
-      min-width: min(100%, 14rem);
-      background: rgba(255, 255, 255, 0.12);
-      padding: 1.25rem;
-      border-radius: var(--radius-md);
-      text-align: center;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-    }
-
-    .progress-label {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--white);
-      font-weight: 700;
-    }
-
-    .progress-value {
-      font-size: 2.5rem;
-      font-weight: 800;
-      margin: 0.2rem 0;
-      color: var(--white);
-      line-height: 1.2;
-    }
-
-    .progress-track {
-      height: 0.65rem;
-      margin: 0.75rem 0;
-      overflow: hidden;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.25);
-    }
-
-    .progress-fill {
-      width: 0;
-      height: 100%;
-      background: var(--accent);
-      border-radius: inherit;
-      transition: width 0.3s ease;
-    }
-
-    .continue-link {
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      gap: 0.5rem;
-      width: 100%;
-      margin-top: 0.85rem;
-    }
-
-    .progress-note {
-      margin: 0.75rem 0 0;
-      font-size: 0.8rem;
-      color: rgba(255, 255, 255, 0.8);
-    }
-
-    .module-index {
-      margin: 0 0 1.5rem;
-      padding: 1rem;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-    }
-
-    .module-index h2 {
-      font-size: 1rem;
-      margin: 0 0 0.75rem;
-    }
-
-    .module-index-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .module-index a {
-      display: inline-flex;
-      align-items: center;
-      min-height: 2.75rem;
-      padding: 0.45rem 0.75rem;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      font-size: 0.9rem;
-      font-weight: 700;
-    }
-
-    .module-index a:hover,
-    .module-index a:focus-visible {
-      background: var(--bg-light);
-      border-color: var(--accent);
-    }
-
-    .module-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: clamp(1rem, 3vw, 1.5rem);
-      margin-bottom: 1.25rem;
-      scroll-margin-top: 1rem;
-      transition: box-shadow 0.2s ease, border-color 0.2s ease;
-    }
-
-    .module-card:hover {
-      box-shadow: var(--shadow-lg);
-      border-color: var(--accent);
-    }
-
-    .module-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 2px solid var(--bg-light);
-      padding-bottom: 0.75rem;
-      margin-bottom: 1rem;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .module-title {
-      font-size: 1.25rem;
-      color: var(--primary);
-      margin: 0.25rem 0 0;
-    }
-
-    .module-duration {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin: 0;
-    }
-
-    .week-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 17.5rem), 1fr));
-      gap: 1rem;
-    }
-
-    .week-card {
-      min-width: 0;
-      background: var(--bg-light);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 1.1rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 1rem;
-      transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
-    }
-
-    .week-card:hover {
-      background: var(--bg-card);
-      border-color: var(--accent);
-      transform: translateY(-2px);
-    }
-
-    .week-card.completed {
-      border-inline-start: 4px solid var(--success);
-    }
-
-    .week-badge {
-      font-size: 0.75rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-      color: var(--primary);
-      margin-bottom: 0.35rem;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .week-title {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 0.5rem;
-    }
-
-    .week-desc {
-      font-size: 0.9rem;
-      color: var(--text-dark);
-      margin: 0;
-      line-height: 1.5;
-    }
-
-    .completion-status-dot {
-      flex: 0 0 0.65rem;
-      width: 0.65rem;
-      height: 0.65rem;
-      border-radius: 50%;
-      display: inline-block;
-      background-color: var(--border);
-    }
-
-    .completion-status-dot.completed {
-      background-color: var(--success);
-    }
-
-    .completion-label {
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--success);
-    }
-
-    .week-action {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 0.4rem;
-      min-height: 2.75rem;
-      text-align: center;
-      font-size: 0.9rem;
-    }
-
-    .week-action:focus-visible,
-    .continue-link:focus-visible,
-    .module-index a:focus-visible {
-      outline: 3px solid var(--accent);
-      outline-offset: 3px;
-    }
-
-    @media (max-width: 480px) {
-      .container {
-        padding: 1rem 0.75rem;
-      }
-
-      .aula-hero {
-        margin-bottom: 1rem;
-      }
-
-      .progress-panel {
-        flex-basis: 100%;
-      }
-
-      .module-index-links {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .module-index a {
-        justify-content: center;
-        text-align: center;
-        padding-inline: 0.4rem;
-      }
-
-      .module-header > div {
-        min-width: 0;
-      }
-
-      .module-duration {
-        width: 100%;
-      }
-    }
-
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        scroll-behavior: auto !important;
-        transition-duration: 0.01ms !important;
-        animation-duration: 0.01ms !important;
-      }
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
     }
   </style>
 </head>
 <body>
   <header class="navbar" aria-label="Navegación principal"></header>
-
   <main class="container">
     <header class="aula-hero">
       <div class="hero-content">
@@ -330,16 +91,16 @@
           <h1 class="hero-title">Aula Virtual de Aprendizaje</h1>
           <p class="hero-description">Accede al material teórico-práctico, guías guiadas paso a paso, ejercicios interactivos y evaluaciones sumativas organizadas por módulos de desarrollo para la certificación CSWA.</p>
         </div>
-
-        <section class="progress-panel" aria-labelledby="progress-heading">
+        <section class="progress-panel" id="course-progress-panel" aria-labelledby="progress-heading">
           <div class="progress-label" id="progress-heading">Progreso Académico Global</div>
           <div id="course-progress-display" class="progress-value">0%</div>
           <div class="progress-track" id="course-progress-bar" role="progressbar" aria-label="Progreso del curso" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0 de 16 semanas completadas">
             <div id="course-progress-fill" class="progress-fill"></div>
           </div>
           <span id="weeks-completed-tag" class="badge badge-warning">0 de 16 Semanas</span>
-          <a id="continue-link" class="btn continue-link" href="#module-1">Comenzar el curso <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+          <a id="continue-link" class="btn continue-link" href="semana1.html"><span id="continue-link-label">Comenzar el curso</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
           <p class="progress-note">El avance se guarda en este navegador.</p>
+          <p class="course-complete-message" id="course-complete-message" role="status">¡Felicitaciones! Has completado las 16 semanas.</p>
         </section>
       </div>
     </header>
@@ -347,298 +108,181 @@
     <nav class="module-index" aria-label="Índice de módulos">
       <h2>Ir al módulo</h2>
       <div class="module-index-links">
-        <a href="#module-1">Módulo 1</a>
-        <a href="#module-2">Módulo 2</a>
-        <a href="#module-3">Módulo 3</a>
-        <a href="#module-4">Módulo 4</a>
-        <a href="#module-5">Módulo 5</a>
-        <a href="#module-6">Módulo 6</a>
-        <a href="#module-7">Módulo 7</a>
-        <a href="#module-8">Módulo 8</a>
+        <a href="#module-1">Módulo 1</a><a href="#module-2">Módulo 2</a>
+        <a href="#module-3">Módulo 3</a><a href="#module-4">Módulo 4</a>
+        <a href="#module-5">Módulo 5</a><a href="#module-6">Módulo 6</a>
+        <a href="#module-7">Módulo 7</a><a href="#module-8">Módulo 8</a>
       </div>
     </nav>
 
-    <section class="module-card" id="module-1" aria-labelledby="module-title-1">
-      <div class="module-header">
-        <div>
-          <span class="badge badge-info"><i class="fa-solid fa-layer-group mr-1" aria-hidden="true"></i> Módulo 1</span>
-          <h2 class="module-title" id="module-title-1">Introducción a SOLIDWORKS y Entorno de Trabajo</h2>
-        </div>
-        <p class="module-duration"><i class="fa-regular fa-clock" aria-hidden="true"></i> Semanas 1 - 2</p>
-      </div>
+    <section class="module-card" id="module-1" data-weeks="1,2" aria-labelledby="module-title-1">
+      <div class="module-header"><div><span class="badge badge-info"><i class="fa-solid fa-layer-group mr-1" aria-hidden="true"></i> Módulo 1</span><h2 class="module-title" id="module-title-1">Introducción a SOLIDWORKS y Entorno de Trabajo</h2></div><p class="module-duration"><i class="fa-regular fa-clock" aria-hidden="true"></i> Semanas 1 - 2</p><div class="module-progress"><div class="module-progress-meta"><span>Avance del módulo</span><span class="module-progress-count">0/2</span></div><div class="module-progress-track" role="progressbar" aria-label="Progreso del módulo 1" aria-valuemin="0" aria-valuemax="2" aria-valuenow="0"><div class="module-progress-fill"></div></div></div></div>
       <div class="week-grid">
-        <article class="week-card" id="week-card-1">
-          <div>
-            <div class="week-badge"><span class="completion-status-dot" id="dot-week-1" aria-hidden="true"></span> Semana 1 <span class="completion-label" id="status-week-1"></span></div>
-            <h3 class="week-title">Entorno de Trabajo e Interfaz</h3>
-            <p class="week-desc">Reconocimiento del entorno, gestores, planos de referencia, navegación 3D y sistemas de unidades MMGS/IPS.</p>
-          </div>
-          <a href="semana1.html" class="btn btn-outline week-action">Ingresar a Lección <i class="fa-solid fa-arrow-right ml-1" aria-hidden="true"></i></a>
-        </article>
-        <article class="week-card" id="week-card-2">
-          <div>
-            <div class="week-badge"><span class="completion-status-dot" id="dot-week-2" aria-hidden="true"></span> Semana 2 <span class="completion-label" id="status-week-2"></span></div>
-            <h3 class="week-title">Modelado Paramétrico y Operaciones Base</h3>
-            <p class="week-desc">Lógica de parámetros, anclaje al Origen (0,0,0), intención del diseño y uso del FeatureManager.</p>
-          </div>
-          <a href="semana2.html" class="btn btn-outline week-action">Ingresar a Lección <i class="fa-solid fa-arrow-right ml-1" aria-hidden="true"></i></a>
-        </article>
+        <article class="week-card" id="week-card-1" data-week="1"><div><div class="week-badge"><span class="completion-status-dot" id="dot-week-1" aria-hidden="true"></span> Semana 1 <span class="completion-label" id="status-week-1"></span></div><h3 class="week-title">Entorno de Trabajo e Interfaz</h3><p class="week-desc">Reconocimiento del entorno, gestores, planos de referencia, navegación 3D y sistemas de unidades MMGS/IPS.</p></div><a href="semana1.html" class="btn btn-outline week-action">Ingresar a Lección <i class="fa-solid fa-arrow-right ml-1" aria-hidden="true"></i></a></article>
+        <article class="week-card" id="week-card-2" data-week="2"><div><div class="week-badge"><span class="completion-status-dot" id="dot-week-2" aria-hidden="true"></span> Semana 2 <span class="completion-label" id="status-week-2"></span></div><h3 class="week-title">Modelado Paramétrico y Operaciones Base</h3><p class="week-desc">Lógica de parámetros, anclaje al Origen (0,0,0), intención del diseño y uso del FeatureManager.</p></div><a href="semana2.html" class="btn btn-outline week-action">Ingresar a Lección <i class="fa-solid fa-arrow-right ml-1" aria-hidden="true"></i></a></article>
       </div>
     </section>
 
-    <section class="module-card" id="module-2" aria-labelledby="module-title-2">
-      <div class="module-header">
-        <div>
-          <span class="badge badge-info"><i class="fa-solid fa-layer-group mr-1" aria-hidden="true"></i> Módulo 2</span>
-          <h2 class="module-title" id="module-title-2">Croquis y Restricciones Geométricas 2D</h2>
-        </div>
-        <p class="module-duration"><i class="fa-regular fa-clock" aria-hidden="true"></i> Semanas 3 - 4</p>
-      </div>
+    <section class="module-card" id="module-2" data-weeks="3,4" aria-labelledby="module-title-2">
+      <div class="module-header"><div><span class="badge badge-info"><i class="fa-solid fa-layer-group mr-1" aria-hidden="true"></i> Módulo 2</span><h2 class="module-title" id="module-title-2">Croquis y Restricciones Geométricas 2D</h2></div><p class="module-duration"><i class="fa-regular fa-clock" aria-hidden="true"></i> Semanas 3 - 4</p><div class="module-progress"><div class="module-progress-meta"><span>Avance del módulo</span><span class="module-progress-count">0/2</span></div><div class="module-progress-track" role="progressbar" aria-label="Progreso del módulo 2" aria-valuemin="0" aria-valuemax="2" aria-valuenow="0"><div class="module-progress-fill"></div></div></div></div>
       <div class="week-grid">
-        <article class="week-card" id="week-card-3">
-          <div>
-            <div class="week-badge"><span class="completion-status-dot" id="dot-week-3" aria-hidden="true"></span> Semana 3 <span class="completion-label" id="status-week-3"></span></div>
-            <h3 class="week-title">Herramientas de Croquizado y Relaciones</h3>
-            <p class="week-desc">Entidades 2D, cotas inteligentes y aplicación explícita de relaciones geométricas para croquis definidos.</p>
-          </div>
-          <a href="semana3.html" class="btn btn-outline week-action">Ingresar a Lección <i class="fa-solid fa-arrow-right ml-1" aria-hidden="true"></i></a>
-        </article>
-        <article class="week-card" id="week-card-4">
-          <div>
-            <div class="week-badge"><span class="completion-status-dot" id="dot-week-4" aria-hidden="true"></span> Semana 4 (Evaluación) <span class="completion-label" id="status-week-4"></span></div>
-            <h3 class="week-title">Evaluación Práctica 1 - Croquis Completo</h3>
-            <p class="week-desc">Examen práctico de croquizado 2D restringido con variables globales y cálculo de área (15% ponderación).</p>
-          </div>
-          <a href="semana4.html" class="btn week-action">Rendir Evaluación <i class="fa-solid fa-pen-to-square ml-1" aria-hidden="true"></i></a>
-        </article>
+        <article class="week-card" id="week-card-3" data-week="3"><div><div class="week-badge"><span class="completion-status-dot" id="dot-week-3" aria-hidden="true"></span> Semana 3 <span class="completion-label" id="status-week-3"></span></div><h3 class="week-title">Herramientas de Croquizado y Relaciones</h3><p class="week-desc">Entidades 2D, cotas inteligentes y aplicación explícita de relaciones geométricas para croquis definidos.</p></div><a href="semana3.html" class="btn btn-outline week-action">Ingresar a Lección <i class="fa-solid fa-arrow-right ml-1" aria-hidden="true"></i></a></article>
+        <article class="week-card" id="week-card-4" data-week="4"><div><div class="week-badge"><span class="completion-status-dot" id="dot-week-4" aria-hidden="true"></span> Semana 4 (Evaluación) <span class="completion-label" id="status-week-4"></span></div><h3 class="week-title">Evaluación Práctica 1 - Croquis Completo</h3><p class="week-desc">Examen práctico de croquizado 2D restringido con variables globales y cálculo de área (15% ponderación).</p></div><a href="semana4.html" class="btn week-action week-action-evaluation">Rendir Evaluación <i class="fa-solid fa-pen-to-square ml-1" aria-hidden="true"></i></a></article>
       </div>
     </section>
 
-    <section class="module-card" id="module-3" aria-labelledby="module-title-3">
-      <div class="module-header">
-        <div>
-          <span class="badge badge-info"><i class="fa-solid fa-layer-group mr-1" aria-hidden="true"></i> Módulo 3</span>
-          <h2 class="module-title" id="module-title-3">Modelado de Sólidos Fundamental</h2>
-        </div>
-        <p class="module-duration"><i class="fa-regular fa-clock" aria-hidden="true"></i> Semanas 5 - 6</p>
-      </div>
+    <section class="module-card" id="module-3" data-weeks="5,6" aria-labelledby="module-title-3">
+      <div class="module-header"><div><span class="badge badge-info"><i class="fa-solid fa-layer-group mr-1" aria-hidden="true"></i> Módulo 3</span><h2 class="module-title" id="module-title-3">Modelado de Sólidos Fundamental</h2></div><p class="module-duration"><i class="fa-regular fa-clock" aria-hidden="true"></i> Semanas 5 - 6</p><div class="module-progress"><div class="module-progress-meta"><span>Avance del módulo</span><span class="module-progress-count">0/2</span></div><div class="module-progress-track" role="progressbar" aria-label="Progreso del módulo 3" aria-valuemin="0" aria-valuemax="2" aria-valuenow="0"><div class="module-progress-fill"></div></div></div></div>
       <div class="week-grid">
-        <article class="week-card" id="week-card-5">
-          <div>
-            <div class="week-badge"><span class="completion-status-dot" id="dot-week-5" aria-hidden="true"></span> Semana 5 <span class="completion-label" id="status-week-5"></span></div>
-            <h3 class="week-title">Extrusión y Revolución de Saliente/Corte</h3>
-            <p class="week-desc">Extrude Boss/Cut, Revolve Boss/Cut, condiciones finales (Blind, Through All, Mid Plane).</p>
-          </div>
-          <a href="semana5.html" class="btn btn-outline week-action">Ingresar a Lección <i class="fa-solid fa-arrow-right ml-1" aria-hidden="true"></i></a>
-        </article>
-        <article class="week-card" id="week-card-6">
-          <div>
-            <div class="week-badge"><span class="completion-status-dot" id="dot-week-6" aria-hidden="true"></span> Semana 6 <span class="completion-label" id="status-week-6"></span></div>
-            <h3 class="week-title">Redondeos, Chaflanes, Vaciados y Matrices</h3>
-            <p class="week-desc">Operaciones 3D de acabado (Fillet, Chamfer, Shell) y matrices de repetición paramétricas.</p>
-          </div>
-          <a href="semana6.html" class="btn btn-outline week-action">Ingresar a Lección <i class="fa-solid fa-arrow-right ml-1" aria-hidden="true"></i></a>
-        </article>
+        <article class="week-card" id="week-card-5" data-week="5"><div><div class="week-badge"><span class="completion-status-dot" id="dot-week-5" aria-hidden="true"></span> Semana 5 <span class="completion-label" id="status-week-5"></span></div><h3 class="week-title">Extrusión y Revolución de Saliente/Corte</h3><p class="week-desc">Extrude Boss/Cut, Revolve Boss/Cut, condiciones finales (Blind, Through All, Mid Plane).</p></div><a href="semana5.html" class="btn btn-outline week-action">Ingresar a Lección <i class="fa-solid fa-arrow-right ml-1" aria-hidden="true"></i></a></article>
+        <article class="week-card" id="week-card-6" data-week="6"><div><div class="week-badge"><span class="completion-status-dot" id="dot-week-6" aria-hidden="true"></span> Semana 6 <span class="completion-label" id="status-week-6"></span></div><h3 class="week-title">Redondeos, Chaflanes, Vaciados y Matrices</h3><p class="week-desc">Operaciones 3D de acabado (Fillet, Chamfer, Shell) y matrices de repetición paramétricas.</p></div><a href="semana6.html" class="btn btn-outline week-action">Ingresar a Lección <i class="fa-solid fa-arrow-right ml-1" aria-hidden="true"></i></a></article>
       </div>
     </section>
 
-    <section class="module-card" id="module-4" aria-labelledby="module-title-4">
-      <div class="module-header">
-        <div>
-          <span class="badge badge-info"><i class="fa-solid fa-layer-group mr-1" aria-hidden="true"></i> Módulo 4</span>
-          <h2 class="module-title" id="module-title-4">Componentes Mecánicos y Modificación Paramétrica</h2>
-        </div>
-        <p class="module-duration"><i class="fa-regular fa-clock" aria-hidden="true"></i> Semanas 7 - 8</p>
-      </div>
+    <section class="module-card" id="module-4" data-weeks="7,8" aria-labelledby="module-title-4">
+      <div class="module-header"><div><span class="badge badge-info"><i class="fa-solid fa-layer-group mr-1" aria-hidden="true"></i> Módulo 4</span><h2 class="module-title" id="module-title-4">Componentes Mecánicos y Modificación Paramétrica</h2></div><p class="module-duration"><i class="fa-regular fa-clock" aria-hidden="true"></i> Semanas 7 - 8</p><div class="module-progress"><div class="module-progress-meta"><span>Avance del módulo</span><span class="module-progress-count">0/2</span></div><div class="module-progress-track" role="progressbar" aria-label="Progreso del módulo 4" aria-valuemin="0" aria-valuemax="2" aria-valuenow="0"><div class="module-progress-fill"></div></div></div></div>
       <div class="week-grid">
-        <article class="week-card" id="week-card-7">
-          <div>
-            <div class="week-badge"><span class="completion-status-dot" id="dot-week-7" aria-hidden="true"></span> Semana 7 <span class="completion-label" id="status-week-7"></span></div>
-            <h3 class="week-title">Bridas, Poleas y Ejes de Transmisión</h3>
-            <p class="week-desc">Modelado de transmisiones mecánicas, canales en V y chaveteros según norma DIN/ANSI.</p>
-          </div>
-          <a href="semana7.html" class="btn btn-outline week-action">Ingresar a Lección <i class="fa-solid fa-arrow-right ml-1" aria-hidden="true"></i></a>
-        </article>
-        <article class="week-card" id="week-card-8">
-          <div>
-            <div class="week-badge"><span class="completion-status-dot" id="dot-week-8" aria-hidden="true"></span> Semana 8 (Evaluación) <span class="completion-label" id="status-week-8"></span></div>
-            <h3 class="week-title">Evaluación Práctica 2 - Interpretación 3D</h3>
-            <p class="week-desc">Examen de interpretación de planos 2D, modificación dimensional (A, B, C) y masa (25% ponderación).</p>
-          </div>
-          <a href="semana8.html" class="btn week-action">Rendir Evaluación <i class="fa-solid fa-pen-to-square ml-1" aria-hidden="true"></i></a>
-        </article>
+        <article class="week-card" id="week-card-7" data-week="7"><div><div class="week-badge"><span class="completion-status-dot" id="dot-week-7" aria-hidden="true"></span> Semana 7 <span class="completion-label" id="status-week-7"></span></div><h3 class="week-title">Bridas, Poleas y Ejes de Transmisión</h3><p class="week-desc">Modelado de transmisiones mecánicas, canales en V y chaveteros según norma DIN/ANSI.</p></div><a href="semana7.html" class="btn btn-outline week-action">Ingresar a Lección <i class="fa-solid fa-arrow-right ml-1" aria-hidden="true"></i></a></article>
+        <article class="week-card" id="week-card-8" data-week="8"><div><div class="week-badge"><span class="completion-status-dot" id="dot-week-8" aria-hidden="true"></span> Semana 8 (Evaluación) <span class="completion-label" id="status-week-8"></span></div><h3 class="week-title">Evaluación Práctica 2 - Interpretación 3D</h3><p class="week-desc">Examen de interpretación de planos 2D, modificación dimensional (A, B, C) y masa (25% ponderación).</p></div><a href="semana8.html" class="btn week-action week-action-evaluation">Rendir Evaluación <i class="fa-solid fa-pen-to-square ml-1" aria-hidden="true"></i></a></article>
       </div>
     </section>
 
-    <section class="module-card" id="module-5" aria-labelledby="module-title-5">
-      <div class="module-header">
-        <div>
-          <span class="badge badge-info"><i class="fa-solid fa-layer-group mr-1" aria-hidden="true"></i> Módulo 5</span>
-          <h2 class="module-title" id="module-title-5">Ensamblajes y Relaciones de Posición</h2>
-        </div>
-        <p class="module-duration"><i class="fa-regular fa-clock" aria-hidden="true"></i> Semanas 9 - 10</p>
-      </div>
+    <section class="module-card" id="module-5" data-weeks="9,10" aria-labelledby="module-title-5">
+      <div class="module-header"><div><span class="badge badge-info"><i class="fa-solid fa-layer-group mr-1" aria-hidden="true"></i> Módulo 5</span><h2 class="module-title" id="module-title-5">Ensamblajes y Relaciones de Posición</h2></div><p class="module-duration"><i class="fa-regular fa-clock" aria-hidden="true"></i> Semanas 9 - 10</p><div class="module-progress"><div class="module-progress-meta"><span>Avance del módulo</span><span class="module-progress-count">0/2</span></div><div class="module-progress-track" role="progressbar" aria-label="Progreso del módulo 5" aria-valuemin="0" aria-valuemax="2" aria-valuenow="0"><div class="module-progress-fill"></div></div></div></div>
       <div class="week-grid">
-        <article class="week-card" id="week-card-9">
-          <div>
-            <div class="week-badge"><span class="completion-status-dot" id="dot-week-9" aria-hidden="true"></span> Semana 9 <span class="completion-label" id="status-week-9"></span></div>
-            <h3 class="week-title">Inserción y Relaciones Estándar</h3>
-            <p class="week-desc">Estructura .SLDASM, componente fijo de origen (f) y relaciones Coincidente/Concéntrica.</p>
-          </div>
-          <a href="semana9.html" class="btn btn-outline week-action">Ingresar a Lección <i class="fa-solid fa-arrow-right ml-1" aria-hidden="true"></i></a>
-        </article>
-        <article class="week-card" id="week-card-10">
-          <div>
-            <div class="week-badge"><span class="completion-status-dot" id="dot-week-10" aria-hidden="true"></span> Semana 10 <span class="completion-label" id="status-week-10"></span></div>
-            <h3 class="week-title">Relaciones Avanzadas e Interferencias</h3>
-            <p class="week-desc">Mates mecánicos, límites de distancia/ángulo y diagnóstico de colisiones entre sólidos.</p>
-          </div>
-          <a href="semana10.html" class="btn btn-outline week-action">Ingresar a Lección <i class="fa-solid fa-arrow-right ml-1" aria-hidden="true"></i></a>
-        </article>
+        <article class="week-card" id="week-card-9" data-week="9"><div><div class="week-badge"><span class="completion-status-dot" id="dot-week-9" aria-hidden="true"></span> Semana 9 <span class="completion-label" id="status-week-9"></span></div><h3 class="week-title">Inserción y Relaciones Estándar</h3><p class="week-desc">Estructura .SLDASM, componente fijo de origen (f) y relaciones Coincidente/Concéntrica.</p></div><a href="semana9.html" class="btn btn-outline week-action">Ingresar a Lección <i class="fa-solid fa-arrow-right ml-1" aria-hidden="true"></i></a></article>
+        <article class="week-card" id="week-card-10" data-week="10"><div><div class="week-badge"><span class="completion-status-dot" id="dot-week-10" aria-hidden="true"></span> Semana 10 <span class="completion-label" id="status-week-10"></span></div><h3 class="week-title">Relaciones Avanzadas e Interferencias</h3><p class="week-desc">Mates mecánicos, límites de distancia/ángulo y diagnóstico de colisiones entre sólidos.</p></div><a href="semana10.html" class="btn btn-outline week-action">Ingresar a Lección <i class="fa-solid fa-arrow-right ml-1" aria-hidden="true"></i></a></article>
       </div>
     </section>
 
-    <section class="module-card" id="module-6" aria-labelledby="module-title-6">
-      <div class="module-header">
-        <div>
-          <span class="badge badge-info"><i class="fa-solid fa-layer-group mr-1" aria-hidden="true"></i> Módulo 6</span>
-          <h2 class="module-title" id="module-title-6">Propiedades Físicas y Verificación de Modelos</h2>
-        </div>
-        <p class="module-duration"><i class="fa-regular fa-clock" aria-hidden="true"></i> Semanas 11 - 12</p>
-      </div>
+    <section class="module-card" id="module-6" data-weeks="11,12" aria-labelledby="module-title-6">
+      <div class="module-header"><div><span class="badge badge-info"><i class="fa-solid fa-layer-group mr-1" aria-hidden="true"></i> Módulo 6</span><h2 class="module-title" id="module-title-6">Propiedades Físicas y Verificación de Modelos</h2></div><p class="module-duration"><i class="fa-regular fa-clock" aria-hidden="true"></i> Semanas 11 - 12</p><div class="module-progress"><div class="module-progress-meta"><span>Avance del módulo</span><span class="module-progress-count">0/2</span></div><div class="module-progress-track" role="progressbar" aria-label="Progreso del módulo 6" aria-valuemin="0" aria-valuemax="2" aria-valuenow="0"><div class="module-progress-fill"></div></div></div></div>
       <div class="week-grid">
-        <article class="week-card" id="week-card-11">
-          <div>
-            <div class="week-badge"><span class="completion-status-dot" id="dot-week-11" aria-hidden="true"></span> Semana 11 <span class="completion-label" id="status-week-11"></span></div>
-            <h3 class="week-title">Asignación de Materiales y Propiedades</h3>
-            <p class="week-desc">Biblioteca de materiales, densidad física, masa (g) y Centro de Gravedad (X,Y,Z).</p>
-          </div>
-          <a href="semana11.html" class="btn btn-outline week-action">Ingresar a Lección <i class="fa-solid fa-arrow-right ml-1" aria-hidden="true"></i></a>
-        </article>
-        <article class="week-card" id="week-card-12">
-          <div>
-            <div class="week-badge"><span class="completion-status-dot" id="dot-week-12" aria-hidden="true"></span> Semana 12 (Evaluación) <span class="completion-label" id="status-week-12"></span></div>
-            <h3 class="week-title">Evaluación Práctica 3 - Propiedades Físicas</h3>
-            <p class="week-desc">Examen de asignación de materiales, modificación dimensional y cálculo de masa (25% ponderación).</p>
-          </div>
-          <a href="semana12.html" class="btn week-action">Rendir Evaluación <i class="fa-solid fa-pen-to-square ml-1" aria-hidden="true"></i></a>
-        </article>
+        <article class="week-card" id="week-card-11" data-week="11"><div><div class="week-badge"><span class="completion-status-dot" id="dot-week-11" aria-hidden="true"></span> Semana 11 <span class="completion-label" id="status-week-11"></span></div><h3 class="week-title">Asignación de Materiales y Propiedades</h3><p class="week-desc">Biblioteca de materiales, densidad física, masa (g) y Centro de Gravedad (X,Y,Z).</p></div><a href="semana11.html" class="btn btn-outline week-action">Ingresar a Lección <i class="fa-solid fa-arrow-right ml-1" aria-hidden="true"></i></a></article>
+        <article class="week-card" id="week-card-12" data-week="12"><div><div class="week-badge"><span class="completion-status-dot" id="dot-week-12" aria-hidden="true"></span> Semana 12 (Evaluación) <span class="completion-label" id="status-week-12"></span></div><h3 class="week-title">Evaluación Práctica 3 - Propiedades Físicas</h3><p class="week-desc">Examen de asignación de materiales, modificación dimensional y cálculo de masa (25% ponderación).</p></div><a href="semana12.html" class="btn week-action week-action-evaluation">Rendir Evaluación <i class="fa-solid fa-pen-to-square ml-1" aria-hidden="true"></i></a></article>
       </div>
     </section>
 
-    <section class="module-card" id="module-7" aria-labelledby="module-title-7">
-      <div class="module-header">
-        <div>
-          <span class="badge badge-info"><i class="fa-solid fa-layer-group mr-1" aria-hidden="true"></i> Módulo 7</span>
-          <h2 class="module-title" id="module-title-7">Preparación Intensiva CSWA</h2>
-        </div>
-        <p class="module-duration"><i class="fa-regular fa-clock" aria-hidden="true"></i> Semanas 13 - 14</p>
-      </div>
+    <section class="module-card" id="module-7" data-weeks="13,14" aria-labelledby="module-title-7">
+      <div class="module-header"><div><span class="badge badge-info"><i class="fa-solid fa-layer-group mr-1" aria-hidden="true"></i> Módulo 7</span><h2 class="module-title" id="module-title-7">Preparación Intensiva CSWA</h2></div><p class="module-duration"><i class="fa-regular fa-clock" aria-hidden="true"></i> Semanas 13 - 14</p><div class="module-progress"><div class="module-progress-meta"><span>Avance del módulo</span><span class="module-progress-count">0/2</span></div><div class="module-progress-track" role="progressbar" aria-label="Progreso del módulo 7" aria-valuemin="0" aria-valuemax="2" aria-valuenow="0"><div class="module-progress-fill"></div></div></div></div>
       <div class="week-grid">
-        <article class="week-card" id="week-card-13">
-          <div>
-            <div class="week-badge"><span class="completion-status-dot" id="dot-week-13" aria-hidden="true"></span> Semana 13 <span class="completion-label" id="status-week-13"></span></div>
-            <h3 class="week-title">Estrategia CSWA y Gestión de Tiempo</h3>
-            <p class="week-desc">Descomposición de problemas, variables globales (=A, =B, =C) y estrategia para los 180 min.</p>
-          </div>
-          <a href="semana13.html" class="btn btn-outline week-action">Ingresar a Lección <i class="fa-solid fa-arrow-right ml-1" aria-hidden="true"></i></a>
-        </article>
-        <article class="week-card" id="week-card-14">
-          <div>
-            <div class="week-badge"><span class="completion-status-dot" id="dot-week-14" aria-hidden="true"></span> Semana 14 <span class="completion-label" id="status-week-14"></span></div>
-            <h3 class="week-title">Ensamblajes Combinados y Coordenadas</h3>
-            <p class="week-desc">Ensambles articulados multinivel, Sistemas de Coordenadas y corrección de mates.</p>
-          </div>
-          <a href="semana14.html" class="btn btn-outline week-action">Ingresar a Lección <i class="fa-solid fa-arrow-right ml-1" aria-hidden="true"></i></a>
-        </article>
+        <article class="week-card" id="week-card-13" data-week="13"><div><div class="week-badge"><span class="completion-status-dot" id="dot-week-13" aria-hidden="true"></span> Semana 13 <span class="completion-label" id="status-week-13"></span></div><h3 class="week-title">Estrategia CSWA y Gestión de Tiempo</h3><p class="week-desc">Descomposición de problemas, variables globales (=A, =B, =C) y estrategia para los 180 min.</p></div><a href="semana13.html" class="btn btn-outline week-action">Ingresar a Lección <i class="fa-solid fa-arrow-right ml-1" aria-hidden="true"></i></a></article>
+        <article class="week-card" id="week-card-14" data-week="14"><div><div class="week-badge"><span class="completion-status-dot" id="dot-week-14" aria-hidden="true"></span> Semana 14 <span class="completion-label" id="status-week-14"></span></div><h3 class="week-title">Ensamblajes Combinados y Coordenadas</h3><p class="week-desc">Ensambles articulados multinivel, Sistemas de Coordenadas y corrección de mates.</p></div><a href="semana14.html" class="btn btn-outline week-action">Ingresar a Lección <i class="fa-solid fa-arrow-right ml-1" aria-hidden="true"></i></a></article>
       </div>
     </section>
 
-    <section class="module-card" id="module-8" aria-labelledby="module-title-8">
-      <div class="module-header">
-        <div>
-          <span class="badge badge-info"><i class="fa-solid fa-layer-group mr-1" aria-hidden="true"></i> Módulo 8</span>
-          <h2 class="module-title" id="module-title-8">Simulacros Oficiales y Cierre de Curso</h2>
-        </div>
-        <p class="module-duration"><i class="fa-regular fa-clock" aria-hidden="true"></i> Semanas 15 - 16</p>
-      </div>
+    <section class="module-card" id="module-8" data-weeks="15,16" aria-labelledby="module-title-8">
+      <div class="module-header"><div><span class="badge badge-info"><i class="fa-solid fa-layer-group mr-1" aria-hidden="true"></i> Módulo 8</span><h2 class="module-title" id="module-title-8">Simulacros Oficiales y Cierre de Curso</h2></div><p class="module-duration"><i class="fa-regular fa-clock" aria-hidden="true"></i> Semanas 15 - 16</p><div class="module-progress"><div class="module-progress-meta"><span>Avance del módulo</span><span class="module-progress-count">0/2</span></div><div class="module-progress-track" role="progressbar" aria-label="Progreso del módulo 8" aria-valuemin="0" aria-valuemax="2" aria-valuenow="0"><div class="module-progress-fill"></div></div></div></div>
       <div class="week-grid">
-        <article class="week-card" id="week-card-15">
-          <div>
-            <div class="week-badge"><span class="completion-status-dot" id="dot-week-15" aria-hidden="true"></span> Semana 15 <span class="completion-label" id="status-week-15"></span></div>
-            <h3 class="week-title">Simulacro Diagnóstico y Reentrenamiento</h3>
-            <p class="week-desc">Prueba cronometrada de 90 min, auditoría de cuellos de botella y protocolos de recuperación.</p>
-          </div>
-          <a href="semana15.html" class="btn btn-outline week-action">Ingresar a Lección <i class="fa-solid fa-arrow-right ml-1" aria-hidden="true"></i></a>
-        </article>
-        <article class="week-card" id="week-card-16">
-          <div>
-            <div class="week-badge"><span class="completion-status-dot" id="dot-week-16" aria-hidden="true"></span> Semana 16 (Cierre) <span class="completion-label" id="status-week-16"></span></div>
-            <h3 class="week-title">Evaluación Final y Simulacro CSWA</h3>
-            <p class="week-desc">Entrega de Proyecto &quot;Tornillo de Banco&quot;, simulacro CSWA de 180 min y acreditación final (35% ponderación).</p>
-          </div>
-          <a href="semana16.html" class="btn week-action">Cierre de Curso <i class="fa-solid fa-graduation-cap ml-1" aria-hidden="true"></i></a>
-        </article>
+        <article class="week-card" id="week-card-15" data-week="15"><div><div class="week-badge"><span class="completion-status-dot" id="dot-week-15" aria-hidden="true"></span> Semana 15 <span class="completion-label" id="status-week-15"></span></div><h3 class="week-title">Simulacro Diagnóstico y Reentrenamiento</h3><p class="week-desc">Prueba cronometrada de 90 min, auditoría de cuellos de botella y protocolos de recuperación.</p></div><a href="semana15.html" class="btn btn-outline week-action">Ingresar a Lección <i class="fa-solid fa-arrow-right ml-1" aria-hidden="true"></i></a></article>
+        <article class="week-card" id="week-card-16" data-week="16"><div><div class="week-badge"><span class="completion-status-dot" id="dot-week-16" aria-hidden="true"></span> Semana 16 (Cierre) <span class="completion-label" id="status-week-16"></span></div><h3 class="week-title">Evaluación Final y Simulacro CSWA</h3><p class="week-desc">Entrega de Proyecto &quot;Tornillo de Banco&quot;, simulacro CSWA de 180 min y acreditación final (35% ponderación).</p></div><a href="semana16.html" class="btn week-action week-action-evaluation">Cierre de Curso <i class="fa-solid fa-graduation-cap ml-1" aria-hidden="true"></i></a></article>
       </div>
     </section>
   </main>
 
   <footer><p>&copy; 2026 SOLIDWORKS ACADEMY - Aula Virtual Formativa</p></footer>
-
   <script src="../assets/js/app.js"></script>
   <script src="../assets/js/navbar.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      if (typeof AppState === 'undefined') return;
+    (() => {
+      const STORAGE_KEY = window.AppState?.STORAGE_KEY || 'SW_ACADEMY_USER_STATE';
+      const TOTAL_WEEKS = window.AppState?.TOTAL_WEEKS || 16;
 
-      const totalWeeks = AppState.TOTAL_WEEKS || 16;
-      const progress = AppState.getUserProgress();
-      const completedWeeks = new Set((progress.completedWeeks || []).map(Number));
-      const completedCount = completedWeeks.size;
-      const percentage = Math.round((completedCount / totalWeeks) * 100);
-
-      const display = document.getElementById('course-progress-display');
-      const tag = document.getElementById('weeks-completed-tag');
-      const bar = document.getElementById('course-progress-bar');
-      const fill = document.getElementById('course-progress-fill');
-      const continueLink = document.getElementById('continue-link');
-
-      if (display) display.textContent = `${percentage}%`;
-      if (tag) tag.textContent = `${completedCount} de ${totalWeeks} Semanas`;
-      if (bar) {
-        bar.setAttribute('aria-valuenow', String(percentage));
-        bar.setAttribute('aria-valuetext', `${completedCount} de ${totalWeeks} semanas completadas`);
-      }
-      if (fill) fill.style.width = `${percentage}%`;
-
-      for (let week = 1; week <= totalWeeks; week += 1) {
-        const dot = document.getElementById(`dot-week-${week}`);
-        const status = document.getElementById(`status-week-${week}`);
-        const card = document.getElementById(`week-card-${week}`);
-
-        if (completedWeeks.has(week)) {
-          if (dot) dot.classList.add('completed');
-          if (status) status.textContent = 'Completada';
-          if (card) {
-            card.classList.add('completed');
-            card.setAttribute('aria-label', `Semana ${week}, completada`);
-          }
-        } else if (status) {
-          status.textContent = '';
+      function readCompletedWeeks() {
+        if (!window.AppState || typeof window.AppState.getUserProgress !== 'function') return new Set();
+        try {
+          const progress = window.AppState.getUserProgress();
+          const source = Array.isArray(progress.completedWeeks) ? progress.completedWeeks : [];
+          return new Set(source.map(Number).filter(week => Number.isInteger(week) && week >= 1 && week <= TOTAL_WEEKS));
+        } catch (error) {
+          console.error('No se pudo leer el progreso del curso.', error);
+          return new Set();
         }
       }
 
-      const nextWeek = Array.from({ length: totalWeeks }, (_, index) => index + 1)
-        .find(week => !completedWeeks.has(week));
+      function renderProgress() {
+        const completedWeeks = readCompletedWeeks();
+        const completedCount = completedWeeks.size;
+        const percentage = Math.round((completedCount / TOTAL_WEEKS) * 100);
+        const nextWeek = Array.from({ length: TOTAL_WEEKS }, (_, index) => index + 1)
+          .find(week => !completedWeeks.has(week));
 
-      if (continueLink && nextWeek) {
-        continueLink.href = `semana${nextWeek}.html`;
-        continueLink.innerHTML = `Continuar con la semana ${nextWeek} <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>`;
-      } else if (continueLink) {
-        continueLink.href = '#module-8';
-        continueLink.innerHTML = 'Curso completado <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>';
+        const display = document.getElementById('course-progress-display');
+        const tag = document.getElementById('weeks-completed-tag');
+        const bar = document.getElementById('course-progress-bar');
+        const fill = document.getElementById('course-progress-fill');
+        const panel = document.getElementById('course-progress-panel');
+        const continueLink = document.getElementById('continue-link');
+        const continueLabel = document.getElementById('continue-link-label');
+
+        if (display) display.textContent = `${percentage}%`;
+        if (tag) {
+          tag.textContent = `${completedCount} de ${TOTAL_WEEKS} semanas`;
+          tag.classList.toggle('badge-success', completedCount === TOTAL_WEEKS);
+          tag.classList.toggle('badge-warning', completedCount !== TOTAL_WEEKS);
+        }
+        if (bar) {
+          bar.setAttribute('aria-valuenow', String(percentage));
+          bar.setAttribute('aria-valuetext', `${completedCount} de ${TOTAL_WEEKS} semanas completadas (${percentage}%)`);
+        }
+        if (fill) fill.style.width = `${percentage}%`;
+        if (panel) panel.classList.toggle('is-complete', completedCount === TOTAL_WEEKS);
+
+        if (continueLink && continueLabel) {
+          if (nextWeek) {
+            continueLink.href = `semana${nextWeek}.html`;
+            continueLabel.textContent = completedCount === 0 ? 'Comenzar el curso' : `Continuar con la semana ${nextWeek}`;
+            continueLink.setAttribute('aria-label', `${continueLabel.textContent}`);
+          } else {
+            continueLink.href = '#module-8';
+            continueLabel.textContent = 'Curso completado';
+            continueLink.setAttribute('aria-label', 'Curso completado. Ir al módulo final.');
+          }
+        }
+
+        document.querySelectorAll('.week-card[data-week]').forEach(card => {
+          const week = Number(card.dataset.week);
+          const isComplete = completedWeeks.has(week);
+          const isNext = !nextWeek ? false : week === nextWeek;
+          const dot = document.getElementById(`dot-week-${week}`);
+          const status = document.getElementById(`status-week-${week}`);
+
+          card.classList.toggle('completed', isComplete);
+          card.classList.toggle('next-up', isNext);
+          card.setAttribute('aria-label', `Semana ${week}${isComplete ? ', completada' : isNext ? ', siguiente recomendada' : ''}`);
+
+          if (dot) dot.classList.toggle('completed', isComplete);
+          if (status) {
+            status.textContent = isComplete ? 'Completada' : isNext ? 'Siguiente' : '';
+            status.classList.toggle('is-next', isNext && !isComplete);
+          }
+        });
+
+        document.querySelectorAll('.module-card[data-weeks]').forEach(module => {
+          const weeks = module.dataset.weeks.split(',').map(Number).filter(Number.isInteger);
+          const moduleCompleted = weeks.filter(week => completedWeeks.has(week)).length;
+          const modulePercent = weeks.length ? Math.round((moduleCompleted / weeks.length) * 100) : 0;
+          const count = module.querySelector('.module-progress-count');
+          const track = module.querySelector('[role="progressbar"]');
+          const moduleFill = module.querySelector('.module-progress-fill');
+
+          if (count) count.textContent = `${moduleCompleted}/${weeks.length} semanas`;
+          if (track) {
+            track.setAttribute('aria-valuemax', String(weeks.length));
+            track.setAttribute('aria-valuenow', String(moduleCompleted));
+            track.setAttribute('aria-valuetext', `${moduleCompleted} de ${weeks.length} semanas completadas (${modulePercent}%)`);
+          }
+          if (moduleFill) moduleFill.style.width = `${modulePercent}%`;
+          module.classList.toggle('is-complete', weeks.length > 0 && moduleCompleted === weeks.length);
+        });
       }
-    });
+
+      document.addEventListener('DOMContentLoaded', renderProgress);
+      window.addEventListener('pageshow', renderProgress);
+      window.addEventListener('storage', event => {
+        if (event.key === STORAGE_KEY || event.key === null) renderProgress();
+      });
+    })();
   </script>
 </body>
 </html>
