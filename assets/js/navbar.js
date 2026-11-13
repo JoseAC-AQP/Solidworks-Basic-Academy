@@ -1,144 +1,104 @@
-/**
- * SOLIDWORKS ACADEMY - Dynamic Universal Navbar Engine
- * Automáticamente renderiza y unifica la barra de navegación principal
- * adaptándose dinámicamente a rutas relativas (raíz vs subcarpetas)
- * y resolviendo enlaces activos e interacciones móviles.
- */
+document.addEventListener("DOMContentLoaded", () => {
+  const navEl = document.querySelector(".navbar") || document.querySelector("header.navbar") || document.querySelector("header");
+  if (!navEl) return;
 
-document.addEventListener("DOMContentLoaded", function () {
-  // 1. Detectar o crear el contenedor principal de la navegación
-  let navHeader = document.querySelector("header") || document.querySelector("nav.navbar");
+  const currentPath = window.location.pathname.replace(/\/+$/, "") || "/";
+  const currentFile = currentPath.split("/").pop() || "index.html";
+  const isSubfolder = /\/(aula|cswa)\//.test(currentPath);
 
-  // 2. Determinar profundidad de carpeta para resolver rutas relativas
-  const currentPath = window.location.pathname;
-  const isInSubfolder = currentPath.includes('/aula/') || currentPath.includes('/cswa/');
-  const prefix = isInSubfolder ? '../' : './';
-  const pageName = currentPath.split('/').pop() || 'index.html';
-  const isHomePage = (pageName === 'index.html' || pageName === '') && !isInSubfolder;
-
-  // 3. Estructura de navegación unificada
   const navItems = [
-    { label: "Inicio", type: "page", url: `${prefix}index.html`, id: "index.html", tabId: "inicio" },
-    { label: "Dashboard", type: "page", url: `${prefix}dashboard.html`, id: "dashboard.html" },
-    { label: "Aula Virtual", type: "page", url: `${prefix}aula/index.html`, id: "aula" },
-    { label: "Lab CAD", type: "tab", tabId: "laboratorio", fallbackUrl: `${prefix}index.html#laboratorio` },
-    { label: "CSWA Center", type: "page", url: `${prefix}cswa/index.html`, id: "cswa", icon: "fa-award" },
-    { label: "Proyecto Final", type: "page", url: `${prefix}proyecto.html`, id: "proyecto.html" },
-    { label: "Recursos", type: "tab", tabId: "recursos", fallbackUrl: `${prefix}index.html#recursos` },
-    { label: "Certificación CSWA", type: "tab", tabId: "certificacion", fallbackUrl: `${prefix}index.html#certificacion` }
+    { label: "Inicio", href: isSubfolder ? "../index.html" : "./index.html", id: "index.html" },
+    { label: "Dashboard", href: isSubfolder ? "../dashboard.html" : "./dashboard.html", id: "dashboard.html" },
+    { label: "Aula Virtual", href: isSubfolder ? "../aula/index.html" : "./aula/index.html", id: "aula" },
+    { label: "Lab CAD", href: isSubfolder ? "../index.html#laboratorio" : "./index.html#laboratorio", tabId: "laboratorio" },
+    { label: "CSWA Center", href: isSubfolder ? "../cswa/index.html" : "./cswa/index.html", id: "cswa", icon: "fa-award" },
+    { label: "Proyecto Final", href: isSubfolder ? "../proyecto.html" : "./proyecto.html", id: "proyecto.html" },
+    { label: "Recursos", href: isSubfolder ? "../index.html#recursos" : "./index.html#recursos", tabId: "recursos" },
+    { label: "Certificación CSWA", href: isSubfolder ? "../index.html#certificacion" : "./index.html#certificacion", tabId: "certificacion" }
   ];
 
-  // 4. Renderizado para páginas basadas en Tailwind (ej. index.html principal)
-  if (document.querySelector('script[src*="tailwindcss"]') || document.getElementById('mainContent')) {
-    renderTailwindNavbar(navHeader, navItems, pageName, currentPath, isHomePage, prefix);
-  } else {
-    // Renderizado para páginas basadas en CSS Tradicional (components.css / style.css)
-    renderStandardNavbar(navHeader, navItems, pageName, currentPath, isHomePage);
-  }
-});
+  const isActive = item => {
+    if (item.id === "aula" && currentPath.includes("/aula")) return true;
+    if (item.id === "cswa" && currentPath.includes("/cswa")) return true;
+    return currentFile === item.id;
+  };
 
-/**
- * Renderizador de Barra para la Landing Page / Tailwind Layout
- */
-function renderTailwindNavbar(headerEl, navItems, pageName, currentPath, isHomePage, prefix) {
-  if (!headerEl) return;
+  const buildItemHTML = (item, mobile = false) => {
+    const activeClass = isActive(item) ? "text-swCyan font-bold bg-swCyan/10" : "hover:text-swCyan";
+    const iconHTML = item.icon ? `<i class="fa-solid ${item.icon} mr-1"></i> ` : "";
+    const baseClasses = mobile
+      ? "block w-full text-left px-3 py-2 rounded-md hover:bg-gray-700"
+      : `nav-item px-3 py-2 rounded-md transition ${activeClass}`;
 
-  let desktopNavHTML = navItems.map(item => {
-    let isActive = false;
-    if (item.id === "aula" && currentPath.includes('/aula/')) isActive = true;
-    else if (item.id === "cswa" && currentPath.includes('/cswa/')) isActive = true;
-    else if (pageName === item.id) isActive = true;
+    const hasTabHandler = item.tabId && typeof window.switchTab === "function";
 
-    const activeClass = isActive ? "text-swCyan font-bold bg-swCyan/10" : "hover:text-swCyan";
-    const iconHTML = item.icon ? `<i class="fa-solid ${item.icon} mr-1"></i> ` : '';
-
-    if (item.type === "page") {
-      return `<a href="${item.url}" class="nav-item px-3 py-2 rounded-md ${activeClass} transition">${iconHTML}${item.label}</a>`;
-    } else {
-      if (isHomePage) {
-        return `<button onclick="switchTab('${item.tabId}')" class="nav-item px-3 py-2 rounded-md hover:text-swCyan transition">${iconHTML}${item.label}</button>`;
-      } else {
-        return `<a href="${item.fallbackUrl}" class="nav-item px-3 py-2 rounded-md hover:text-swCyan transition">${iconHTML}${item.label}</a>`;
-      }
+    if (hasTabHandler) {
+      return `<button type="button" onclick="switchTab('${item.tabId}')" class="${baseClasses}">${iconHTML}${item.label}</button>`;
     }
-  }).join('');
 
-  let mobileNavHTML = navItems.map(item => {
-    const iconHTML = item.icon ? `<i class="fa-solid ${item.icon} mr-1"></i> ` : '';
-    if (item.type === "page") {
-      return `<a href="${item.url}" class="block w-full text-left px-3 py-2 rounded-md hover:bg-gray-700">${iconHTML}${item.label}</a>`;
-    } else {
-      if (isHomePage) {
-        return `<button onclick="switchTab('${item.tabId}')" class="block w-full text-left px-3 py-2 rounded-md hover:bg-gray-700">${iconHTML}${item.label}</button>`;
-      } else {
-        return `<a href="${item.fallbackUrl}" class="block w-full text-left px-3 py-2 rounded-md hover:bg-gray-700">${iconHTML}${item.label}</a>`;
-      }
-    }
-  }).join('');
+    return `<a href="${item.href}" class="${baseClasses}">${iconHTML}${item.label}</a>`;
+  };
 
-  headerEl.className = "bg-swDark text-white shadow-lg flex-shrink-0 z-20";
-  headerEl.innerHTML = `
+  navEl.className = "bg-swDark text-white shadow-lg flex-shrink-0 z-20";
+  navEl.innerHTML = `
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
-        <a href="${prefix}index.html" class="flex items-center space-x-3 text-white no-underline">
-          <div class="w-10 h-10 bg-swCyan rounded-lg flex items-center justify-center text-swDark text-xl font-black shadow-md">
-            SW
-          </div>
+        <a href="${isSubfolder ? "../index.html" : "./index.html"}" class="flex items-center space-x-3 text-white no-underline">
+          <div class="w-10 h-10 bg-swCyan rounded-lg flex items-center justify-center text-swDark text-xl font-black shadow-md">SW</div>
           <div>
             <div class="font-extrabold text-lg tracking-wider text-white leading-none">SOLIDWORKS ACADEMY</div>
             <div class="text-xs text-swCyan font-medium tracking-wide">CURSO Y PREPARACIÓN CSWA</div>
           </div>
         </a>
-        <nav class="hidden lg:flex space-x-1 text-sm font-medium">
-          ${desktopNavHTML}
+
+        <nav class="hidden lg:flex space-x-1 text-sm font-medium" aria-label="Navegación principal">
+          ${navItems.map(item => buildItemHTML(item, false)).join("")}
         </nav>
-        <div class="lg:hidden">
-          <button id="mobileMenuBtn" onclick="toggleMobileMenuNavbar()" class="text-gray-300 hover:text-white focus:outline-none p-2">
-            <i class="fa-solid fa-bars text-xl"></i>
-          </button>
-        </div>
+
+        <button
+          id="mobileMenuBtn"
+          type="button"
+          class="lg:hidden text-gray-300 hover:text-white focus:outline-none p-2"
+          aria-expanded="false"
+          aria-controls="mobileMenu"
+          aria-label="Abrir menú móvil"
+        >
+          <i class="fa-solid fa-bars text-xl"></i>
+        </button>
       </div>
     </div>
+
     <div id="mobileMenu" class="hidden lg:hidden bg-swDark/95 border-b border-gray-700 px-4 pt-2 pb-4 space-y-2 text-sm font-medium">
-      ${mobileNavHTML}
+      ${navItems.map(item => buildItemHTML(item, true)).join("")}
     </div>
   `;
-}
 
-/**
- * Renderizador de Barra para las Lecciones del Aula y CSWA (components.css)
- */
-function renderStandardNavbar(navEl, navItems, pageName, currentPath, isHomePage) {
-  if (!navEl) return;
+  const mobileBtn = document.getElementById("mobileMenuBtn");
+  const mobileMenu = document.getElementById("mobileMenu");
 
-  let linksHTML = navItems.map(item => {
-    let isActive = false;
-    if (item.id === "aula" && currentPath.includes('/aula/')) isActive = true;
-    else if (item.id === "cswa" && currentPath.includes('/cswa/')) isActive = true;
-    else if (pageName === item.id) isActive = true;
+  if (mobileBtn && mobileMenu) {
+    const setMenuState = expanded => {
+      mobileMenu.classList.toggle("hidden", !expanded);
+      mobileBtn.setAttribute("aria-expanded", String(expanded));
+    };
 
-    const activeClass = isActive ? 'class="active"' : '';
+    mobileBtn.addEventListener("click", () => {
+      const isOpen = mobileBtn.getAttribute("aria-expanded") === "true";
+      setMenuState(!isOpen);
+    });
 
-    if (item.type === "page") {
-      return `<li><a href="${item.url}" ${activeClass}>${item.label}</a></li>`;
-    } else {
-      return `<li><a href="${item.fallbackUrl}">${item.label}</a></li>`;
-    }
-  }).join('');
+    mobileMenu.querySelectorAll("a, button").forEach(item => {
+      item.addEventListener("click", () => setMenuState(false));
+    });
 
-  navEl.className = "navbar";
-  navEl.innerHTML = `
-    <a href="${navItems[0].url}" class="brand"><span>SOLIDWORKS</span> ACADEMY</a>
-    <ul class="nav-links">
-      ${linksHTML}
-    </ul>
-  `;
-}
+    document.addEventListener("click", event => {
+      if (!mobileMenu.contains(event.target) && !mobileBtn.contains(event.target)) {
+        setMenuState(false);
+      }
+    });
 
-/**
- * Función global auxiliar para desplegar menú móvil en Tailwind
- */
-window.toggleMobileMenuNavbar = function() {
-  const menu = document.getElementById('mobileMenu');
-  if (menu) menu.classList.toggle('hidden');
-};
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") setMenuState(false);
+    });
+  }
+});
