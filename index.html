@@ -1,31 +1,83 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Curso virtual de SOLIDWORKS y preparación para la certificación CSWA.">
-  <meta name="theme-color" content="#102A43">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Curso virtual de SOLIDWORKS y preparación para la certificación CSWA." />
+  <meta name="theme-color" content="#102A43" />
   <title>SOLIDWORKS ACADEMY - Preparación CSWA</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
   <script>
-    tailwind = { config: { theme: { extend: { colors: {
-      swDark: '#102A43', swCyan: '#00B3E0', swCyanHover: '#0090B3', swLightBg: '#F3F6F8'
-    } } } } };
+    tailwind = {
+      config: {
+        theme: {
+          extend: {
+            colors: {
+              swDark: '#102A43',
+              swCyan: '#00B3E0',
+              swCyanHover: '#0090B3',
+              swLightBg: '#F3F6F8',
+              swSlate: '#1F2937'
+            }
+          }
+        }
+      }
+    };
   </script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
   <style>
-    body { font-family: Inter, ui-sans-serif, system-ui, sans-serif; background: #F3F6F8; color: #1F2937; }
-    .custom-scrollbar { scrollbar-width: thin; scrollbar-color: #00B3E0 #E5E7EB; }
-    .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
-    .custom-scrollbar::-webkit-scrollbar-track { background: #E5E7EB; border-radius: 4px; }
-    .custom-scrollbar::-webkit-scrollbar-thumb { background: #00B3E0; border-radius: 4px; }
-    canvas { display: block; width: 100%; height: 100%; touch-action: none; }
-    :focus-visible { outline: 3px solid #00B3E0; outline-offset: 3px; }
-    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+      background: #F3F6F8;
+      color: #1F2937;
+    }
+
+    .custom-scrollbar {
+      scrollbar-width: thin;
+      scrollbar-color: #00B3E0 #E5E7EB;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #E5E7EB;
+      border-radius: 4px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #00B3E0;
+      border-radius: 4px;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      touch-action: none;
+    }
+
+    :focus-visible {
+      outline: 3px solid #00B3E0;
+      outline-offset: 3px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
   </style>
 </head>
 <body class="h-screen flex flex-col overflow-hidden">
@@ -34,230 +86,308 @@
       <div class="flex items-center justify-between min-h-16 py-2">
         <a href="#inicio" onclick="switchTab('inicio'); return false;" class="flex items-center gap-3 text-white no-underline" aria-label="SOLIDWORKS ACADEMY, inicio">
           <span class="w-10 h-10 bg-swCyan rounded-lg flex items-center justify-center text-swDark text-xl font-black shadow-md">SW</span>
-          <span><span class="block font-extrabold text-base sm:text-lg tracking-wider leading-none">SOLIDWORKS ACADEMY</span><span class="block text-xs text-swCyan font-medium tracking-wide mt-1">CURSO Y PREPARACIÓN CSWA</span></span>
+          <span>
+            <span class="block font-extrabold text-base sm:text-lg tracking-wider leading-none">SOLIDWORKS ACADEMY</span>
+            <span class="block text-xs text-swCyan font-medium tracking-wide mt-1">CURSO Y PREPARACIÓN CSWA</span>
+          </span>
         </a>
+
         <nav class="hidden lg:flex items-center gap-1 text-sm font-medium" aria-label="Navegación principal">
-          <button onclick="switchTab('inicio')" class="px-3 py-2 rounded-md hover:text-swCyan">Inicio</button>
-          <a href="dashboard.html" class="px-3 py-2 rounded-md hover:text-swCyan">Dashboard</a>
-          <a href="aula/index.html" class="px-3 py-2 rounded-md hover:text-swCyan">Aula Virtual</a>
-          <button onclick="switchTab('laboratorio')" class="px-3 py-2 rounded-md hover:text-swCyan">Lab CAD</button>
-          <a href="cswa/index.html" class="px-3 py-2 rounded-md text-swCyan hover:bg-swCyan/10 font-semibold"><i class="fa-solid fa-award mr-1" aria-hidden="true"></i>CSWA Center</a>
-          <a href="proyecto.html" class="px-3 py-2 rounded-md hover:text-swCyan">Proyecto Final</a>
-          <button onclick="switchTab('recursos')" class="px-3 py-2 rounded-md hover:text-swCyan">Recursos</button>
-          <button onclick="switchTab('certificacion')" class="px-3 py-2 rounded-md hover:text-swCyan">Certificación CSWA</button>
+          <button type="button" onclick="switchTab('inicio')" class="px-3 py-2 rounded-md hover:text-swCyan transition">Inicio</button>
+          <a href="dashboard.html" class="px-3 py-2 rounded-md hover:text-swCyan transition">Dashboard</a>
+          <a href="aula/index.html" class="px-3 py-2 rounded-md hover:text-swCyan transition">Aula Virtual</a>
+          <button type="button" onclick="switchTab('laboratorio')" class="px-3 py-2 rounded-md hover:text-swCyan transition">Lab CAD</button>
+          <a href="cswa/index.html" class="px-3 py-2 rounded-md text-swCyan hover:bg-swCyan/10 font-semibold transition"><i class="fa-solid fa-award mr-1" aria-hidden="true"></i>CSWA Center</a>
+          <a href="proyecto.html" class="px-3 py-2 rounded-md hover:text-swCyan transition">Proyecto Final</a>
+          <button type="button" onclick="switchTab('recursos')" class="px-3 py-2 rounded-md hover:text-swCyan transition">Recursos</button>
+          <button type="button" onclick="switchTab('certificacion')" class="px-3 py-2 rounded-md hover:text-swCyan transition">Certificación CSWA</button>
         </nav>
-        <button id="mobileMenuBtn" type="button" class="lg:hidden text-gray-200 hover:text-white p-2 rounded" aria-expanded="false" aria-controls="mobileMenu" aria-label="Abrir menú" onclick="toggleMobileMenu()"><i class="fa-solid fa-bars text-xl" aria-hidden="true"></i></button>
+
+        <button id="mobileMenuBtn" type="button" class="lg:hidden text-gray-200 hover:text-white p-2 rounded" aria-expanded="false" aria-controls="mobileMenu" aria-label="Abrir menú" onclick="toggleMobileMenu()">
+          <i class="fa-solid fa-bars text-xl" aria-hidden="true"></i>
+        </button>
       </div>
+
+      <nav id="mobileMenu" class="hidden lg:hidden border-t border-gray-700 bg-swDark/95 px-2 pb-3 pt-2 space-y-1 text-sm font-medium" aria-label="Navegación móvil">
+        <button type="button" onclick="switchTab('inicio'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-md hover:bg-gray-700 hover:text-swCyan">Inicio</button>
+        <a href="dashboard.html" class="block px-3 py-2 rounded-md hover:bg-gray-700 hover:text-swCyan">Dashboard</a>
+        <a href="aula/index.html" class="block px-3 py-2 rounded-md hover:bg-gray-700 hover:text-swCyan">Aula Virtual</a>
+        <button type="button" onclick="switchTab('laboratorio'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-md hover:bg-gray-700 hover:text-swCyan">Lab CAD</button>
+        <a href="cswa/index.html" class="block px-3 py-2 rounded-md text-swCyan hover:bg-swCyan/10 font-semibold"><i class="fa-solid fa-award mr-1" aria-hidden="true"></i>CSWA Center</a>
+        <a href="proyecto.html" class="block px-3 py-2 rounded-md hover:bg-gray-700 hover:text-swCyan">Proyecto Final</a>
+        <button type="button" onclick="switchTab('recursos'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-md hover:bg-gray-700 hover:text-swCyan">Recursos</button>
+        <button type="button" onclick="switchTab('certificacion'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-md hover:bg-gray-700 hover:text-swCyan">Certificación CSWA</button>
+      </nav>
     </div>
-    <nav id="mobileMenu" class="hidden lg:hidden bg-swDark border-t border-gray-700 px-4 pt-2 pb-4 space-y-1 text-sm font-medium" aria-label="Navegación móvil">
-      <button onclick="switchTab('inicio')" class="block w-full text-left px-3 py-2 rounded-md hover:bg-gray-700">Inicio</button>
-      <a href="dashboard.html" class="block px-3 py-2 rounded-md hover:bg-gray-700">Dashboard</a>
-      <a href="aula/index.html" class="block px-3 py-2 rounded-md hover:bg-gray-700">Aula Virtual</a>
-      <button onclick="switchTab('laboratorio')" class="block w-full text-left px-3 py-2 rounded-md hover:bg-gray-700">Laboratorio CAD</button>
-      <a href="cswa/index.html" class="block px-3 py-2 rounded-md text-swCyan hover:bg-gray-700 font-bold"><i class="fa-solid fa-award mr-1" aria-hidden="true"></i>CSWA Practice Center</a>
-      <a href="proyecto.html" class="block px-3 py-2 rounded-md hover:bg-gray-700">Proyecto Final</a>
-      <button onclick="switchTab('recursos')" class="block w-full text-left px-3 py-2 rounded-md hover:bg-gray-700">Recursos</button>
-      <button onclick="switchTab('certificacion')" class="block w-full text-left px-3 py-2 rounded-md hover:bg-gray-700">Certificación CSWA</button>
-    </nav>
   </header>
 
-  <main id="mainContent" class="flex-1 overflow-y-auto custom-scrollbar p-4 md:p-6 bg-swLightBg">
-    <section id="tab-inicio" class="tab-content max-w-7xl mx-auto space-y-8" aria-labelledby="home-title">
-      <div class="bg-gradient-to-r from-swDark to-slate-800 text-white rounded-2xl p-6 md:p-10 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
-        <div class="md:w-2/3 space-y-4">
-          <span class="inline-block bg-swCyan/20 text-swCyan border border-swCyan/30 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">Formación Profesional CAD</span>
-          <h1 id="home-title" class="text-3xl md:text-4xl lg:text-5xl font-black tracking-tight leading-tight text-white">SOLIDWORKS PARA PRINCIPIANTES</h1>
-          <p class="text-gray-300 text-base md:text-lg">Curso virtual interactivo de 16 semanas para dominar el diseño 3D y prepararte para la certificación CSWA.</p>
-          <div class="flex flex-wrap gap-3 pt-2"><a href="aula/index.html" class="bg-swCyan hover:bg-swCyanHover text-swDark font-bold px-6 py-3 rounded-lg shadow-lg transition inline-flex items-center gap-2"><i class="fa-solid fa-play" aria-hidden="true"></i>Iniciar Aula Virtual</a><a href="cswa/index.html" class="bg-white/10 hover:bg-white/20 border border-white/30 text-white font-semibold px-6 py-3 rounded-lg transition inline-flex items-center gap-2"><i class="fa-solid fa-chart-line" aria-hidden="true"></i>Evaluar Nivel CSWA</a></div>
+  <main id="mainContent" class="flex-1 overflow-y-auto custom-scrollbar bg-swLightBg">
+    <section id="tab-inicio" class="tab-content max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-[1.3fr_0.7fr] gap-6 items-stretch">
+        <div class="bg-gradient-to-r from-swDark via-slate-800 to-sky-800 text-white rounded-2xl p-6 sm:p-8 shadow-lg">
+          <span class="inline-flex items-center gap-2 bg-swCyan/20 text-swCyan border border-swCyan/40 rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider">
+            <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
+            Formación profesional · 16 semanas
+          </span>
+          <h1 class="mt-5 text-3xl md:text-5xl font-black leading-tight tracking-tight">SOLIDWORKS PARA DISEÑO Y CERTIFICACIÓN</h1>
+          <p class="mt-4 max-w-2xl text-sm md:text-base text-slate-200">
+            Curso virtual orientado a desarrollar competencias de modelado 3D, dibujo técnico, análisis conceptual y preparación para la certificación CSWA en un flujo de aprendizaje práctico.
+          </p>
+
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="aula/index.html" class="inline-flex items-center gap-2 bg-swCyan text-swDark font-bold px-5 py-3 rounded-lg hover:bg-swCyanHover transition shadow-md">
+              <i class="fa-solid fa-play" aria-hidden="true"></i>
+              Iniciar aula
+            </a>
+            <button type="button" onclick="switchTab('laboratorio')" class="inline-flex items-center gap-2 border border-white/30 text-white px-5 py-3 rounded-lg hover:bg-white/10 transition">
+              <i class="fa-solid fa-cube" aria-hidden="true"></i>
+              Probar Lab CAD
+            </button>
+          </div>
         </div>
-        <div class="w-48 h-48 md:w-56 md:h-56 bg-swCyan/10 border-2 border-swCyan/30 rounded-2xl flex flex-col items-center justify-center text-center p-4"><i class="fa-solid fa-certificate text-5xl text-swCyan mb-3" aria-hidden="true"></i><span class="font-extrabold text-xl text-white">Certificación CSWA</span><span class="text-xs text-gray-300 mt-1">SOLIDWORKS Official Associate</span><span class="mt-3 bg-swCyan text-swDark text-xs font-bold px-3 py-1 rounded-full">Simulacros de práctica</span></div>
+
+        <div class="bg-white rounded-2xl p-6 shadow-md border border-slate-200">
+          <div class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Resumen</div>
+          <div class="mt-5 grid grid-cols-2 gap-4">
+            <div class="bg-swLightBg rounded-xl p-4">
+              <div class="text-3xl font-black text-swDark">8</div>
+              <div class="text-sm text-slate-600">Módulos</div>
+            </div>
+            <div class="bg-swLightBg rounded-xl p-4">
+              <div class="text-3xl font-black text-swDark">48h</div>
+              <div class="text-sm text-slate-600">Total</div>
+            </div>
+            <div class="bg-swLightBg rounded-xl p-4">
+              <div class="text-3xl font-black text-swDark">16</div>
+              <div class="text-sm text-slate-600">Semanas</div>
+            </div>
+            <div class="bg-swLightBg rounded-xl p-4">
+              <div class="text-3xl font-black text-swDark">70%</div>
+              <div class="text-sm text-slate-600">Aprobación</div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
-        <article class="bg-white p-5 rounded-xl shadow-sm border border-gray-200 flex items-start gap-4"><span class="p-3 bg-blue-50 text-swDark rounded-lg"><i class="fa-regular fa-clock text-2xl" aria-hidden="true"></i></span><div><h2 class="font-bold text-gray-900">16 Semanas</h2><p class="text-xs text-gray-600 mb-0">3 horas por semana (48 horas en total)</p></div></article>
-        <article class="bg-white p-5 rounded-xl shadow-sm border border-gray-200 flex items-start gap-4"><span class="p-3 bg-cyan-50 text-swCyan rounded-lg"><i class="fa-solid fa-cubes text-2xl" aria-hidden="true"></i></span><div><h2 class="font-bold text-gray-900">8 Módulos</h2><p class="text-xs text-gray-600 mb-0">Croquis, piezas, ensamblajes y masa</p></div></article>
-        <article class="bg-white p-5 rounded-xl shadow-sm border border-gray-200 flex items-start gap-4"><span class="p-3 bg-emerald-50 text-emerald-600 rounded-lg"><i class="fa-solid fa-gears text-2xl" aria-hidden="true"></i></span><div><h2 class="font-bold text-gray-900">Proyecto Integrador</h2><p class="text-xs text-gray-600 mb-0">Diseño de un tornillo de banco</p></div></article>
-        <article class="bg-white p-5 rounded-xl shadow-sm border border-gray-200 flex items-start gap-4"><span class="p-3 bg-amber-50 text-amber-600 rounded-lg"><i class="fa-solid fa-bullseye text-2xl" aria-hidden="true"></i></span><div><h2 class="font-bold text-gray-900">Preparación CSWA</h2><p class="text-xs text-gray-600 mb-0">Práctica y diagnóstico de competencias</p></div></article>
+
+      <div class="mt-8 grid md:grid-cols-3 gap-6">
+        <article class="bg-white rounded-2xl p-6 shadow-md border border-slate-200">
+          <div class="flex items-center gap-3 text-swDark mb-3">
+            <span class="w-10 h-10 rounded-lg bg-swCyan/15 flex items-center justify-center text-swCyan"><i class="fa-solid fa-ruler-combined"></i></span>
+            <h2 class="text-lg font-bold">Diseño 2D y 3D</h2>
+          </div>
+          <p class="text-slate-600 text-sm leading-6">
+            Aprenderás a trabajar con croquis, restricciones, operaciones de modelado, ensambles y edición paramétrica.
+          </p>
+        </article>
+
+        <article class="bg-white rounded-2xl p-6 shadow-md border border-slate-200">
+          <div class="flex items-center gap-3 text-swDark mb-3">
+            <span class="w-10 h-10 rounded-lg bg-swCyan/15 flex items-center justify-center text-swCyan"><i class="fa-solid fa-diagram-project"></i></span>
+            <h2 class="text-lg font-bold">Competencias CSWA</h2>
+          </div>
+          <p class="text-slate-600 text-sm leading-6">
+            El contenido está diseñado para fortalecer las habilidades evaluadas en la certificación oficial CSWA.
+          </p>
+        </article>
+
+        <article class="bg-white rounded-2xl p-6 shadow-md border border-slate-200">
+          <div class="flex items-center gap-3 text-swDark mb-3">
+            <span class="w-10 h-10 rounded-lg bg-swCyan/15 flex items-center justify-center text-swCyan"><i class="fa-solid fa-chart-line"></i></span>
+            <h2 class="text-lg font-bold">Seguimiento</h2>
+          </div>
+          <p class="text-slate-600 text-sm leading-6">
+            Evalúa tus avances con dashboard, rutas por semanas y recursos de autoaprendizaje.
+          </p>
+        </article>
       </div>
-      <section class="bg-white rounded-xl p-6 shadow-sm border border-gray-200" aria-labelledby="curriculum-heading"><h2 id="curriculum-heading" class="text-2xl font-extrabold text-swDark mb-5 flex items-center gap-2"><i class="fa-solid fa-graduation-cap text-swCyan" aria-hidden="true"></i>Estructura del curso</h2><p id="curriculumStatus" class="text-sm text-gray-600" role="status">Cargando currículo…</p><div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4" id="inicioModulesGrid"></div></section>
     </section>
 
-    <section id="tab-laboratorio" class="tab-content hidden max-w-7xl mx-auto space-y-6" aria-labelledby="lab-title">
-      <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4"><div><h1 id="lab-title" class="text-2xl font-bold text-swDark flex items-center gap-2"><i class="fa-solid fa-drafting-compass text-swCyan" aria-hidden="true"></i>Laboratorio CAD interactivo</h1><p class="text-sm text-gray-600 mb-0">Visualizador 3D y calculadora aproximada de volumen y masa.</p></div><div class="flex flex-wrap gap-2" role="group" aria-label="Seleccionar geometría"><button type="button" onclick="setLabShape('cube')" class="px-3 py-2 bg-gray-100 hover:bg-swCyan hover:text-white rounded text-xs font-semibold">Bloque extruido</button><button type="button" onclick="setLabShape('cylinder')" class="px-3 py-2 bg-gray-100 hover:bg-swCyan hover:text-white rounded text-xs font-semibold">Cilindro</button><button type="button" onclick="setLabShape('bracket')" class="px-3 py-2 bg-gray-100 hover:bg-swCyan hover:text-white rounded text-xs font-semibold">Placa perforada</button></div></div>
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div class="lg:col-span-2 bg-slate-900 rounded-xl overflow-hidden shadow-md flex flex-col h-[420px] md:h-[480px]"><div class="bg-slate-800 text-gray-200 text-xs px-4 py-2 flex flex-wrap justify-between gap-2 border-b border-slate-700"><span><i class="fa-solid fa-cube text-swCyan mr-2" aria-hidden="true"></i>VISUALIZACIÓN 3D</span><span class="text-slate-300">Arrastra para rotar · Rueda para zoom</span></div><div id="threeCanvasContainer" class="w-full flex-1 relative" aria-label="Vista 3D interactiva"></div><p id="threeError" class="hidden text-sm text-amber-200 bg-slate-800 p-3 mb-0" role="status">No se pudo iniciar el visualizador 3D en este dispositivo; la calculadora sigue disponible.</p></div>
-        <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-4"><h2 class="font-bold text-swDark border-b pb-2 flex items-center gap-2"><i class="fa-solid fa-calculator text-swCyan" aria-hidden="true"></i>Inspector de propiedades</h2>
-          <div><label for="labMaterialSelect" class="block text-xs font-bold text-gray-700 mb-1">Material asignado</label><select id="labMaterialSelect" class="w-full border border-gray-300 rounded-lg p-2 text-sm" onchange="updateLabCalculations()"><option value="7850">Acero al carbono - 7850 kg/m³</option><option value="2700">Aluminio 6061-T6 - 2700 kg/m³</option><option value="8500">Latón - 8500 kg/m³</option><option value="1020">ABS - 1020 kg/m³</option><option value="8960">Cobre - 8960 kg/m³</option></select></div>
-          <div class="space-y-3 pt-1"><div><label for="rangeA" class="flex justify-between text-xs text-gray-700 mb-1"><span>Dimensión A (longitud)</span><span id="valA" class="font-semibold">100 mm</span></label><input type="range" id="rangeA" min="50" max="200" value="100" class="w-full accent-swCyan" oninput="updateLabCalculations()"></div><div><label for="rangeB" class="flex justify-between text-xs text-gray-700 mb-1"><span>Dimensión B (ancho/diámetro)</span><span id="valB" class="font-semibold">50 mm</span></label><input type="range" id="rangeB" min="20" max="120" value="50" class="w-full accent-swCyan" oninput="updateLabCalculations()"></div><div><label for="rangeC" class="flex justify-between text-xs text-gray-700 mb-1"><span>Dimensión C (alto/espesor)</span><span id="valC" class="font-semibold">30 mm</span></label><input type="range" id="rangeC" min="10" max="80" value="30" class="w-full accent-swCyan" oninput="updateLabCalculations()"></div></div>
-          <div class="bg-slate-50 border border-slate-200 p-4 rounded-lg space-y-2"><h3 class="text-xs text-gray-600 font-bold uppercase">Estimación de propiedades</h3><div class="flex justify-between gap-3 text-sm"><span class="text-gray-700">Volumen:</span><output id="calcVol" class="font-bold text-swDark text-right">—</output></div><div class="flex justify-between gap-3 text-sm"><span class="text-gray-700">Masa estimada:</span><output id="calcMass" class="font-bold text-swCyan text-right">—</output></div><div class="flex justify-between gap-3 text-xs text-gray-600 border-t pt-2"><span>Centro de masa aprox. (X,Y,Z):</span><output id="calcCG" class="font-mono text-gray-800 text-right">—</output></div><p class="text-xs text-gray-600 mb-0">Estimación geométrica con material homogéneo; no sustituye a SOLIDWORKS Mass Properties.</p></div>
+    <section id="tab-laboratorio" class="tab-content hidden max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+      <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-md border border-slate-200">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="w-12 h-12 rounded-xl bg-swCyan/15 flex items-center justify-center text-swCyan text-xl"><i class="fa-solid fa-cube"></i></span>
+          <div>
+            <p class="text-xs uppercase tracking-[0.25em] text-slate-500 font-semibold">Herramienta didáctica</p>
+            <h2 class="text-2xl font-black text-swDark">Laboratorio CAD</h2>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="space-y-4">
+            <label class="block text-sm font-semibold text-slate-700">
+              Material
+              <select id="materialSelect" class="mt-2 w-full border border-slate-300 rounded-lg px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-swCyan">
+                <option value="aluminio">Aluminio</option>
+                <option value="acero">Acero</option>
+                <option value="laton">Latón</option>
+                <option value="plastico">Plástico</option>
+              </select>
+            </label>
+
+            <div class="grid grid-cols-2 gap-4">
+              <label class="block text-sm font-semibold text-slate-700">
+                Ancho (mm)
+                <input id="widthInput" type="number" min="0" step="0.1" value="50" class="mt-2 w-full border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-swCyan" />
+              </label>
+              <label class="block text-sm font-semibold text-slate-700">
+                Alto (mm)
+                <input id="heightInput" type="number" min="0" step="0.1" value="30" class="mt-2 w-full border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-swCyan" />
+              </label>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+              <label class="block text-sm font-semibold text-slate-700">
+                Profundidad (mm)
+                <input id="depthInput" type="number" min="0" step="0.1" value="20" class="mt-2 w-full border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-swCyan" />
+              </label>
+              <label class="block text-sm font-semibold text-slate-700">
+                Densidad (kg/m³)
+                <input id="densityInput" type="number" min="0" step="1" value="2700" class="mt-2 w-full border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-swCyan" />
+              </label>
+            </div>
+
+            <button type="button" onclick="calcularMasaLab()" class="w-full bg-swDark text-white font-bold px-4 py-3 rounded-lg hover:bg-slate-800 transition">Calcular masa</button>
+          </div>
+
+          <div class="bg-swLightBg rounded-2xl p-5 border border-slate-200">
+            <div class="text-sm uppercase tracking-[0.2em] text-slate-500 font-semibold">Resultado</div>
+            <div class="mt-4 space-y-3 text-sm text-slate-700">
+              <div class="flex justify-between"><span>Volumen</span><strong id="volumeResult">0 mm³</strong></div>
+              <div class="flex justify-between"><span>Volumen</span><strong id="volumeM3Result">0 m³</strong></div>
+              <div class="flex justify-between"><span>Masa</span><strong id="massResult">0 kg</strong></div>
+              <div class="flex justify-between"><span>Masa</span><strong id="massGrResult">0 g</strong></div>
+            </div>
+            <p class="mt-5 text-xs text-slate-500 leading-5">
+              Nota: la conversión de volumen es realizada en milímetros cúbicos a metros cúbicos para mantener una referencia física consistente con la densidad en kg/m³.
+            </p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="tab-recursos" class="tab-content hidden max-w-7xl mx-auto space-y-6" aria-labelledby="resources-title"><div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm"><h1 id="resources-title" class="text-2xl font-bold text-swDark mb-2">Biblioteca de recursos</h1><p class="text-sm text-gray-600">Descargas disponibles en el repositorio del curso.</p><div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-      <article class="p-4 border border-gray-200 rounded-lg hover:border-swCyan"><i class="fa-solid fa-file-pdf text-red-500 text-2xl mb-2" aria-hidden="true"></i><h2 class="font-bold text-swDark">Atajos de SOLIDWORKS</h2><p class="text-xs text-gray-600">Guía de referencia rápida de comandos y atajos.</p><a class="inline-flex mt-2 text-sm font-bold text-sky-800 hover:underline" href="assets/pdf/Atajos_SolidWorks.pdf" target="_blank" rel="noopener noreferrer">Abrir o descargar PDF</a></article>
-      <article class="p-4 border border-gray-200 rounded-lg hover:border-swCyan"><i class="fa-solid fa-file-pdf text-red-500 text-2xl mb-2" aria-hidden="true"></i><h2 class="font-bold text-swDark">Guía de la semana 1</h2><p class="text-xs text-gray-600">Material de apoyo para el entorno e interfaz.</p><a class="inline-flex mt-2 text-sm font-bold text-sky-800 hover:underline" href="assets/pdf/guia-semana01.pdf" target="_blank" rel="noopener noreferrer">Abrir guía PDF</a></article>
-      <article class="p-4 border border-gray-200 rounded-lg hover:border-swCyan"><i class="fa-solid fa-file-pdf text-red-500 text-2xl mb-2" aria-hidden="true"></i><h2 class="font-bold text-swDark">Guía de la semana 2</h2><p class="text-xs text-gray-600">Material de apoyo para modelado paramétrico.</p><a class="inline-flex mt-2 text-sm font-bold text-sky-800 hover:underline" href="assets/pdf/guia-semana02.pdf" target="_blank" rel="noopener noreferrer">Abrir guía PDF</a></article>
-    </div></div></section>
+    <section id="tab-recursos" class="tab-content hidden max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+      <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-md border border-slate-200">
+        <h2 class="text-2xl font-black text-swDark mb-5">Recursos del curso</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <a href="dashboard.html" class="block bg-swLightBg rounded-xl p-4 hover:border-swCyan border border-transparent transition">
+            <div class="text-swCyan mb-2"><i class="fa-solid fa-chart-bar text-xl"></i></div>
+            <div class="font-bold text-swDark">Dashboard</div>
+            <div class="text-sm text-slate-600">Seguimiento del progreso</div>
+          </a>
+          <a href="aula/index.html" class="block bg-swLightBg rounded-xl p-4 hover:border-swCyan border border-transparent transition">
+            <div class="text-swCyan mb-2"><i class="fa-solid fa-chalkboard-user text-xl"></i></div>
+            <div class="font-bold text-swDark">Aula Virtual</div>
+            <div class="text-sm text-slate-600">Contenido por semana y módulo</div>
+          </a>
+          <a href="cswa/index.html" class="block bg-swLightBg rounded-xl p-4 hover:border-swCyan border border-transparent transition">
+            <div class="text-swCyan mb-2"><i class="fa-solid fa-award text-xl"></i></div>
+            <div class="font-bold text-swDark">CSWA Center</div>
+            <div class="text-sm text-slate-600">Prácticas y simulacros</div>
+          </a>
+          <a href="proyecto.html" class="block bg-swLightBg rounded-xl p-4 hover:border-swCyan border border-transparent transition">
+            <div class="text-swCyan mb-2"><i class="fa-solid fa-file-lines text-xl"></i></div>
+            <div class="font-bold text-swDark">Proyecto final</div>
+            <div class="text-sm text-slate-600">Plataforma de entrega final</div>
+          </a>
+          <button type="button" onclick="switchTab('certificacion')" class="block text-left bg-swLightBg rounded-xl p-4 hover:border-swCyan border border-transparent transition">
+            <div class="text-swCyan mb-2"><i class="fa-solid fa-certificate text-xl"></i></div>
+            <div class="font-bold text-swDark">Certificación</div>
+            <div class="text-sm text-slate-600">Cronograma y preparación</div>
+          </button>
+        </div>
+      </div>
+    </section>
 
-    <section id="tab-certificacion" class="tab-content hidden max-w-7xl mx-auto space-y-6" aria-labelledby="cert-title"><div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-6"><div class="border-b pb-4"><span class="text-xs font-bold text-sky-800 uppercase">Información del examen</span><h1 id="cert-title" class="text-2xl font-bold text-swDark">Certificación CSWA</h1><p class="text-sm text-gray-600 mb-0">Consulta los requisitos vigentes y detalles directamente en el sitio oficial de SOLIDWORKS.</p></div><div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm"><div class="space-y-3"><h2 class="font-bold text-swDark">Preparación</h2><p class="text-gray-700">Practica modelado de piezas, croquis totalmente definidos, ensamblajes y propiedades físicas. Confirma los requisitos, duración y puntuación del examen en la fuente oficial, ya que pueden actualizarse.</p><a href="https://www.solidworks.com/certifications" target="_blank" rel="noopener noreferrer" class="inline-flex font-bold text-sky-800 hover:underline">Sitio oficial de certificaciones</a></div><div class="bg-slate-50 border border-slate-200 p-4 rounded-xl space-y-3"><h2 class="font-bold text-swDark">Lista de preparación</h2><div class="space-y-2 text-sm"><label class="flex items-start gap-2"><input type="checkbox" class="mt-1 accent-swCyan"><span>Verificar acceso al software y al cliente de examen indicado oficialmente.</span></label><label class="flex items-start gap-2"><input type="checkbox" class="mt-1 accent-swCyan"><span>Practicar unidades MMGS e IPS y confirmar las unidades solicitadas en cada ejercicio.</span></label><label class="flex items-start gap-2"><input type="checkbox" class="mt-1 accent-swCyan"><span>Practicar variables globales y reconstrucción del modelo.</span></label><label class="flex items-start gap-2"><input type="checkbox" class="mt-1 accent-swCyan"><span>Comprobar masa y centro de masa con precisión y unidades correctas.</span></label></div></div></div></div></section>
+    <section id="tab-certificacion" class="tab-content hidden max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+      <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-md border border-slate-200">
+        <h2 class="text-2xl font-black text-swDark mb-4">Preparación CSWA</h2>
+        <p class="text-slate-600 leading-7">
+          Esta ruta está diseñada para desarrollar competencias clave de SOLIDWORKS, a partir de modelado 3D, croquis, restricciones, ensambles, simplificaciones y comprensión de criterios evaluados por la certificación CSWA.
+        </p>
+        <div class="mt-6 grid md:grid-cols-2 gap-4">
+          <div class="bg-swLightBg rounded-xl p-5">
+            <div class="font-bold text-swDark mb-2">Objetivo</div>
+            <p class="text-sm text-slate-600">Dominar la lógica de diseño paramétrico y la solución de ejercicios tipo examen.</p>
+          </div>
+          <div class="bg-swLightBg rounded-xl p-5">
+            <div class="font-bold text-swDark mb-2">Reto</div>
+            <p class="text-sm text-slate-600">Trabajar con precisión, entendimiento del entorno y toma de decisiones correctas bajo presión.</p>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <script>
-    const VALID_TABS = new Set(['inicio', 'laboratorio', 'recursos', 'certificacion']);
-    let scene, camera, renderer, currentMesh, currentShapeType = 'cube';
-    let resizeObserver;
-
-    function setTabFromLocation() { const tab = location.hash.slice(1); showTab(VALID_TABS.has(tab) ? tab : 'inicio', false); }
-    function showTab(tabId, updateHash = true) {
-      if (!VALID_TABS.has(tabId)) tabId = 'inicio';
-      document.querySelectorAll('.tab-content').forEach(section => section.classList.add('hidden'));
-      document.getElementById(`tab-${tabId}`)?.classList.remove('hidden');
-      closeMobileMenu();
-      if (updateHash) history.pushState(null, '', tabId === 'inicio' ? location.pathname + location.search : `#${tabId}`);
-      if (tabId === 'laboratorio' && renderer) resizeRenderer();
-    }
-    function switchTab(tabId) { showTab(tabId); }
-    function closeMobileMenu() {
-      document.getElementById('mobileMenu')?.classList.add('hidden');
-      document.getElementById('mobileMenuBtn')?.setAttribute('aria-expanded', 'false');
-    }
-    function toggleMobileMenu() {
-      const menu = document.getElementById('mobileMenu'), button = document.getElementById('mobileMenuBtn');
-      if (!menu || !button) return;
-      const opening = menu.classList.contains('hidden');
-      menu.classList.toggle('hidden', !opening);
-      button.setAttribute('aria-expanded', String(opening));
-    }
-
-    async function renderInicioModules() {
-      const grid = document.getElementById('inicioModulesGrid'), status = document.getElementById('curriculumStatus');
-      try {
-        const response = await fetch('assets/data/curriculum.json');
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        const data = await response.json();
-        if (!Array.isArray(data.modules) || !Array.isArray(data.weeks)) throw new Error('Formato de currículo no válido');
-        const modules = [...data.modules].sort((a, b) => a.module_id - b.module_id);
-        grid.innerHTML = modules.map(module => {
-          const weeks = data.weeks.filter(week => week.module_id === module.module_id).sort((a, b) => a.week - b.week);
-          const links = weeks.map(week => {
-            const weekNum = Number(week.week);
-            const path = /^aula\/semana\d+\.html$/.test(week.file_path || '') ? week.file_path : `aula/semana${weekNum}.html`;
-            return `<li><a class="text-sky-800 hover:underline" href="${path}"><i class="fa-solid fa-angle-right text-swCyan text-[10px] mr-1" aria-hidden="true"></i>Semana ${weekNum} · ${escapeHTML(week.title)}</a></li>`;
-          }).join('');
-          return `<article class="border border-gray-200 rounded-xl p-4 bg-gray-50 hover:bg-white hover:border-swCyan transition"><span class="text-[10px] font-black uppercase text-sky-800 bg-cyan-50 px-2 py-1 rounded">Módulo ${Number(module.module_id)}</span><h3 class="font-bold text-swDark text-sm mt-2 mb-2">${escapeHTML(module.title)}</h3><ul class="text-xs space-y-1 list-none pl-0">${links}</ul></article>`;
-        }).join('');
-        if (status) status.textContent = `${modules.length} módulos · ${data.weeks.length} semanas`;
-      } catch (error) {
-        console.error('No se pudo cargar el currículo.', error);
-        if (status) status.innerHTML = 'No se pudo cargar el currículo. Puedes consultarlo desde el <a href="aula/index.html" class="text-sky-800 underline">Aula Virtual</a>.';
-      }
-    }
-    function escapeHTML(value) { return String(value ?? '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]); }
-
-    function readDimensions() { return { a: Number(document.getElementById('rangeA').value), b: Number(document.getElementById('rangeB').value), c: Number(document.getElementById('rangeC').value) }; }
-    function getShapeProperties() {
-      const { a, b, c } = readDimensions();
-      if (currentShapeType === 'cylinder') return { volume: Math.PI * (b / 2) ** 2 * a, cg: [0, 0, 0] };
-      if (currentShapeType === 'bracket') {
-        const width = Math.max(30, b), height = Math.max(30, a);
-        const radius = Math.max(2, Math.min(width * 0.18, height * 0.12, c * 0.8));
-        const firstHoleArea = Math.PI * radius ** 2, secondHoleArea = Math.PI * (radius * 0.75) ** 2;
-        const netArea = Math.max(1, width * height - firstHoleArea - secondHoleArea);
-        return { volume: netArea * c, cg: [0, secondHoleArea * height * 0.22 / netArea, 0] };
-      }
-      return { volume: a * b * c, cg: [0, 0, 0] };
-    }
-    function buildBracketGeometry(width, height, thickness) {
-      const outerW = Math.max(30, width), outerH = Math.max(30, height);
-      const radius = Math.max(2, Math.min(outerW * 0.18, outerH * 0.12, thickness * 0.8));
-      const shape = new THREE.Shape();
-      shape.moveTo(-outerW / 2, -outerH / 2); shape.lineTo(outerW / 2, -outerH / 2);
-      shape.lineTo(outerW / 2, outerH / 2); shape.lineTo(-outerW / 2, outerH / 2); shape.closePath();
-      const hole1 = new THREE.Path(), hole2 = new THREE.Path();
-      hole1.absarc(0, 0, radius, 0, Math.PI * 2, false);
-      hole2.absarc(0, -outerH * 0.22, radius * 0.75, 0, Math.PI * 2, false);
-      shape.holes.push(hole1, hole2);
-      const geometry = new THREE.ExtrudeGeometry(shape, { depth: thickness, bevelEnabled: false, curveSegments: 24 });
-      geometry.center();
-      return geometry;
-    }
-    function makeGeometry() {
-      const { a, b, c } = readDimensions();
-      if (currentShapeType === 'cylinder') return new THREE.CylinderGeometry(b / 2, b / 2, a, 48);
-      if (currentShapeType === 'bracket') return buildBracketGeometry(b, a, c);
-      return new THREE.BoxGeometry(a, c, b);
-    }
-    function setLabShape(type) {
-      currentShapeType = ['cube', 'cylinder', 'bracket'].includes(type) ? type : 'cube';
-      updateLabCalculations();
-    }
-    function updateLabCalculations() {
-      const { a, b, c } = readDimensions();
-      document.getElementById('valA').textContent = `${a} mm`;
-      document.getElementById('valB').textContent = `${b} mm`;
-      document.getElementById('valC').textContent = `${c} mm`;
-      const props = getShapeProperties();
-      const density = Number(document.getElementById('labMaterialSelect').value);
-      const massGrams = props.volume / 1e6 * density;
-      document.getElementById('calcVol').textContent = `${props.volume.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} mm³`;
-      document.getElementById('calcMass').textContent = `${massGrams.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} g`;
-      document.getElementById('calcCG').textContent = `(${props.cg.map(value => value.toFixed(2)).join(', ')}) mm`;
-      if (!scene || !renderer || !camera || !window.THREE) return;
-      if (currentMesh) { scene.remove(currentMesh); currentMesh.geometry.dispose(); currentMesh.material.dispose(); }
-      currentMesh = new THREE.Mesh(makeGeometry(), new THREE.MeshStandardMaterial({ color: 0x00b3e0, metalness: 0.35, roughness: 0.35 }));
-      scene.add(currentMesh);
-      renderer.render(scene, camera);
-    }
-
-    function resizeRenderer() {
-      const container = document.getElementById('threeCanvasContainer');
-      if (!container || !camera || !renderer) return;
-      const width = container.clientWidth, height = container.clientHeight;
-      if (!width || !height) return;
-      camera.aspect = width / height; camera.updateProjectionMatrix();
-      renderer.setSize(width, height, false); renderer.render(scene, camera);
-    }
-    function initThreeJS() {
-      const container = document.getElementById('threeCanvasContainer');
-      if (!container || !window.THREE || !window.WebGLRenderingContext) { document.getElementById('threeError')?.classList.remove('hidden'); return; }
-      try {
-        scene = new THREE.Scene(); scene.background = new THREE.Color(0x0f172a);
-        camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000); camera.position.set(190, 170, 230); camera.lookAt(0, 0, 0);
-        renderer = new THREE.WebGLRenderer({ antialias: true }); renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-        container.appendChild(renderer.domElement);
-        scene.add(new THREE.AmbientLight(0xffffff, 0.65));
-        const light = new THREE.DirectionalLight(0xffffff, 0.8); light.position.set(100, 200, 150); scene.add(light);
-        scene.add(new THREE.GridHelper(300, 20, 0x00b3e0, 0x334155));
-        if ('ResizeObserver' in window) { resizeObserver = new ResizeObserver(resizeRenderer); resizeObserver.observe(container); }
-        else window.addEventListener('resize', resizeRenderer);
-        let dragging = false, previous = { x: 0, y: 0 };
-        renderer.domElement.addEventListener('pointerdown', event => { dragging = true; previous = { x: event.clientX, y: event.clientY }; renderer.domElement.setPointerCapture(event.pointerId); });
-        renderer.domElement.addEventListener('pointermove', event => {
-          if (!dragging || !currentMesh) return;
-          currentMesh.rotation.y += (event.clientX - previous.x) * 0.01; currentMesh.rotation.x += (event.clientY - previous.y) * 0.01;
-          previous = { x: event.clientX, y: event.clientY }; renderer.render(scene, camera);
-        });
-        renderer.domElement.addEventListener('pointerup', () => { dragging = false; });
-        renderer.domElement.addEventListener('pointercancel', () => { dragging = false; });
-        renderer.domElement.addEventListener('wheel', event => {
-          event.preventDefault();
-          camera.position.setLength(THREE.MathUtils.clamp(camera.position.length() * (event.deltaY > 0 ? 1.08 : 0.92), 100, 600));
-          renderer.render(scene, camera);
-        }, { passive: false });
-        updateLabCalculations(); resizeRenderer();
-      } catch (error) { console.error('No se pudo iniciar Three.js.', error); document.getElementById('threeError')?.classList.remove('hidden'); }
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
-      renderInicioModules(); initThreeJS(); setTabFromLocation();
-      document.addEventListener('click', event => {
-        const menu = document.getElementById('mobileMenu'), button = document.getElementById('mobileMenuBtn');
-        if (menu && button && !menu.contains(event.target) && !button.contains(event.target)) closeMobileMenu();
+    function switchTab(tabName) {
+      const tabs = document.querySelectorAll('.tab-content');
+      tabs.forEach((tab) => {
+        tab.classList.toggle('hidden', tab.id !== 'tab-' + tabName);
       });
-      document.addEventListener('keydown', event => { if (event.key === 'Escape') closeMobileMenu(); });
+
+      const menuButtons = document.querySelectorAll('button[onclick*="switchTab("]');
+      menuButtons.forEach((button) => {
+        const action = button.getAttribute('onclick') || '';
+        if (action.includes("'" + tabName + "'")) {
+          button.classList.add('text-swCyan');
+          button.classList.add('font-semibold');
+        } else {
+          button.classList.remove('text-swCyan');
+          button.classList.remove('font-semibold');
+        }
+      });
+    }
+
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      const button = document.getElementById('mobileMenuBtn');
+      const expanded = menu.classList.toggle('hidden');
+      button.setAttribute('aria-expanded', String(!expanded));
+      button.innerHTML = expanded
+        ? '<i class="fa-solid fa-bars text-xl" aria-hidden="true"></i>'
+        : '<i class="fa-solid fa-xmark text-xl" aria-hidden="true"></i>';
+    }
+
+    const materialDensities = {
+      aluminio: 2700,
+      acero: 7850,
+      laton: 8500,
+      plastico: 1200
+    };
+
+    function calcularMasaLab() {
+      const width = Number(document.getElementById('widthInput').value || 0);
+      const height = Number(document.getElementById('heightInput').value || 0);
+      const depth = Number(document.getElementById('depthInput').value || 0);
+      const material = document.getElementById('materialSelect').value;
+      const density = Number(document.getElementById('densityInput').value || materialDensities[material]);
+
+      const volumenMm3 = width * height * depth;
+      const volumenM3 = volumenMm3 * 1e-9;
+      const masaKg = volumenM3 * density;
+      const masaGr = masaKg * 1000;
+
+      document.getElementById('volumeResult').textContent = `${volumenMm3.toLocaleString('es-ES', { maximumFractionDigits: 2 })} mm³`;
+      document.getElementById('volumeM3Result').textContent = `${volumenM3.toLocaleString('es-ES', { maximumFractionDigits: 8 })} m³`;
+      document.getElementById('massResult').textContent = `${masaKg.toLocaleString('es-ES', { maximumFractionDigits: 4 })} kg`;
+      document.getElementById('massGrResult').textContent = `${masaGr.toLocaleString('es-ES', { maximumFractionDigits: 2 })} g`;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const materialSelect = document.getElementById('materialSelect');
+      const densityInput = document.getElementById('densityInput');
+
+      materialSelect.addEventListener('change', () => {
+        const selected = materialSelect.value;
+        if (selected && materialDensities[selected]) {
+          densityInput.value = materialDensities[selected];
+        }
+      });
+
+      document.getElementById('densityInput').value = materialDensities['aluminio'];
+      calcularMasaLab();
+      switchTab('inicio');
     });
-    window.addEventListener('popstate', setTabFromLocation);
-    window.addEventListener('hashchange', setTabFromLocation);
   </script>
 </body>
 </html>
