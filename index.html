@@ -1,614 +1,748 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOLIDWORKS ACADEMY - Preparación Certificación CSWA</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Curso virtual de SOLIDWORKS y preparación para la certificación CSWA." />
+  <meta name="theme-color" content="#102A43" />
+  <title>SOLIDWORKS ACADEMY - Preparación CSWA</title>
 
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Chart.js CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <!-- Three.js CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        swDark: '#102A43',
-                        swCyan: '#00B3E0',
-                        swCyanHover: '#0090B3',
-                        swLightBg: '#F3F6F8',
-                        swSlate: '#1F2937',
-                    }
-                }
-            }
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            swDark: '#102A43',
+            swCyan: '#00B3E0',
+            swCyanHover: '#0090B3',
+            swLightBg: '#F3F6F8',
+            swSlate: '#1F2937'
+          }
         }
-    </script>
+      }
+    };
+  </script>
 
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+  <style>
+    :root {
+      --sw-dark: #102A43;
+      --sw-cyan: #00B3E0;
+      --sw-cyan-hover: #0090B3;
+      --sw-bg: #F3F6F8;
+      --sw-slate: #1F2937;
+      --sw-card: #ffffff;
+      --sw-muted: #64748b;
+      --sw-line: #dfe7ee;
+      --sw-soft: #edf4f8;
+    }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #F3F6F8;
-            color: #1F2937;
-        }
+    html {
+      scroll-behavior: smooth;
+    }
 
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
+    body {
+      font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+      background: var(--sw-bg);
+      color: var(--sw-slate);
+    }
 
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #E5E7EB;
-            border-radius: 4px;
-        }
+    .custom-scrollbar {
+      scrollbar-width: thin;
+      scrollbar-color: var(--sw-cyan) #e5e7eb;
+    }
 
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #00B3E0;
-            border-radius: 4px;
-        }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
 
-        .tab-btn.active {
-            border-bottom: 3px solid #00B3E0;
-            color: #00B3E0;
-            font-weight: 700;
-        }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #e5e7eb;
+      border-radius: 999px;
+    }
 
-        canvas {
-            touch-action: none;
-        }
-    </style>
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: var(--sw-cyan);
+      border-radius: 999px;
+    }
+
+    .page-shell {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .glass-panel {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.18);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-link,
+    .nav-btn,
+    .nav-a {
+      transition: all 0.2s ease;
+    }
+
+    .nav-link:hover,
+    .nav-btn:hover,
+    .nav-a:hover {
+      color: var(--sw-cyan);
+    }
+
+    .nav-link.active,
+    .nav-btn.active,
+    .nav-a.active {
+      color: var(--sw-cyan);
+      font-weight: 700;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.5rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(0, 179, 224, 0.12);
+      border: 1px solid rgba(0, 179, 224, 0.35);
+      color: #7ad9f5;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .card-soft {
+      background: #fff;
+      border: 1px solid var(--sw-line);
+      border-radius: 1.1rem;
+      box-shadow: 0 8px 28px rgba(16,42,67,0.05);
+    }
+
+    .metric-box {
+      background: var(--sw-soft);
+      border: 1px solid #dfeaf1;
+      border-radius: 1rem;
+      padding: 1rem;
+    }
+
+    .module-card {
+      background: #fff;
+      border: 1px solid var(--sw-line);
+      border-radius: 1rem;
+      box-shadow: 0 8px 20px rgba(16,42,67,0.04);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .module-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(0, 179, 224, 0.45);
+      box-shadow: 0 12px 28px rgba(16,42,67,0.08);
+    }
+
+    .module-card a:hover {
+      color: var(--sw-cyan);
+    }
+
+    .tab-content {
+      animation: fadeIn 0.2s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      touch-action: none;
+    }
+
+    .resource-btn {
+      background: #f3f6f8;
+      border: 1px solid #dfe7ee;
+      color: var(--sw-slate);
+      transition: all 0.2s ease;
+    }
+
+    .resource-btn:hover {
+      background: #edf7fb;
+      border-color: rgba(0,179,224,0.4);
+      color: var(--sw-dark);
+    }
+
+    .info-list li::marker {
+      color: var(--sw-cyan);
+    }
+
+    @media (max-width: 1023px) {
+      .desktop-nav {
+        display: none;
+      }
+    }
+  </style>
 </head>
-
 <body class="h-screen flex flex-col overflow-hidden">
+  <header class="bg-swDark text-white shadow-lg flex-shrink-0 z-20">
+    <div class="page-shell">
+      <div class="flex items-center justify-between min-h-[64px] py-2">
+        <a href="#inicio" onclick="switchTab('inicio'); return false;" class="flex items-center gap-3 text-white no-underline" aria-label="Inicio SOLIDWORKS ACADEMY">
+          <span class="w-10 h-10 rounded-lg bg-swCyan text-swDark text-xl font-black shadow-md flex items-center justify-center">SW</span>
+          <span>
+            <span class="block text-base sm:text-lg font-extrabold tracking-wider leading-none">SOLIDWORKS ACADEMY</span>
+            <span class="mt-1 block text-[10px] sm:text-xs font-medium tracking-[0.16em] text-swCyan uppercase">Curso y preparación CSWA</span>
+          </span>
+        </a>
 
-    <!-- TOP HEADER / NAV BAR -->
-    <header class="bg-swDark text-white shadow-lg flex-shrink-0 z-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <!-- Logo -->
-                <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('inicio')">
-                    <div class="w-10 h-10 bg-swCyan rounded-lg flex items-center justify-center text-swDark text-xl font-black shadow-md">
-                        SW
-                    </div>
-                    <div>
-                        <div class="font-extrabold text-lg tracking-wider text-white leading-none">SOLIDWORKS ACADEMY</div>
-                        <div class="text-xs text-swCyan font-medium tracking-wide">CURSO Y PREPARACIÓN CSWA</div>
-                    </div>
-                </div>
+        <nav class="desktop-nav flex items-center gap-1 text-sm font-medium" aria-label="Navegación principal">
+          <button type="button" onclick="switchTab('inicio')" class="nav-btn px-3 py-2 rounded-md hover:text-swCyan transition active">Inicio</button>
+          <a href="dashboard.html" class="nav-a px-3 py-2 rounded-md hover:text-swCyan transition">Dashboard</a>
+          <a href="aula/index.html" class="nav-a px-3 py-2 rounded-md hover:text-swCyan transition">Aula Virtual</a>
+          <button type="button" onclick="switchTab('laboratorio')" class="nav-btn px-3 py-2 rounded-md hover:text-swCyan transition">Lab CAD</button>
+          <a href="cswa/index.html" class="nav-a px-3 py-2 rounded-md text-swCyan hover:bg-swCyan/10 font-semibold transition"><i class="fa-solid fa-award mr-1"></i>CSWA Center</a>
+          <a href="proyecto.html" class="nav-a px-3 py-2 rounded-md hover:text-swCyan transition">Proyecto Final</a>
+          <button type="button" onclick="switchTab('recursos')" class="nav-btn px-3 py-2 rounded-md hover:text-swCyan transition">Recursos</button>
+          <button type="button" onclick="switchTab('certificacion')" class="nav-btn px-3 py-2 rounded-md hover:text-swCyan transition">Certificación CSWA</button>
+        </nav>
 
-                <!-- Desktop Nav Links -->
-                <nav class="hidden lg:flex space-x-1 text-sm font-medium">
-                    <button onclick="switchTab('inicio')" class="nav-item px-3 py-2 rounded-md hover:text-swCyan transition">Inicio</button>
-                    <a href="dashboard.html" class="nav-item px-3 py-2 rounded-md hover:text-swCyan transition">Dashboard</a>
-                    <a href="aula/index.html" class="nav-item px-3 py-2 rounded-md hover:text-swCyan transition">Aula Virtual</a>
-                    <button onclick="switchTab('laboratorio')" class="nav-item px-3 py-2 rounded-md hover:text-swCyan transition">Lab CAD</button>
-                    <a href="cswa/index.html" class="nav-item px-3 py-2 rounded-md text-swCyan hover:bg-swCyan/10 rounded font-semibold transition"><i class="fa-solid fa-award mr-1"></i> CSWA Center</a>
-                    <a href="proyecto.html" class="nav-item px-3 py-2 rounded-md hover:text-swCyan transition">Proyecto Final</a>
-                    <button onclick="switchTab('recursos')" class="nav-item px-3 py-2 rounded-md hover:text-swCyan transition">Recursos</button>
-                    <button onclick="switchTab('certificacion')" class="nav-item px-3 py-2 rounded-md hover:text-swCyan transition">Certificación CSWA</button>
-                </nav>
+        <button id="mobileMenuBtn" type="button" class="lg:hidden text-gray-200 hover:text-white p-2 rounded" aria-expanded="false" aria-controls="mobileMenu" aria-label="Abrir menú" onclick="toggleMobileMenu()">
+          <i class="fa-solid fa-bars text-xl" aria-hidden="true"></i>
+        </button>
+      </div>
 
-                <!-- Mobile Menu Button -->
-                <div class="lg:hidden">
-                    <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-white focus:outline-none p-2">
-                        <i class="fa-solid fa-bars text-xl"></i>
-                    </button>
-                </div>
+      <nav id="mobileMenu" class="hidden lg:hidden border-t border-gray-700 bg-swDark/95 px-2 pb-3 pt-2 space-y-1 text-sm font-medium" aria-label="Navegación móvil">
+        <button type="button" onclick="switchTab('inicio'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-md hover:bg-gray-700 hover:text-swCyan">Inicio</button>
+        <a href="dashboard.html" class="block px-3 py-2 rounded-md hover:bg-gray-700 hover:text-swCyan">Dashboard</a>
+        <a href="aula/index.html" class="block px-3 py-2 rounded-md hover:bg-gray-700 hover:text-swCyan">Aula Virtual</a>
+        <button type="button" onclick="switchTab('laboratorio'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-md hover:bg-gray-700 hover:text-swCyan">Lab CAD</button>
+        <a href="cswa/index.html" class="block px-3 py-2 rounded-md text-swCyan hover:bg-swCyan/10 font-semibold"><i class="fa-solid fa-award mr-1"></i>CSWA Center</a>
+        <a href="proyecto.html" class="block px-3 py-2 rounded-md hover:bg-gray-700 hover:text-swCyan">Proyecto Final</a>
+        <button type="button" onclick="switchTab('recursos'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-md hover:bg-gray-700 hover:text-swCyan">Recursos</button>
+        <button type="button" onclick="switchTab('certificacion'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-md hover:bg-gray-700 hover:text-swCyan">Certificación CSWA</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="mainContent" class="flex-1 overflow-y-auto custom-scrollbar bg-swLightBg">
+    <section id="tab-inicio" class="tab-content max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-[1.35fr_0.65fr] gap-6 items-stretch">
+        <div class="rounded-2xl p-6 sm:p-8 md:p-10 shadow-lg bg-gradient-to-r from-swDark via-slate-800 to-sky-800 text-white relative overflow-hidden">
+          <div class="absolute right-0 top-0 h-full w-1/3 bg-gradient-to-l from-white/5 to-transparent"></div>
+          <div class="relative z-10">
+            <span class="hero-badge">
+              <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
+              Formación profesional · 16 semanas
+            </span>
+            <h1 class="mt-5 text-3xl md:text-5xl font-black leading-tight tracking-tight">SOLIDWORKS PARA DISEÑO Y CERTIFICACIÓN</h1>
+            <p class="mt-4 max-w-2xl text-sm md:text-base text-slate-200">
+              Curso virtual orientado a desarrollar competencias de modelado 3D, dibujo técnico, análisis conceptual y preparación para la certificación CSWA en un flujo de aprendizaje práctico y estructurado.
+            </p>
+
+            <div class="mt-6 flex flex-wrap gap-3">
+              <a href="aula/index.html" class="inline-flex items-center gap-2 bg-swCyan text-swDark font-bold px-5 py-3 rounded-lg hover:bg-swCyanHover transition shadow-md">
+                <i class="fa-solid fa-play" aria-hidden="true"></i>
+                Iniciar aula
+              </a>
+              <button type="button" onclick="switchTab('laboratorio')" class="inline-flex items-center gap-2 border border-white/30 text-white px-5 py-3 rounded-lg hover:bg-white/10 transition">
+                <i class="fa-solid fa-cube" aria-hidden="true"></i>
+                Probar Lab CAD
+              </button>
             </div>
+          </div>
         </div>
 
-        <!-- Mobile Navigation Menu -->
-        <div id="mobileMenu" class="hidden lg:hidden bg-swDark/95 border-b border-gray-700 px-4 pt-2 pb-4 space-y-2 text-sm font-medium">
-            <button onclick="switchTab('inicio')" class="block w-full text-left px-3 py-2 rounded-md hover:bg-gray-700">Inicio</button>
-            <a href="dashboard.html" class="block w-full text-left px-3 py-2 rounded-md hover:bg-gray-700">Dashboard</a>
-            <a href="aula/index.html" class="block w-full text-left px-3 py-2 rounded-md hover:bg-gray-700">Aula Virtual</a>
-            <button onclick="switchTab('laboratorio')" class="block w-full text-left px-3 py-2 rounded-md hover:bg-gray-700">Laboratorio CAD</button>
-            <a href="cswa/index.html" class="block w-full text-left px-3 py-2 rounded-md text-swCyan hover:bg-gray-700 font-bold"><i class="fa-solid fa-award mr-1"></i> CSWA Practice Center</a>
-            <a href="proyecto.html" class="block w-full text-left px-3 py-2 rounded-md hover:bg-gray-700">Proyecto Final</a>
-            <button onclick="switchTab('recursos')" class="block w-full text-left px-3 py-2 rounded-md hover:bg-gray-700">Recursos</button>
-            <button onclick="switchTab('certificacion')" class="block w-full text-left px-3 py-2 rounded-md hover:bg-gray-700">Certificación CSWA</button>
+        <aside class="card-soft p-6">
+          <div class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Resumen</div>
+          <div class="mt-5 grid grid-cols-2 gap-4">
+            <div class="metric-box">
+              <div class="text-3xl font-black text-swDark">8</div>
+              <div class="text-sm text-slate-600">Módulos</div>
+            </div>
+            <div class="metric-box">
+              <div class="text-3xl font-black text-swDark">48h</div>
+              <div class="text-sm text-slate-600">Total</div>
+            </div>
+            <div class="metric-box">
+              <div class="text-3xl font-black text-swDark">16</div>
+              <div class="text-sm text-slate-600">Semanas</div>
+            </div>
+            <div class="metric-box">
+              <div class="text-3xl font-black text-swDark">70%</div>
+              <div class="text-sm text-slate-600">Aprobación</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="mt-8 grid md:grid-cols-3 gap-6">
+        <article class="card-soft p-6">
+          <div class="flex items-center gap-3 text-swDark mb-3">
+            <span class="w-11 h-11 rounded-xl bg-swCyan/15 flex items-center justify-center text-swCyan"><i class="fa-solid fa-ruler-combined"></i></span>
+            <h2 class="text-lg font-bold">Diseño 2D y 3D</h2>
+          </div>
+          <p class="text-slate-600 text-sm leading-6">
+            Aprenderás a trabajar con croquis, restricciones, operaciones de modelado, ensambles y edición paramétrica.
+          </p>
+        </article>
+
+        <article class="card-soft p-6">
+          <div class="flex items-center gap-3 text-swDark mb-3">
+            <span class="w-11 h-11 rounded-xl bg-swCyan/15 flex items-center justify-center text-swCyan"><i class="fa-solid fa-diagram-project"></i></span>
+            <h2 class="text-lg font-bold">Competencias CSWA</h2>
+          </div>
+          <p class="text-slate-600 text-sm leading-6">
+            El contenido está diseñado para fortalecer las habilidades evaluadas en la certificación oficial CSWA.
+          </p>
+        </article>
+
+        <article class="card-soft p-6">
+          <div class="flex items-center gap-3 text-swDark mb-3">
+            <span class="w-11 h-11 rounded-xl bg-swCyan/15 flex items-center justify-center text-swCyan"><i class="fa-solid fa-chart-line"></i></span>
+            <h2 class="text-lg font-bold">Seguimiento</h2>
+          </div>
+          <p class="text-slate-600 text-sm leading-6">
+            Evalúa tus avances con dashboard, rutas por semanas y recursos de autoaprendizaje.
+          </p>
+        </article>
+      </div>
+
+      <div class="mt-8 card-soft p-6 sm:p-8">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="w-11 h-11 rounded-xl bg-swCyan/15 text-swCyan flex items-center justify-center text-xl"><i class="fa-solid fa-graduation-cap"></i></span>
+          <div>
+            <p class="text-[11px] uppercase tracking-[0.25em] text-slate-500 font-semibold">Plan curricular</p>
+            <h2 class="text-2xl font-black text-swDark">Estructura del curso</h2>
+          </div>
         </div>
-    </header>
 
-    <!-- MAIN CONTENT CONTAINER -->
-    <main class="flex-1 overflow-y-auto custom-scrollbar p-4 md:p-6 bg-swLightBg" id="mainContent">
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4" id="inicioModulesGrid"></div>
+      </div>
+    </section>
 
-        <!-- ==================== TAB 1: INICIO ==================== -->
-        <section id="tab-inicio" class="tab-content max-w-7xl mx-auto space-y-8">
-            <!-- Hero Banner -->
-            <div class="bg-gradient-to-r from-swDark to-slate-800 text-white rounded-2xl p-6 md:p-10 shadow-xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between">
-                <div class="md:w-2/3 space-y-4 z-10">
-                    <span class="bg-swCyan/20 text-swCyan border border-swCyan/30 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">Formación Profesional CAD</span>
-                    <h1 class="text-3xl md:text-4xl lg:text-5xl font-black tracking-tight leading-tight">SOLIDWORKS PARA PRINCIPIANTES</h1>
-                    <p class="text-gray-300 text-base md:text-lg">Curso Virtual Interactivo de 16 semanas diseñado por ingenieros y pedagogos para dominar el diseño 3D y superar con éxito la certificación CSWA.</p>
-                    <div class="flex flex-wrap gap-4 pt-2">
-                        <a href="aula/index.html" class="bg-swCyan hover:bg-swCyanHover text-swDark font-bold px-6 py-3 rounded-lg shadow-lg hover:shadow-cyan-500/20 transition flex items-center gap-2">
-                            <i class="fa-solid fa-play"></i> Iniciar Aula Virtual
-                        </a>
-                        <a href="cswa/index.html" class="bg-white/10 hover:bg-white/20 border border-white/30 text-white font-semibold px-6 py-3 rounded-lg backdrop-blur-sm transition flex items-center gap-2">
-                            <i class="fa-solid fa-chart-line"></i> Evaluar Nivel CSWA
-                        </a>
-                    </div>
-                </div>
-                <div class="md:w-1/3 mt-6 md:mt-0 flex justify-center z-10">
-                    <div class="w-48 h-48 md:w-56 md:h-56 bg-swCyan/10 border-2 border-swCyan/30 rounded-2xl flex flex-col items-center justify-center text-center p-4 backdrop-blur-md">
-                        <i class="fa-solid fa-certificate text-5xl text-swCyan mb-3 animate-pulse"></i>
-                        <span class="font-extrabold text-xl text-white">Certificación CSWA</span>
-                        <span class="text-xs text-gray-300 mt-1">SOLIDWORKS Official Associate</span>
-                        <div class="mt-3 bg-swCyan text-swDark text-xs font-bold px-3 py-1 rounded-full">Examen 100% Simulado</div>
-                    </div>
-                </div>
+    <section id="tab-laboratorio" class="tab-content hidden max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+      <div class="card-soft p-6 sm:p-8">
+        <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-6">
+          <div class="flex items-center gap-3">
+            <span class="w-12 h-12 rounded-xl bg-swCyan/15 text-swCyan text-xl flex items-center justify-center"><i class="fa-solid fa-cube"></i></span>
+            <div>
+              <p class="text-[11px] uppercase tracking-[0.25em] text-slate-500 font-semibold">Herramienta didáctica</p>
+              <h2 class="text-2xl font-black text-swDark">Laboratorio CAD</h2>
             </div>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <button onclick="setLabShape('cube')" class="px-3 py-1.5 bg-gray-100 hover:bg-swCyan hover:text-white rounded text-xs font-semibold transition">Bloque Extruido</button>
+            <button onclick="setLabShape('cylinder')" class="px-3 py-1.5 bg-gray-100 hover:bg-swCyan hover:text-white rounded text-xs font-semibold transition">Eje con Revolución</button>
+            <button onclick="setLabShape('bracket')" class="px-3 py-1.5 bg-gray-100 hover:bg-swCyan hover:text-white rounded text-xs font-semibold transition">Soporte Perforado</button>
+          </div>
+        </div>
 
-            <!-- Highlights Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 flex items-start space-x-4">
-                    <div class="p-3 bg-blue-50 text-swDark rounded-lg"><i class="fa-regular fa-clock text-2xl"></i></div>
-                    <div>
-                        <h3 class="font-bold text-gray-900">16 Semanas</h3>
-                        <p class="text-xs text-gray-500">3 hrs/semana (48 hrs lectivas totales)</p>
-                    </div>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 flex items-start space-x-4">
-                    <div class="p-3 bg-cyan-50 text-swCyan rounded-lg"><i class="fa-solid fa-cubes text-2xl"></i></div>
-                    <div>
-                        <h3 class="font-bold text-gray-900">8 Módulos Completos</h3>
-                        <p class="text-xs text-gray-500">Croquis, piezas, ensamblajes y masa</p>
-                    </div>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 flex items-start space-x-4">
-                    <div class="p-3 bg-emerald-50 text-emerald-600 rounded-lg"><i class="fa-solid fa-gears text-2xl"></i></div>
-                    <div>
-                        <h3 class="font-bold text-gray-900">Proyecto Real</h3>
-                        <p class="text-xs text-gray-500">Diseño completo de Tornillo de Banco</p>
-                    </div>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 flex items-start space-x-4">
-                    <div class="p-3 bg-amber-50 text-amber-600 rounded-lg"><i class="fa-solid fa-bullseye text-2xl"></i></div>
-                    <div>
-                        <h3 class="font-bold text-gray-900">CSWA Engine</h3>
-                        <p class="text-xs text-gray-500">Diagnóstico automático de 9 áreas</p>
-                    </div>
-                </div>
+        <div class="grid lg:grid-cols-[1.7fr_0.95fr] gap-6">
+          <div class="bg-slate-900 rounded-2xl overflow-hidden shadow-md flex flex-col h-[490px] relative">
+            <div class="bg-slate-800 text-gray-300 text-xs px-4 py-2 flex justify-between items-center border-b border-slate-700">
+              <span><i class="fa-solid fa-cube text-swCyan mr-2"></i> Vista de modelado 3D</span>
+              <span class="text-slate-400">Arrastra para rotar · rueda para zoom</span>
             </div>
+            <div id="threeCanvasContainer" class="flex-1"></div>
+          </div>
 
-            <!-- Curriculum Syllabus Breakdown -->
-            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-                <h2 class="text-2xl font-extrabold text-swDark mb-6 flex items-center gap-2">
-                    <i class="fa-solid fa-graduation-cap text-swCyan"></i> Estructura del Curso (8 Módulos / 16 Semanas)
-                </h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" id="inicioModulesGrid">
-                    <!-- Populated dynamically -->
-                </div>
-            </div>
-        </section>
+          <div class="card-soft p-6 h-fit">
+            <h3 class="font-bold text-swDark border-b pb-2 flex items-center gap-2">
+              <i class="fa-solid fa-calculator text-swCyan"></i> Inspector de propiedades
+            </h3>
 
-        <!-- ==================== TAB 2: LABORATORIO CAD ==================== -->
-        <section id="tab-laboratorio" class="tab-content hidden max-w-7xl mx-auto space-y-6">
-            <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div class="mt-4 space-y-4">
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">Material asignado</label>
+                <select id="labMaterialSelect" onchange="updateLabCalculations()" class="w-full border border-gray-300 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-swCyan outline-none bg-white">
+                  <option value="7850">Acero al Carbono (1020) - 7850 kg/m³</option>
+                  <option value="2700">Aluminio 6061-T6 - 2700 kg/m³</option>
+                  <option value="8500">Latón (Brass) - 8500 kg/m³</option>
+                  <option value="1020">ABS Plástico - 1020 kg/m³</option>
+                  <option value="8960">Cobre Puro - 8960 kg/m³</option>
+                </select>
+              </div>
+
+              <div class="space-y-3">
                 <div>
-                    <h1 class="text-2xl font-bold text-swDark flex items-center gap-2">
-                        <i class="fa-solid fa-drafting-compass text-swCyan"></i> Laboratorio CAD Interactivo
-                    </h1>
-                    <p class="text-sm text-gray-500">Visualizador 3D, generador de planos técnicos y calculadora de propiedades de masa</p>
+                  <div class="flex justify-between text-xs text-gray-600 mb-1">
+                    <span>Dimensión A (Longitud)</span>
+                    <span class="font-semibold" id="valA">100 mm</span>
+                  </div>
+                  <input type="range" id="rangeA" min="50" max="200" value="100" oninput="updateLabCalculations()" class="w-full accent-swCyan">
                 </div>
-                <div class="flex gap-2">
-                    <button onclick="setLabShape('cube')" class="px-3 py-1.5 bg-gray-100 hover:bg-swCyan hover:text-white rounded text-xs font-semibold transition">Bloque Extruido</button>
-                    <button onclick="setLabShape('cylinder')" class="px-3 py-1.5 bg-gray-100 hover:bg-swCyan hover:text-white rounded text-xs font-semibold transition">Eje con Revolución</button>
-                    <button onclick="setLabShape('bracket')" class="px-3 py-1.5 bg-gray-100 hover:bg-swCyan hover:text-white rounded text-xs font-semibold transition">Soporte Perforado</button>
+                <div>
+                  <div class="flex justify-between text-xs text-gray-600 mb-1">
+                    <span>Dimensión B (Ancho / Diámetro)</span>
+                    <span class="font-semibold" id="valB">50 mm</span>
+                  </div>
+                  <input type="range" id="rangeB" min="20" max="120" value="50" oninput="updateLabCalculations()" class="w-full accent-swCyan">
                 </div>
+                <div>
+                  <div class="flex justify-between text-xs text-gray-600 mb-1">
+                    <span>Dimensión C (Altura / Perforación)</span>
+                    <span class="font-semibold" id="valC">30 mm</span>
+                  </div>
+                  <input type="range" id="rangeC" min="10" max="80" value="30" oninput="updateLabCalculations()" class="w-full accent-swCyan">
+                </div>
+              </div>
+
+              <div class="bg-slate-50 border border-slate-200 p-4 rounded-lg space-y-2 pt-3">
+                <div class="text-[11px] text-gray-500 font-bold uppercase tracking-[0.2em]">Resultados de masa</div>
+                <div class="flex justify-between text-sm">
+                  <span class="text-gray-600">Volumen:</span>
+                  <span class="font-bold text-swDark" id="calcVol">150,000.00 mm³</span>
+                </div>
+                <div class="flex justify-between text-sm">
+                  <span class="text-gray-600">Masa calculada:</span>
+                  <span class="font-bold text-swCyan" id="calcMass">1,177.50 gramos</span>
+                </div>
+                <div class="flex justify-between text-[11px] text-gray-500 border-t pt-2">
+                  <span>Centro de gravedad (X, Y, Z):</span>
+                  <span class="font-mono text-gray-700" id="calcCG">(0.00, 0.00, 0.00)</span>
+                </div>
+              </div>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <!-- 3D Viewer Canvas -->
-                <div class="lg:col-span-2 bg-slate-900 rounded-xl overflow-hidden shadow-md flex flex-col h-[480px] relative">
-                    <div class="bg-slate-800 text-gray-300 text-xs px-4 py-2 flex justify-between items-center border-b border-slate-700">
-                        <span><i class="fa-solid fa-cube text-swCyan mr-2"></i> VISTA DE MODELADO 3D (INTERACTIVO)</span>
-                        <span class="text-slate-400">Arrastra para rotar | Rueda para Zoom</span>
-                    </div>
-                    <div id="threeCanvasContainer" class="w-full flex-1 relative">
-                        <!-- Three.js Canvas injected here -->
-                    </div>
-                </div>
+    <section id="tab-recursos" class="tab-content hidden max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+      <div class="card-soft p-6 sm:p-8">
+        <h2 class="text-2xl font-black text-swDark mb-5">Biblioteca de recursos y descargas</h2>
+        <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+          <div class="p-4 border border-slate-200 rounded-xl hover:border-swCyan transition bg-white">
+            <i class="fa-solid fa-file-pdf text-red-500 text-2xl mb-2"></i>
+            <h4 class="font-bold text-swDark">Guía de atajos de teclado CSWA</h4>
+            <p class="text-xs text-gray-500 mt-1">Hoja de referencia rápida de comandos y atajos de SolidWorks.</p>
+            <button onclick="downloadResource('Guia_Atajos_SolidWorks.pdf')" class="resource-btn mt-3 text-xs font-bold px-3 py-1.5 rounded">Descargar PDF</button>
+          </div>
 
-                <!-- Parameter Inspector & Mass Calculator -->
-                <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-4">
-                    <h3 class="font-bold text-swDark border-b pb-2 flex items-center gap-2">
-                        <i class="fa-solid fa-calculator text-swCyan"></i> Inspector de Propiedades
-                    </h3>
+          <div class="p-4 border border-slate-200 rounded-xl hover:border-swCyan transition bg-white">
+            <i class="fa-solid fa-folder-archive text-amber-500 text-2xl mb-2"></i>
+            <h4 class="font-bold text-swDark">Plantillas de planos normalizados</h4>
+            <p class="text-xs text-gray-500 mt-1">Archivos de formato ISO / ANSI A4 y A3 (.slddrt).</p>
+            <button onclick="downloadResource('Plantillas_Planos_ISO_ANSI.zip')" class="resource-btn mt-3 text-xs font-bold px-3 py-1.5 rounded">Descargar</button>
+          </div>
 
-                    <div>
-                        <label class="block text-xs font-bold text-gray-700 mb-1">Material Asignado</label>
-                        <select id="labMaterialSelect" onchange="updateLabCalculations()" class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-swCyan outline-none">
-                            <option value="7850">Acero al Carbono (1020) - 7850 kg/m³</option>
-                            <option value="2700">Aluminio 6061-T6 - 2700 kg/m³</option>
-                            <option value="8500">Latón (Brass) - 8500 kg/m³</option>
-                            <option value="1020">ABS Plástico - 1020 kg/m³</option>
-                            <option value="8960">Cobre Puro - 8960 kg/m³</option>
-                        </select>
-                    </div>
+          <div class="p-4 border border-slate-200 rounded-xl hover:border-swCyan transition bg-white">
+            <i class="fa-solid fa-cube text-swCyan text-2xl mb-2"></i>
+            <h4 class="font-bold text-swDark">Banco de planos tipo CSWA</h4>
+            <p class="text-xs text-gray-500 mt-1">20 ejercicios resueltos en plano 2D con cotas de prueba.</p>
+            <button onclick="downloadResource('Planos_Ejercicios_CSWA.pdf')" class="resource-btn mt-3 text-xs font-bold px-3 py-1.5 rounded">Descargar PDF</button>
+          </div>
+        </div>
+      </div>
+    </section>
 
-                    <div class="space-y-3 pt-2">
-                        <div>
-                            <div class="flex justify-between text-xs text-gray-600 mb-1">
-                                <span>Dimensión A (Longitud)</span>
-                                <span class="font-semibold" id="valA">100 mm</span>
-                            </div>
-                            <input type="range" id="rangeA" min="50" max="200" value="100" oninput="updateLabCalculations()" class="w-full accent-swCyan">
-                        </div>
-                        <div>
-                            <div class="flex justify-between text-xs text-gray-600 mb-1">
-                                <span>Dimensión B (Ancho / Diámetro)</span>
-                                <span class="font-semibold" id="valB">50 mm</span>
-                            </div>
-                            <input type="range" id="rangeB" min="20" max="120" value="50" oninput="updateLabCalculations()" class="w-full accent-swCyan">
-                        </div>
-                        <div>
-                            <div class="flex justify-between text-xs text-gray-600 mb-1">
-                                <span>Dimensión C (Altura / Perforación)</span>
-                                <span class="font-semibold" id="valC">30 mm</span>
-                            </div>
-                            <input type="range" id="rangeC" min="10" max="80" value="30" oninput="updateLabCalculations()" class="w-full accent-swCyan">
-                        </div>
-                    </div>
+    <section id="tab-certificacion" class="tab-content hidden max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+      <div class="card-soft p-6 sm:p-8">
+        <div class="border-b pb-4">
+          <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-swCyan">Información oficial del examen</span>
+          <h1 class="mt-2 text-2xl font-bold text-swDark">Certificación Internacional CSWA</h1>
+        </div>
 
-                    <!-- Calculated Properties Box -->
-                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-lg space-y-2 pt-3">
-                        <div class="text-xs text-gray-500 font-bold uppercase">Resultados de Masa</div>
-                        <div class="flex justify-between text-sm">
-                            <span class="text-gray-600">Volumen:</span>
-                            <span class="font-bold text-swDark" id="calcVol">150,000.00 mm³</span>
-                        </div>
-                        <div class="flex justify-between text-sm">
-                            <span class="text-gray-600">Masa Calculada:</span>
-                            <span class="font-bold text-swCyan" id="calcMass">1,177.50 gramos</span>
-                        </div>
-                        <div class="flex justify-between text-xs text-gray-500 border-t pt-2">
-                            <span>Centro de Gravedad (X, Y, Z):</span>
-                            <span class="font-mono text-gray-700" id="calcCG">(0.00, 0.00, 0.00)</span>
-                        </div>
-                    </div>
-                </div>
+        <div class="grid md:grid-cols-2 gap-6 mt-6 text-sm">
+          <div>
+            <h3 class="font-bold text-swDark text-base mb-3">Requisitos y formato oficial</h3>
+            <ul class="space-y-2 text-xs text-gray-600 info-list pl-5">
+              <li><strong>Duración del examen:</strong> 3 horas (180 minutos).</li>
+              <li><strong>Calificación mínima de aprobación:</strong> 70% (165 puntos de 240).</li>
+              <li><strong>Software requerido:</strong> SOLIDWORKS 2021 o superior (con Tangent Edges enabled).</li>
+              <li><strong>Política de reintento:</strong> espera mínima de 14 días en caso de no aprobar.</li>
+              <li><strong>Enlace oficial:</strong> <a href="https://www.solidworks.com/certifications" target="_blank" class="text-swCyan font-bold hover:underline">solidworks.com/certifications</a></li>
+            </ul>
+          </div>
+
+          <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl">
+            <h3 class="font-bold text-swDark text-sm mb-3">Lista de chequeo del día del examen</h3>
+            <div class="space-y-2 text-xs">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" class="accent-swCyan">
+                <span>Verificar conexión estable para el cliente Tangix TesterPRO.</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" class="accent-swCyan">
+                <span>Tener plantilla configurada en Milímetros (MMGS) y Pulgadas (IPS).</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" class="accent-swCyan">
+                <span>Saber modificar variables globales (A, B, C) rápidamente.</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" class="accent-swCyan">
+                <span>Saber calcular la masa y el centro de masa con precisión decimal.</span>
+              </label>
             </div>
-        </section>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
-        <!-- ==================== TAB 3: RECURSOS ==================== -->
-        <section id="tab-recursos" class="tab-content hidden max-w-7xl mx-auto space-y-6">
-            <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
-                <h1 class="text-2xl font-bold text-swDark mb-4">Biblioteca de Recursos y Descargas</h1>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-                    <div class="p-4 border rounded-lg hover:border-swCyan transition">
-                        <i class="fa-solid fa-file-pdf text-red-500 text-2xl mb-2"></i>
-                        <h4 class="font-bold text-swDark">Guía de Atajos de Teclado CSWA</h4>
-                        <p class="text-xs text-gray-500 mt-1">Hoja de referencia rápida de comandos y atajos de SolidWorks.</p>
-                        <button onclick="downloadResource('Guia_Atajos_SolidWorks.pdf')" class="mt-3 text-xs bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold px-3 py-1.5 rounded">Descargar PDF</button>
-                    </div>
-                    <div class="p-4 border rounded-lg hover:border-swCyan transition">
-                        <i class="fa-solid fa-folder-archive text-amber-500 text-2xl mb-2"></i>
-                        <h4 class="font-bold text-swDark">Plantillas de Planos Normalizados</h4>
-                        <p class="text-xs text-gray-500 mt-1">Archivos de formato ISO / ANSI A4 y A3 (.slddrt).</p>
-                        <button onclick="downloadResource('Plantillas_Planos_ISO_ANSI.zip')" class="mt-3 text-xs bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold px-3 py-1.5 rounded">Descargar</button>
-                    </div>
-                    <div class="p-4 border rounded-lg hover:border-swCyan transition">
-                        <i class="fa-solid fa-cube text-swCyan text-2xl mb-2"></i>
-                        <h4 class="font-bold text-swDark">Banco de Planos Tipo CSWA</h4>
-                        <p class="text-xs text-gray-500 mt-1">20 Ejercicios resueltos en plano 2D con cotas de prueba.</p>
-                        <button onclick="downloadResource('Planos_Ejercicios_CSWA.pdf')" class="mt-3 text-xs bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold px-3 py-1.5 rounded">Descargar PDF</button>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <script>
+    const curriculumData = [
+      { module: 1, moduleTitle: "INTRODUCCIÓN A SOLIDWORKS", weeks: [{ week: 1, title: "Entorno e Interfaz" }, { week: 2, title: "Modelado Paramétrico" }] },
+      { module: 2, moduleTitle: "CROQUIS Y RESTRICCIONES", weeks: [{ week: 3, title: "Entidades y Relaciones" }, { week: 4, title: "Evaluación Práctica 1" }] },
+      { module: 3, moduleTitle: "MODELADO DE SÓLIDOS", weeks: [{ week: 5, title: "Extrusión y Revolución" }, { week: 6, title: "Vaciados y Matrices" }] },
+      { module: 4, moduleTitle: "COMPONENTES MECÁNICOS", weeks: [{ week: 7, title: "Bridas, Poleas y Ejes" }, { week: 8, title: "Evaluación Práctica 2" }] },
+      { module: 5, moduleTitle: "ENSAMBLAJES", weeks: [{ week: 9, title: "Relaciones Estándar" }, { week: 10, title: "Relaciones Avanzadas e Interferencias" }] },
+      { module: 6, moduleTitle: "PROPIEDADES FÍSICAS", weeks: [{ week: 11, title: "Materiales y Masa" }, { week: 12, title: "Evaluación Práctica 3" }] },
+      { module: 7, moduleTitle: "PREPARACIÓN CSWA", weeks: [{ week: 13, title: "Estrategia CSWA" }, { week: 14, title: "Ensamblajes Complejos" }] },
+      { module: 8, moduleTitle: "SIMULACROS Y PROYECTO", weeks: [{ week: 15, title: "Simulacro Diagnóstico" }, { week: 16, title: "Evaluación Final" }] }
+    ];
 
-        <!-- ==================== TAB 4: CERTIFICACIÓN CSWA ==================== -->
-        <section id="tab-certificacion" class="tab-content hidden max-w-7xl mx-auto space-y-6">
-            <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-6">
-                <div class="border-b pb-4">
-                    <span class="text-xs font-bold text-swCyan uppercase">Información Oficial del Examen</span>
-                    <h1 class="text-2xl font-bold text-swDark">Certificación Internacional CSWA (Certified SOLIDWORKS Associate)</h1>
-                </div>
+    function setActiveTabVisual(tabId) {
+      const navButtons = document.querySelectorAll('.nav-btn');
+      navButtons.forEach(el => el.classList.toggle('active', el.textContent.trim().toLowerCase().includes(tabId === 'inicio' ? 'inicio' : tabId === 'laboratorio' ? 'lab cad' : tabId === 'recursos' ? 'recursos' : tabId === 'certificacion' ? 'certificación cswa' : '')));
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
-                    <div class="space-y-3">
-                        <h3 class="font-bold text-swDark text-base">Requisitos y Formato Oficial del Examen</h3>
-                        <ul class="space-y-2 text-xs text-gray-600 list-disc pl-4">
-                            <li><strong>Duración del examen:</strong> 3 Horas (180 minutos).</li>
-                            <li><strong>Calificación mínima de aprobación:</strong> 70% (165 puntos de 240 puntos posibles).</li>
-                            <li><strong>Software requerido:</strong> SOLIDWORKS 2021 o superior (con Tangent Edges enabled).</li>
-                            <li><strong>Política de reintento:</strong> Esperar un periodo mínimo de 14 días en caso de no aprobar.</li>
-                            <li><strong>Enlace Oficial de Inscripción:</strong> <a href="https://www.solidworks.com/certifications" target="_blank" class="text-swCyan font-bold hover:underline">solidworks.com/certifications</a></li>
-                        </ul>
-                    </div>
+      document.querySelectorAll('.nav-link, .nav-a').forEach(el => el.classList.remove('active'));
+      const activeLink = [...document.querySelectorAll('.nav-a, .nav-btn')].find(el => {
+        const text = el.textContent.replace(/\s+/g, ' ').trim().toLowerCase();
+        return text.includes(tabId === 'inicio' ? 'inicio' : tabId === 'laboratorio' ? 'lab cad' : tabId === 'recursos' ? 'recursos' : tabId === 'certificacion' ? 'certificación cswa' : '');
+      });
+      if (activeLink) activeLink.classList.add('active');
+    }
 
-                    <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl space-y-3">
-                        <h3 class="font-bold text-swDark text-sm">Lista de Chequeo para el Día del Examen</h3>
-                        <div class="space-y-2 text-xs">
-                            <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="checkbox" class="accent-swCyan">
-                                <span>Verificar conexión a internet estable para el cliente Tangix TesterPRO.</span>
-                            </label>
-                            <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="checkbox" class="accent-swCyan">
-                                <span>Tener plantilla de pieza configurada en Milímetros (MMGS) e Pulgadas (IPS).</span>
-                            </label>
-                            <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="checkbox" class="accent-swCyan">
-                                <span>Saber modificar variables globales (A, B, C) rápidamente.</span>
-                            </label>
-                            <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="checkbox" class="accent-swCyan">
-                                <span>Saber calcular la masa y el centro de masa con precisión decimal.</span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      const target = document.getElementById('tab-' + tabId);
+      if (target) target.classList.remove('hidden');
 
-    </main>
+      setActiveTabVisual(tabId);
 
-    <!-- MAIN JAVASCRIPT LOGIC -->
-    <script>
-        const curriculumData = [
-            { module: 1, moduleTitle: "INTRODUCCIÓN A SOLIDWORKS", weeks: [{ week: 1, title: "Entorno e Interfaz" }, { week: 2, title: "Modelado Paramétrico" }] },
-            { module: 2, moduleTitle: "CROQUIS Y RESTRICCIONES", weeks: [{ week: 3, title: "Entidades y Relaciones" }, { week: 4, title: "Evaluación Práctica 1" }] },
-            { module: 3, moduleTitle: "MODELADO DE SÓLIDOS", weeks: [{ week: 5, title: "Extrusión y Revolución" }, { week: 6, title: "Vaciados y Matrices" }] },
-            { module: 4, moduleTitle: "COMPONENTES MECÁNICOS", weeks: [{ week: 7, title: "Bridas, Poleas y Ejes" }, { week: 8, title: "Evaluación Práctica 2" }] },
-            { module: 5, moduleTitle: "ENSAMBLAJES", weeks: [{ week: 9, title: "Relaciones Estándar" }, { week: 10, title: "Relaciones Avanzadas e Interferencias" }] },
-            { module: 6, moduleTitle: "PROPIEDADES FÍSICAS", weeks: [{ week: 11, title: "Materiales y Masa" }, { week: 12, title: "Evaluación Práctica 3" }] },
-            { module: 7, moduleTitle: "PREPARACIÓN CSWA", weeks: [{ week: 13, title: "Estrategia CSWA" }, { week: 14, title: "Ensamblajes Complejos" }] },
-            { module: 8, moduleTitle: "SIMULACROS Y PROYECTO", weeks: [{ week: 15, title: "Simulacro Diagnóstico" }, { week: 16, title: "Evaluación Final" }] }
-        ];
+      const mobileMenu = document.getElementById('mobileMenu');
+      if (mobileMenu) mobileMenu.classList.add('hidden');
+    }
 
-        window.onload = function() {
-            renderInicioModules();
-            initThreeJS();
-            updateLabCalculations();
-        };
+    function toggleMobileMenu() {
+      const mobileMenu = document.getElementById('mobileMenu');
+      const button = document.getElementById('mobileMenuBtn');
+      const isHidden = mobileMenu.classList.toggle('hidden');
+      button.setAttribute('aria-expanded', String(!isHidden));
+      button.innerHTML = isHidden
+        ? '<i class="fa-solid fa-bars text-xl" aria-hidden="true"></i>'
+        : '<i class="fa-solid fa-xmark text-xl" aria-hidden="true"></i>';
+    }
 
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            const target = document.getElementById('tab-' + tabId);
-            if (target) target.classList.remove('hidden');
+    function renderInicioModules() {
+      const grid = document.getElementById('inicioModulesGrid');
+      if (!grid) return;
 
-            const mobileMenu = document.getElementById('mobileMenu');
-            if (mobileMenu) mobileMenu.classList.add('hidden');
+      grid.innerHTML = curriculumData.map((mod) => `
+        <div class="module-card p-4">
+          <span class="inline-block text-[10px] font-black uppercase tracking-[0.15em] text-swCyan bg-swCyan/10 px-2 py-1 rounded">Módulo ${mod.module}</span>
+          <h4 class="font-bold text-swDark text-sm mt-3 mb-3">${mod.moduleTitle}</h4>
+          <ul class="text-xs space-y-2 text-gray-600">
+            ${mod.weeks.map(w => `
+              <li>
+                <a href="aula/semana${w.week}.html" class="hover:text-swCyan transition inline-flex items-center gap-2">
+                  <i class="fa-solid fa-angle-right text-swCyan text-[10px]"></i>
+                  <span>Sem ${w.week} - ${w.title}</span>
+                </a>
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+      `).join('');
+    }
+
+    let scene, camera, renderer, currentMesh, currentShapeType = 'cube';
+
+    function initThreeJS() {
+      const container = document.getElementById('threeCanvasContainer');
+      if (!container) return;
+
+      scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x0f172a);
+
+      camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+      camera.position.set(150, 150, 200);
+      camera.lookAt(0, 0, 0);
+
+      renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setSize(container.clientWidth, container.clientHeight);
+      container.appendChild(renderer.domElement);
+
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+      scene.add(ambientLight);
+
+      const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+      dirLight.position.set(100, 200, 150);
+      scene.add(dirLight);
+
+      const grid = new THREE.GridHelper(300, 20, 0x00B3E0, 0x334155);
+      scene.add(grid);
+
+      setLabShape('cube');
+
+      let isDragging = false;
+      let prevMouse = { x: 0, y: 0 };
+
+      renderer.domElement.addEventListener('pointerdown', e => {
+        isDragging = true;
+        prevMouse = { x: e.clientX, y: e.clientY };
+      });
+
+      renderer.domElement.addEventListener('pointermove', e => {
+        if (!isDragging || !currentMesh) return;
+        const deltaX = e.clientX - prevMouse.x;
+        const deltaY = e.clientY - prevMouse.y;
+        currentMesh.rotation.y += deltaX * 0.01;
+        currentMesh.rotation.x += deltaY * 0.01;
+        prevMouse = { x: e.clientX, y: e.clientY };
+        renderer.render(scene, camera);
+      });
+
+      window.addEventListener('pointerup', () => { isDragging = false; });
+      window.addEventListener('pointercancel', () => { isDragging = false; });
+
+      window.addEventListener('resize', () => {
+        if (!container || !camera || !renderer) return;
+        const width = container.clientWidth;
+        const height = container.clientHeight;
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        renderer.setSize(width, height);
+        renderer.render(scene, camera);
+      });
+
+      renderer.render(scene, camera);
+    }
+
+    function buildBracketGeometry(width, height, thickness) {
+      const shape = new THREE.Shape();
+      const outerW = Math.max(30, width);
+      const outerH = Math.max(30, height);
+      const innerR = Math.max(8, Math.min(outerW * 0.22, thickness * 0.8));
+
+      shape.moveTo(-outerW / 2, -outerH / 2);
+      shape.lineTo(outerW / 2, -outerH / 2);
+      shape.lineTo(outerW / 2, outerH / 2);
+      shape.lineTo(-outerW / 2, outerH / 2);
+      shape.lineTo(-outerW / 2, -outerH / 2);
+
+      const hole = new THREE.Path();
+      hole.absarc(0, 0, innerR, 0, Math.PI * 2, false);
+      const hole2 = new THREE.Path();
+      hole2.absarc(0, -(outerH * 0.14), innerR * 0.8, 0, Math.PI * 2, false);
+      shape.holes.push(hole);
+      shape.holes.push(hole2);
+
+      const geometry = new THREE.ExtrudeGeometry(shape, {
+        depth: thickness,
+        bevelEnabled: false,
+        curveSegments: 20
+      });
+      geometry.center();
+      return geometry;
+    }
+
+    function setLabShape(type) {
+      currentShapeType = type;
+      if (!scene) return;
+
+      if (currentMesh) {
+        scene.remove(currentMesh);
+        currentMesh.geometry.dispose();
+        currentMesh.material.dispose();
+        currentMesh = null;
+      }
+
+      const material = new THREE.MeshStandardMaterial({
+        color: 0x00B3E0,
+        metalness: 0.4,
+        roughness: 0.3
+      });
+
+      const dimA = parseFloat(document.getElementById('rangeA').value);
+      const dimB = parseFloat(document.getElementById('rangeB').value);
+      const dimC = parseFloat(document.getElementById('rangeC').value);
+
+      let geometry;
+
+      if (type === 'cube') {
+        geometry = new THREE.BoxGeometry(dimA, dimC, dimB);
+      } else if (type === 'cylinder') {
+        geometry = new THREE.CylinderGeometry(dimB / 2, dimB / 2, dimA, 32);
+      } else if (type === 'bracket') {
+        geometry = buildBracketGeometry(dimB, dimA, dimC);
+      } else {
+        geometry = new THREE.TorusGeometry(dimB, dimC / 2, 16, 100);
+      }
+
+      currentMesh = new THREE.Mesh(geometry, material);
+      scene.add(currentMesh);
+      renderer.render(scene, camera);
+      updateLabCalculations();
+    }
+
+    function getShapeVolumeMm3() {
+      const dimA = parseFloat(document.getElementById('rangeA').value);
+      const dimB = parseFloat(document.getElementById('rangeB').value);
+      const dimC = parseFloat(document.getElementById('rangeC').value);
+
+      if (currentShapeType === 'cube') return dimA * dimB * dimC;
+      if (currentShapeType === 'cylinder') return Math.PI * Math.pow(dimB / 2, 2) * dimA;
+      if (currentShapeType === 'bracket') {
+        const outerPlateArea = dimA * dimB;
+        const innerHoleArea = Math.PI * Math.pow(Math.max(4, dimC / 3), 2);
+        return (outerPlateArea - innerHoleArea) * dimC * 0.7;
+      }
+      return dimA * dimB * dimC;
+    }
+
+    function updateLabCalculations() {
+      const dimA = parseFloat(document.getElementById('rangeA').value);
+      const dimB = parseFloat(document.getElementById('rangeB').value);
+      const dimC = parseFloat(document.getElementById('rangeC').value);
+
+      document.getElementById('valA').innerText = dimA + ' mm';
+      document.getElementById('valB').innerText = dimB + ' mm';
+      document.getElementById('valC').innerText = dimC + ' mm';
+
+      const density = parseFloat(document.getElementById('labMaterialSelect').value);
+      const volumeMm3 = getShapeVolumeMm3();
+      const volumeM3 = volumeMm3 / 1e9;
+      const massKg = volumeM3 * density;
+      const massGrams = massKg * 1000;
+
+      document.getElementById('calcVol').innerText = volumeMm3.toLocaleString('es-ES', { minimumFractionDigits: 2 }) + ' mm³';
+      document.getElementById('calcMass').innerText = massGrams.toLocaleString('es-ES', { minimumFractionDigits: 2 }) + ' gramos';
+
+      if (currentMesh && scene && renderer) {
+        if (currentShapeType === 'cube') {
+          currentMesh.scale.set(dimA / 100, dimC / 30, dimB / 50);
+        } else if (currentShapeType === 'cylinder') {
+          currentMesh.scale.set(1, 1, 1);
+        } else if (currentShapeType === 'bracket') {
+          currentMesh.scale.set(0.7, 0.7, 0.7);
+        } else {
+          currentMesh.scale.set(1, 1, 1);
         }
+        renderer.render(scene, camera);
+      }
+    }
 
-        function toggleMobileMenu() {
-            const mobileMenu = document.getElementById('mobileMenu');
-            if (mobileMenu) mobileMenu.classList.toggle('hidden');
-        }
+    function downloadResource(filename) {
+      alert(`Iniciando descarga simulada del archivo: ${filename}`);
+    }
 
-        function renderInicioModules() {
-            const grid = document.getElementById('inicioModulesGrid');
-            if (!grid) return;
-
-            grid.innerHTML = curriculumData.map(mod => `
-                <div class="border border-gray-200 rounded-xl p-4 bg-gray-50 hover:bg-white hover:border-swCyan hover:shadow-md transition">
-                    <span class="text-[10px] font-black uppercase text-swCyan bg-swCyan/10 px-2 py-0.5 rounded">Módulo ${mod.module}</span>
-                    <h4 class="font-bold text-swDark text-sm mt-2 mb-2">${mod.moduleTitle}</h4>
-                    <ul class="text-xs space-y-1 text-gray-600">
-                        ${mod.weeks.map(w => `
-                            <li>
-                                <a href="aula/semana${w.week}.html" class="hover:text-swCyan transition">
-                                    <i class="fa-solid fa-angle-right text-swCyan text-[10px] mr-1"></i> Sem ${w.week} - ${w.title}
-                                </a>
-                            </li>
-                        `).join('')}
-                    </ul>
-                </div>
-            `).join('');
-        }
-
-        let scene, camera, renderer, currentMesh, currentShapeType = 'cube';
-
-        function initThreeJS() {
-            const container = document.getElementById('threeCanvasContainer');
-            if (!container) return;
-
-            scene = new THREE.Scene();
-            scene.background = new THREE.Color(0x0f172a);
-
-            camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
-            camera.position.set(150, 150, 200);
-            camera.lookAt(0, 0, 0);
-
-            renderer = new THREE.WebGLRenderer({ antialias: true });
-            renderer.setSize(container.clientWidth, container.clientHeight);
-            container.appendChild(renderer.domElement);
-
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-            scene.add(ambientLight);
-
-            const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
-            dirLight.position.set(100, 200, 150);
-            scene.add(dirLight);
-
-            const grid = new THREE.GridHelper(300, 20, 0x00B3E0, 0x334155);
-            scene.add(grid);
-
-            setLabShape('cube');
-
-            let isDragging = false;
-            let prevMouse = { x: 0, y: 0 };
-
-            renderer.domElement.addEventListener('pointerdown', e => {
-                isDragging = true;
-                prevMouse = { x: e.clientX, y: e.clientY };
-            });
-
-            renderer.domElement.addEventListener('pointermove', e => {
-                if (!isDragging || !currentMesh) return;
-
-                const deltaX = e.clientX - prevMouse.x;
-                const deltaY = e.clientY - prevMouse.y;
-
-                currentMesh.rotation.y += deltaX * 0.01;
-                currentMesh.rotation.x += deltaY * 0.01;
-
-                prevMouse = { x: e.clientX, y: e.clientY };
-                renderer.render(scene, camera);
-            });
-
-            window.addEventListener('pointerup', () => { isDragging = false; });
-            window.addEventListener('pointercancel', () => { isDragging = false; });
-
-            window.addEventListener('resize', () => {
-                if (!container || !camera || !renderer) return;
-                const width = container.clientWidth;
-                const height = container.clientHeight;
-                camera.aspect = width / height;
-                camera.updateProjectionMatrix();
-                renderer.setSize(width, height);
-                renderer.render(scene, camera);
-            });
-
-            renderer.render(scene, camera);
-        }
-
-        function buildBracketGeometry(width, height, thickness) {
-            const shape = new THREE.Shape();
-
-            const outerW = Math.max(30, width);
-            const outerH = Math.max(30, height);
-            const innerR = Math.max(8, Math.min(outerW * 0.22, thickness * 0.8));
-
-            shape.moveTo(-outerW / 2, -outerH / 2);
-            shape.lineTo(outerW / 2, -outerH / 2);
-            shape.lineTo(outerW / 2, outerH / 2);
-            shape.lineTo(-outerW / 2, outerH / 2);
-            shape.lineTo(-outerW / 2, -outerH / 2);
-
-            const hole = new THREE.Path();
-            hole.absarc(0, 0, innerR, 0, Math.PI * 2, false);
-
-            const hole2 = new THREE.Path();
-            hole2.absarc(0, -(outerH * 0.14), innerR * 0.8, 0, Math.PI * 2, false);
-
-            shape.holes.push(hole);
-            shape.holes.push(hole2);
-
-            const geometry = new THREE.ExtrudeGeometry(shape, {
-                depth: thickness,
-                bevelEnabled: false,
-                curveSegments: 20
-            });
-
-            geometry.center();
-
-            return geometry;
-        }
-
-        function setLabShape(type) {
-            currentShapeType = type;
-
-            if (!scene) return;
-
-            if (currentMesh) {
-                scene.remove(currentMesh);
-                currentMesh.geometry.dispose();
-                currentMesh.material.dispose();
-                currentMesh = null;
-            }
-
-            const material = new THREE.MeshStandardMaterial({
-                color: 0x00B3E0,
-                metalness: 0.4,
-                roughness: 0.3
-            });
-
-            const dimA = parseFloat(document.getElementById('rangeA').value);
-            const dimB = parseFloat(document.getElementById('rangeB').value);
-            const dimC = parseFloat(document.getElementById('rangeC').value);
-
-            let geometry;
-
-            if (type === 'cube') {
-                geometry = new THREE.BoxGeometry(dimA, dimC, dimB);
-            } else if (type === 'cylinder') {
-                geometry = new THREE.CylinderGeometry(dimB / 2, dimB / 2, dimA, 32);
-            } else if (type === 'bracket') {
-                geometry = buildBracketGeometry(dimB, dimA, dimC);
-            } else {
-                geometry = new THREE.TorusGeometry(dimB, dimC / 2, 16, 100);
-            }
-
-            currentMesh = new THREE.Mesh(geometry, material);
-            scene.add(currentMesh);
-
-            renderer.render(scene, camera);
-            updateLabCalculations();
-        }
-
-        function getShapeVolumeMm3() {
-            const dimA = parseFloat(document.getElementById('rangeA').value);
-            const dimB = parseFloat(document.getElementById('rangeB').value);
-            const dimC = parseFloat(document.getElementById('rangeC').value);
-
-            if (currentShapeType === 'cube') {
-                return dimA * dimB * dimC;
-            }
-
-            if (currentShapeType === 'cylinder') {
-                return Math.PI * Math.pow(dimB / 2, 2) * dimA;
-            }
-
-            if (currentShapeType === 'bracket') {
-                const outerPlateArea = dimA * dimB;
-                const innerHoleArea = Math.PI * Math.pow(Math.max(4, dimC / 3), 2);
-                return (outerPlateArea - innerHoleArea) * dimC * 0.7;
-            }
-
-            return dimA * dimB * dimC;
-        }
-
-        function updateLabCalculations() {
-            const dimA = parseFloat(document.getElementById('rangeA').value);
-            const dimB = parseFloat(document.getElementById('rangeB').value);
-            const dimC = parseFloat(document.getElementById('rangeC').value);
-
-            document.getElementById('valA').innerText = dimA + ' mm';
-            document.getElementById('valB').innerText = dimB + ' mm';
-            document.getElementById('valC').innerText = dimC + ' mm';
-
-            const density = parseFloat(document.getElementById('labMaterialSelect').value);
-            const volumeMm3 = getShapeVolumeMm3();
-
-            const volumeM3 = volumeMm3 / 1e9;
-            const massKg = volumeM3 * density;
-            const massGrams = massKg * 1000;
-
-            document.getElementById('calcVol').innerText = volumeMm3.toLocaleString('es-ES', { minimumFractionDigits: 2 }) + ' mm³';
-            document.getElementById('calcMass').innerText = massGrams.toLocaleString('es-ES', { minimumFractionDigits: 2 }) + ' gramos';
-
-            if (currentMesh && scene && renderer) {
-                if (currentShapeType === 'cube') {
-                    currentMesh.scale.set(dimA / 100, dimC / 30, dimB / 50);
-                } else if (currentShapeType === 'cylinder') {
-                    currentMesh.scale.set(1, 1, 1);
-                } else if (currentShapeType === 'bracket') {
-                    currentMesh.scale.set(0.7, 0.7, 0.7);
-                } else {
-                    currentMesh.scale.set(1, 1, 1);
-                }
-
-                renderer.render(scene, camera);
-            }
-        }
-
-        function downloadResource(filename) {
-            alert(`Iniciando descarga simulada del archivo: ${filename}`);
-        }
-    </script>
+    window.onload = function() {
+      renderInicioModules();
+      initThreeJS();
+      updateLabCalculations();
+      switchTab('inicio');
+    };
+  </script>
 </body>
 </html>
