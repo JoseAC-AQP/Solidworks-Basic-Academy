@@ -3,8 +3,10 @@
     "schema_version": "1.1",
     "language": "es",
     "version": "2026.1",
+    "visibility": "public",
     "description": "Banco de Preguntas Oficiales y Simulaciones para el Examen CSWA (Certified SOLIDWORKS Associate)",
     "source_url": "https://github.com/JoseAC-AQP/Solidworks-Basic-Academy/blob/main/assets/data/cswa_bank.json",
+    "answer_key_reference": "assets/data/cswa_bank_private.json",
     "updated_at": "2026-11-13T00:00:00Z"
   },
   "categories": [
@@ -163,47 +165,6 @@
         "Utilice Geometría de Referencia > Sistema de Coordenadas.",
         "En Propiedades de Masa, seleccione el sistema personalizado en el menú desplegable."
       ]
-    }
-  ],
-  "answer_key": [
-    {
-      "question_id": "cswa_q1_part_initial",
-      "type": "numeric_mass",
-      "target": 1342.50,
-      "min": 1270.00,
-      "max": 1355.00,
-      "unit": "g"
-    },
-    {
-      "question_id": "cswa_q2_part_modification",
-      "type": "multiple_choice",
-      "correct_option_id": "B"
-    },
-    {
-      "question_id": "cswa_q3_sketch_area",
-      "type": "multiple_choice",
-      "correct_option_id": "A"
-    },
-    {
-      "question_id": "cswa_q4_mass_change_material",
-      "type": "numeric_mass",
-      "target": 482.14,
-      "min": 475.00,
-      "max": 490.00,
-      "unit": "g"
-    },
-    {
-      "question_id": "cswa_q5_assembly_initial",
-      "type": "multiple_choice",
-      "correct_option_id": "A"
-    },
-    {
-      "question_id": "cswa_q6_coordinate_system",
-      "type": "numeric_coordinate",
-      "target": 68.45,
-      "min": 67.50,
-      "max": 69.50,
-      "unit": "mm"
     }
   ]
 }
