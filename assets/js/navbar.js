@@ -42,56 +42,42 @@ document.addEventListener("DOMContentLoaded", () => {
     navEl.className = "bg-swDark text-white shadow-lg flex-shrink-0 z-20";
 
     const desktopLinks = navItems.map(item => {
-      const activeClass = isActive(item) ? "text-swCyan font-bold bg-swCyan/10" : "hover:text-swCyan";
-      const iconHTML = item.icon ? `<i class="fa-solid ${item.icon} mr-1"></i> ` : "";
-
-      if (item.tabId && typeof window.switchTab === "function") {
-        return `<button type="button" onclick="switchTab('${item.tabId}')" class="nav-item px-3 py-2 rounded-md ${activeClass} transition">${iconHTML}${item.label}</button>`;
-      }
-
-      return `<a href="${item.href}" class="nav-item px-3 py-2 rounded-md ${activeClass} transition">${iconHTML}${item.label}</a>`;
+      const activeClass = isActive(item)
+        ? "text-swCyan font-bold bg-swCyan/10"
+        : "hover:text-swCyan";
+      const iconHTML = item.icon ? `<i class="fa-solid ${item.icon} mr-1" aria-hidden="true"></i>` : "";
+      return `<a href="${item.href}" class="px-3 py-2 rounded-md ${activeClass} transition">${iconHTML}${item.label}</a>`;
     }).join("");
 
     const mobileLinks = navItems.map(item => {
-      const iconHTML = item.icon ? `<i class="fa-solid ${item.icon} mr-1"></i> ` : "";
-
-      if (item.tabId && typeof window.switchTab === "function") {
-        return `<button type="button" onclick="switchTab('${item.tabId}')" class="block w-full text-left px-3 py-2 rounded-md hover:bg-gray-700">${iconHTML}${item.label}</button>`;
-      }
-
-      return `<a href="${item.href}" class="block w-full text-left px-3 py-2 rounded-md hover:bg-gray-700">${iconHTML}${item.label}</a>`;
+      const activeClass = isActive(item) ? "text-swCyan font-semibold bg-swCyan/10" : "hover:bg-gray-700 hover:text-swCyan";
+      const iconHTML = item.icon ? `<i class="fa-solid ${item.icon} mr-1" aria-hidden="true"></i>` : "";
+      return `<a href="${item.href}" class="block px-3 py-2 rounded-md ${activeClass}">${iconHTML}${item.label}</a>`;
     }).join("");
 
     navEl.innerHTML = `
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-16">
-          <a href="${prefix}index.html" class="flex items-center space-x-3 text-white no-underline">
-            <div class="w-10 h-10 bg-swCyan rounded-lg flex items-center justify-center text-swDark text-xl font-black shadow-md">SW</div>
-            <div>
-              <div class="font-extrabold text-lg tracking-wider text-white leading-none">SOLIDWORKS ACADEMY</div>
-              <div class="text-xs text-swCyan font-medium tracking-wide">CURSO Y PREPARACIÓN CSWA</div>
-            </div>
+        <div class="flex items-center justify-between min-h-16 py-2">
+          <a href="${prefix}index.html" class="flex items-center gap-3 text-white no-underline" aria-label="SOLIDWORKS ACADEMY, inicio">
+            <span class="w-10 h-10 bg-swCyan rounded-lg flex items-center justify-center text-swDark text-xl font-black shadow-md">SW</span>
+            <span>
+              <span class="block font-extrabold text-base sm:text-lg tracking-wider leading-none">SOLIDWORKS ACADEMY</span>
+              <span class="block text-xs text-swCyan font-medium tracking-wide mt-1">CURSO Y PREPARACIÓN CSWA</span>
+            </span>
           </a>
 
-          <nav class="hidden lg:flex space-x-1 text-sm font-medium" aria-label="Navegación principal">
+          <nav class="hidden lg:flex items-center gap-1 text-sm font-medium" aria-label="Navegación principal">
             ${desktopLinks}
           </nav>
 
-          <button
-            id="mobileMenuBtn"
-            type="button"
-            class="lg:hidden text-gray-300 hover:text-white focus:outline-none p-2"
-            aria-expanded="false"
-            aria-controls="mobileMenu"
-            aria-label="Abrir menú móvil"
-          >
-            <i class="fa-solid fa-bars text-xl"></i>
+          <button id="mobileMenuBtn" type="button" class="lg:hidden text-gray-200 hover:text-white p-2 rounded" aria-expanded="false" aria-controls="mobileMenu" aria-label="Abrir menú móvil">
+            <i class="fa-solid fa-bars text-xl" aria-hidden="true"></i>
           </button>
         </div>
-      </div>
 
-      <div id="mobileMenu" class="hidden lg:hidden bg-swDark/95 border-b border-gray-700 px-4 pt-2 pb-4 space-y-2 text-sm font-medium">
-        ${mobileLinks}
+        <nav id="mobileMenu" class="hidden lg:hidden border-t border-gray-700 bg-swDark/95 px-2 pb-3 pt-2 space-y-1 text-sm font-medium" aria-label="Navegación móvil">
+          ${mobileLinks}
+        </nav>
       </div>
     `;
 
@@ -102,11 +88,17 @@ document.addEventListener("DOMContentLoaded", () => {
       const setMenuState = expanded => {
         mobileMenu.classList.toggle("hidden", !expanded);
         mobileBtn.setAttribute("aria-expanded", String(expanded));
+        mobileBtn.setAttribute("aria-label", expanded ? "Cerrar menú móvil" : "Abrir menú móvil");
+        mobileBtn.innerHTML = expanded
+          ? '<i class="fa-solid fa-xmark text-xl" aria-hidden="true"></i>'
+          : '<i class="fa-solid fa-bars text-xl" aria-hidden="true"></i>';
       };
 
-      mobileBtn.addEventListener("click", () => setMenuState(mobileBtn.getAttribute("aria-expanded") !== "true"));
+      mobileBtn.addEventListener("click", () => {
+        setMenuState(mobileBtn.getAttribute("aria-expanded") !== "true");
+      });
 
-      mobileMenu.querySelectorAll("a, button").forEach(item => {
+      mobileMenu.querySelectorAll("a").forEach(item => {
         item.addEventListener("click", () => setMenuState(false));
       });
 
@@ -125,8 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const renderStandardNavbar = () => {
     const linksHTML = navItems.map(item => {
       const active = isActive(item) ? 'class="active"' : "";
-      const content = item.tabId ? `<a href="${item.href}" ${active}>${item.label}</a>` : `<a href="${item.href}" ${active}>${item.label}</a>`;
-      return `<li>${content}</li>`;
+      return `<li><a href="${item.href}" ${active}>${item.label}</a></li>`;
     }).join("");
 
     navEl.className = "navbar";
@@ -142,13 +133,3 @@ document.addEventListener("DOMContentLoaded", () => {
     renderStandardNavbar();
   }
 });
-
-window.toggleMobileMenuNavbar = function () {
-  const menu = document.getElementById("mobileMenu");
-  const btn = document.getElementById("mobileMenuBtn");
-  if (!menu || !btn) return;
-
-  const shouldOpen = menu.classList.contains("hidden");
-  menu.classList.toggle("hidden", !shouldOpen);
-  btn.setAttribute("aria-expanded", String(shouldOpen));
-};
