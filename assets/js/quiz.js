@@ -6,15 +6,96 @@
  */
 
 const QuizEngine = {
+  defaultMessages: {
+    unanswered: 'Por favor, responde a todas las preguntas antes de enviar la evaluación.',
+    invalidNumeric: 'Por favor, ingrese un valor numérico válido.',
+    success: '<strong>¡Excelente!</strong> Has respondido correctamente las preguntas de comprobación.',
+    error: '<strong>Revisa tus respuestas:</strong> Hay inconsistencias en una o más preguntas. Repasa el material e intentalo nuevamente.'
+  },
+
+  getAppState() {
+    if (typeof window === 'undefined') return null;
+    return window.AppState || null;
+  },
+
+  normalizeValue(value) {
+    if (Array.isArray(value)) {
+      return value
+        .filter(item => item !== null && item !== undefined && item !== '')
+        .map(item => item.toString().trim());
+    }
+
+    if (value === null || value === undefined) return '';
+    return value.toString().trim();
+  },
+
+  getFormValue(form, fieldName) {
+    if (!form || !fieldName) return undefined;
+
+    const matchingFields = Array.from(form.elements).filter((element) => element.name === fieldName);
+    if (!matchingFields.length) return undefined;
+
+    const isChoiceField = matchingFields.some((element) => element.type === 'radio' || element.type === 'checkbox');
+    if (isChoiceField) {
+      const selected = matchingFields.filter((element) => element.checked).map((element) => element.value);
+      return selected.length ? selected : null;
+    }
+
+    const firstField = matchingFields[0];
+    return firstField.value;
+  },
+
+  valuesMatch(actualValue, expectedValue) {
+    const normalizedActual = this.normalizeValue(actualValue);
+    const normalizedExpected = this.normalizeValue(expectedValue);
+
+    if (Array.isArray(normalizedExpected)) {
+      const actualValues = Array.isArray(normalizedActual) ? normalizedActual : [normalizedActual];
+      return normalizedExpected.length === actualValues.length &&
+        normalizedExpected.every((value) => actualValues.includes(value));
+    }
+
+    if (Array.isArray(normalizedActual)) {
+      return normalizedActual.includes(normalizedExpected);
+    }
+
+    return normalizedActual === normalizedExpected;
+  },
+
+  setFeedback(feedbackEl, variant, htmlContent) {
+    if (!feedbackEl) return;
+    feedbackEl.style.display = 'block';
+    feedbackEl.className = `alert-box alert-${variant} fade-in`;
+    feedbackEl.innerHTML = htmlContent;
+  },
+
+  setFeedbackText(feedbackEl, variant, title, detailText) {
+    if (!feedbackEl) return;
+
+    feedbackEl.style.display = 'block';
+    feedbackEl.className = `alert-box alert-${variant} fade-in`;
+    feedbackEl.innerHTML = '';
+
+    const strong = document.createElement('strong');
+    strong.textContent = title;
+    feedbackEl.appendChild(strong);
+
+    const textNode = document.createTextNode(` ${detailText}`);
+    feedbackEl.appendChild(textNode);
+  },
+
   /**
    * Evaluates a standard form-based quiz or practical exam.
    * @param {Object} options - Configuration for the evaluation.
    * @param {string} options.formId - ID of the HTML form element containing inputs.
    * @param {string} options.feedbackId - ID of the container element to display feedback.
-   * @param {string} options.quizId - Key name used in AppState (e.g. 'semana1_quiz', 'semana4_eval1').
-   * @param {number} options.weekNumber - Week number associated with the quiz (1-16).
-   * @param {Object} options.answers - Key-value pair of correct answers (e.g. { q1: 'B', q2: 'A' }).
+   * @param {string} options.quizId - Key name used in AppState.
+   * @param {number} options.weekNumber - Week number associated with the quiz.
+   * @param {Object} options.answers - Key-value pair of correct answers.
    * @param {Object} options.competencyGains - Object mapping CSWA competencies to points earned on success.
+   * @param {number} [options.passingThreshold] - Percentage needed to pass (defaults to 100 for compatibility).
+   * @param {boolean} [options.savePartialResults] - Whether partial results should be stored even on failure.
+   * @param {boolean} [options.recordOnlyOnPass] - Legacy alias for compatibility.
    * @param {string} [options.successMsg] - Custom success message.
    * @param {string} [options.errorMsg] - Custom error message on wrong answer.
    */
@@ -25,14 +106,23 @@ const QuizEngine = {
     weekNumber,
     answers,
     competencyGains = {},
-    successMsg = "<strong>¡Excelente!</strong> Has respondido correctamente las preguntas de comprobación.",
-    errorMsg = "<strong>Revisa tus respuestas:</strong> Hay inconsistencias en una o más preguntas. Repasa el material e intentalo nuevamente."
+    passingThreshold = 100,
+    savePartialResults = false,
+    recordOnlyOnPass = true,
+    successMsg = this.defaultMessages.success,
+    errorMsg = this.defaultMessages.error
   }) {
     const form = document.getElementById(formId);
     const feedbackEl = document.getElementById(feedbackId);
+    const appState = this.getAppState();
 
     if (!form) {
       console.error(`QuizEngine Error: Form with ID '${formId}' not found.`);
+      return false;
+    }
+
+    if (!answers || Object.keys(answers).length === 0) {
+      console.warn('QuizEngine Error: No answer map was provided.');
       return false;
     }
 
@@ -41,43 +131,47 @@ const QuizEngine = {
     let correctCount = 0;
     let unanswered = false;
 
-    // Check each question answer
     for (const [qKey, expectedValue] of Object.entries(answers)) {
-      const userValue = formData.get(qKey);
-      if (!userValue) {
+      const userValue = this.getFormValue(form, qKey);
+      const normalizedUserValue = this.normalizeValue(userValue);
+      const normalizedExpectedValue = this.normalizeValue(expectedValue);
+
+      if (!normalizedUserValue || (Array.isArray(normalizedUserValue) && normalizedUserValue.length === 0)) {
         unanswered = true;
         break;
       }
-      if (userValue.toString().trim() === expectedValue.toString().trim()) {
+
+      if (this.valuesMatch(normalizedUserValue, normalizedExpectedValue)) {
         correctCount++;
       }
     }
 
     if (unanswered) {
-      alert("Por favor, responde a todas las preguntas antes de enviar la evaluación.");
+      alert(this.defaultMessages.unanswered);
       return false;
     }
 
-    const isPassed = correctCount === totalQuestions;
+    const isPassed = passingThreshold <= 0 || correctCount === totalQuestions;
     const scorePercentage = Math.round((correctCount / totalQuestions) * 100);
+    const shouldRecordResult = (() => {
+      if (!appState || typeof appState.recordQuizResult !== 'function') return false;
+      if (recordOnlyOnPass) return isPassed;
+      return isPassed || savePartialResults;
+    })();
 
-    // Render feedback if container element exists
     if (feedbackEl) {
       feedbackEl.style.display = 'block';
       if (isPassed) {
-        feedbackEl.className = 'alert-box alert-success fade-in';
-        feedbackEl.innerHTML = `${successMsg} (${correctCount}/${totalQuestions} correctas - 100%)`;
+        this.setFeedback(feedbackEl, 'success', `${successMsg} (${correctCount}/${totalQuestions} correctas - 100%)`);
       } else {
-        feedbackEl.className = 'alert-box alert-danger fade-in';
-        feedbackEl.innerHTML = `${errorMsg} (${correctCount}/${totalQuestions} correctas - ${scorePercentage}%)`;
+        this.setFeedback(feedbackEl, 'danger', `${errorMsg} (${correctCount}/${totalQuestions} correctas - ${scorePercentage}%)`);
       }
     }
 
-    // Record results and mark week completed if passed
-    if (isPassed && typeof AppState !== 'undefined') {
-      AppState.recordQuizResult(quizId, 100, competencyGains);
-      if (weekNumber) {
-        AppState.markWeekCompleted(weekNumber);
+    if (shouldRecordResult) {
+      appState.recordQuizResult(quizId, scorePercentage, competencyGains);
+      if (isPassed && weekNumber) {
+        appState.markWeekCompleted?.(weekNumber);
         this.updateWeekStatusUI(weekNumber);
       }
     }
@@ -93,16 +187,21 @@ const QuizEngine = {
    * @param {string} feedbackId - ID of feedback container.
    * @param {string} quizKey - AppState identifier.
    * @param {Object} competencyGains - CSWA competency points gained upon passing.
+   * @param {Object} [options] - Additional evaluation config.
    */
-  evaluateNumericAnswer(inputId, expectedVal, tolerance, feedbackId, quizKey, competencyGains = {}) {
+  evaluateNumericAnswer(inputId, expectedVal, tolerance, feedbackId, quizKey, competencyGains = {}, options = {}) {
     const input = document.getElementById(inputId);
     const feedbackEl = document.getElementById(feedbackId);
+    const appState = this.getAppState();
+    const { recordOnlyOnPass = true, savePartialResults = false } = options;
 
     if (!input) return false;
 
-    const userVal = parseFloat(input.value);
-    if (isNaN(userVal)) {
-      alert("Por favor, ingrese un valor numérico válido.");
+    const rawValue = input.value;
+    const userVal = Number.parseFloat(rawValue);
+
+    if (!Number.isFinite(userVal)) {
+      alert(this.defaultMessages.invalidNumeric);
       return false;
     }
 
@@ -111,18 +210,23 @@ const QuizEngine = {
     const isCorrect = userVal >= minVal && userVal <= maxVal;
 
     if (feedbackEl) {
-      feedbackEl.style.display = 'block';
       if (isCorrect) {
-        feedbackEl.className = 'alert-box alert-success fade-in';
-        feedbackEl.innerHTML = `<strong>¡Valor Correcto!</strong> El resultado ingresado (${userVal}) está dentro del rango nominal aceptado [${minVal.toFixed(2)} - ${maxVal.toFixed(2)}].`;
+        const detailText = `El resultado ingresado (${userVal}) está dentro del rango nominal aceptado [${minVal.toFixed(2)} - ${maxVal.toFixed(2)}].`;
+        this.setFeedbackText(feedbackEl, 'success', '¡Valor Correcto!', detailText);
       } else {
-        feedbackEl.className = 'alert-box alert-danger fade-in';
-        feedbackEl.innerHTML = `<strong>Valor Fuera de Tolerancia.</strong> Tu resultado (${userVal}) difiere del valor esperado. Revisa el material asignado y la geometría 3D.`;
+        const detailText = `Tu resultado (${userVal}) difiere del valor esperado. Revisa el material asignado y la geometría 3D.`;
+        this.setFeedbackText(feedbackEl, 'danger', 'Valor Fuera de Tolerancia.', detailText);
       }
     }
 
-    if (isCorrect && typeof AppState !== 'undefined') {
-      AppState.recordQuizResult(quizKey, 100, competencyGains);
+    const shouldRecordResult = (() => {
+      if (!appState || typeof appState.recordQuizResult !== 'function') return false;
+      if (recordOnlyOnPass) return isCorrect;
+      return isCorrect || savePartialResults;
+    })();
+
+    if (shouldRecordResult) {
+      appState.recordQuizResult(quizKey, isCorrect ? 100 : 0, competencyGains);
     }
 
     return isCorrect;
@@ -144,6 +248,7 @@ const QuizEngine = {
     }
     if (btn) {
       btn.textContent = `✓ Semana ${weekNumber} Completada`;
+      btn.disabled = true;
       btn.style.opacity = '0.85';
     }
   }
