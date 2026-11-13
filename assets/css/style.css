@@ -1,111 +1,192 @@
 /* ==========================================================================
-SOLIDWORKS ACADEMY - GLOBAL CORE STYLESHEET (style.css)
-System Font: Inter & System Fallbacks
-Theme: Industrial Blue / CAD Precision Dark-Light Palette
-========================================================================== */
+   SOLIDWORKS ACADEMY - GLOBAL CORE STYLESHEET (style.css)
+   System font: Inter & system fallbacks
+   Theme: Industrial blue / CAD precision palette
+   ========================================================================== */
 
-/* --------------------------------------------------------------------------
+/* 1. Design tokens */
+:root {
+  color-scheme: light;
 
-GLOBAL RESETS & BASE BOX MODEL
--------------------------------------------------------------------------- */
+  --color-background: #F3F6F8;
+  --color-text: #1F2937;
+  --color-text-muted: #334155;
+  --color-heading: #102A43;
+  --color-primary: #00B3E0;
+  --color-primary-hover: #0090B3;
+  --color-surface-muted: #E2E8F0;
+  --color-border: #CBD5E1;
+  --color-code-text: #0F172A;
+  --color-footer-text: #9FB3C8;
+
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+
+  --radius-sm: 4px;
+  --content-width: 1280px;
+  --layout-gap: 1.5rem;
+  --focus-ring: 3px solid var(--color-primary);
+}
+
+/* 2. Global resets & base styles */
 *,
 *::before,
 *::after {
-box-sizing: border-box;
-margin: 0;
-padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
-font-size: 16px;
-scroll-behavior: smooth;
--webkit-text-size-adjust: 100%;
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-background-color: #F3F6F8;
-color: #1F2937;
-line-height: 1.6;
-min-height: 100vh;
-display: flex;
-flex-direction: column;
-overflow-x: hidden;
--webkit-font-smoothing: antialiased;
--moz-osx-font-smoothing: grayscale;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  overflow-x: hidden;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* --------------------------------------------------------------------------
-2. TYPOGRAPHY & HEADINGS
--------------------------------------------------------------------------- */
-h1, h2, h3, h4, h5, h6 {
-color: #102A43;
-font-weight: 800;
-line-height: 1.25;
-margin-bottom: 0.75rem;
-letter-spacing: -0.02em;
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
 }
 
-h1 { font-size: 2.25rem; }
-h2 { font-size: 1.75rem; }
+img,
+video {
+  height: auto;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: 3px;
+}
+
+/* 3. Typography & headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: 0.75rem;
+  color: var(--color-heading);
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: clamp(2rem, 3vw, 2.75rem); }
+h2 { font-size: clamp(1.5rem, 2.5vw, 2rem); }
 h3 { font-size: 1.35rem; }
 h4 { font-size: 1.1rem; }
 h5 { font-size: 0.95rem; }
 
 p {
-margin-bottom: 1rem;
-color: #334155;
-font-size: 0.95rem;
+  margin-bottom: 1rem;
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}
+
+ul,
+ol {
+  padding-inline-start: 1.5rem;
+}
+
+li + li {
+  margin-top: 0.25rem;
 }
 
 a {
-color: #00B3E0;
-text-decoration: none;
-transition: color 0.2s ease, border-color 0.2s ease;
+  color: var(--color-primary-hover);
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 a:hover {
-color: #0090B3;
+  color: var(--color-heading);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
 }
 
-code, kbd, pre {
-font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-font-size: 0.875em;
-background-color: #E2E8F0;
-color: #0F172A;
-padding: 0.15rem 0.4rem;
-border-radius: 4px;
-border: 1px solid #CBD5E1;
+code,
+kbd,
+pre {
+  font-family: var(--font-mono);
 }
 
-/* --------------------------------------------------------------------------
-3. LAYOUT CONTAINERS & GRID UTILITIES
--------------------------------------------------------------------------- */
+code,
+kbd {
+  padding: 0.15rem 0.4rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-surface-muted);
+  color: var(--color-code-text);
+  font-size: 0.875em;
+}
+
+pre {
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-surface-muted);
+  color: var(--color-code-text);
+  font-size: 0.875rem;
+}
+
+pre code {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-size: inherit;
+}
+
+/* 4. Layout containers & grid utilities */
 .container {
-width: 100%;
-max-width: 1280px;
-margin-left: auto;
-margin-right: auto;
-padding: 1.5rem 1rem;
-flex: 1 0 auto;
+  width: 100%;
+  max-width: var(--content-width);
+  margin-inline: auto;
+  padding: 1.5rem 1rem;
+  flex: 1 0 auto;
 }
 
 @media (min-width: 640px) {
-.container {
-padding: 2rem 1.5rem;
-}
+  .container {
+    padding: 2rem 1.5rem;
+  }
 }
 
 @media (min-width: 1024px) {
-.container {
-padding: 2.5rem 2rem;
-}
+  .container {
+    padding: 2.5rem 2rem;
+  }
 }
 
-/* Flexible Layout Grids */
 .grid {
-display: grid;
-gap: 1.5rem;
+  display: grid;
+  gap: var(--layout-gap);
 }
 
 .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
@@ -114,84 +195,98 @@ gap: 1.5rem;
 .grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 
 @media (max-width: 768px) {
-.grid-cols-2,
-.grid-cols-3,
-.grid-cols-4 {
-grid-template-columns: repeat(1, minmax(0, 1fr));
-}
+  .grid-cols-2,
+  .grid-cols-3,
+  .grid-cols-4 {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
-/* Sidebar + Main Content Layout */
 .layout-with-sidebar {
-display: grid;
-grid-template-columns: 1fr;
-gap: 1.5rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--layout-gap);
 }
 
 @media (min-width: 1024px) {
-.layout-with-sidebar {
-grid-template-columns: 2.8fr 1fr;
-}
+  .layout-with-sidebar {
+    grid-template-columns: minmax(0, 2.8fr) minmax(0, 1fr);
+  }
 }
 
-/* --------------------------------------------------------------------------
-4. CUSTOM SCROLLBARS
--------------------------------------------------------------------------- */
+/* 5. Scrollbars */
+* {
+  scrollbar-color: var(--color-primary) var(--color-surface-muted);
+  scrollbar-width: thin;
+}
+
 ::-webkit-scrollbar {
-width: 8px;
-height: 8px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-background: #E2E8F0;
-border-radius: 4px;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-muted);
 }
 
 ::-webkit-scrollbar-thumb {
-background: #00B3E0;
-border-radius: 4px;
+  border-radius: var(--radius-sm);
+  background: var(--color-primary);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-background: #0090B3;
+  background: var(--color-primary-hover);
 }
 
-/* --------------------------------------------------------------------------
-5. FOOTER STYLES
--------------------------------------------------------------------------- */
+/* 6. Footer */
 footer {
-background-color: #102A43;
-color: #9FB3C8;
-text-align: center;
-padding: 1.75rem 1rem;
-font-size: 0.875rem;
-border-top: 3px solid #00B3E0;
-margin-top: auto;
+  margin-top: auto;
+  padding: 1.75rem 1rem;
+  border-top: 3px solid var(--color-primary);
+  background-color: var(--color-heading);
+  color: var(--color-footer-text);
+  text-align: center;
+  font-size: 0.875rem;
 }
 
 footer p {
-color: #9FB3C8;
-margin: 0;
+  margin: 0;
+  color: var(--color-footer-text);
 }
 
-/* --------------------------------------------------------------------------
-6. ANIMATIONS & TRANSITION UTILITIES
--------------------------------------------------------------------------- */
+/* 7. Animations & transition utilities */
 @keyframes fadeIn {
-from {
-opacity: 0;
-transform: translateY(6px);
-}
-to {
-opacity: 1;
-transform: translateY(0);
-}
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .fade-in {
-animation: fadeIn 0.3s ease-in-out forwards;
+  animation: fadeIn 0.3s ease-in-out forwards;
 }
 
 .transition-all {
-transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
