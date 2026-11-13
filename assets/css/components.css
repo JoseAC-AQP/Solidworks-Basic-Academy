@@ -19,6 +19,7 @@
   --component-radius-md: 8px;
   --component-radius-lg: 10px;
   --component-radius-xl: 12px;
+  --component-radius-pill: 999px;
   --component-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
   --component-shadow-md: 0 4px 12px rgba(16, 42, 67, 0.15);
   --component-shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.2);
@@ -79,7 +80,7 @@
 }
 
 .cswa-score-value {
-  font-size: 3.5rem;
+  font-size: clamp(2.4rem, 5vw, 3.5rem);
   font-weight: 800;
   color: var(--accent);
   line-height: 1;
@@ -103,14 +104,14 @@
   width: 100%;
   height: 10px;
   background-color: var(--border);
-  border-radius: 20px;
+  border-radius: var(--component-radius-pill);
   overflow: hidden;
 }
 
 .competency-bar-fill {
   height: 100%;
   background: var(--accent);
-  border-radius: 20px;
+  border-radius: var(--component-radius-pill);
   transition: width 0.5s ease-in-out;
 }
 
@@ -146,13 +147,14 @@
 }
 
 .cad-btn-icon {
-  background: rgba(15, 23, 42, 0.7);
+  background: rgba(15, 23, 42, 0.85);
   color: var(--white);
   border: 1px solid var(--component-color-slate-600);
   border-radius: 4px;
   padding: 0.4rem 0.6rem;
   font-size: 0.8rem;
   cursor: pointer;
+  /* El fondo opaco sigue siendo legible si backdrop-filter no está disponible. */
   backdrop-filter: blur(4px);
   transition: background-color 0.2s ease, border-color 0.2s ease;
 }
@@ -202,7 +204,7 @@
   background: var(--component-color-amber-100);
   color: var(--component-color-amber-800);
   padding: 0.4rem 0.85rem;
-  border-radius: 20px;
+  border-radius: var(--component-radius-pill);
   font-weight: bold;
   font-size: 0.9rem;
 }
@@ -251,7 +253,8 @@
   inset: 0;
   width: 100%;
   height: 100%;
-  background: rgba(16, 42, 67, 0.6);
+  /* Fondo translúcido como fallback; el blur es solo una mejora visual. */
+  background: rgba(16, 42, 67, 0.72);
   backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
@@ -308,10 +311,6 @@
 
   .cad-viewport {
     height: 240px;
-  }
-
-  .cswa-score-value {
-    font-size: 2.5rem;
   }
 
   .modal-window {
