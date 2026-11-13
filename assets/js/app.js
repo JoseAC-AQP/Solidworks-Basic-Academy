@@ -1,14 +1,23 @@
 /**
  * SOLIDWORKS ACADEMY - Core App State & Analytics Engine
  * Persists user progress, CSWA competency scores, and quiz results in LocalStorage.
- * Updated 2026 for production deployment.
  */
 
 const AppState = {
-  // Key name for local storage
   STORAGE_KEY: 'SW_ACADEMY_USER_STATE',
+  TOTAL_WEEKS: 16,
+  COMPETENCIES: [
+    'croquis',
+    'piezas',
+    'modificacion',
+    'interpretacion',
+    'operaciones',
+    'propiedades_fisicas',
+    'ensamblajes',
+    'relaciones_posicion',
+    'tiempo_limite'
+  ],
 
-  // Default state layout
   getInitialState() {
     return {
       user: {
@@ -16,8 +25,10 @@ const AppState = {
         email: 'estudiante@solidworks.edu',
         startDate: new Date().toISOString()
       },
-      completedWeeks: [], // Array of numbers e.g. [1, 2, 3]
-      quizResults: {},   // e.g. { semana1_quiz: 100, semana4_eval1: 95 }
+      completedWeeks: [],
+      quizResults: {},
+      // Stores each quiz's latest competency contribution, so retries replace it.
+      quizCompetencyGains: {},
       cswaScores: {
         croquis: 0,
         piezas: 0,
@@ -34,80 +45,164 @@ const AppState = {
     };
   },
 
-  // Read state from LocalStorage
+  isPlainObject(value) {
+    return value !== null && typeof value === 'object' && !Array.isArray(value);
+  },
+
+  clampScore(value) {
+    const number = Number(value);
+    return Number.isFinite(number) ? Math.min(100, Math.max(0, number)) : 0;
+  },
+
+  normalizeState(value) {
+    const defaults = this.getInitialState();
+    const parsed = this.isPlainObject(value) ? value : {};
+    const user = this.isPlainObject(parsed.user) ? parsed.user : {};
+    const scores = this.isPlainObject(parsed.cswaScores) ? parsed.cswaScores : {};
+    const quizResults = this.isPlainObject(parsed.quizResults) ? parsed.quizResults : {};
+    const storedGains = this.isPlainObject(parsed.quizCompetencyGains)
+      ? parsed.quizCompetencyGains
+      : {};
+
+    const completedWeeks = Array.isArray(parsed.completedWeeks)
+      ? [...new Set(parsed.completedWeeks
+          .map(Number)
+          .filter(week => Number.isInteger(week) && week >= 1 && week <= this.TOTAL_WEEKS))]
+      : [];
+
+    const normalizedQuizResults = {};
+    for (const [quizId, score] of Object.entries(quizResults)) {
+      if (quizId.trim() !== '' && Number.isFinite(Number(score))) {
+        normalizedQuizResults[quizId] = this.clampScore(score);
+      }
+    }
+
+    const quizCompetencyGains = {};
+    for (const [quizId, gains] of Object.entries(storedGains)) {
+      if (!quizId.trim() || !this.isPlainObject(gains)) continue;
+      quizCompetencyGains[quizId] = {};
+      for (const competency of this.COMPETENCIES) {
+        if (Object.prototype.hasOwnProperty.call(gains, competency)) {
+          quizCompetencyGains[quizId][competency] = this.clampScore(gains[competency]);
+        }
+      }
+    }
+
+    const cswaScores = {};
+    for (const competency of this.COMPETENCIES) {
+      cswaScores[competency] = this.clampScore(scores[competency]);
+    }
+
+    return {
+      ...defaults,
+      ...parsed,
+      user: { ...defaults.user, ...user },
+      completedWeeks,
+      quizResults: normalizedQuizResults,
+      quizCompetencyGains,
+      cswaScores,
+      projectSubmitted: Boolean(parsed.projectSubmitted),
+      finalScore: parsed.finalScore == null ? null : this.clampScore(parsed.finalScore)
+    };
+  },
+
   getUserProgress() {
     try {
       const data = localStorage.getItem(this.STORAGE_KEY);
       if (!data) return this.getInitialState();
-      const parsed = JSON.parse(data);
-      return { ...this.getInitialState(), ...parsed };
-    } catch (e) {
-      console.error('Error reading LocalStorage AppState', e);
+      return this.normalizeState(JSON.parse(data));
+    } catch (error) {
+      console.error('Error reading LocalStorage AppState', error);
       return this.getInitialState();
     }
   },
 
-  // Save state to LocalStorage
   saveProgress(state) {
     try {
-      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(state));
-    } catch (e) {
-      console.error('Error saving LocalStorage AppState', e);
+      const normalized = this.normalizeState(state);
+      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(normalized));
+      return true;
+    } catch (error) {
+      console.error('Error saving LocalStorage AppState', error);
+      return false;
     }
   },
 
-  // Mark a week as completed
   markWeekCompleted(weekNumber) {
+    const number = Number(weekNumber);
+    if (!Number.isInteger(number) || number < 1 || number > this.TOTAL_WEEKS) {
+      console.warn('Invalid week number; expected an integer from 1 to 16.');
+      return this.getUserProgress();
+    }
+
     const state = this.getUserProgress();
-    const num = parseInt(weekNumber, 10);
-    if (!state.completedWeeks.includes(num)) {
-      state.completedWeeks.push(num);
+    if (!state.completedWeeks.includes(number)) {
+      state.completedWeeks.push(number);
+      state.completedWeeks.sort((a, b) => a - b);
     }
     this.saveProgress(state);
     return state;
   },
 
-  // Record quiz or practical exam scores & update CSWA competencies
   recordQuizResult(quizId, score, competencyGains = {}) {
-    const state = this.getUserProgress();
-    state.quizResults[quizId] = score;
-
-    // Increment corresponding CSWA competency scores (capped at 100)
-    for (const [comp, gain] of Object.entries(competencyGains)) {
-      if (Object.prototype.hasOwnProperty.call(state.cswaScores, comp)) {
-        state.cswaScores[comp] = Math.min(100, (state.cswaScores[comp] || 0) + gain);
-      }
+    if (typeof quizId !== 'string' || quizId.trim() === '') {
+      console.warn('Invalid quiz ID; expected a non-empty string.');
+      return this.getUserProgress();
     }
 
+    const numericScore = Number(score);
+    if (!Number.isFinite(numericScore) || numericScore < 0 || numericScore > 100) {
+      console.warn('Invalid quiz score; expected a number from 0 to 100.');
+      return this.getUserProgress();
+    }
+    if (!this.isPlainObject(competencyGains)) {
+      console.warn('Invalid competency gains; expected an object.');
+      return this.getUserProgress();
+    }
+
+    const state = this.getUserProgress();
+    const previousGains = state.quizCompetencyGains[quizId] || {};
+    const nextGains = {};
+
+    for (const competency of this.COMPETENCIES) {
+      const rawGain = competencyGains[competency];
+      if (rawGain === undefined) continue;
+      const gain = Number(rawGain);
+      if (!Number.isFinite(gain) || gain < 0 || gain > 100) {
+        console.warn(`Invalid gain for competency "${competency}"; expected a number from 0 to 100.`);
+        continue;
+      }
+      nextGains[competency] = gain;
+      // Replace this quiz's previous contribution rather than accumulating on retries.
+      state.cswaScores[competency] = this.clampScore(
+        state.cswaScores[competency] - (previousGains[competency] || 0) + gain
+      );
+    }
+
+    state.quizResults[quizId] = this.clampScore(numericScore);
+    state.quizCompetencyGains[quizId] = nextGains;
     this.saveProgress(state);
     return state;
   },
 
-  // Calculate weighted overall CSWA Index (0 to 100%)
+  // Competency scores contribute 80%; course completion contributes 20%.
   calculateCSWAIndex() {
     const state = this.getUserProgress();
-    const scores = Object.values(state.cswaScores);
-    if (scores.length === 0) return 0;
-    
-    const avgScore = scores.reduce((a, b) => a + b, 0) / scores.length;
-    const weekProgressBonus = (state.completedWeeks.length / 16) * 20; // 20% weight from course completion
-    
-    const totalIndex = Math.min(100, Math.round((avgScore * 0.8) + weekProgressBonus));
-    return totalIndex;
+    const scores = this.COMPETENCIES.map(competency => state.cswaScores[competency]);
+    const averageScore = scores.reduce((sum, score) => sum + score, 0) / scores.length;
+    const completionBonus = (state.completedWeeks.length / this.TOTAL_WEEKS) * 20;
+    return Math.min(100, Math.max(0, Math.round((averageScore * 0.8) + completionBonus)));
   },
 
-  // Reset progress (for practice retries)
   resetProgress() {
-    localStorage.removeItem(this.STORAGE_KEY);
+    try {
+      localStorage.removeItem(this.STORAGE_KEY);
+    } catch (error) {
+      console.error('Error resetting LocalStorage AppState', error);
+    }
     return this.getInitialState();
   }
 };
 
 // Global export
 window.AppState = AppState;
-```eoc
-
-### Key Highlights of Updated `app.js`:
-1. **Centralized Data Engine:** Standardized storage layout using `SW_ACADEMY_USER_STATE` key in `LocalStorage`.
-2. **Competency Engine:** Maps gains across all 9 CSWA domains (`croquis`, `piezas`, `modificacion`, `interpretacion`, `operaciones`, `propiedades_fisicas`, `ensamblajes`, `relaciones_posicion`, `tiempo_limite`).
-3. **Calculated Metrics:** Automatically computes the student's real-time CSWA Index combining competency performance ($80\%$) and overall course progress ($20\%$).
