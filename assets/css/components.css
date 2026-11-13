@@ -1,15 +1,43 @@
 /* SOLIDWORKS ACADEMY - Components Stylesheet */
 
+:root {
+  /* Tokens locales del componente; no sobrescriben los colores globales del tema. */
+  --component-color-amber-50: #fffbeb;
+  --component-color-sky-50: #f0f9ff;
+  --component-color-slate-900: #1e293b;
+  --component-color-slate-600: #475569;
+  --component-color-slate-400: #94a3b8;
+  --component-color-amber-100: #fef3c7;
+  --component-color-amber-800: #92400e;
+  --component-color-sky-100: #e0f2fe;
+  --component-color-sky-800: #0369a1;
+  --component-color-emerald-100: #d1fae5;
+  --component-color-emerald-800: #065f46;
+  --component-color-red-100: #fee2e2;
+  --component-color-red-800: #991b1b;
+  --component-radius-sm: 6px;
+  --component-radius-md: 8px;
+  --component-radius-lg: 10px;
+  --component-radius-xl: 12px;
+  --component-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --component-shadow-md: 0 4px 12px rgba(16, 42, 67, 0.15);
+  --component-shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
 /* ==========================================
    1. TARJETAS DE MÓDULO Y LECCIÓN
    ========================================== */
-.module-card {
+.module-card,
+.quiz-container {
   background: var(--white);
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: var(--component-radius-lg);
   padding: 1.5rem;
+}
+
+.module-card {
   margin-bottom: 1.5rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--component-shadow-sm);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -21,7 +49,7 @@
 .lesson-card {
   background: var(--white);
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: var(--component-radius-md);
   padding: 1.25rem;
   margin-bottom: 1rem;
   display: flex;
@@ -31,7 +59,7 @@
 
 .lesson-card.evaluation-highlight {
   border-left: 4px solid var(--warning);
-  background: #FFFBEB;
+  background: var(--component-color-amber-50);
 }
 
 .lesson-card.completed {
@@ -44,10 +72,10 @@
 .cswa-score-card {
   background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
   color: var(--white);
-  border-radius: 12px;
+  border-radius: var(--component-radius-xl);
   padding: 2rem;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(16, 42, 67, 0.15);
+  box-shadow: var(--component-shadow-md);
 }
 
 .cswa-score-value {
@@ -96,14 +124,14 @@
 .cad-viewport {
   width: 100%;
   height: 320px;
-  background-color: #1E293B;
-  border-radius: 8px;
-  border: 1px dashed #475569;
+  background-color: var(--component-color-slate-900);
+  border-radius: var(--component-radius-md);
+  border: 1px dashed var(--component-color-slate-600);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: #94A3B8;
+  color: var(--component-color-slate-400);
   position: relative;
   overflow: hidden;
   margin: 1.25rem 0;
@@ -120,12 +148,13 @@
 .cad-btn-icon {
   background: rgba(15, 23, 42, 0.7);
   color: var(--white);
-  border: 1px solid #475569;
+  border: 1px solid var(--component-color-slate-600);
   border-radius: 4px;
   padding: 0.4rem 0.6rem;
   font-size: 0.8rem;
   cursor: pointer;
   backdrop-filter: blur(4px);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .cad-btn-icon:hover {
@@ -136,13 +165,6 @@
 /* ==========================================
    4. CUESTIONARIOS Y SIMULADORES CSWA
    ========================================== */
-.quiz-container {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1.5rem;
-}
-
 .quiz-question-title {
   font-size: 1.05rem;
   font-weight: 600;
@@ -156,15 +178,16 @@
   padding: 0.85rem 1.2rem;
   background: var(--bg-light);
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: var(--component-radius-sm);
   margin-bottom: 0.75rem;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
-.quiz-option-card:hover {
+.quiz-option-card:hover,
+.quiz-option-card:focus-within {
   border-color: var(--accent);
-  background: #F0F9FF;
+  background: var(--component-color-sky-50);
 }
 
 .quiz-option-card input[type="radio"] {
@@ -176,8 +199,8 @@
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  background: #FEF3C7;
-  color: #92400E;
+  background: var(--component-color-amber-100);
+  color: var(--component-color-amber-800);
   padding: 0.4rem 0.85rem;
   border-radius: 20px;
   font-weight: bold;
@@ -189,25 +212,43 @@
    ========================================== */
 .alert-box {
   padding: 1rem 1.25rem;
-  border-radius: 8px;
+  border-radius: var(--component-radius-md);
   margin-bottom: 1.25rem;
   display: flex;
   align-items: flex-start;
   gap: 0.75rem;
 }
 
-.alert-info { background: #E0F2FE; color: #0369A1; border-left: 4px solid var(--accent); }
-.alert-warning { background: #FFFBEB; color: #92400E; border-left: 4px solid var(--warning); }
-.alert-success { background: #D1FAE5; color: #065F46; border-left: 4px solid var(--success); }
-.alert-danger { background: #FEE2E2; color: #991B1B; border-left: 4px solid var(--danger); }
+.alert-info {
+  background: var(--component-color-sky-100);
+  color: var(--component-color-sky-800);
+  border-left: 4px solid var(--accent);
+}
+
+.alert-warning {
+  background: var(--component-color-amber-50);
+  color: var(--component-color-amber-800);
+  border-left: 4px solid var(--warning);
+}
+
+.alert-success {
+  background: var(--component-color-emerald-100);
+  color: var(--component-color-emerald-800);
+  border-left: 4px solid var(--success);
+}
+
+.alert-danger {
+  background: var(--component-color-red-100);
+  color: var(--component-color-red-800);
+  border-left: 4px solid var(--danger);
+}
 
 /* ==========================================
    6. VENTANAS MODALES
    ========================================== */
 .modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
   background: rgba(16, 42, 67, 0.6);
@@ -217,26 +258,78 @@
   justify-content: center;
   z-index: 1000;
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease, visibility 0s linear 0.3s;
 }
 
 .modal-overlay.active {
   opacity: 1;
+  visibility: visible;
   pointer-events: auto;
+  transition-delay: 0s;
 }
 
 .modal-window {
   background: var(--white);
-  border-radius: 12px;
+  border-radius: var(--component-radius-xl);
   max-width: 600px;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
   width: 90%;
   padding: 2rem;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--component-shadow-lg);
   transform: translateY(20px);
   transition: transform 0.3s ease;
 }
 
 .modal-overlay.active .modal-window {
   transform: translateY(0);
+}
+
+/* Foco visible para navegación con teclado. */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ==========================================
+   7. AJUSTES RESPONSIVE Y MOVIMIENTO REDUCIDO
+   ========================================== */
+@media (max-width: 768px) {
+  .module-card,
+  .quiz-container {
+    padding: 1rem;
+  }
+
+  .lesson-card {
+    padding: 1rem;
+  }
+
+  .cad-viewport {
+    height: 240px;
+  }
+
+  .cswa-score-value {
+    font-size: 2.5rem;
+  }
+
+  .modal-window {
+    padding: 1.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .module-card:hover {
+    transform: none;
+  }
 }
